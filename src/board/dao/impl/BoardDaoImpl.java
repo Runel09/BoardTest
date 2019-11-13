@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import board.dao.face.BoardDao;
 import board.dto.Board;
 import dbutil.DBConn;
@@ -41,7 +43,6 @@ public class BoardDaoImpl implements BoardDao {
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
 				list.add(board);
-				board.toString();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -51,6 +52,50 @@ public class BoardDaoImpl implements BoardDao {
 
 		System.out.println(list);
 		return list;
+	}
+
+
+
+	@Override
+	public void updateHit(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public Board selectBoardByBoardno(Board inboard) {
+		
+		conn = DBConn.getConnection();// DB 연결
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT boardno,title,id,content,hit,writtendate";
+		sql += " FROM board WHERE boardno=?";
+		Board board = new Board();
+		board.setBoardno(inboard.getBoardno());
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getBoardno());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		board.toString();
+
+		
+		return board;
 	}
 
 }
