@@ -1,5 +1,9 @@
 package board.service.face;
 
-public interface BoardService {
+import java.util.List;
 
+import board.dto.Board;
+
+public interface BoardService {
+	public List<Board> listview();
 }

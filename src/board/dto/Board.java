@@ -18,6 +18,11 @@ public class Board {
 	public String getTitle() {
 		return title;
 	}
+	@Override
+	public String toString() {
+		return "Board [boardno=" + boardno + ", title=" + title + ", id=" + id + ", content=" + content + ", hit=" + hit
+				+ ", writtendate=" + writtendate + "]";
+	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
