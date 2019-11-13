@@ -1,10 +1,48 @@
 package board.dto;
 
+import java.util.Date;
+
 public class Board {
-	boardno NUMBER primary key, -- 글번호
-	title VARCHAR2(500), -- 제목
-	id VARCHAR2(100), -- 작성자 아이디
-	content VARCHAR2(4000), -- 본문
-	hit NUMBER, -- 조회수
-	writtendate DATE DEFAULT sysdate -- 최초작성일
+	private int boardno;
+	private String title;
+	private String id;
+	private String content;
+	private int hit;
+	private Date writtendate;
+	public int getBoardno() {
+		return boardno;
+	}
+	public void setBoardno(int boardno) {
+		this.boardno = boardno;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public Date getWrittendate() {
+		return writtendate;
+	}
+	public void setWrittendate(Date writtendate) {
+		this.writtendate = writtendate;
+	}
 }
