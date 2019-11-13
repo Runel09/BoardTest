@@ -61,4 +61,10 @@ public class PlannerServiceImpl implements PlannerService {
 		return null;
 	}
 
+	@Override
+	public List<PlaceDto> placeFilter(int[] placeArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -11,7 +11,14 @@ public class Planner {
 	private int trip_date;
 	private int trip_season;
 	private int trip_theme;
+	private int planner_writer;
 	
+	public int getPlanner_writer() {
+		return planner_writer;
+	}
+	public void setPlanner_writer(int planner_writer) {
+		this.planner_writer = planner_writer;
+	}
 	public int getTrip_nation() {
 		return trip_nation;
 	}

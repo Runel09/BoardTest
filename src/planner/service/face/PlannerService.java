@@ -90,8 +90,18 @@ public interface PlannerService {
 	//  카테고리별 출력
 	public List<PlaceDto> catPlLits(PlaceDto catInfo);
 	
+	// 장소 필터링
+	/**
+	 *  wkd
+	 * @return
+	 */
+	public List<PlaceDto> placeFilter(int[] placeArray);
+	
 	
 	//	-일정표상 두장소의 직선상 거리의 중심점을기준으로 반경 검색후 평점 순으로 추천
+	
+	
+	
 	//	-선택시 일정표에 해당 장소 추가
 	//	입력된 장소들을 두개씩 연결하여 모든 장소들의 소요시간과 교통비를 구글Maps로 검색
 	//	검색후 나오게 되는 결과값으로 최소시간,최소비용두가지로 최적화된 경로를 화면상 표기
