@@ -49,8 +49,6 @@ public class BoardDaoImpl implements BoardDao {
 			e.printStackTrace();
 		}
 
-
-		System.out.println(list);
 		return list;
 	}
 
@@ -92,10 +90,87 @@ public class BoardDaoImpl implements BoardDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		board.toString();
-
-		
 		return board;
 	}
+
+
+
+	@Override
+	public List<Board> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Board> selectList(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+
+
+	@Override
+	public void insertImage(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void insertReco(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void insertCmt(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void selectPlanner() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public List<Board> loadCmt(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void deleteReco(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public List<Board> Paging(List<Board> boardList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//-----------------------------------------------
+
+
 
 }

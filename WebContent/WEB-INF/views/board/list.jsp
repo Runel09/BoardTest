@@ -1,65 +1,47 @@
-<%@page import="board.dto.Board"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	List<Board> bList = (List<Board>) request.getAttribute("list");
-%>
+<%@page import="board.dto.Board"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-
-
-</script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="/WEB-INF/views/Layout/header.jsp"/>
 <style type="text/css">
-table {
-	border-collapse: collapse;
-	border: 1px solid #ccc;
-}
-
-td {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	padding: 5px 10px;
-}
-
-td:hover {
-	background: #ff0;
-}
+	table, th{
+		text-align: center;
+	}
+	tr td:nth-child(2){
+		text-align:left;
+	}
+	tr td:not(:first-child), tr th:not(:first-child) { 
+		border-left: 3px solid white;
+	}
 </style>
-</head>
-<body>
 
-	<h1>EMP 리스트</h1>
-	<hr>
-	<table>
+<div class="container text-center">
+<h1>게시글 목록</h1>
+<hr>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th style="width: 10%">글번호</th>
+		<th style="width: 55%">제목</th>
+		<th style="width: 10%">아이디</th>
+		<th style="width: 10%">조회수</th>
+		<th style="width: 15%">작성일</th>
+	</tr>
+	</thead>
+	<tbody>
+	<c:forEach items="${list }" var="board">
 		<tr>
-		<th>글번호</th>
-		<th>제목</th>
-		<th>작성자 아이디</th>
-		<th>조회수</th>
-		<th>작성일</th>
+			<td>${board.boardno }</td>
+			<td><a href="/board/view?boardno=${board.boardno}">${board.title }</a></td>
+			<td>${board.id }</td>
+			<td>${board.hit }</td>
+			<td><fmt:formatDate value="${board.writtendate }"
+					pattern="yyyy-MM-dd" /></td>
 		</tr>
-<%-- 		<c:set var="p" value="<%=session.getAttribute("page") %>"> --%>
-<%-- 	<c:forEach var="i" begin="${0-p }" end="<%=bList.size() %>"> --%>
-		<%for (int i = 0; i < 11; i++) {%>
-		<tr>
-			<td><%=bList.get(i).getBoardno()%></td>
-			<td><a href="/board/view?boardno=<%=bList.get(i).getBoardno()%>">
-			<%=bList.get(i).getTitle()%></a></td>
-			<td><%=bList.get(i).getId()%></td>
-			<td><%=bList.get(i).getHit()%></td>
-			<td><%=bList.get(i).getWrittendate()%></td>
-		</tr>
-		<%}%>
-<%-- 			<c:set var="sum" value="0" /> --%>
-<%-- 		</c:set> --%>
-<%-- 	</c:forEach> --%>
-		
-	</table>
-</body>
-</html>
+	</c:forEach>
+	</tbody>
+</table>
+</div>
+<jsp:include page="/WEB-INF/views/Layout/footer.jsp"/>

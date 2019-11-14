@@ -6,7 +6,8 @@ import user.service.face.SignService;
 public class SignServiceImpl implements SignService {
 
 	@Override
-	public void checkId(User user) {
+	public User checkId(User user) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

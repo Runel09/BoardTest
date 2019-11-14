@@ -1,15 +1,12 @@
 <%@page import="board.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-    <%Board detailBoard = (Board) request.getAttribute("Board");%>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@page import="board.dto.Board"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="/WEB-INF/views/Layout/header.jsp"/>
+ <%Board detailBoard = (Board) request.getAttribute("Board");%>
+<div class="container">
 <div id = boardBody>
 	<div >
 	<div id="" style="float: left;"><label>글번호</label><%=detailBoard.getBoardno() %></div>
@@ -24,5 +21,5 @@
 	<%=detailBoard.getContent() %>
 	</div>
 </div>
-</body>
-</html>
+</div>
+<jsp:include page="/WEB-INF/views/Layout/footer.jsp"/>

@@ -6,7 +6,12 @@ public interface SignService {
  
 	//	-아이디 중복 확인은 새창을 열어 다른창에서 시행
 	//	- 중복여후 확인 후 해당 아이디 입력창 수정불가능으로 변경
-	public void checkId(User user);
+	/**
+	 * 
+	 * @param user 확인 받을 아이디가 들어있는 User
+	 * @return 중복이 없는 경우
+	 */
+	public User checkId(User user);
 	
 	//	-자바스크립트-비밀번호 입력창과 비밀번호 확인창의 일치여부 확인후 결과값을 옆에 표기(일치,불일치)
 	//	-(주소 기본 정보 또는 우편번호 입력창에 포커싱이 되면)

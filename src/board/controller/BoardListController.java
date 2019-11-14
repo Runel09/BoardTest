@@ -27,7 +27,6 @@ public class BoardListController extends HttpServlet {
 		// 	Board 테이블의 목록을 조회
 				List<Board> boardList = boardService.listview();
 				//세션 객체 얻기
-				System.out.println(boardList.get(0));
 				//세션 정보 추가하기(세션 컨텍스트 영역에 추가됨)
 //				session.setAttribute("page",1);
 //				session.setAttribute("total", boardList.get(0).getBoardno());

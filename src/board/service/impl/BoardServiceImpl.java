@@ -47,6 +47,55 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
+	//-----------------------------------------------------------
+
+	@Override
+	public void recoBoard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void downLoad() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void repoBoard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cmtBoard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void readAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void searchBoard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void readPlanner() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void writeBoard(Board board) {
+		boardDao.insertReco(board);
+	}
+	
 	
 
 }

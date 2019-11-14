@@ -9,6 +9,34 @@ public class Board {
 	private String content;
 	private int hit;
 	private Date writtendate;
+	private int totalPage;
+	private int totalCount;
+	private int listCount;
+	private int curPage;
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	public int getListCount() {
+		return listCount;
+	}
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+	public int getCurPage() {
+		return curPage;
+	}
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
 	public int getBoardno() {
 		return boardno;
 	}
