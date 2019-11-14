@@ -1,9 +1,9 @@
 package user.service.impl;
 
 import user.dto.User;
-import user.service.face.SignService;
+import user.service.face.UserService;
 
-public class SignServiceImpl implements SignService {
+public class SignServiceImpl implements UserService {
 
 	@Override
 	public User checkId(User user) {

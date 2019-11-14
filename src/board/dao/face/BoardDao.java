@@ -3,17 +3,19 @@ package board.dao.face;
 import java.util.List;
 
 import board.dto.Board;
+import util.Paging;
 
 public interface BoardDao {
 	// ------------- 일반게시판 (목록)
 	public List<Board> boardList();
+	
+	public List<Board> boardList(Paging paging);
 
     
 	public List<Board> selectAll(); //게시글 DB에서 가져오기
 	
 	public List<Board> selectList(Board board);//검색어에 맞는 데이터 DB에서 가져오기-Board에 검색에 입력
-	
-	public List<Board> Paging(List<Board> boardList);//불러온 정보 페이징 처리
+	public int selectCntAll();
 	
 	
 	

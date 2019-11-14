@@ -8,6 +8,7 @@ import board.dao.face.BoardDao;
 import board.dao.impl.BoardDaoImpl;
 import board.dto.Board;
 import board.service.face.BoardService;
+import util.Paging;
 
 public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao = new BoardDaoImpl();
@@ -94,6 +95,29 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void writeBoard(Board board) {
 		boardDao.insertReco(board);
+	}
+
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		
+		//요청 파라미터 curPage를 파싱한다
+		String param=req.getParameter("curPage");
+		int curPage=0;
+		if(param!=null && !"".equals(param)) {
+			curPage= Integer.parseInt(param);
+		}
+		//Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+		int totalCount = boardDao.selectCntAll();
+		Paging paging= new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+
+	@Override
+	public List<Board> listview(Paging paging) {
+		
+		return boardDao.boardList(paging);
+		
 	}
 	
 	

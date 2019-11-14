@@ -43,5 +43,6 @@
 	</c:forEach>
 	</tbody>
 </table>
+<jsp:include page="/WEB-INF/views/Layout/paging.jsp"/>
 </div>
 <jsp:include page="/WEB-INF/views/Layout/footer.jsp"/>

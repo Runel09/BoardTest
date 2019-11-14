@@ -2,7 +2,7 @@ package user.service.face;
 
 import user.dto.User;
 
-public interface SignService {
+public interface UserService {
  
 	//	-아이디 중복 확인은 새창을 열어 다른창에서 시행
 	//	- 중복여후 확인 후 해당 아이디 입력창 수정불가능으로 변경
