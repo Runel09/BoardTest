@@ -1,5 +1,7 @@
 package user.service.face;
 
+import javax.servlet.http.HttpServletRequest;
+
 import user.dto.User;
 
 public interface UserService {
@@ -9,7 +11,7 @@ public interface UserService {
 	/**
 	 * 
 	 * @param user 확인 받을 아이디가 들어있는 User
-	 * @return 중복이 없는 경우
+	 * @return 중복이 없는 경우 그대로 중복인 경우 USERID를 공란으로 반환
 	 */
 	public User checkId(User user);
 	
@@ -25,12 +27,29 @@ public interface UserService {
 	
 	//	-주소 검색창에서 서버를 통해 검색후 해당 정보를 회원가입창으로 전송
 	//  반환 받는 User에 주소 정보를 넣어서 전송
-	public User setAdress();
+	public User setAdress(User user);
 	//  -확인 과정에서 입력되지 않은 정보가 있다면 알림창으로 출력후 해당 정보 입력객체로 포커스이동
 	//	-입력받은 정보를 DB로 전달
 	public void checkAndInsert(User user);
 	
+	//로그인 정보 확인 후 해당 회원정보 쿠키나 세션에 저장
+	public User confirmLoginInformation(User user);
 	
+	//로그인 정보 찾기//emailService 를 따로 만들어서 이메일 송신 기능 추가 해야됨..
+	//일치하는 email이 있는지만 확인 req 파싱해서 String 획득
+	/**
+	 * 
+	 * @param req-입력받은 
+	 * @return
+	 */
+	public User checkEmail(HttpServletRequest req);
+	//emailService를 통해서 전송한 정보를 DB에 입력하고 해당 정보와 일치할 경우 전달받은 회원 정보를 
+	//email 찾기 정보 입력
+	//ID 찾기
+	public User findId(User user);
+	
+	//PW 찾기
+	public User findPw(User user);
 	
 
 }
