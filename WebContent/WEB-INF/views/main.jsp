@@ -11,11 +11,11 @@
 <ul>
 	<c:choose>
 	<c:when test="${loginfo }">
-		<li><a href="board/list">게시판</a></li>
+		<li><a href="/board/list">게시판</a></li>
 		<li><a href="/user/logout">로그아웃</a></li>
 	</c:when>
 	<c:otherwise>
-		<li><a href="">회원가입</a></li>	
+		<li><a href="/user/sign">회원가입</a></li>	
 		<li><a href="/user/login">로그인</a></li>
 	</c:otherwise>
 	</c:choose>

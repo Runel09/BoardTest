@@ -15,17 +15,14 @@ import user.service.impl.UserServiceImpl;
 /**
  * Servlet implementation class SignController
  */
-@WebServlet("/sign")
+@WebServlet("/user/sign")
 public class SignController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        private UserService userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	String inputId=(String) req.getAttribute("InputId");
-    	User inputUser =new User();
-    	inputUser.setUSERID(inputId);
+    	req.getRequestDispatcher("/WEB-INF/views/user/join.jsp").forward(req, resp);
     	
-    	userService.checkId(inputUser);
     }
 
 }
