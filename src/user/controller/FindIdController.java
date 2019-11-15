@@ -26,7 +26,8 @@ public class FindIdController extends HttpServlet {
 		@Override
 			protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			userService.checkEmail(req);
-			emailService.sendCheckInfo(email);
+			Email email= null;
+			emailService.sendCheckInfo((Email)email);
 			
 			
 			}

@@ -16,6 +16,12 @@ public class User {
 	public int getUser_num() {
 		return User_num;
 	}
+	@Override
+	public String toString() {
+		return "User [User_num=" + User_num + ", USERID=" + USERID + ", USERPW=" + USERPW + ", USERName=" + USERName
+				+ ", Nick=" + Nick + ", Gender=" + Gender + ", Email=" + Email + ", Addr=" + Addr + ", Address_detail="
+				+ Address_detail + ", Mailnum=" + Mailnum + ", Birthday=" + Birthday + ", Phonenum=" + Phonenum + "]";
+	}
 	public void setUser_num(int user_num) {
 		User_num = user_num;
 	}

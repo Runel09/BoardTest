@@ -1,10 +1,22 @@
 package user.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import board.dto.Board;
+import dbutil.DBConn;
 import email.dto.Email;
 import user.dao.face.UserDao;
 import user.dto.User;
 
 public class UserDaoImpl implements UserDao {
+	private Connection conn = null;// DB연결 객체
+	private PreparedStatement ps = null;// SQL 수행 객체
+	private ResultSet rs = null;// SQL 수행 결과 객체
 
 	@Override
 	public User checkIdDB(User user) {
@@ -47,7 +59,79 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void insertFindInfo(Email email) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public int selectCntUserByDBID(User user) {
+		int cnt = 0;
+
+		conn = DBConn.getConnection();// DB 연결
+
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT COUNT(*) ";
+		sql += " FROM USERINFO WHERE DB_ID = ? AND DB_PW = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUSERID());
+			ps.setString(2, user.getUSERPW());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return cnt;
+	}
+
+	@Override
+	public User selectUserByDBID(User user) {
+		conn = DBConn.getConnection();// DB 연결
+
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT DB_ID,DB_NICK ";
+		sql += " FROM USERINFO WHERE DB_ID = ? AND DB_PW = ?";
+		User infoUser = new User();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUSERID());
+			ps.setString(2, user.getUSERPW());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				infoUser.setUSERID(rs.getString("DB_ID"));
+				infoUser.setNick(rs.getString("DB_NICK"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return infoUser;
 	}
 
 }

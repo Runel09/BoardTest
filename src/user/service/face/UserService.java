@@ -32,10 +32,20 @@ public interface UserService {
 	//	-입력받은 정보를 DB로 전달
 	public void checkAndInsert(User user);
 	
-	//로그인 정보 확인 후 해당 회원정보 쿠키나 세션에 저장
-	public User confirmLoginInformation(User user);
+	//------------------------------로그인 처리
 	
-	//로그인 정보 찾기//emailService 를 따로 만들어서 이메일 송신 기능 추가 해야됨..
+	/**
+	 * 
+	 * @param req 로그인 정보가 들어있는 requset
+	 * @return 입력된 로그인 정보
+	 */
+	public User getLoginMember(HttpServletRequest req);
+	
+	public boolean login(User user);
+	
+	public User getMemberByUserid(User user);
+	
+	//-------------------------------로그인 정보 찾기//
 	//일치하는 email이 있는지만 확인 req 파싱해서 String 획득
 	/**
 	 * 

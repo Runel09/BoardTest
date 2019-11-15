@@ -29,14 +29,8 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Override
-	public User confirmLoginInformation(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public User checkEmail(HttpServletRequest req) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -51,6 +45,31 @@ public class UserServiceImpl implements UserService {
 	public User findPw(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User getLoginMember(HttpServletRequest req) {
+		User user = new User();
+		user.setUSERID((String)req.getParameter("userId"));
+		user.setUSERPW((String)req.getParameter("userPw"));
+		return user;
+	}
+
+	@Override
+	public boolean login(User user) {
+		int checkCnt=0;
+		checkCnt=userDao.selectCntUserByDBID(user);
+		if(checkCnt==1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public User getMemberByUserid(User user) {
+		return userDao.selectUserByDBID(user);
+		 
 	}
 
 

@@ -12,16 +12,19 @@ public interface UserDao {
 	//보낸 User 정보를 DB에 입력 
 	public void insertUser(User user);
 	
-	public User findUserId(User user);
-	
-	public User findUserPw(User user);
-	
 	public Email searchEmail(String email);
 	/**
 	 * 
-	 * @param email 
+	 * @param email  
 	 */
 	public void insertFindInfo(Email email);
 	
+	public User findUserId(User user);
+	
+	public User findUserPw(User user);
+
+	public int selectCntUserByDBID(User user);
+	
+	User selectUserByDBID(User user);
 	
 }

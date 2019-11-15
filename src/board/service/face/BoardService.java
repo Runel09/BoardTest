@@ -38,7 +38,7 @@ public interface BoardService {
 	// ------------- 일반 게시판 ( 읽기 )
 	public void recoBoard(); //추천수 DB에 저장,가져오기
 	
-	public void downLoad(); //게시글 다운로드
+	public void downLoad(); //게시글 첨부파일 다운로드
 	
 	public void repoBoard(); //신고하기
 	
