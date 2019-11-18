@@ -10,11 +10,26 @@ public class User {
 	private String Email;
 	private String Addr;
 	private String Address_detail;
-	private int Mailnum;
-	private int Birthday;
-	private int Phonenum;
+	private String Mailnum;
+	private String Birthday;
+	private String Phonenum;
 	public int getUser_num() {
 		return User_num;
+	}
+	@Override
+	public String toString() {
+		return "User [User_num=" + User_num + ", USERID=" + USERID + ", USERPW=" + USERPW + ", USERName=" + USERName
+				+ ", Nick=" + Nick + ", Gender=" + Gender + ", Email=" + Email + ", Addr=" + Addr + ", Address_detail="
+				+ Address_detail + ", Mailnum=" + Mailnum + ", Birthday=" + Birthday + ", Phonenum=" + Phonenum + "]";
+	}
+	public void setMailnum(String mailnum) {
+		Mailnum = mailnum;
+	}
+	public void setBirthday(String birthday) {
+		Birthday = birthday;
+	}
+	public void setPhonenum(String phonenum) {
+		Phonenum = phonenum;
 	}
 	public void setUser_num(int user_num) {
 		User_num = user_num;
@@ -67,23 +82,15 @@ public class User {
 	public void setAddress_detail(String address_detail) {
 		Address_detail = address_detail;
 	}
-	public int getMailnum() {
+	public String getMailnum() {
 		return Mailnum;
 	}
-	public void setMailnum(int mailnum) {
-		Mailnum = mailnum;
-	}
-	public int getBirthday() {
+	public String getBirthday() {
 		return Birthday;
 	}
-	public void setBirthday(int birthday) {
-		Birthday = birthday;
-	}
-	public int getPhonenum() {
+	public String getPhonenum() {
 		return Phonenum;
 	}
-	public void setPhonenum(int phonenum) {
-		Phonenum = phonenum;
-	}
+
 	
 }

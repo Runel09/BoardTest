@@ -20,7 +20,8 @@
 <style type="text/css">
 #header{
 	text-align: center;
-	background: gray;
+	background: #1DDB16;
+	color: white;
 }
 #header h1{
 	margin: 0;
@@ -28,7 +29,7 @@
 }
 #footer{
 	text-align: center;
-	background: gray;
+	background: #1DDB16;
 }
 </style>
 </head>
