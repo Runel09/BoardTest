@@ -10,7 +10,7 @@ import user.service.face.UserService;
 public class UserServiceImpl implements UserService {
 	private UserDao userDao=new UserDaoImpl();
 	@Override
-	public User checkId(User user) {
+	public boolean checkId(User user) {
 		
 		return userDao.checkIdDB(user);
 	}
@@ -20,13 +20,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void checkAndInsert(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 	@Override
 	public User checkEmail(HttpServletRequest req) {
@@ -70,6 +63,27 @@ public class UserServiceImpl implements UserService {
 	public User getMemberByUserid(User user) {
 		return userDao.selectUserByDBID(user);
 		 
+	}
+
+	@Override
+	public void checkAndInsert(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		User user = new User();
+		user.setUSERID(req.getParameter("id"));
+		user.setUSERPW(req.getParameter("pswd1"));
+		user.setUSERName(req.getParameter("userName"));
+		user.setNick(req.getParameter("userNick"));
+		user.setGender(Integer.parseInt(req.getParameter("sex")));
+		user.setBirthday(req.getParameter("birth"));
+		user.toString();
+		boolean check = false;
+		check=this.checkId(user);
+		System.out.println("확인결과 : " +check);
+		if(check) {
+			
+			userDao.insertUser(user);
+		}
+		System.out.println("입력 완료");
 	}
 
 

@@ -11,9 +11,10 @@ public interface UserService {
 	/**
 	 * 
 	 * @param user 확인 받을 아이디가 들어있는 User
-	 * @return 중복이 없는 경우 그대로 중복인 경우 USERID를 공란으로 반환
+	 * @return true일 경우 체크값을 1로 바꿈
+	 * 
 	 */
-	public User checkId(User user);
+	public boolean checkId(User user);
 	
 	//	-자바스크립트-비밀번호 입력창과 비밀번호 확인창의 일치여부 확인후 결과값을 옆에 표기(일치,불일치)
 	//	-(주소 기본 정보 또는 우편번호 입력창에 포커싱이 되면)
@@ -30,7 +31,7 @@ public interface UserService {
 	public User setAdress(User user);
 	//  -확인 과정에서 입력되지 않은 정보가 있다면 알림창으로 출력후 해당 정보 입력객체로 포커스이동
 	//	-입력받은 정보를 DB로 전달
-	public void checkAndInsert(User user);
+	public void checkAndInsert(HttpServletRequest req);
 	
 	//------------------------------로그인 처리
 	
@@ -60,6 +61,8 @@ public interface UserService {
 	
 	//PW 찾기
 	public User findPw(User user);
+
+
 	
 
 }

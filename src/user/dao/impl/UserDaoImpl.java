@@ -19,10 +19,42 @@ public class UserDaoImpl implements UserDao {
 	private ResultSet rs = null;// SQL 수행 결과 객체
 
 	@Override
-	public User checkIdDB(User user) {
-		User resultUser = null;
+	public boolean checkIdDB(User user) {
+		boolean result =false;
+		int cnt=0;
+		conn = DBConn.getConnection();// DB 연결
 
-		return resultUser;
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT COUNT(*) ";
+		sql += " FROM USERINFO WHERE DB_ID = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUSERID());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(cnt ==0) result=true;
+			
+
+		return result;
 	}
 
 	@Override
@@ -34,9 +66,56 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void insertUser(User user) {
-		// TODO Auto-generated method stub
+		conn = DBConn.getConnection();// DB 연결
 
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "INSERT INTO USERINFO(USER_NUM," + 
+				"DB_EMAIL," + 
+				"DB_ID," + 
+				"DB_PW," + 
+				"DB_NAME," + 
+				"DB_NICK," + 
+				"DB_GENDER," + 
+				"DB_ADDR," + 
+				"DB_ADDR_DETAIL," + 
+				"DB_MAILNUM," + 
+				"DB_BIRTH," + 
+				"DB_PHNUM)";
+		sql += "  VALUES (user_seq.nextval,?,?,?,?,?,?,?,?,?,?,?)";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getUSERID());
+			ps.setString(3, user.getUSERPW());
+			ps.setString(4, user.getUSERName());
+			ps.setString(5, user.getNick());
+			ps.setInt(6, user.getGender());
+			ps.setString(7, user.getAddr());
+			ps.setString(8, user.getAddress_detail());
+			ps.setString(9, user.getMailnum());
+			ps.setString(10, user.getBirthday());
+			ps.setString(11, user.getEmail());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
+
+	
 
 	@Override
 	public User findUserId(User user) {

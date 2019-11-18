@@ -18,11 +18,20 @@ import user.service.impl.UserServiceImpl;
 @WebServlet("/user/sign")
 public class SignController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       private UserService userService = new UserServiceImpl();
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	req.getRequestDispatcher("/WEB-INF/views/user/join.jsp").forward(req, resp);
-    	
-    }
+	private UserService userService = new UserServiceImpl();
 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/user/sign.jsp").forward(req, resp);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html;charset=utf-8");
+		userService.checkAndInsert(req);
+		resp.sendRedirect("/main");
+				
+	}
 }
