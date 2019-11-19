@@ -13,7 +13,7 @@
 	<div id=""style="float: left;"><label>글쓴이</label>${userNick }</div>
 	</div>
 	<div>
-	<textarea id="content" rows="10" cols="30"></textarea>
+	<textarea id="content" rows="30" cols="10"></textarea>
 	</div>
 </div>
 </div>
