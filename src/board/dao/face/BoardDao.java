@@ -1,5 +1,6 @@
 package board.dao.face;
 
+import java.net.HttpRetryException;
 import java.util.List;
 
 import board.dto.Board;
@@ -16,6 +17,8 @@ public interface BoardDao {
 	
 	public List<Board> selectList(Board board);//검색어에 맞는 데이터 DB에서 가져오기-Board에 검색에 입력
 	public int selectCntAll();
+	
+	public int getBoardNo();
 	
 	
 	
@@ -41,5 +44,7 @@ public interface BoardDao {
 	
 	//게시글 삭제
 	public void deleteReco(Board board);//삭제할 게시물 번호를 받아서 삭제처리
+
+	public void insert(Board board);
 	
 }

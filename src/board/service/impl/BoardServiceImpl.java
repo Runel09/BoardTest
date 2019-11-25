@@ -119,6 +119,24 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.boardList(paging);
 		
 	}
+
+	@Override
+	public void write(HttpServletRequest req) {
+		Board board = new Board();
+
+		board.setTitle( req.getParameter("title") );
+		board.setContent( req.getParameter("content") );
+
+		//작성자id 처리
+		board.setId((String) req.getSession().getAttribute("userid"));
+
+		if(board.getTitle()==null || "".equals(board.getTitle())) {
+			board.setTitle("(제목없음)");
+		}
+
+		boardDao.insert(board);
+		
+	}
 	
 	
 

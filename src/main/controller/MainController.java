@@ -21,13 +21,14 @@ public class MainController extends HttpServlet {
 		HttpSession session = null;
 		//세션 객체 얻기
 		session= req.getSession();
-		
+		System.out.println("접속 성공");
 		//세션 정보 추가하기(세션 컨텍스트 영역에 추가됨)
 		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = null;
+		
 		session= req.getSession();
 		req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);
 	}

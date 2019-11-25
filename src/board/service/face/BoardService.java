@@ -54,4 +54,20 @@ public interface BoardService {
 		
 	public void readPlanner();//카테고리별로 플래너 DB에서 출력
 
+	
+	
+	
+
+	/**
+	 * 게시글 작성
+	 * 	입력한 게시글 내용을 DB에 저장
+	 * 
+	 *  [ 예정 ] 첨부파일을 함께 업로드 할 수 있도록 처리
+	 * 
+	 * @param req - 요청정보 객체(게시글내용 + 첨부파일)
+	 * 
+	 */
+	public void write(HttpServletRequest req);
+
+	
 }

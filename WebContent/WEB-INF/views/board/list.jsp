@@ -37,7 +37,7 @@
 			<td><a href="/board/view?boardno=${board.boardno}">${board.title }</a></td>
 			<td>${board.id }</td>
 			<td>${board.hit }</td>
-			<td><fmt:formatDate value="${board.writtendate }" pattern="yyyy-MM-dd" /></td>
+			<td><fmt:formatDate value="${board.writtendate }" pattern="yyyy-MM-dd"/></td>
 		</tr>
 	</c:forEach>
 	<tr><td><ul><li><a href="/board/write">글쓰기</a></li></ul></td></tr>

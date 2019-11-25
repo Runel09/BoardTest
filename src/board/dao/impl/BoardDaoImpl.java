@@ -218,6 +218,68 @@ public class BoardDaoImpl implements BoardDao {
 	
 	}
 
+	@Override
+	public void insert(Board board) {
+		// TODO Auto-generated method stub
+		conn = DBConn.getConnection(); //DB 연결
+
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "INSERT INTO board(BOARDNO,TITLE,ID,CONTENT,HIT) ";
+		sql += " VALUES (?, ?, ?, ?, 0)";
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getBoardno());
+			ps.setString(2, board.getTitle());
+			ps.setString(3, board.getId());
+			ps.setString(4, board.getContent());
+
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				//DB객체 닫기
+				if(ps!=null)	ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public int getBoardNo() {
+		conn = DBConn.getConnection(); //DB 연결
+
+		//다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "SELECT BOARD_SEQ.nextval FROM DUAL ";
+		int BoardNo=0;
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			rs=ps.executeQuery(sql);
+			while (rs.next()) {
+				BoardNo=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				//DB객체 닫기
+				if(ps!=null)	ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return BoardNo;
+	}
+
 
 
 	// -----------------------------------------------
