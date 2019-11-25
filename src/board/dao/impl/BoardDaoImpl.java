@@ -13,6 +13,7 @@ import dbutil.DBConn;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
+	
 	private Connection conn = null;// DB연결 객체
 	private PreparedStatement ps = null;// SQL 수행 객체
 	private ResultSet rs = null;// SQL 수행 결과 객체

@@ -3,7 +3,7 @@
 <%@page import="board.dto.Board"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/Layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
 <style type="text/css">
 #logForm .inputform label {
@@ -214,4 +214,4 @@
 </div>
 
 
-<jsp:include page="/WEB-INF/views/Layout/footer.jsp" />
+<jsp:include page="/WEB-INF/views/layout/footer.jsp" />

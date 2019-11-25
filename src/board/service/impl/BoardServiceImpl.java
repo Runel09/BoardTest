@@ -13,11 +13,6 @@ import util.Paging;
 public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao = new BoardDaoImpl();
 	
-	@Override
-	public List<Board> listview() {
-		return boardDao.boardList();
-	
-	}
 
 	@Override
 	public Board getBoardno(HttpServletRequest req) {
@@ -39,10 +34,10 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
+	
 	@Override
 	public Board view(Board board) {
 		
-//		boardDao.updateHit(board);
 		Board resultBoard = boardDao.selectBoardByBoardno(board);
 		return resultBoard;
 		
@@ -114,7 +109,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> listview(Paging paging) {
+	public List<Board> listView(Paging paging) {
 		
 		return boardDao.boardList(paging);
 		
@@ -137,6 +132,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.insert(board);
 		
 	}
+
+
+	
+
+
 	
 	
 

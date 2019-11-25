@@ -1,6 +1,5 @@
 package board.dao.face;
 
-import java.net.HttpRetryException;
 import java.util.List;
 
 import board.dto.Board;

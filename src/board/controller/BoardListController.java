@@ -32,7 +32,7 @@ public class BoardListController extends HttpServlet {
 		// Paging 객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);
 		// Board 테이블의 목록을 조회
-		List<Board> boardList = boardService.listview(paging);
+		List<Board> boardList = boardService.listView(paging);
 		// 세션 객체 얻기
 		// 세션 정보 추가하기(세션 컨텍스트 영역에 추가됨)
 		//session.setAttribute("page",1);

@@ -3,7 +3,7 @@
 <%@page import="board.dto.Board"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/Layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <style type="text/css">
 	table, th{
 		text-align: center;
@@ -43,6 +43,6 @@
 	<tr><td><ul><li><a href="/board/write">글쓰기</a></li></ul></td></tr>
 	</tbody>
 </table>
-<jsp:include page="/WEB-INF/views/Layout/paging.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/paging.jsp"/>
 </div>
-<jsp:include page="/WEB-INF/views/Layout/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
