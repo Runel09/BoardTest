@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/Layout/header.jsp"/>
 <style type="text/css">
+
 	table, th{
 		text-align: center;
 	}
