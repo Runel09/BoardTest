@@ -3,6 +3,7 @@ package board.dto;
 import java.util.Date;
 
 public class Board {
+	
 	private int boardno;
 	private String title;
 	private String id;
@@ -13,6 +14,13 @@ public class Board {
 	private int totalCount;
 	private int listCount;
 	private int curPage;
+	
+	@Override
+	public String toString() {
+		return "Board [boardno=" + boardno + ", title=" + title + ", id=" + id + ", content=" + content + ", hit=" + hit
+				+ ", writtendate=" + writtendate + "]";
+	}
+
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -45,11 +53,6 @@ public class Board {
 	}
 	public String getTitle() {
 		return title;
-	}
-	@Override
-	public String toString() {
-		return "Board [boardno=" + boardno + ", title=" + title + ", id=" + id + ", content=" + content + ", hit=" + hit
-				+ ", writtendate=" + writtendate + "]";
 	}
 	public void setTitle(String title) {
 		this.title = title;

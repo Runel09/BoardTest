@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="board.dto.Board"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/Layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
  <%Board detailBoard = (Board) request.getAttribute("Board");%>
 
 <style type="text/css">
@@ -50,4 +50,4 @@
 		<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/views/Layout/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>

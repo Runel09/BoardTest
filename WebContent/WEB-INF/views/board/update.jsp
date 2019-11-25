@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/Layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <script type="text/javascript"
 	src="/resource/se2/js/service/HuskyEZCreator.js" charset="utf-8">
 	
@@ -113,5 +113,5 @@
 		<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/views/Layout/footer.jsp" />
+<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 

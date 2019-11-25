@@ -6,6 +6,12 @@ public class PlanBoard {
 	private int trip_season; // 여행 시즌
 	private int trip_theme; // 여행 테마
 	
+	@Override
+	public String toString() {
+		return "PlanBoard [trip_nation=" + trip_nation + ", trip_date=" + trip_date + ", trip_season=" + trip_season
+				+ ", trip_theme=" + trip_theme + "]";
+	}
+	
 	public int getTrip_nation() {
 		return trip_nation;
 	}

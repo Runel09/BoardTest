@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="/WEB-INF/views/Layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <style type="text/css">
 .left {
 	float: left;
@@ -67,4 +67,4 @@ width: 100%;
 
 	</div>
 	</div>
-<jsp:include page="/WEB-INF/views/Layout/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
