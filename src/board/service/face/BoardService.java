@@ -3,70 +3,120 @@ package board.service.face;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import board.dto.Board;
+import board.dto.BoardFile;
+import board.dto.Comment;
+import board.dto.Recommend;
 import util.Paging;
 
 public interface BoardService {
-	
+
 	/**
-	 *  페이징 정보를 활용하여 보여질 게시글 목록만 조회
-	 * @param paging-페이징 정보
+	 * 게시글 목록 조회
+	 * 
 	 * @return List - 게시글 목록
 	 */
-	public List<Board> listView(Paging paging);
+	public List<Board> getList();
+	
+	
+	/**
+	 * 페이징 정보를 활용하여 보여질 게시글 목록만 조회
+	 * 
+	 * @param Paging - 페이징 정보
+	 * @return List - 게시글 목록
+	 */
+	public List<Board> getList(Paging paging);
+
 	
 	public Board getBoardno(HttpServletRequest req);
-	
-	
+
+	public Board view(Board board);
+
 	/**
-	 * 요청파라미터 curPage를 파싱한
-	 * @param req
-	 * @return
+	 * 요청파라미터 curPage를 파싱한다
+	 * Borad TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+	 * 
+	 * @param req - 요청정보 객체
+	 * @return Paging - 페이징 정보
 	 */
 	public Paging getPaging(HttpServletRequest req);
-	
 
-	public Board view(Board board);//게시판 DB데이터 받아오기
-	
-	//-------------------------------------------------
-	// ------------- 일반 게시판 ( 쓰기 )
-	public void writeBoard(Board board);
-	
-		
-	// ------------- 일반 게시판 ( 읽기 )
-	public void recoBoard(); //추천수 DB에 저장,가져오기
-	
-	public void downLoad(); //게시글 첨부파일 다운로드
-	
-	public void repoBoard(); //신고하기
-	
-	public void cmtBoard(); //댓글작성
-		
-	// ------------- 일반 게시판 ( 읽기 - 목록 )
-		
-	public void readAll();//게시글 DB에서 가져오기 
-		
-	public void searchBoard();//검색메소드
-		
-	// -------------- 플래너 게시판 ( 읽기 )
-		
-	public void readPlanner();//카테고리별로 플래너 DB에서 출력
-
-	
-	
-	
 
 	/**
-	 * 게시글 작성
-	 * 	입력한 게시글 내용을 DB에 저장
 	 * 
-	 *  [ 예정 ] 첨부파일을 함께 업로드 할 수 있도록 처리
 	 * 
-	 * @param req - 요청정보 객체(게시글내용 + 첨부파일)
-	 * 
+	 * @param board - 등록할 내용
 	 */
-	public void write(HttpServletRequest req);
+	public void write(Board board);
+
+
+	public void write(HttpServletRequest req, HttpServletResponse resp);
+
+
+	public BoardFile getBoardFileByBoardno(int boardno);
+
+
+	public BoardFile getFileno(HttpServletRequest req);
+
+
+	public BoardFile getFile(BoardFile boardFile);
+
+
+	public void update(HttpServletRequest req);
 
 	
+	public void delete(Board board);
+
+	
+	public List<Comment> commentList(Board board);
+
+	
+	public void commentInsert(Comment comment);
+
+	
+	public void commentDelete(Comment comment);
+
+	
+	public void deleteCheckBoardno(String[] check);
+	
+	
+	public String getNick(Board board);
+	
+	/**
+	 * 게시글 추천 상태 조회
+	 * 
+	 * @param recommend - 추천 상태 체크 객체
+	 * @return boolean - true:추천했음, false:추천하지않았음
+	 */
+	public boolean isRecommend(Recommend recommend);
+	
+	/**
+	 * 추천 정보 파라미터 얻기
+	 * 
+	 * @param req - 요청 정보 객체
+	 * @return Recommend - 추천 정보 객체
+	 */
+	public Recommend getRecommend(HttpServletRequest req);
+	
+	/**
+	 * 추천 토글
+	 * 
+	 * @param recommend - 추천 정보 객체
+	 * @return boolean - true:추천 성공, false:추천취소 성공
+	 */
+	public boolean recommend(Recommend recommend);
+	
+	/**
+	 * 게시글의 총 추천 수 구하기
+	 * 
+	 * @param board - 해당 게시글
+	 * @return int - 총 추천 수
+	 */
+	public int getTotalCntRecommend(Recommend recommend);
+
+
+
+	public void updateReport(Board board);
 }

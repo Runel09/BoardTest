@@ -1,7 +1,6 @@
 package board.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.dto.Board;
+import board.dto.BoardFile;
 import board.service.face.BoardService;
 import board.service.impl.BoardServiceImpl;
-import util.Paging;
 
-@WebServlet("/board/list")
-public class BoardListController extends HttpServlet {
+@WebServlet("/board/update")
+public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardService boardService = new BoardServiceImpl();
@@ -23,20 +22,22 @@ public class BoardListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//요청파라미터에서 curPage를 구하고 Paging 객체 반환
-		Paging paging = boardService.getPaging(req);
-//		System.out.println(paging);
+		Board board = boardService.getBoardno(req);
+		BoardFile boardFile = boardService.getBoardFileByBoardno(board.getBoardno());
 		
-		//Paging 객체를 MODEL값으로 지정
-		req.setAttribute("paging", paging);
+		req.setAttribute("board", board);
+		req.setAttribute("boardFile", boardFile);
 		
-		List<Board> list = boardService.getList(paging);
-		
-		req.setAttribute("list", list);
-		
-		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/board/update.jsp")
 		.forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		boardService.update(req);
+		
+		resp.sendRedirect("/board/list");
 	}
 
 }

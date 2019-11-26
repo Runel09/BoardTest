@@ -1,7 +1,6 @@
 package board.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,34 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.dto.Board;
+import board.dto.Comment;
 import board.service.face.BoardService;
 import board.service.impl.BoardServiceImpl;
-import util.Paging;
 
-@WebServlet("/board/list")
-public class BoardListController extends HttpServlet {
+@WebServlet("/comment/delete")
+public class CommentDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardService boardService = new BoardServiceImpl();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//요청파라미터에서 curPage를 구하고 Paging 객체 반환
-		Paging paging = boardService.getPaging(req);
-//		System.out.println(paging);
+		Comment comment = new Comment();
 		
-		//Paging 객체를 MODEL값으로 지정
-		req.setAttribute("paging", paging);
+		comment.setCommentno(Integer.parseInt(req.getParameter("commentno")));
 		
-		List<Board> list = boardService.getList(paging);
+		int boardno = Integer.parseInt(req.getParameter("boardno"));
 		
-		req.setAttribute("list", list);
+		boardService.commentDelete(comment);
 		
-		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
-		.forward(req, resp);
+		resp.sendRedirect("/board/view?boardno="+boardno);
 		
 	}
-
 }

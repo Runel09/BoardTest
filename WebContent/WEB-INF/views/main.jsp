@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<jsp:include page="/WEB-INF/layout/header.jsp"/>
-
-
-
-<jsp:include page="/WEB-INF/layout/footer.jsp"/>
-=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="board.dto.Board"%>
@@ -31,4 +24,3 @@
 
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
->>>>>>> refs/heads/board

@@ -7,42 +7,50 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import board.dao.face.BoardDao;
 import board.dto.Board;
+import board.dto.BoardFile;
 import dbutil.DBConn;
 import util.Paging;
 
-public class BoardDaoImpl implements BoardDao {
+public class BoardDaoImpl implements BoardDao{
 	
-	private Connection conn = null;// DB연결 객체
-	private PreparedStatement ps = null;// SQL 수행 객체
-	private ResultSet rs = null;// SQL 수행 결과 객체
+	private Connection conn = null; //DB연결 객체
+	private PreparedStatement ps = null; //SQL 수행 객체
+	private ResultSet rs = null; //SQL수행 결과 객체
 
 	@Override
-	public List<Board> boardList() {
-		List<Board> list = new ArrayList<Board>();
-
-		conn = DBConn.getConnection();// DB 연결
-
-		// 수행할 SQL 쿼리
+	public List<Board> selectAll() {
+		
+		conn = DBConn.getConnection();
+		
 		String sql = "";
-		sql += "SELECT boardno,title,id,content,hit,writtendate";
-		sql += " FROM board ORDER BY boardno desc";
-
+		sql += "SELECT boardno, title, id, content, hit, writtendate";
+		sql += " FROM board ORDER BY boardno DESC";
+		
+		List<Board> list = new ArrayList<>();
+		
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while (rs.next()) {
+			
+//			System.out.println(rs.next());
+			
+			while(rs.next()) {
 				Board board = new Board();
-
+				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
 				board.setId(rs.getString("id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
+				
 				list.add(board);
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

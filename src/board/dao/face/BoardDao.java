@@ -2,48 +2,91 @@ package board.dao.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import board.dto.Board;
+import board.dto.BoardFile;
 import util.Paging;
 
 public interface BoardDao {
-	// ------------- 일반게시판 (목록)
-	public List<Board> boardList();
-	
-	public List<Board> boardList(Paging paging);
 
-    
-	public List<Board> selectAll(); //게시글 DB에서 가져오기
+	/**
+	 * 게시글 전체 목록 조회
+	 * 
+	 * @return List - 조회된 게시글 목록
+	 */
+	public List<Board> selectAll();
 	
-	public List<Board> selectList(Board board);//검색어에 맞는 데이터 DB에서 가져오기-Board에 검색에 입력
-	public int selectCntAll();
-	
-	public int getBoardNo();
-	
-	
-	
-	// ------------ 일반게시판 쓰기
-	
-	public void insertImage(Board board); //이미지정보저장
-	
-	public void insertReco(Board board);//게시글 정보 저장 DB에 저장
-	
-	public void insertCmt(Board board);//댓글 DB에 저장
-	// ------------ 일반게시물 읽기
-	
-	public Board selectBoardByBoardno(Board inboard);//게시물 번호를 통해 게시물 불러오기
-	
-	public List<Board> loadCmt(Board board);//게시물 번호를 통해 댓글 불러오기
-	
-	public void updateHit(Board board);//게시글 조회수 증가
-	
-	
-	// -------------- 플래너게시물 읽기
-	
-	public void selectPlanner();
-	
-	//게시글 삭제
-	public void deleteReco(Board board);//삭제할 게시물 번호를 받아서 삭제처리
+	public String selectNickByUserid(Board board);
+	/**
+	 * 페이징 대상 게시글 목록 조회
+	 * 
+	 * @param Paging - 페이징 정보
+	 * @return List - 조회된 게시글 목록
+	 */
+	public List<Board> selectAll(Paging paging);
 
+	public Board selectBoardByBoardno(Board board);
+
+	public void updateHit(Board board);
+
+	/**
+	 * 총 게시글 수 조회
+	 * @param req 
+	 * 
+	 * @return int - 총 게시글 수
+	 */
+	public int selectCntAll(HttpServletRequest req);
+
+
+	/**
+	 * 입력한 내용을 데이터 베이스에 저장
+	 * 
+	 * @param board - 작성한 게시글
+	 */	
 	public void insert(Board board);
+	
+	public int selectBoardno();
+	
+	public void insertFile(BoardFile boardFile);
+
+
+	public BoardFile selectBoardFileByBoardno(int boardno);
+
+
+	public BoardFile selectByFileno(BoardFile boardFile);
+
+
+	public Board selectByBoardno(Board board);
+
+
+	public void update(Board board);
+
+
+	public void deleteFileByBoardno(Board board);
+
+
+	public void deleteBoardByboardno(Board board);
+
+
+	public void deleteBoardList(String[] check);
+
+
+	public void insertRecommend(Board recommendBoard);
+
+
+	public void deleteRecommend(Board recommendBoard);
+
+
+	public boolean checkRecommend(Board recommendBoard);
+
+
+	public int getCountRecommend(Board recommendBoard);
+
+	public void insertReport(Board board);
+
+
+	
+	
 	
 }
