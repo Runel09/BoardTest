@@ -11,22 +11,14 @@ public class PlaceDto {
 	private String db_web_site;
 	private String business_hours;
 	private String tel_number;
+	private String place_information;
+	//------------------------------------
 	private double score;
 	private int views_number;
-	private String place_information;
 	private int favorite_count;
 	private int review_number;
 	private int review_score;
 	private String review_char;
-	@Override
-	public String toString() {
-		return "PlaceDto [place_number=" + place_number + ", place_name=" + place_name + ", coordinate_lat="
-				+ coordinate_lat + ", coordinate_lng=" + coordinate_lng + ", address=" + address + ", place_cate="
-				+ place_cate + ", detail=" + detail + ", db_web_site=" + db_web_site + ", business_hours="
-				+ business_hours + ", tel_number=" + tel_number + ", score=" + score + ", views_number=" + views_number
-				+ ", place_information=" + place_information + ", favorite_count=" + favorite_count + ", review_number="
-				+ review_number + ", review_score=" + review_score + ", review_char=" + review_char + "]";
-	}
 	public int getPlace_number() {
 		return place_number;
 	}
@@ -129,5 +121,14 @@ public class PlaceDto {
 	public void setReview_char(String review_char) {
 		this.review_char = review_char;
 	}
-
+	@Override
+	public String toString() {
+		return "PlaceInfo [place_number=" + place_number + ", place_name=" + place_name + ", coordinate_lat="
+				+ coordinate_lat + ", coordinate_lng=" + coordinate_lng + ", address=" + address + ", place_cate="
+				+ place_cate + ", detail=" + detail + ", db_web_site=" + db_web_site + ", business_hours="
+				+ business_hours + ", tel_number=" + tel_number + ", score=" + score + ", views_number=" + views_number
+				+ ", place_information=" + place_information + ", favorite_count=" + favorite_count + ", review_number="
+				+ review_number + ", review_score=" + review_score + ", review_char=" + review_char + "]";
+	}
+	
 }

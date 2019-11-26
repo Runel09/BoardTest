@@ -1,117 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/Layout/header.jsp" />
-<script type="text/javascript"
-	src="/resource/se2/js/service/HuskyEZCreator.js" charset="utf-8">
-	
-</script>
+    pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page ="/WEB-INF/views/layout/header.jsp"/>
 
 <script type="text/javascript">
-	function submitContents(elClickedObj) {
-		// 에디터의 내용이 textarea에 적용된다.
-		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-
-		// 에디터의 내용에 대한 값 검증은 이곳에서
-		// document.getElementById("ir1").value를 이용해서 처리한다.
-
-		try {
-			elClickedObj.form.submit();
-		} catch (e) {
-		}
-	}
-	$(document).ready(function() {
-		console.log("#boardNo")
-		//작성버튼 동작
-		$("#btnUpdate").click(function() {
-			//스마트 에디터의 내용을 <textarea>에 적용
-			submitContents($("btnUpdate"))
-
-			//form submit
-			$("form").submit();
-		});
-
-		//취소버튼 동작
-		$("#btnCancel").click(function() {
-			history.go(-1);
-		});
-		
-		$("#btnFileRe").click(function() {
-			console.log($("#fileTr"));
-			$("#fileTr").html("<td>파일<input name='originalFile' type='hidden' value=${fileInfo.originName }/> </td><td><input type='file' name='upfile' /></td>");
-			
-			return false;
-		});
-	});
+$(document).ready(function() {
+//    $("#btnUpdate").click(function() {
+//       $(location).attr("href", "/board/update");
+//    });
+   
+   
+   $("#btnCancel").click(function() {
+      $(location).attr("href", "/board/list");
+   });
+   
+   
+   
+   
+   
+   
+});
 </script>
+<script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 
-<style type="text/css">
-#content {
-	width: 95%;
-}
-</style>
 
-<div class="container">
+   <div class = "container">
+   <div class="row">
+<form action="/board/update" method="post" enctype = "multipart/form-data">
+<input type="hidden" name="boardno" value="${board.boardno }" />   
+   <table class="table table-bordered">
+            <thead>
+               <tr>
+                  <th colspan="2"
+                     style="background-color: #eeeeee; text-align: center;">글쓰기</th>
+               </tr>
+            </thead>
+            <tr>
+<td class="info">제목</td><td colspan="3">
+<input type="text" placeholder="title" id="title"
+                  name="title" value = "${board.title }" /></td>
 
-	<h3>게시글 쓰기</h3>
-	<hr>
+<tr>
+<td class="info">작성자 </td><td colspan="3">${writer}</td>
+</tr>
 
-	<div>
-		<form action="/board/update" method="post"
-			enctype="multipart/form-data">
-			<input name = "boardno" type="hidden" value="${board.boardno}" />
-			<table class="table table-bordered">
-				<tr>
-					<td class="info">아이디</td>
-					<td>${board.getId() }</td>
-				</tr>
-				<tr>
-					<td class="info">제목</td>
-					<td><input type="text" name="title" style="width: 100%"
-						value="${board.title }" /></td>
-				</tr>
-				<tr>
-					<td class="info" colspan="2">본문</td>
-				</tr>
-				<tr>
-					<td colspan="2"><textarea name="content" id="content"
-							rows="20" cols="130">${board.content }</textarea></td>
-				</tr>
-				<tr id="fileTr">
-				<c:choose>
-					<c:when test="${(fileInfo.originName ne null) }">
-						
-						<td>파일 <input name="originalFile" type="hidden" value=${fileInfo.originName }/></td>
-						<td>${fileInfo.originName }<button type="button" id="btnFileRe">X</button></td>
-						
-					</c:when>
-					<c:when test="${!(fileInfo.originName ne null) }">
-						
-							<td>파일<input name="originalFile" type="hidden" value=""/></td>
-							<td><input type="file" name="upfile" /></td>
-						
-					</c:when>
-				</c:choose>
-				</tr>
-			</table>
 
-		</form>
-	</div>
-	<script type="text/javascript">
-		var oEditors = [];
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : oEditors,
-			elPlaceHolder : "content",
-			sSkinURI : "/resource/se2/SmartEditor2Skin.html",
-			fCreator : "createSEditor2"
-		});
-	</script>
-	<div class="text-center">
-		<button id="btnUpdate" class="btn btn-info">수정</button>
-		<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
-	</div>
+<tr><td class="info"  colspan="4">내용</td></tr>
+
+<tr><td colspan="4"><textarea name="content" id="content" rows="10" cols="80">
+<%--             ${board.content } --%>
+            </textarea>
+            
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+            </script></td></tr>
+
+<tr>
+<td class="info">첨부파일</td><td colspan="3"><input type = "file" name = "upfile"/></td>
+</tr>
+
+</table>
+<div class="text-center">   
+   <button id="btnUpdate" class="btn btn-primary">수정완료</button>
 </div>
-<jsp:include page="/WEB-INF/views/Layout/footer.jsp" />
-
+</form>
+   <button id="btnCancel" class="btn btn-danger">취소</button>
+</div>
+</div>
+<jsp:include page ="/WEB-INF/views/layout/footer.jsp"/>
