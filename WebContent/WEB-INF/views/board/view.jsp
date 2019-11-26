@@ -131,48 +131,40 @@ function deleteComment(commentNo) {
 <div class="container">
 
 <h1>게시판 - 장소정보 상세보기</h1>
-<img src="/image/${viewplace.place_number}.jpg">
-<hr>
+<img src="/image/${viewplace.place_number}.PNG">
+
+<div class="text-right">   
+   <button id="btnList" class="btn btn-primary">목록</button>
+   <button id="btnUpdate" class="btn btn-info">수정</button>
+   <button id="btnDelete" class="btn btn-danger">삭제</button>
+</div>
+
+
 
 
 <table class="table table-bordered">
 <tr>
 <td class="info">장소정보</td><td colspan="3">${viewplace.place_number }</td>
-</tr>
-
-<tr>
 <td class="info">장소이름</td><td colspan="3">${viewplace.place_name }</td>
 </tr>
 
 <tr>
 <td class="info">좌표lat</td><td colspan="3">${viewplace.coordinate_lat }</td>
-</tr>
-
-<tr>
 <td class="info">좌표lng</td><td colspan="3">${viewplace.coordinate_lng }</td>
 </tr>
 
 <tr>
 <td class="info">주소</td><td colspan="3">${viewplace.address }</td>
-</tr>
-
-<tr>
 <td class="info">카테고리</td><td colspan="3">${viewplace.place_cate }</td>
 </tr>
 
 <tr>
 <td class="info">디테일</td><td colspan="3">${viewplace.detail }</td>
-</tr>
-
-<tr>
 <td class="info">웹사이트주소</td><td colspan="3">${viewplace.db_web_site }</td>
 </tr>
 
 <tr>
 <td class="info">영업시간</td><td colspan="3">${viewplace.business_hours }</td>
-</tr>
-
-<tr>
 <td class="info">전화번호</td><td colspan="3">${viewplace.tel_number }</td>
 </tr>
 
@@ -186,70 +178,23 @@ function deleteComment(commentNo) {
 
 
 
-<tr><td class="info"  colspan="4">장소정보내용</td></tr>
+<tr><td class="info"  colspan="7">장소정보내용</td></tr>
 
-<tr><td colspan="4">${viewplace.place_information }</td></tr>
+<tr><td colspan="7">${viewplace.place_information }</td></tr>
 
 <c:if test="${viewplace.place_number eq viewfile.place_number}">
-<tr><td class="info"  colspan="4">첨부파일</td></tr>
+<tr><td class="info"  colspan="7">첨부파일</td></tr>
 <tr><td colspan="4">${viewfile.originname }</td></tr>
 </c:if>
 
-<!-- <tr> -->
-<!-- 	<td>댓글번호</td> -->
-<!-- 	<td>글번호</td> -->
-<!-- 	<td>아이디</td> -->
-<!-- 	<td>내용</td> -->
-<!-- 	<td>날짜</td> -->
-	
-<!-- </tr> -->
 
 
 
-<%-- <c:forEach var="comment" items="${commentList }"> --%>
-<!-- 	<tr> -->
-<%-- 		<td>${ comment.commentno}</td> --%>
-<%-- 		<td>${ comment.boardno }</td> --%>
-<%-- 		<td>${ comment.userid }</td> --%>
-<%-- 		<td>${ commnet.content }</td> --%>
-<%-- 		<td>${ comment.writtendate }</td> --%>
-
-<!-- 	</tr> -->
-<%-- </c:forEach> --%>
-
-
-
-
-
-<!-- </table> -->
-<!-- <form action="/comment/insert" method="post"> -->
-<!-- <div> -->
-	
-<%-- 	${board.boardno }	 --%>
-<!-- 	댓글쓰기 -->
-<!-- 	<input type = "text" name = "content"/> -->
-<%-- 	<input type="hidden" value="${board.boardno }" name="boardno"> --%>
-	
-<!-- 	<button type = "submit" >등록</button> -->
-<!-- </div> -->
-<!-- </form> -->
-
-<div class="text-right">   
-   <button id="btnList" class="btn btn-primary">목록</button>
-   <button id="btnUpdate" class="btn btn-info">수정</button>
-   <button id="btnDelete" class="btn btn-danger">삭제</button>
-</div>
 <!-- 댓글 처리 -->
 <div>
 
-<hr>
 
-<!-- 비로그인상태 -->
-<c:if test="${not login }">
-<strong>로그인이 필요합니다</strong><br>
-<button onclick='location.href="/member/login";'>로그인</button>
-<button onclick='location.href="/member/join";'>회원가입</button>
-</c:if>
+
 
 <!-- 로그인상태 -->
 <c:if test="${login }">
@@ -261,6 +206,14 @@ function deleteComment(commentNo) {
 </div>	<!-- 댓글 입력 end -->
 </c:if>
 
+<!-- 비로그인상태 -->
+<c:if test="${not login }">
+<div class= "text-right">
+<strong>댓글 작성시 로그인이 필요합니다</strong><br>
+<button onclick='location.href="/member/login";'>로그인</button>
+<button onclick='location.href="/member/join";'>회원가입</button>
+</div>
+</c:if>
 <!-- 댓글 리스트 -->
 <table class="table table-striped table-hover table-condensed">
 <thead>

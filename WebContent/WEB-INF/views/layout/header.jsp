@@ -43,10 +43,12 @@
 
 
 img{
-	width:200px;
-	heigh:150px;
+	width:750px;
+	heigh:500px;
 	
 	float:left;
+	
+	
 }
 
 
