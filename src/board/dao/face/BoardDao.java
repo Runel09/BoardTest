@@ -83,6 +83,8 @@ public interface BoardDao {
 
 	public int getCountRecommend(Board recommendBoard);
 
+	public void insertReport(Board board);
+
 
 	
 	

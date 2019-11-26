@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import board.dto.Board;
 import board.dto.BoardFile;
 import board.dto.Comment;
+import board.dto.Recommend;
 import board.service.face.BoardService;
 import board.service.impl.BoardServiceImpl;
 
@@ -31,16 +32,18 @@ public class BoardViewController extends HttpServlet {
 		BoardFile boardFile = boardService.getBoardFileByBoardno(board.getBoardno());
 		List<Comment> commentList = boardService.commentList(board);
 		
-		int count = boardService.getRecommendCount(board);
-		
-		if (req.getSession().getAttribute("userid") != null) {
-			req.setAttribute("result", boardService.checkRecommend(board));
-		}
-		req.setAttribute("count", count);
 		req.setAttribute("board", board);
 		req.setAttribute("boardFile", boardFile);
 		req.setAttribute("comment", commentList);
 		req.setAttribute("nick", boardService.getNick(board));
+		
+		//추천 상태 전달
+		Recommend recommend = new Recommend();
+		recommend.setBoardno(board.getBoardno()); //게시글 번호
+		recommend.setUserid((String)req.getSession().getAttribute("userid")); //로그인한 아이디
+				
+		boolean isRecommend = boardService.isRecommend(recommend);
+		req.setAttribute("isRecommend", isRecommend);
 		
 		req.getRequestDispatcher("/WEB-INF/views/board/view.jsp")
 		.forward(req, resp);

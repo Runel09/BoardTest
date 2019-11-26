@@ -653,6 +653,28 @@ public class BoardDaoImpl implements BoardDao{
 	      return nick;
 	   }
 
+	@Override
+	public void insertReport(Board board) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "UPDATE board SET REPO = REPO+1";
+		sql += " WHERE boardno=?";
+		
+
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, board.getBoardno());
+				ps.executeQuery();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		
+		
+	}
+
 
 
 

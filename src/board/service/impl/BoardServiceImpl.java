@@ -20,12 +20,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import board.dao.face.BoardDao;
 import board.dao.face.BoardFileDao;
 import board.dao.face.CommentDao;
+import board.dao.face.RecommendDao;
 import board.dao.impl.BoardDaoImpl;
 import board.dao.impl.BoardFileDaoImpl;
 import board.dao.impl.CommentDaoImpl;
+import board.dao.impl.RecommendDaoImpl;
 import board.dto.Board;
 import board.dto.BoardFile;
 import board.dto.Comment;
+import board.dto.Recommend;
 import board.service.face.BoardService;
 import util.Paging;
 
@@ -34,6 +37,7 @@ public class BoardServiceImpl implements BoardService{
 	BoardDao boardDao = new BoardDaoImpl();
 	BoardFileDao boardFileDao = new BoardFileDaoImpl();
 	CommentDao commentDao = new CommentDaoImpl();
+	RecommendDao recommendDao = new RecommendDaoImpl();
 	@Override
 	public List<Board> getList() {
 		
@@ -609,45 +613,75 @@ public class BoardServiceImpl implements BoardService{
 
 
 	@Override
-	public void recommend(Board recommendBoard) {
-		
-		
-		
-		boolean chk = checkRecommend(recommendBoard);
-		
-		System.out.println("chekc : " +chk);
-		
-		if(chk==false) {
-
-			boardDao.insertRecommend(recommendBoard);
-		} else {
-			
-			boardDao.deleteRecommend(recommendBoard);
-		}
-		
-	}
-
-
-	@Override
-	public int getRecommendCount(Board recommendBoard) {
-		
-		int cnt = boardDao.getCountRecommend(recommendBoard);
-		
-		return cnt;
-	}
-	
-	@Override
-	public boolean checkRecommend(Board recommendBoard) {
-		return boardDao.checkRecommend(recommendBoard);
-	}
-
-	@Override
 	   public String getNick(Board board) {
 
 	      
 	      
 	      return boardDao.selectNickByUserid(board);
 	   }
+	
+	@Override
+	public boolean isRecommend(Recommend recommend) {
+		int cnt = recommendDao.selectCntRecommend(recommend);
+		
+		if(cnt > 0) { //추천했음
+			return true;
+			
+		} else { //추천하지 않았음
+			return false;
+			
+		}
+	}
+
+	@Override
+	public Recommend getRecommend(HttpServletRequest req) {
+		
+		//전달파라미터 파싱
+		int boardno = 0;
+		String param = req.getParameter("boardno");
+		if( param!=null && !"".equals(param) ) {
+			boardno = Integer.parseInt(param);
+		}
+		
+		//로그인한 아이디
+		String userid = (String) req.getSession().getAttribute("userid");
+		
+		Recommend recommend = new Recommend();
+		recommend.setBoardno(boardno);
+		recommend.setUserid(userid);
+		
+		return recommend;
+	}
+	
+	@Override
+	public boolean recommend(Recommend recommend) {
+		if( isRecommend(recommend) ) { //추천한 상태
+			recommendDao.deleteRecommend(recommend);
+			
+			return false;
+			
+		} else { //추천하지 않은 상태
+			recommendDao.insertRecommend(recommend);
+			
+			return true;
+			
+		}
+		
+	}
+	
+	@Override
+	public int getTotalCntRecommend(Recommend recommend) {
+		return recommendDao.selectTotalCntRecommend(recommend);
+	}
+
+
+	@Override
+	public void updateReport(Board board) {
+		boardDao.insertReport(board);
+	}
+
+
+
 	
 }
 

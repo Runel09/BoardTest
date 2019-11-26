@@ -14,8 +14,6 @@
 
 $(document).ready(function(){
 
-function check() {
-	
 // check();
 
 	//목록버튼 동작
@@ -32,42 +30,64 @@ function check() {
 	$("#btnDelete").click(function() {
 		$(location).attr("href", "/board/delete?boardno=${board.boardno }");
 	});
+
+	//신고버튼 동작
+	$("#btnReport").click(function() {
+		$(location).attr("href", "/board/report?boardno=${board.boardno }");
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	if(${isRecommend}) {
+		$("#btnRecommend")
+			.addClass("btn-warning")
+			.html('추천 취소');
+		
+	} else {
+		$("#btnRecommend")
+			.addClass("btn-primary")
+			.html('추천');
+	}
 	
 	$("#btnRecommend").click(function() {
 		
 		$.ajax({
 			type: "get"
 			, url: "/board/recommend"
-			, data: {
-				"boardno": "${board.boardno}"
-			}
+			, data: { "boardno": '${board.boardno }' }
 			, dataType: "json"
-			, success: function(data) {
+			, success: function( data ) {
+// 				console.log("성공");
+// 				console.log(data);
 
-				if (data.result) {
+				if( data.result ) { //추천 성공
 					$("#btnRecommend")
 					.removeClass("btn-primary")
 					.addClass("btn-warning")
 					.html('추천 취소');
-				} else {
+				
+				} else { //추천 취소 성공
 					$("#btnRecommend")
 					.removeClass("btn-warning")
 					.addClass("btn-primary")
 					.html('추천');
+				
 				}
-					
+				
+				//추천수 적용
 				$("#recommend").html(data.cnt);
+				
 			}
-			, error: function(data) {
-				console.log("실패")
+			, error: function() {
+				console.log("실패");
+				
 			}
-		
-		})
 		});
-
+		
+	});
 });
-
-
 </script>
 
 <div class="container">
@@ -114,8 +134,13 @@ function check() {
 		</tr>
 
 		<c:if test="${not empty file.originname }">
-			<tr><td class="info"  colspan="4">첨부파일</td></tr>
-			<tr><td colspan="4" onclick="location.href='/board/download?fileno=${file.fileno }';">${file.originname }</td></tr>
+			<tr>
+				<td class="info" colspan="4">첨부파일</td>
+			</tr>
+			<tr>
+				<td colspan="4"
+					onclick="location.href='/board/download?fileno=${file.fileno }';">${file.originname }</td>
+			</tr>
 		</c:if>
 
 		<tr>
@@ -157,22 +182,10 @@ function check() {
 
 	<!-- 버튼을 통한 페이지 이동 -->
 	<div class="text-center">
-		<button id="btnList" class="btn btn-primary">목록</button>
-		<c:choose>
-			<c:when test="${result eq true}">
-				<button id="btnRecommend" class="btn btn-primary"></button>
-			</c:when>
-			<c:otherwise>
-				<button id="btnRecommend" class="btn btn-primary">추천</button>
-			</c:otherwise>
-
-		</c:choose>
-			<c:if test="${result }">
-				<button id="btnRecommend" class="btn btn-primary">추천취소</button>
-			</c:if>
-			<c:if test="${!empty result && !result }">
-				<button id="btnRecommend" class="btn btn-primary">추천</button>
-			</c:if>
+		<button id="btnList" class="btn btn-primary">목록</button>		
+		<button id="btnRecommend" class="btn btn-primary"></button>
+		<button id="btnReport" class="btn btn-primary">신고</button>
+	
 		<c:if test="${userid eq board.id }">
 			<button id="btnUpdate" class="btn btn-info">수정</button>
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
@@ -182,10 +195,5 @@ function check() {
 	</div>
 
 </div>
-<!-- .container -->
-
-
-<div id="result"></div>
-
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

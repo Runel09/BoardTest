@@ -8,31 +8,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.dto.Recommend;
+import board.dto.Board;
 import board.service.face.BoardService;
 import board.service.impl.BoardServiceImpl;
 
-@WebServlet("/board/recommend")
-public class BoardRecommendController extends HttpServlet {
+@WebServlet("/board/report")
+public class BoardReportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	//BoardService 객체
 	private BoardService boardService = new BoardServiceImpl();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//추천 정보 얻기
-		Recommend recommendParam = boardService.getRecommend(req);
+	
+		Board board = new Board();
 		
-		//추천 정보 토글
-		boolean result = boardService.recommend(recommendParam);
+		int boardno = Integer.parseInt(req.getParameter("boardno"));
+		board.setBoardno(boardno);
 		
-		//추천 수 조회
-		int cnt = boardService.getTotalCntRecommend(recommendParam);
+//		System.out.println(boardno);
 		
-		//결과 JSON응답
-		resp.getWriter().println("{\"result\": "+result+", \"cnt\": "+cnt+"}");
+		boardService.updateReport(board);
 		
+		resp.sendRedirect("/board/list");
+	}
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 	}
 
 }
