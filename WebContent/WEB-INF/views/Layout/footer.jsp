@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
 	pageEncoding="UTF-8"%>
 </div>
 <div id="footer">
@@ -6,3 +7,16 @@
 </div>
 </body>
 </html>
+=======
+    pageEncoding="UTF-8"%>
+
+</div> <!--  #wrapper -->
+
+<hr>
+<div id="footer">
+<small></small>
+</div>
+
+</body>
+</html>
+>>>>>>> refs/remotes/origin/semi

@@ -1,4 +1,4 @@
-package user.controller;
+package place.controller;
 
 import java.io.IOException;
 
@@ -8,29 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import email.service.EmailService;
-import email.service.EmailServiceImpl;
-import user.dto.User;
-import user.service.face.UserService;
-import user.service.impl.UserServiceImpl;
+import place.service.face.PlaceService;
+import place.service.impl.PlaceServiceImpl;
 
 /**
- * Servlet implementation class FindPwController
+ * Servlet implementation class placeInsertController
  */
-@WebServlet("/find/pw")
-public class FindPwController extends HttpServlet {
+@WebServlet(name = "PlaceInsertController", urlPatterns = { "/place/insert" })
+public class placeInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	UserService userService=new UserServiceImpl();
-	EmailService emailService = new EmailServiceImpl();
+	
+	PlaceService placeService = new PlaceServiceImpl();
+	
+	
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// TODO Auto-generated method stub
-			super.doGet(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/board/write.jsp").forward(req, resp);
 			
 		}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
-	}
+		
+			placeService.write(req);
+	
+		}
+	
+	
 }

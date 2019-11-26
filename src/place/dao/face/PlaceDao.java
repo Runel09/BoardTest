@@ -1,21 +1,18 @@
 package place.dao.face;
 
-import java.util.List;
-
 import place.dto.PlaceDto;
+import place.dto.PlaceFile;
 
 public interface PlaceDao {
+	public void insert(PlaceDto place);
 	
-	/**
-	 * 
-	 * @return DB에 존재하는 모든 마커 포인트 정보
-	 */
-	public List<PlaceDto> selectAll();
+	public int selectPlace_num();
 	
-	/**
-	 * 
-	 * @return DB에 존재하는 모든 장소의 지리정보
-	 */
-	public List<PlaceDto> selectAllLocation();
-
+	public void insertFile(PlaceFile placeFile);
+	
+	
+	public PlaceDto selectPlace(PlaceDto place);
+	
+	public PlaceFile selectfile(PlaceFile placeFile);
+	
 }
