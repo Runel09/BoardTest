@@ -1,12 +1,12 @@
-<%@page import="board.dto.BoardFile"%>
-<%@page import="board.dto.Board"%>
+<%@page import="dto.board.BoardFile"%>
+<%@page import="dto.board.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<%-- <jsp:include page="/WEB-INF/views/layout/header.jsp" /> --%>
 
 <script type="text/javascript" src="/js/httpRequest.js"></script>
 
@@ -86,7 +86,6 @@ $(document).ready(function() {
 			}
 		});
 		
-	});
 });
 </script>
 
@@ -196,4 +195,4 @@ $(document).ready(function() {
 
 </div>
 
-<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+<%-- <jsp:include page="/WEB-INF/views/layout/footer.jsp" /> --%>

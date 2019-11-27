@@ -133,7 +133,7 @@ div.circleBehind a:hover:after
 
 <a href="/board/write" style="float: right;"><button>글쓰기</button></a>
 
-<%-- <jsp:include page="/WEB-INF/views/layout/paging.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/layout/paging.jsp" />
 
 </div> <!-- .container -->
 
