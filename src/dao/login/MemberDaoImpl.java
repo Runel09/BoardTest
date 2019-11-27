@@ -1,13 +1,12 @@
-package web.dao.impl;
+package dao.login;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dbutill.DBConn;
-import web.dao.face.MemberDao;
-import web.dto.Member;
+import dbutil.DBConn;
+import dto.login.Member;
 
 public class MemberDaoImpl implements MemberDao{
 
