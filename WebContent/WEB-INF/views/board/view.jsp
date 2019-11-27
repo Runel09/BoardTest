@@ -42,8 +42,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
    //목록버튼 동작
-   $("#btnList").click(function() {
-      $(location).attr("href", "/board/list");
+   $("#btnCommInsert").click(function() {
+//       $(location).attr("href", "/board/list");
+	   warningModal("입력하소 시ㅠ은 메ㅣ지를 이2력");
    });
    
    //수정버튼 동작
@@ -119,8 +120,34 @@ function deleteComment(commentNo) {
 		}
 	});
 }
-</script>
 
+
+function warningModal(content) {
+    $(".modal-contents").text(content);
+    $("#defaultModal").modal('show');
+ }
+
+
+
+</script>
+<!-- 경고 모달창 -->
+            <div class="modal fade" id="defaultModal">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-success">
+                        <div class="modal-header panel-heading">
+                            <h4 class="modal-title">오류 메시지</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+       
+            <!--// 경고 모달창 -->
 
 
 
@@ -130,14 +157,9 @@ function deleteComment(commentNo) {
 
 <div class="container">
 
-<h1>게시판 - 장소정보 상세보기</h1>
+<h1 class="name">게시판 - 장소정보 상세보기</h1>
 <img src="/image/${viewplace.place_number}.PNG">
 
-<div class="text-right">   
-   <button id="btnList" class="btn btn-primary">목록</button>
-   <button id="btnUpdate" class="btn btn-info">수정</button>
-   <button id="btnDelete" class="btn btn-danger">삭제</button>
-</div>
 
 
 
@@ -197,23 +219,18 @@ function deleteComment(commentNo) {
 
 
 <!-- 로그인상태 -->
-<c:if test="${login }">
+<%-- <c:if test="${login }"> --%>
 <!-- 댓글 입력 -->
-<div class="form-inline text-center">
-	<input type="text" size="10" class="form-control" id="commentWriter" value="${usernick }" readonly="readonly"/>
-	<textarea rows="2" cols="60" class="form-control" id="commentContent"></textarea>
-	<button id="btnCommInsert" class="btn">입력</button>
-</div>	<!-- 댓글 입력 end -->
-</c:if>
+<%-- </c:if> --%>
 
 <!-- 비로그인상태 -->
-<c:if test="${not login }">
-<div class= "text-right">
-<strong>댓글 작성시 로그인이 필요합니다</strong><br>
-<button onclick='location.href="/member/login";'>로그인</button>
-<button onclick='location.href="/member/join";'>회원가입</button>
-</div>
-</c:if>
+<%-- <c:if test="${not login }"> --%>
+<!-- <div class= "text-right"> -->
+<!-- <strong>댓글 작성시 로그인이 필요합니다</strong><br> -->
+<!-- <button onclick='location.href="/member/login";'>로그인</button> -->
+<!-- <button onclick='location.href="/member/join";'>회원가입</button> -->
+<!-- </div> -->
+<%-- </c:if> --%>
 <!-- 댓글 리스트 -->
 <table class="table table-striped table-hover table-condensed">
 <thead>
@@ -243,6 +260,19 @@ function deleteComment(commentNo) {
 </c:forEach>
 </tbody>
 </table>	<!-- 댓글 리스트 end -->
+
+
+<div class="form-inline text-center">
+<%-- 	<input type="text" size="10" class="form-control" id="commentWriter" value="${usernick }" readonly="readonly"/> --%>
+	<textarea rows="1" cols="50" class="form-control" id="commentContent"></textarea>
+	<button id="btnCommInsert" class="btn">입력</button>
+</div>	<!-- 댓글 입력 end -->
+
+
+
+<div class="text-center">   
+   <button id="btnList" class="btn btn-primary">목록</button>
+</div>
 
 </div>	<!-- 댓글 처리 end -->
 
