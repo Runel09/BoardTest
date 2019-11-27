@@ -78,7 +78,7 @@ $(document).ready(function() {
 				
 				//추천수 적용
 				$("#recommend").html(data.cnt);
-				
+		
 			}
 			, error: function() {
 				console.log("실패");
