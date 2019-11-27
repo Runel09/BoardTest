@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- jquery 2.2.4 -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <script type= "text/javascript">
 $(document).ready(function(){
@@ -27,7 +32,7 @@ $(document).ready(function(){
 
 <div class ="container" style="center">
 
-<form action ="/admin/login" method="post" class="form-horizontal">
+<form action ="/supervisor/login" method="post" class="form-horizontal">
    <fieldset style='margin: 0 auto;width:300px'>
       <legend>관리자 로그인</legend><br>
          <div class="form-group">
