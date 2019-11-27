@@ -51,7 +51,7 @@ public class SupervisorLoginController extends HttpServlet {
 			
 		}
 		
-
+		resp.sendRedirect("/supervisor/main");
 				
 	}
 
