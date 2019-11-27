@@ -34,7 +34,7 @@ public class BoardListController extends HttpServlet {
 		
 		req.setAttribute("list", list);
 		
-		req.getRequestDispatcher("/WEB-INF/views/board/asdf.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
 		.forward(req, resp);
 		
 	}
