@@ -1,6 +1,6 @@
-package web.dao.face;
+package dao.login;
 
-import web.dto.Member;
+import dto.login.Member;
 
 public interface MemberDao {
 

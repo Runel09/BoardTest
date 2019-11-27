@@ -1,4 +1,4 @@
-package web.dto;
+package dto.login;
 
 
 public class Member {
