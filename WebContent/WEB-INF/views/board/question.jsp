@@ -106,8 +106,8 @@ div.circleBehind a:hover:after
 
 <div class="container">
 
-<h1>게시글 목록</h1>
-<hr>
+<h1 style="float:left;">질문 게시판</h1>
+
 
 <table class="table table-hover table-condensed table-striped">
 
