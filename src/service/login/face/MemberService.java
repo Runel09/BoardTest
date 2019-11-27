@@ -1,8 +1,8 @@
-package web.service.face;
+package service.login.face;
 
 import javax.servlet.http.HttpServletRequest;
 
-import web.dto.Member;
+import dto.login.Member;
 
 public interface MemberService {
 
