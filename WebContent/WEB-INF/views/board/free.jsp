@@ -98,8 +98,8 @@ div.circleBehind a:hover:after
 <span>커뮤니티</span>
 </div>
 
-  <a href="/board/planner" class="menutab" style="font-size:38px">플래너</a>
-  <a href="/board/free" class="menutab" style="font-size:38px">자유</a>
+  <a href="/board/planner" class="menutab" style="font-size:38px;">플래너</a>
+  <a href="/board/free" class="menutab" style="font-size:38px; color: yellow;">자유</a>
   <a href="/board/tip" class="menutab" style="font-size:38px">여행팁</a>
   <a href="/board/question" class="menutab" style="font-size:38px">질문</a>
 </div>

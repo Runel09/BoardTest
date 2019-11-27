@@ -14,8 +14,8 @@ import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/board/list")
-public class BoardListController extends HttpServlet {
+@WebServlet("/board/free")
+public class BoardFreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardService boardService = new BoardServiceImpl();
@@ -34,7 +34,7 @@ public class BoardListController extends HttpServlet {
 		
 		req.setAttribute("list", list);
 		
-		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/board/free.jsp")
 		.forward(req, resp);
 		
 	}
