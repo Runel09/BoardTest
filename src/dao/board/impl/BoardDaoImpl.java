@@ -70,7 +70,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'free'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -136,7 +136,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'tip'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -202,7 +202,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'question'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -268,7 +268,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'planner'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";

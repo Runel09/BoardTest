@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%-- <jsp:include page="/WEB-INF/views/layout/header.jsp"/> --%>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
 <style type="text/css">
 
@@ -27,13 +27,13 @@ div.container
 {
     font-family: Raleway;
     margin: 0 auto;
-	padding: 10em 3em;
+	padding: 1em 7em;
 	text-align: center;
 }
 
 div.container a
 {
-    color: #FFF;
+    color: #6f6565;
     text-decoration: none;
     font: 20px Raleway;
     margin: 0px 10px;
@@ -45,7 +45,7 @@ div.container a
 
 .yellow
 {
-    background: #fdd835;
+    background: #f7bcbc;
     
 }
 
@@ -71,20 +71,21 @@ div.pullRight a:hover:before
 .community {
 	font-size: 48px;
 	padding: 0px 793px 26px 0px;
+	color: white;
 }
 
 </style>
 
-<div class="container yellow pullRight" style="margin: -117px;">
+<div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
 
 <div class="community">
 <span>커뮤니티</span>
 </div>
 
   <a href="/board/planner" class="menutab" style="font-size:38px;">플래너</a>
-  <a href="/board/free" class="menutab" style="font-size:38px; color: yellow;">자유</a>
-  <a href="/board/tip" class="menutab" style="font-size:38px">여행팁</a>
-  <a href="/board/question" class="menutab" style="font-size:38px">질문</a>
+  <a href="/board/free" class="menutab" style="font-size:38px; ">자유</a>
+  <a href="/board/tip" class="menutab" style="font-size:38px;">여행팁</a>
+  <a href="/board/question" class="menutab" style="font-size:38px; color: white;">질문</a>
 </div>
 
 
@@ -96,7 +97,9 @@ div.pullRight a:hover:before
 <table class="table table-hover table-condensed table-striped">
 
 <tr class="info">
-   <th style="width: 15%">게시글번호</th>
+
+   <th style="width: 8%">구분</th>
+   <th style="width: 7%">게시글번호</th>
    <th style="width: 40%">제목</th>
    <th style="width: 20%">아이디</th>
    <th style="width: 10%">조회수</th>
@@ -105,6 +108,7 @@ div.pullRight a:hover:before
 
 <c:forEach var="list" items="${list }">
 <tr>
+   <td>${list.checkboard }</td>
    <td>${list.boardno }</td>
    <td><a href="/board/view?boardno=${list.boardno }">${list.title }</a></td>
    <td>${list.id }</td>
@@ -117,13 +121,13 @@ div.pullRight a:hover:before
 
 <a href="/board/write" style="float: right;"><button>글쓰기</button></a>
 
-<form action="/board/free" method="get">
+<form action="/board/question" method="get">
 검색어 : <input type="text" name="search">
 <button>검색</button>
 </form>
 
-<jsp:include page="/WEB-INF/views/layout/paging.jsp" />
+<jsp:include page="/WEB-INF/views/layout/question_paging.jsp" />
 
 </div> <!-- .container -->
 
-<%-- <jsp:include page="/WEB-INF/views/layout/footer.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp" />

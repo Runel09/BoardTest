@@ -5,10 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!-- <script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> -->
-<%-- <jsp:include page="/WEB-INF/views/layout/header.jsp"/> --%>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
 <script type="text/javascript"
-src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+src="/resource/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script type="text/javascript">
 // <form>이 submit되면
@@ -109,7 +109,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 
-<%-- <jsp:include page="/WEB-INF/views/layout/footer.jsp"/> --%>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 
 <!-- 스마트 에디터 적용 코드 -->
 <!-- <textarea>태그에 스마트 에디터의 스킨을 입히는 코드 -->   
@@ -118,7 +118,7 @@ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
    oAppRef: oEditors,
    elPlaceHolder: "content",
-   sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+   sSkinURI: "/resource/se2/SmartEditor2Skin.html",
    fCreator: "createSEditor2"
 });
 </script>
