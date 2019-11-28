@@ -1,3 +1,4 @@
+
 <%@page import="dto.board.BoardFile"%>
 <%@page import="dto.board.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
