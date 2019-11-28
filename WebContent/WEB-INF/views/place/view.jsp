@@ -30,8 +30,6 @@
 
 
 
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -39,27 +37,7 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-<script type="text/javascript">
-$(document).ready(function() {
-   //목록버튼 동작
-   $("#btnCommInsert").click(function() {
-//       $(location).attr("href", "/board/list");
-	   warningModal("입력하소 시ㅠ은 메ㅣ지를 이2력");
-   });
-   
-   //수정버튼 동작
-   $("#btnUpdate").click(function() {
-      $(location).attr("href", "/board/update?boardno=${board.boardno }");
-   });
 
-   //삭제버튼 동작
-   $("#btnDelete").click(function() {
-	   $(location).attr("href", "/board/delete?boardno=${board.boardno }");
-   });
-   
-
-});
-</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -67,31 +45,33 @@ $(document).ready(function() {
 	$("#btnCommInsert").click(function() {
 		// 게시글 번호.... ${viewBoard.boardno }
 	//		console.log($("#commentWriter").val());
-	//		console.log($("#commentContent").val());
+	console.log($("#commentContent").val());
 		
-		$form = $("<form>").attr({
-			action: "/comment/insert",
-			method: "post"
-		}).append(
-			$("<input>").attr({
-				type:"hidden",
-				name:"boardNo",
-				value:"${viewBoard.boardno }"
-			})
-		).append(
-			$("<input>").attr({
-				type:"hidden",
-				name:"userid",
-				value:"${sessionScope.userid }"
-			})
-		).append(
-			$("<textarea>")
-				.attr("name", "content")
-				.css("display", "none")
-				.text($("#commentContent").val())
-		);
-		$(document.body).append($form);
-		$form.submit();
+	 warningModal("입력하소 시ㅠ은 메ㅣ지를 이2력");
+	
+// 		$form = $("<form>").attr({
+// 			action: "/comment/insert",
+// 			method: "post"
+// 		}).append(
+// 			$("<input>").attr({
+// 				type:"hidden",
+// 				name:"boardNo",
+// 				value:"${viewBoard.boardno }"
+// 			})
+// 		).append(
+// 			$("<input>").attr({
+// 				type:"hidden",
+// 				name:"userid",
+// 				value:"${sessionScope.userid }"
+// 			})
+// 		).append(
+// 			$("<textarea>")
+// 				.attr("name", "content")
+// 				.css("display", "none")
+// 				.text($("#commentContent").val())
+// 		);
+// 		$(document.body).append($form);
+// 		$form.submit();
 		
 	});
 	
