@@ -1,6 +1,16 @@
 package util;
 
 public class Paging {
+	
+	private String search;
+	
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	private int curPage; // 현재 페이지 번호 (브라우저에서 선택한 페이지 번호)
 
 	private int totalCount; // 총 게시글 수 (DB에서 조회된 전체 결과의 행 수)
@@ -48,9 +58,9 @@ public class Paging {
 	
 	@Override
 	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
+		return "Paging [search=" + search + ", curPage=" + curPage + ", totalCount=" + totalCount + ", listCount="
+				+ listCount + ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}
 
 	//페이징 정보 생성
@@ -58,6 +68,7 @@ public class Paging {
 		if(totalCount==0) return;//게시글이 없는 경우
 		
 		//기본값 설정 
+		if(search==null)	setSearch("");
 		if(curPage==0) setCurPage(1);//첫 페이지 기본값 세팅
 		if(pageCount==0) setPageCount(10);//페이지수 기본값
 		if(listCount==0) setListCount(10);//게시글수 기본값
