@@ -17,7 +17,6 @@ src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 function submitContents(elClickedObj) {
    // 에디터의 내용이 textarea에 적용된다
    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-   
    try {
       elClickedObj.form.submit(); // <form> submit 수행
    } catch(e) {}
@@ -69,39 +68,38 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <h1>글쓰기 페이지</h1>
 <hr>
 
-<form action="/board/write" method="post" encType="multipart/form-data">
+
+<form action="/board/update" method="post" encType="multipart/form-data">
+<input type="hidden" value="${board.boardno }" name="boardno">
 <table class="table table-bordered">
 
    <tr>
       <td class="info">아이디</td><td>${userid }</td>
    <tr>
-
-   <tr><td>  
-	<input type="radio" name="checkboard" value="free">자유
-	<input type="radio" name="checkboard" value="tip">여행팁
-	<input type="radio" name="checkboard" value="question">질문
-   </td></tr>
    
    <tr>
       <th class="info" >제목:</th>
-      <td><input type="text" placeholder="제목을 입력하세요." name="title" required="required" style="width: 650px;"/></td>
+      <td><input type="text" placeholder="제목을 입력하세요." name="title" required="required" style="width: 650px;" value="${board.title }"/></td>
    </tr>
-
+   
    <tr>
       <th class="info">내용:</th>
-      <td><textarea name="content" id="content" rows="30" cols="140">
-</textarea>
+      <td><textarea name="content" id="content" rows="30" cols="140" >${board.content }</textarea>
 <!-- <script> -->
 <!-- //    CKEDITOR.replace( 'content' ); -->
 <!-- </script> -->
 </td>
    </tr>
-
+   
    <tr>
       <th class="info">첨부파일:</th>
-      <td><input type="file" placeholder="파일을 선택하세요. " name="file" /></td>
+      <td><input type="file"  name="file" />
+      <c:if test="${not empty file.originname}">
+	  ${file.originname }
+      </c:if>
+      </td>
    </tr>
-
+   
 </table>
       <button id="btnCancel" style="float: right">취소</button>
       <button id="btnWrite" style="float: right">작성</button>

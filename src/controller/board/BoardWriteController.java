@@ -94,13 +94,15 @@ public class BoardWriteController extends HttpServlet {
 		.append("- - - 파일 형식 - - -<br>")
 		.append(mul.getContentType("upfile") + "<br>" );
 				
-		// -------------------
+		// -------------------  파일
+		
+		
 		Board board = new Board();
 		
 		board.setTitle(mul.getParameter("title"));
 		board.setId((String)req.getSession().getAttribute("userid"));
 		board.setContent(mul.getParameter("content"));
-		
+		board.setCheckboard(mul.getParameter("checkboard"));
 				
 		BoardFile boardFile = new BoardFile();
 				
@@ -120,7 +122,7 @@ public class BoardWriteController extends HttpServlet {
 		boardDao.insert(board);
 		boardDao.insertFile(boardFile);
 		
-		resp.sendRedirect("/board/list");
+		resp.sendRedirect("/board/free");
 		
 	}
 

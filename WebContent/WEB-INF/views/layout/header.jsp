@@ -32,9 +32,15 @@ hr {
 }
 
 a.menubar{
-margin:83px;
-font-size:25px;
-font-family: 'Alatsi', sans-serif;
+	margin:83px;
+	font-size:25px;
+	font-family: 'Alatsi', sans-serif;
+}
+h1.name{
+	font-size:25px;
+	font-family: 'Alatsi', sans-serif;
+	color:#337ab7;
+	text-align:center;
 }
 
 

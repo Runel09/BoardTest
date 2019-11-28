@@ -11,7 +11,16 @@ public class Board {
 	private int hit;
 	private Date writtendate;
 	private int recommend;
+	private String checkboard;
 	
+	public String getCheckboard() {
+		return checkboard;
+	}
+
+	public void setCheckboard(String checkboard) {
+		this.checkboard = checkboard;
+	}
+
 	public int getRecommend() {
 		return recommend;
 	}
@@ -23,7 +32,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardno=" + boardno + ", title=" + title + ", id=" + id + ", content=" + content + ", hit=" + hit
-				+ ", writtendate=" + writtendate + ", recommend=" + recommend + "]";
+				+ ", writtendate=" + writtendate + ", recommend=" + recommend + ", checkboard=" + checkboard + "]";
 	}
 
 	public int getBoardno() {

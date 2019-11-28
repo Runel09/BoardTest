@@ -15,7 +15,7 @@ import service.place.impl.PlaceServiceImpl;
  * Servlet implementation class placeInsertController
  */
 @WebServlet("/place/insert")
-public class placeInsertController extends HttpServlet {
+public class PlaceInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	PlaceService placeService = new PlaceServiceImpl();
@@ -23,7 +23,7 @@ public class placeInsertController extends HttpServlet {
 	
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			req.getRequestDispatcher("/WEB-INF/views/board/write.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/place/write.jsp").forward(req, resp);
 			
 		}
 	

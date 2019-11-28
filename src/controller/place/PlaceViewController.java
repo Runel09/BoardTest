@@ -44,7 +44,7 @@ public class PlaceViewController extends HttpServlet {
 		
 		
 		
-		req.getRequestDispatcher("/WEB-INF/views/board/view.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/place/view.jsp").forward(req, resp);
 		
 		
 	}
