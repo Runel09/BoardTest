@@ -79,6 +79,9 @@ for (i = 0; i < result.length; i++) {
       path = ploy.getPath();
       map.setZoom(15);
       map.setCenter(this.getPosition());
+      
+      
+      
 //         if (($("#indexBody").children().size()==0 || $("#indexBody").children().size()==6) && result[this.id].cate!="숙소"){
 //         	alert("첫 장소와 마지막 장소는 숙소만 선택 가능 합니다.")
 //     		return false;
@@ -135,6 +138,23 @@ function addIndex(ind){
       
       path.push(new google.maps.LatLng(result[ind].lat, result[ind].lng));
       path.getAt();
+      var encodeString = google.maps.geometry.encoding.encodePath(path);
+      var decodeString = google.maps.geometry.encoding.decodePath(encodeString);
+		if (encodeString) {
+			console.log(encodeString);
+			console.log(decodeString);
+			console.log(decodeString[0].lng[0]);
+			console.log(decodeString[0].lat);
+			for (var i = 1; i <= decodeString.length; ++i) {
+					console.log(decodeString.length);
+				   var index = (decodeString.length-1);
+
+				   console.log(decodeString[index].lat());
+				   console.log(decodeString[index].lng());
+			}	   
+				   
+		}
+    
 }
 
 //	var markerCluster = new MarkerClusterer(map, markers,{imagePath: '/resource/img'});

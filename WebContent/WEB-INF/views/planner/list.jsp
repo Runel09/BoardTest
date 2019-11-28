@@ -59,8 +59,6 @@ $(document).ready(function() {
 //   }
 // })();
 </script>
-
-<h1>리스트</h1>
 <div id="indexList"></div>
 
 <button id="ajaxButton" type="button">Make a request</button>

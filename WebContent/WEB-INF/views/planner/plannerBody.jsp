@@ -96,7 +96,7 @@ html, body {
 		$(".center").on("click", ".marker", function() {
 			console.log($(this).attr("data-idx"));
 			var placeno =$(this).attr("data-idx");
-			console.log(placeno);
+// 			console.log(placeno);
 			$.ajax({
 				type: "get"
 				, url: "/planner/placeInfo"
@@ -110,8 +110,8 @@ html, body {
 				}
 			})
 			map.setZoom(15);
-			console.log($(this).attr("location-lat"));
-			console.log($(this).attr("location-lng"));
+// 			console.log($(this).attr("location-lat"));
+// 			console.log($(this).attr("location-lng"));
 			
 		    map.setCenter(new google.maps.LatLng($(this).attr("location-lat"), $(this).attr("location-lng")));
 		})
