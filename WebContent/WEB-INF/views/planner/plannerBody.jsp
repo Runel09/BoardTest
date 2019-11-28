@@ -106,7 +106,7 @@ html, body {
 			$.ajax({
 				type: "get"
 				, url: "/planner/placeInfo"
-				, data: {placeno}
+				, data: {"placeno":placeno}
 				, dataType: "html"
 				, success: function(data) {
 					$("#indexList").append(data);

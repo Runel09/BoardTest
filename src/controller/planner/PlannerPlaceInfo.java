@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.place.Place;
-import service.place.PlaceService;
-import service.place.PlaceServiceImpl;
+import dto.place.PlaceDto;
+import service.place.face.PlaceService;
+import service.place.impl.PlaceServiceImpl;
 import service.planner.face.PlannerService;
 import service.planner.impl.PlannerServiceImpl;
 
@@ -27,17 +27,19 @@ public class PlannerPlaceInfo extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int placeno=0;
-		Place place=new Place();
-		List<Place> placeList = new ArrayList<Place>();
+		PlaceDto place=new PlaceDto();
+		List<PlaceDto> placeList = new ArrayList<PlaceDto>();
+		System.out.println(req.getParameter("placeno"));
 		if(req.getParameter("placeno")!=null && !"".equals(req.getParameter("placeno")) ) {
-			placeno =Integer.parseInt(req.getParameter("placeno"));
+			place =placeService.getPlace_number(req);
+			placeno=place.getPlace_number();
 		}
 		if(placeno==0) {
 			placeList=placeService.getAlleGeoInfo();
 			req.setAttribute("placeno", placeno);
 			req.setAttribute("markers", placeList);
-		}else if(placeno!=0) {
-			place=placeService.getInfoByplaceno(placeno);
+		}else if(placeno>=0) {
+			place=placeService.view(place);
 			req.setAttribute("placeno", placeno);
 			req.setAttribute("markers", place);
 		}

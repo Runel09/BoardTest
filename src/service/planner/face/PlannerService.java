@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dto.place.Place;
+import dto.place.PlaceDto;
 import dto.planner.Marker;
 import dto.planner.Planner;
 
@@ -62,7 +62,7 @@ public interface PlannerService {
 	 * @param req 페이지에 표시된 지도 좌표(4개 모서리)
 	 * @return 해당 좌표들 안에 존재하는 장소들 목록
 	 */
-	public List<Place> getPlace(HttpServletRequest req);
+	public List<PlaceDto> getPlace(HttpServletRequest req);
 
 	//PL-04
 	//	 일정표에 추가된 장소들을 순서에 맞춰 직선으로 이어줌
@@ -72,7 +72,7 @@ public interface PlannerService {
 	 * @param placeIndex 입력된 장소번호와 순서가 들어가 있는 리스트 
 	 * @return 입력된 장소 번호와 순서에 맞춰서 순차적으로 입력된 장소 정보(좌표) 리스트
 	 */
-	public List<Place> getLine(List<Planner>  placeIndex);
+	public List<PlaceDto> getLine(List<Planner>  placeIndex);
 
 	//PL-05
 	//	 지도에서 아이콘 선택시일정표에 해당 장소 추가 
@@ -86,17 +86,17 @@ public interface PlannerService {
 	//PL-06
 	//	-카테고리별 분류후 각 카테고리별 평점을 기준으로 정렬하여 우측바에 출력
 	//  전체 출력
-	public List<Place> allPlace();
+	public List<PlaceDto> allPlace();
 	
 	//  카테고리별 출력
-	public List<Place> catPlLits(Place catInfo);
+	public List<PlaceDto> catPlLits(PlaceDto catInfo);
 	
 	// 장소 필터링
 	/**
 	 *  wkd
 	 * @return
 	 */
-	public List<Place> placeFilter(int[] placeArray);
+	public List<PlaceDto> placeFilter(int[] placeArray);
 	
 	
 	//	-일정표상 두장소의 직선상 거리의 중심점을기준으로 반경 검색후 평점 순으로 추천

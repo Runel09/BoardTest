@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dto.place.Place;
+import dto.place.PlaceDto;
 import dto.planner.Marker;
 import dto.planner.Planner;
 import service.planner.face.PlannerService;
@@ -26,13 +26,13 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public List<Place> getPlace(HttpServletRequest req) {
+	public List<PlaceDto> getPlace(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Place> getLine(List<Planner> placeIndex) {
+	public List<PlaceDto> getLine(List<Planner> placeIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,13 +44,13 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public List<Place> allPlace() {
+	public List<PlaceDto> allPlace() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Place> catPlLits(Place catInfo) {
+	public List<PlaceDto> catPlLits(PlaceDto catInfo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,7 +62,7 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public List<Place> placeFilter(int[] placeArray) {
+	public List<PlaceDto> placeFilter(int[] placeArray) {
 		// TODO Auto-generated method stub
 		return null;
 	}
