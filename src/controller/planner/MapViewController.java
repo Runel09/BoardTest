@@ -22,16 +22,18 @@ public class MapViewController extends HttpServlet {
 	PlaceService placeService = new PlaceServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String placeparam=req.getParameter("placeno");
+		String placeparam=req.getParameter("place_number");
 		PlaceDto place= new PlaceDto();
 		int placeno= 0;
-		if (placeparam==null) {
+		if (placeparam==null ) {
 			place.setCoordinate_lat(35.305034);
 			place.setCoordinate_lng(123.726168);
+			place.setPlace_number(0);
 			req.setAttribute("centerPlace", place);
 		}else {
 			placeno=Integer.parseInt((placeparam));
-//			place=placeService.getInfoByplaceno(placeno);
+			place.setPlace_number(placeno);
+			place=placeService.view(place);
 			req.setAttribute("centerPlace", place);
 		}
 		List<PlaceDto> placeList=placeService.getAlleGeoInfo();

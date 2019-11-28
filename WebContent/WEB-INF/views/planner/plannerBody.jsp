@@ -106,10 +106,22 @@ html, body {
 			$.ajax({
 				type: "get"
 				, url: "/planner/placeInfo"
-				, data: {"placeno":placeno}
+				, data: {"place_number":placeno}
 				, dataType: "html"
 				, success: function(data) {
-					$("#indexList").append(data);
+					$("#indexList").html(data);
+				}
+				, error: function() {
+					console.log("fail");
+				}
+			})
+			$.ajax({
+				type: "get"
+				, url: "/map/view"
+				, data: {"place_number":placeno}
+				, dataType: "html"
+				, success: function(data) {
+					$(".right").html(data);
 				}
 				, error: function() {
 					console.log("fail");

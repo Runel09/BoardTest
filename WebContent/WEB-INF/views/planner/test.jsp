@@ -16,11 +16,18 @@ label : 'B'
 var ploy;
 var result = new Array();
 var path;
+var zoomVal=0;
 function initMap() {
+var placeNumber= ${centerPlace.place_number};	
+if(placeNumber ==0){
+	zoomVal=4.5;
+}else{
+	zoomVal=15;
+}
 var map = new google.maps.Map(document.getElementById('map'), {
 center : new google.maps.LatLng(${centerPlace.coordinate_lat}, ${centerPlace.coordinate_lng}),
-zoom : 4.5
-
+	zoom: zoomVal
+			
 });
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 ploy = new google.maps.Polyline({
@@ -136,11 +143,13 @@ function addIndex(ind){
 
 </script>
 
-	<div id="map"></div>
-
+<div id="map"></div>
+<c:set value="${centerplace }" var="center" />
+<c:if test="${center.place_number ne 0}">
 <script
 	src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
 	</script>
+</c:if>
 

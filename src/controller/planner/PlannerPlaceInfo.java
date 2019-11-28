@@ -29,10 +29,11 @@ public class PlannerPlaceInfo extends HttpServlet {
 		int placeno=0;
 		PlaceDto place=new PlaceDto();
 		List<PlaceDto> placeList = new ArrayList<PlaceDto>();
-		System.out.println(req.getParameter("placeno"));
-		if(req.getParameter("placeno")!=null && !"".equals(req.getParameter("placeno")) ) {
+//		System.out.println(req.getParameter("place_number"));
+		if(req.getParameter("place_number")!=null && !"".equals(req.getParameter("place_number")) ) {
 			place =placeService.getPlace_number(req);
 			placeno=place.getPlace_number();
+//			System.out.println(placeno);
 		}
 		if(placeno==0) {
 			placeList=placeService.getAlleGeoInfo();
@@ -41,6 +42,7 @@ public class PlannerPlaceInfo extends HttpServlet {
 		}else if(placeno>=0) {
 			place=placeService.view(place);
 			req.setAttribute("placeno", placeno);
+			System.out.println(place.toString());
 			req.setAttribute("markers", place);
 		}
 		
