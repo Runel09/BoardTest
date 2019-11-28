@@ -17,6 +17,7 @@ var ploy;
 var result = new Array();
 var path;
 var zoomVal=0;
+
 function initMap() {
 var placeNumber= ${centerPlace.place_number};	
 if(placeNumber ==0){
@@ -24,7 +25,7 @@ if(placeNumber ==0){
 }else{
 	zoomVal=15;
 }
-var map = new google.maps.Map(document.getElementById('map'), {
+ map = new google.maps.Map(document.getElementById('map'), {
 center : new google.maps.LatLng(${centerPlace.coordinate_lat}, ${centerPlace.coordinate_lng}),
 	zoom: zoomVal
 			

@@ -6,7 +6,7 @@
 	<c:when test="${placeno eq 0}">
 		<c:forEach items="${markers}" var="marker">
 			<div style="border: 1px solid #ccc" class="marker"
-				data-idx="${marker.place_number }">
+				data-idx="${marker.place_number }" location-lat="${marker.coordinate_lat }" location-lng="${marker.coordinate_lng }">
 				${marker.place_name } - ${marker.detail}
 				<!-- <button id = 'insertBtn"+i+"' onclick='addIndex("+i+");'> 장소 추가 </button>"	 -->
 			</div>

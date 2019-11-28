@@ -91,14 +91,8 @@ html, body {
 
 
 <script type="text/javascript">
+	var map;
 	$(document).ready(function() {
-		$("a").click(function() {
-			// 클릭이벤트가 발생한 <a>태그의 href 속성의 url값을 이용하여 .load() 수행
-			$(".right").load($(this).attr("href"));
-			// 웹페이지의 동적 수행을 멈추는 코드 - <a> 태그의 페이지 이동을 막는다
-			return false;
-		})
-		
 		$(".center").on("click", ".marker", function() {
 			console.log($(this).attr("data-idx"));
 			var placeno =$(this).attr("data-idx");
@@ -115,18 +109,11 @@ html, body {
 					console.log("fail");
 				}
 			})
-			$.ajax({
-				type: "get"
-				, url: "/map/view"
-				, data: {"place_number":placeno}
-				, dataType: "html"
-				, success: function(data) {
-					$(".right").html(data);
-				}
-				, error: function() {
-					console.log("fail");
-				}
-			})
+			map.setZoom(15);
+			console.log($(this).attr("location-lat"));
+			console.log($(this).attr("location-lng"));
+			
+		    map.setCenter(new google.maps.LatLng($(this).attr("location-lat"), $(this).attr("location-lng")));
 		})
 	});	
 </script>
