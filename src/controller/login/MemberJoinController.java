@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import web.dto.Member;
-import web.service.face.MemberService;
-import web.service.impl.MemberServiceImpl;
+import dto.login.Member;
+import service.login.MemberService;
+import service.login.MemberServiceImpl;
 
 /**
  * Servlet implementation class MemberJoinController

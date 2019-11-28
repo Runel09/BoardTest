@@ -20,10 +20,12 @@ public class DBConn {
 	private DBConn() {
 		
 	}
+
 	
 	//Connection 객체 반환 -Singleton Pattern
 	public static Connection getConnection() {
 		
+
 		if (conn==null) {
 				try {
 					Class.forName(DRIVER);//드라이버 로드

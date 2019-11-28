@@ -61,7 +61,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<Board> selectAll(Paging paging) {
+	public List<Board> selectFreeAll(Paging paging) {
 
 		conn = DBConn.getConnection();
 		
@@ -70,9 +70,208 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
+		sql	+=	"        WHERE checkboard = free";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
-			sql += " WHERE title LIKE ?";
+			sql += " AND title LIKE ?";
+		}
+		
+		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN ? AND ?";
+
+		List<Board> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+				
+				ps.setString(1, "%"+paging.getSearch()+"%");
+				ps.setInt(2, paging.getStartNo());
+				ps.setInt(3, paging.getEndNo());
+				
+			} else {
+				
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			}
+			
+			
+			rs = ps.executeQuery();
+			
+//			System.out.println(rs.next());
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				
+				list.add(board);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
+	@Override
+	public List<Board> selectTipAll(Paging paging) {
+
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+=	"    SELECT rownum rnum, B.* FROM (";
+		sql	+=	"        SELECT *";
+		sql	+=	"        FROM board";
+		sql	+=	"        WHERE checkboard = free";
+		
+		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			sql += " AND title LIKE ?";
+		}
+		
+		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN ? AND ?";
+
+		List<Board> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+				
+				ps.setString(1, "%"+paging.getSearch()+"%");
+				ps.setInt(2, paging.getStartNo());
+				ps.setInt(3, paging.getEndNo());
+				
+			} else {
+				
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			}
+			
+			
+			rs = ps.executeQuery();
+			
+//			System.out.println(rs.next());
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				
+				list.add(board);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
+	@Override
+	public List<Board> selectQuestionAll(Paging paging) {
+
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+=	"    SELECT rownum rnum, B.* FROM (";
+		sql	+=	"        SELECT *";
+		sql	+=	"        FROM board";
+		sql	+=	"        WHERE checkboard = free";
+		
+		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			sql += " AND title LIKE ?";
+		}
+		
+		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN ? AND ?";
+
+		List<Board> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+				
+				ps.setString(1, "%"+paging.getSearch()+"%");
+				ps.setInt(2, paging.getStartNo());
+				ps.setInt(3, paging.getEndNo());
+				
+			} else {
+				
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			}
+			
+			
+			rs = ps.executeQuery();
+			
+//			System.out.println(rs.next());
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				
+				list.add(board);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
+	@Override
+	public List<Board> selectPlannerAll(Paging paging) {
+
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+=	"    SELECT rownum rnum, B.* FROM (";
+		sql	+=	"        SELECT *";
+		sql	+=	"        FROM board";
+		sql	+=	"        WHERE checkboard = free";
+		
+		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			sql += " AND title LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -131,7 +330,7 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT boardno, title, id, content, hit, writtendate";
+		sql += "SELECT boardno, title, id, content, hit, writtendate, checkboard";
 		sql += " FROM board WHERE boardno=?";
 		
 		Board boarddetail = new Board();
@@ -243,8 +442,8 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO board(boardno,title,id,content,hit,writtendate)";
-		sql += " VALUES(?,?,?,?,0,sysdate)";
+		sql += "INSERT INTO board(boardno,title,id,content,hit,writtendate,checkboard)";
+		sql += " VALUES(?,?,?,?,0,sysdate,?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -253,6 +452,7 @@ public class BoardDaoImpl implements BoardDao{
 			ps.setString(2, board.getTitle());
 			ps.setString(3, board.getId());
 			ps.setString(4, board.getContent());
+			ps.setString(5, board.getCheckboard());
 			
 			ps.executeQuery();
 			

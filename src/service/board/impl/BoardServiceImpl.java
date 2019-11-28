@@ -12,10 +12,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.board.face.BoardDao;
 import dao.board.face.BoardFileDao;
@@ -46,11 +46,30 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	@Override
-	public List<Board> getList(Paging paging) {
+	public List<Board> getFreeList(Paging paging) {
 
-		return boardDao.selectAll(paging);
+		return boardDao.selectFreeAll(paging);
 	}
 
+	@Override
+	public List<Board> getTipList(Paging paging) {
+
+		return boardDao.selectTipAll(paging);
+	}
+
+	@Override
+	public List<Board> getQuestionList(Paging paging) {
+
+		return boardDao.selectQuestionAll(paging);
+	}
+
+	@Override
+	public List<Board> getPlannerList(Paging paging) {
+
+		return boardDao.selectPlannerAll(paging);
+	}
+
+	
 	
 	@Override
 	public Board getBoardno(HttpServletRequest req) {

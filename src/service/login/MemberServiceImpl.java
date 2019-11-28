@@ -1,11 +1,10 @@
-package web.service.impl;
+package service.login;
 
 import javax.servlet.http.HttpServletRequest;
 
-import web.dao.face.MemberDao;
-import web.dao.impl.MemberDaoImpl;
-import web.dto.Member;
-import web.service.face.MemberService;
+import dao.login.MemberDao;
+import dao.login.MemberDaoImpl;
+import dto.login.Member;
 
 public class MemberServiceImpl implements MemberService{
 

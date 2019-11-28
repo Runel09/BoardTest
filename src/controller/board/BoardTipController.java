@@ -14,8 +14,8 @@ import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/board/list")
-public class BoardListController extends HttpServlet {
+@WebServlet("/board/tip")
+public class BoardTipController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardService boardService = new BoardServiceImpl();
@@ -30,11 +30,11 @@ public class BoardListController extends HttpServlet {
 		//Paging 객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);
 		
-		List<Board> list = boardService.getList(paging);
+		List<Board> list = boardService.getTipList(paging);
 		
 		req.setAttribute("list", list);
 		
-		req.getRequestDispatcher("/WEB-INF/views/board/asdf.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/board/tip.jsp")
 		.forward(req, resp);
 		
 	}
