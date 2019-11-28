@@ -24,7 +24,10 @@ public interface BoardDao {
 	 * @param Paging - 페이징 정보
 	 * @return List - 조회된 게시글 목록
 	 */
-	public List<Board> selectAll(Paging paging);
+	public List<Board> selectFreeAll(Paging paging);
+	public List<Board> selectQuestionAll(Paging paging);
+	public List<Board> selectTipAll(Paging paging);
+	public List<Board> selectPlannerAll(Paging paging);
 
 	public Board selectBoardByBoardno(Board board);
 

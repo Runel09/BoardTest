@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 	//목록버튼 동작
 	$("#btnList").click(function() {
-		$(location).attr("href", "/board/list");
+		$(location).attr("href", "/board/free");
 	});
 	
 	//수정버튼 동작
@@ -44,13 +44,13 @@ $(document).ready(function() {
 		$("#btnRecommend")
 			.addClass("btn-warning")
 			.html('추천 취소');
-		
-	} else {
+		} 
+	else {
 		$("#btnRecommend")
 			.addClass("btn-primary")
 			.html('추천');
 	}
-	
+
 	$("#btnRecommend").click(function() {
 		
 		$.ajax({
@@ -85,7 +85,6 @@ $(document).ready(function() {
 				
 			}
 		});
-		
 });
 </script>
 

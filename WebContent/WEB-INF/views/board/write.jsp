@@ -75,12 +75,18 @@ tr td:not(:first-child), tr th:not(:first-child) {
    <tr>
       <td class="info">아이디</td><td>${userid }</td>
    <tr>
+
+   <tr><td>  
+	<input type="radio" name="checkboard" value="free">자유
+	<input type="radio" name="checkboard" value="tip">여행팁
+	<input type="radio" name="checkboard" value="question">질문
+   </td></tr>
    
    <tr>
       <th class="info" >제목:</th>
       <td><input type="text" placeholder="제목을 입력하세요." name="title" required="required" style="width: 650px;"/></td>
    </tr>
-   
+
    <tr>
       <th class="info">내용:</th>
       <td><textarea name="content" id="content" rows="30" cols="140">
@@ -90,12 +96,12 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <!-- </script> -->
 </td>
    </tr>
-   
+
    <tr>
       <th class="info">첨부파일:</th>
       <td><input type="file" placeholder="파일을 선택하세요. " name="file" /></td>
    </tr>
-   
+
 </table>
       <button id="btnCancel" style="float: right">취소</button>
       <button id="btnWrite" style="float: right">작성</button>

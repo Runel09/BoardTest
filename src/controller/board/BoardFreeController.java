@@ -30,7 +30,7 @@ public class BoardFreeController extends HttpServlet {
 		//Paging 객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);
 		
-		List<Board> list = boardService.getList(paging);
+		List<Board> list = boardService.getFreeList(paging);
 		
 		req.setAttribute("list", list);
 		

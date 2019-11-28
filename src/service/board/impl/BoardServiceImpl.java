@@ -46,11 +46,30 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	@Override
-	public List<Board> getList(Paging paging) {
+	public List<Board> getFreeList(Paging paging) {
 
-		return boardDao.selectAll(paging);
+		return boardDao.selectFreeAll(paging);
 	}
 
+	@Override
+	public List<Board> getTipList(Paging paging) {
+
+		return boardDao.selectTipAll(paging);
+	}
+
+	@Override
+	public List<Board> getQuestionList(Paging paging) {
+
+		return boardDao.selectQuestionAll(paging);
+	}
+
+	@Override
+	public List<Board> getPlannerList(Paging paging) {
+
+		return boardDao.selectPlannerAll(paging);
+	}
+
+	
 	
 	@Override
 	public Board getBoardno(HttpServletRequest req) {

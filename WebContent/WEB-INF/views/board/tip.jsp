@@ -43,46 +43,29 @@ div.container a
     cursor: pointer;
 }
 
-.blue
+.yellow
 {
-    background: #2196f3;
+    background: #fdd835;
     
 }
 
-/* Circle behind */
-div.circleBehind a:before, div.circleBehind a:after
+/* Pull right  */
+div.pullRight a:before
 {
     position: absolute;
-    top: 22px;
-    left: 50%;
-    width: 50px;
-    height: 50px;
-    border: 4px solid #0277bd;
-    transform: translateX(-50%) translateY(-50%) scale(0.8);
-    border-radius: 50%;
-    background: transparent;
-    content: "";
-    opacity: 0;
+    width: 2px;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
     transition: all 0.3s;
-    z-index: -1;
 }
 
-div.circleBehind a:after
+div.pullRight a:hover:before
 {
-    border-width: 2px;
-    transition: all 0.4s;
-}
-
-div.circleBehind a:hover:before
-{
-    opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(1);
-}
-
-div.circleBehind a:hover:after
-{
-    opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(1.3);
+    width: 100%;
 }
 
 .community {
@@ -92,21 +75,23 @@ div.circleBehind a:hover:after
 
 </style>
 
-<div class="container blue circleBehind" style="margin: -117px;">
+<div class="container yellow pullRight" style="margin: -117px;">
 
 <div class="community">
 <span>커뮤니티</span>
 </div>
 
-  <a href="/board/planner" class="menutab" style="font-size:38px; ">플래너</a>
-  <a href="/board/free" class="menutab" style="font-size:38px">자유</a>
-  <a href="/board/tip" class="menutab" style="font-size:38px; color: yellow;">여행팁</a>
+  <a href="/board/planner" class="menutab" style="font-size:38px;">플래너</a>
+  <a href="/board/free" class="menutab" style="font-size:38px; color: yellow;">자유</a>
+  <a href="/board/tip" class="menutab" style="font-size:38px">여행팁</a>
   <a href="/board/question" class="menutab" style="font-size:38px">질문</a>
 </div>
 
+
 <div class="container">
 
-<h1 style="float:left;">여행팁 게시판</h1>
+<h1 style="float:left;">팁 게시판</h1>
+
 
 <table class="table table-hover table-condensed table-striped">
 
@@ -131,6 +116,11 @@ div.circleBehind a:hover:after
 </table>
 
 <a href="/board/write" style="float: right;"><button>글쓰기</button></a>
+
+<form action="/board/free" method="get">
+검색어 : <input type="text" name="search">
+<button>검색</button>
+</form>
 
 <jsp:include page="/WEB-INF/views/layout/paging.jsp" />
 

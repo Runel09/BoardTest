@@ -68,6 +68,7 @@ public class Paging {
 		if(totalCount==0) return;//게시글이 없는 경우
 		
 		//기본값 설정 
+		if(search==null)	setSearch("");
 		if(curPage==0) setCurPage(1);//첫 페이지 기본값 세팅
 		if(pageCount==0) setPageCount(10);//페이지수 기본값
 		if(listCount==0) setListCount(10);//게시글수 기본값

@@ -19,6 +19,7 @@ public interface BoardService {
 	 * @return List - 게시글 목록
 	 */
 	public List<Board> getList();
+
 	
 	
 	/**
@@ -27,8 +28,11 @@ public interface BoardService {
 	 * @param Paging - 페이징 정보
 	 * @return List - 게시글 목록
 	 */
-	public List<Board> getList(Paging paging);
 
+	public List<Board> getFreeList(Paging paging);
+	public List<Board> getTipList(Paging paging);
+	public List<Board> getQuestionList(Paging paging);
+	public List<Board> getPlannerList(Paging paging);
 	
 	public Board getBoardno(HttpServletRequest req);
 

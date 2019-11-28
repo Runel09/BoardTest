@@ -30,7 +30,7 @@ public class BoardQuestionController extends HttpServlet {
 		//Paging 객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);
 		
-		List<Board> list = boardService.getList(paging);
+		List<Board> list = boardService.getQuestionList(paging);
 		
 		req.setAttribute("list", list);
 		
