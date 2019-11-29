@@ -17,6 +17,8 @@
 <br><br>
 <a href="/place/insert">장소입력</a>
 <br><br>
+<a href="/supervisor/insertnotice">공지사항 입력</a>
+<br><br>
 <a href="/supervisor/logout">로그아웃</a>
 <br>
 </body>
