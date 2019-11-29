@@ -8,6 +8,7 @@
 
 <style type="text/css">
 
+/* 게시판board style */
 table, th {
 	text-align: center;
 }
@@ -20,8 +21,9 @@ tr td:not(:first-child), tr th:not(:first-child) {
 	border-left: 1px solid white;
 }
 
-@import 'https://fonts.googleapis.com/css?family=Raleway';
 
+/* 게시판tab style */
+@import 'https://fonts.googleapis.com/css?family=Raleway';
 
 div.container
 {
@@ -88,11 +90,11 @@ div.pullRight a:hover:before
   <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
 </div>
 
+<h2 style="text-align:center;">여행자들의 일정보기</h2>
 
 <div class="container">
 
 <h1 style="float:left;">플래너 게시판</h1>
-
 
 <table class="table table-hover table-condensed table-striped">
 
