@@ -4,10 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import dao.supervisor.face.SupervisorDao;
 import dbutil.DBConn;
+import dto.login.Member;
 import dto.supervisor.Supervisor;
+import util.Paging;
 
 public class SupervisorDaoImpl implements SupervisorDao{
 
@@ -85,8 +91,8 @@ public class SupervisorDaoImpl implements SupervisorDao{
 			rs = ps.executeQuery();
 			
 			while( rs.next() ) {
-				supervisor.setSuper_id( rs.getString("userid") );
-				supervisor.setSuper_pw( rs.getString("userpw") );
+				supervisor.setSuper_id( rs.getString("super_id") );
+				supervisor.setSuper_pw( rs.getString("super_pw") );
 			}
 			
 		} catch (SQLException e) {
@@ -105,5 +111,138 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		return supervisor;
 		
 	}
+
+	@Override
+	public List<Member> getUserList(Paging paging) {
+		conn = DBConn.getConnection(); // DB연결
+		
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "select * from(";
+		sql += " Select rownum rnum, B.* FROM(";
+		sql += " select * from userinfo";
+		
+		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			sql+=" WHERE db_id LIKE ? ";
+			System.out.println("ㅋㅋ");
+		}
+		
+		sql += " order by user_num desc)B";
+		sql += " ORDER BY rnum) BOARD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+
+		List<Member> list = new ArrayList<>();
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			
+			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+				ps.setString(1, "%" + paging.getSearch() + "%");
+				ps.setInt(2, paging.getStartNo());
+				ps.setInt(3, paging.getEndNo());
+			} else {
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			}
+			
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+			// SQL 수행결과 처리
+			while (rs.next()) {
+				Member member = new Member();// 각 행을 처리할 DTO
+
+				member.setUser_Num(rs.getInt("user_num"));
+//				member.setDB_Email(rs.getString("db_email"));
+				member.setDB_Id(rs.getString("db_id"));
+				member.setDB_Pw(rs.getString("db_pw"));
+				member.setDB_Name(rs.getString("db_name"));
+//				member.setDB_Nick(rs.getString("db_nick"));
+//				member.setDB_Gender(rs.getInt("db_gender"));
+//				member.setDB_Addr(rs.getString("db_addr"));
+//				member.setDB_Addr_detail(rs.getString("db_addr_detail"));
+//				member.setDB_Mailnum(rs.getString("db_mailnum"));
+//				member.setDB_Birth(rs.getString("db_birth"));
+				member.setDB_Phnum(rs.getString("db_phnum"));
+				
+				list.add(member);
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void memberdelete(Member member) {
+
+		conn= DBConn.getConnection();
+
+		String sql="";
+		sql+="DELETE FROM userinfo";
+		sql+=" WHERE user_num=?";
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			ps.setInt(1, member.getUser_Num());
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	
+	}
+
+	@Override
+	public int selectCntAll(HttpServletRequest req) {
+		conn = DBConn.getConnection(); // DB연결
+
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT count(*) FROM userinfo";
+		if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
+		sql +=" WHERE DB_id LIKE ?";
+		}
+		
+
+		// 최종 결과 변수
+		int cnt = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
+				ps.setString(1, "'%'" + req.getParameter("search") + "'%'");
+			}
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+			// SQL 수행결과 처리
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		// 최종결과 반환
+		return cnt;
+	}
+
 
 }

@@ -122,7 +122,6 @@ public class BoardDaoImpl implements BoardDao{
 			e.printStackTrace();
 		}
 		
-		
 		return list;
 	}
 	
