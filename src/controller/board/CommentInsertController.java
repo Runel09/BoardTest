@@ -43,18 +43,7 @@ public class CommentInsertController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		Comment comment = new Comment();
-//		
-//		
-//		int cno =  Integer.parseInt(req.getParameter("commentno"));
-//		int bno = Integer.parseInt(req.getParameter("boardno"));
-//		String con = req.getParameter("content");
-//		
-//		comment.setCommentno(cno);
-//		comment.setBoardno(bno);
-//		comment.setContent(con);
-//		
-//		boardService.commentInsert(comment);
+
 	}
 	
 }

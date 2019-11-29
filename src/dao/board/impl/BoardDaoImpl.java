@@ -70,7 +70,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'free'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -113,6 +113,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
 				
 				list.add(board);
 			}
@@ -135,7 +136,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'tip'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -178,6 +179,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
 				
 				list.add(board);
 			}
@@ -201,7 +203,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'question'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -244,6 +246,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
 				
 				list.add(board);
 			}
@@ -267,7 +270,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = free";
+		sql	+=	"        WHERE checkboard = 'planner'";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql += " AND title LIKE ?";
@@ -310,6 +313,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
 				
 				list.add(board);
 			}
@@ -349,11 +353,11 @@ public class BoardDaoImpl implements BoardDao{
 			boarddetail.setContent(rs.getString("content"));
 			boarddetail.setHit(rs.getInt("hit"));
 			boarddetail.setWrittendate(rs.getDate("writtendate"));
+			boarddetail.setCheckboard(rs.getString("checkboard"));
 				
-			
+			System.out.println(boarddetail);
 			
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -604,6 +608,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql += "UPDATE board SET";
 		sql += " title=?,";
 		sql += " content=?";
+		sql += " checkboard=?";
 		sql += " WHERE boardno=?";
 
 		try {
@@ -611,7 +616,8 @@ public class BoardDaoImpl implements BoardDao{
 
 			ps.setString(1, board.getTitle());
 			ps.setString(2, board.getContent());
-			ps.setInt(3, board.getBoardno());
+			ps.setString(3, board.getCheckboard());
+			ps.setInt(4, board.getBoardno());
 
 			ps.executeQuery();
 
