@@ -78,7 +78,7 @@ public class SupervisorServiceImpl implements SupervisorService{
 //		System.out.println("curPage: "+curPage);
 
 		// Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
-		int totalCount = supervisordao.selectCntAll(req);
+		int totalCount = supervisordao.memberselectCntAll(req);
 		System.out.println("totalcount:" + totalCount);
 		// Paging 객체 생성
 		Paging paging = new Paging(totalCount, curPage);

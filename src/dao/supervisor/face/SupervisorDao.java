@@ -42,7 +42,7 @@ public interface SupervisorDao {
 	 * @param search-검색어
 	 * @return-검색결과 갯수
 	 */
-	public int selectCntAll(HttpServletRequest req);
+	public int memberselectCntAll(HttpServletRequest req);
 
 
 }

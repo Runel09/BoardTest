@@ -123,8 +123,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		sql += " select * from userinfo";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
-			sql+=" WHERE db_id LIKE ? ";
-			System.out.println("ㅋㅋ");
+			sql+=" WHERE db_id LIKE ? or db_PHnum LIKE ? or db_name LIKE ?";
 		}
 		
 		sql += " order by user_num desc)B";
@@ -137,8 +136,10 @@ public class SupervisorDaoImpl implements SupervisorDao{
 			
 			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 				ps.setString(1, "%" + paging.getSearch() + "%");
-				ps.setInt(2, paging.getStartNo());
-				ps.setInt(3, paging.getEndNo());
+				ps.setString(2, "%" + paging.getSearch() + "%");
+				ps.setString(3, "%" + paging.getSearch() + "%");
+				ps.setInt(4, paging.getStartNo());
+				ps.setInt(5, paging.getEndNo());
 			} else {
 				ps.setInt(1, paging.getStartNo());
 				ps.setInt(2, paging.getEndNo());
@@ -148,6 +149,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 
 			// SQL 수행결과 처리
 			while (rs.next()) {
+//				System.out.println("HERE");
 				Member member = new Member();// 각 행을 처리할 DTO
 
 				member.setUser_Num(rs.getInt("user_num"));
@@ -202,14 +204,14 @@ public class SupervisorDaoImpl implements SupervisorDao{
 	}
 
 	@Override
-	public int selectCntAll(HttpServletRequest req) {
+	public int memberselectCntAll(HttpServletRequest req) {
 		conn = DBConn.getConnection(); // DB연결
 
 		// 수행할 SQL 쿼리
 		String sql = "";
 		sql += "SELECT count(*) FROM userinfo";
 		if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
-		sql +=" WHERE DB_id LIKE ?";
+		sql +=" WHERE DB_id LIKE ? or db_PHnum LIKE ? or db_name LIKE ?";
 		}
 		
 
@@ -219,7 +221,9 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		try {
 			ps = conn.prepareStatement(sql);// 수행객체 얻기
 			if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
-				ps.setString(1, "'%'" + req.getParameter("search") + "'%'");
+				ps.setString(1, "%" + req.getParameter("search") + "%");
+				ps.setString(2, "%" + req.getParameter("search")+ "%");
+				ps.setString(3, "%" + req.getParameter("search")+ "%");
 			}
 			rs = ps.executeQuery();// sql 수행결과 얻기
 
