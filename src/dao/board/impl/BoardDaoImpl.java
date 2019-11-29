@@ -36,7 +36,6 @@ public class BoardDaoImpl implements BoardDao{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
-//			System.out.println(rs.next());
 			
 			while(rs.next()) {
 				Board board = new Board();
