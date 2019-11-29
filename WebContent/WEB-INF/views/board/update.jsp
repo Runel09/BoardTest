@@ -40,6 +40,24 @@ $(document).ready(function() {
       history.back(-1);
    })
    
+   $("#free").click(function() {
+	   
+	   $("#cate").html("자유");
+
+	});
+		
+	   $("#tip").click(function() {
+			   
+	   $("#cate").html("여행팁");
+
+	});
+		   
+		$("#question").click(function() {
+			   
+		$("#cate").html("질문");
+
+	});
+   
 })
 
 </script>
@@ -72,7 +90,28 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <form action="/board/update" method="post" encType="multipart/form-data">
 <input type="hidden" value="${board.boardno }" name="boardno">
 <table class="table table-bordered">
-
+   
+   <tr>
+   		<td>
+<%--    		<c:if test=${board.checkboard eq "free"}>   --%>
+<!-- 		<input id="free" type="radio" name="checkboard" value="free" checked="checked">자유 -->
+<%-- 		</c:if> --%>
+		<input id="free" type="radio" name="checkboard" value="free">자유
+		
+<%-- 		<c:if test=${board.checkboard eq "tip"}>   --%>
+<!-- 		<input id="tip" type="radio" name="checkboard" value="tip" checked="checked">여행팁 -->
+<%-- 		</c:if> --%>
+		<input id="tip" type="radio" name="checkboard" value="tip">여행팁
+		
+<%-- 		<c:if test=${board.checkboard eq "question"}>   --%>
+<!-- 		<input id="question" type="radio" name="checkboard" value="question" checked="checked">질문 -->
+<%-- 		</c:if> --%>
+		<input id="question" type="radio" name="checkboard" value="question">질문
+   		</td>
+   		
+   		<td><div id="cate"></div></td>
+   </tr>
+   
    <tr>
       <td class="info">아이디</td><td>${userid }</td>
    <tr>

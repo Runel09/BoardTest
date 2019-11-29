@@ -30,7 +30,7 @@ public class BoardReportController extends HttpServlet {
 		
 		boardService.updateReport(board);
 		
-		resp.sendRedirect("/board/list");
+		resp.sendRedirect("/board/free");
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

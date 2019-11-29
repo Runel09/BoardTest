@@ -37,7 +37,7 @@ public class BoardUpdateController extends HttpServlet {
 		
 		boardService.update(req);
 		
-		resp.sendRedirect("/board/list");
+		resp.sendRedirect("/board/free");
 	}
 
 }

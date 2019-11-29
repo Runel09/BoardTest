@@ -88,11 +88,26 @@ div.pullRight a:hover:before
   <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
 </div>
 
+<div class="container">
+
+<h1 style="float:left;">※공지사항을 알려드립니다</h1>
+<br><br><br><br>
+<table class="table table-hover table-condensed table-striped">
+
+<tr class="info">
+   <th style="width: 8%">구분</th>
+   <th style="width: 36%;">제목</th>
+   <th style="width: 13%">작성일</th>
+   <th style="width: 8%">조회수</th>
+</tr>
+
+</table>
+</div>
 
 <div class="container">
 
 <h1 style="float:left;">자유 게시판</h1>
-
+<br><br><br><br>
 
 <table class="table table-hover table-condensed table-striped">
 
@@ -100,7 +115,7 @@ div.pullRight a:hover:before
 
    <th style="width: 8%">구분</th>
    <th style="width: 7%">게시글번호</th>
-   <th style="width: 36%">제목</th>
+   <th style="width: 36%;">제목</th>
    <th style="width: 18%">아이디</th>
 <!--    <th style="width: 8%">추천수</th> -->
    <th style="width: 8%">조회수</th>
@@ -110,8 +125,8 @@ div.pullRight a:hover:before
 <c:forEach var="list" items="${list }">
 <tr>
    <td>${list.checkboard }</td>
-   <td>${list.boardno }</td>
-   <td><a href="/board/view?boardno=${list.boardno }">${list.title }</a></td>
+   <td style="text-align:center;">${list.boardno }</td>
+   <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
    <td>${list.id }</td>
 <%--    <td>${list.reco }</td> --%>
    <td>${list.hit }</td>

@@ -47,22 +47,22 @@
 <!-- <div class="text-center"> -->
 <!-- 	<ul class ="pagination pagination-sm"> -->
 	  
-<!-- 	<!-- 처음으로 가기 --> -->
+<!-- 	<!-- 처음으로 가기 -->
 <%-- 	<c:if test = "${paging.curPage ne 1 }"> --%>
 <%-- 	<li><a href="/board/free?search=${Search }">&larr;처음</a></li> --%>
 <%-- 	</c:if> --%>
-<!-- 	<!-- 이전페이징가기 --> -->
+<!-- 	<!-- 이전페이징가기 -->
 <%-- 	<c:if test="${paging.startPage gt paging.pageCount }"> --%>
 <%-- 	<li><a href="/board/free?curPage=${paging.startPage - paging.pageCount }&search=${Search }">&laquo;</a></li> --%>
 <%-- 	</c:if> --%>
 <%-- 	<c:if test="${paging.startPage gt paging.pageCount }"> --%>
 <!-- 	<li class="disabled"><a>&laquo;</a></li> -->
 <%-- 	</c:if> --%>
-<!-- 	<!-- 이전 페이지로 가기 --> -->
+<!-- 	<!-- 이전 페이지로 가기 -->
 <%-- 	<c:if test="${paging.curPage ne paging.startPage }"> --%>
 <%-- 	<li><a href ="/board/free?curPage=${paging.curPage -1 }&search=${Search }">&laquo;</a></li> --%>
 <%-- 	</c:if> --%>
-<!-- 	<!-- 페이징 리스트 --> -->
+<!-- 	<!-- 페이징 리스트 --> 
 <%-- 	<c:forEach begin="${paging.startPage }" end ="${paging.endPage }" var ="i"> --%>
 <%-- 		<c:choose> --%>
 <%-- 			<c:when test="${paging.curPage eq i }"> --%>
@@ -74,19 +74,19 @@
 			
 <%-- 		</c:choose> --%>
 <%-- 	</c:forEach> --%>
-<!-- 	<!-- 다음페이지로 가기 --> -->
+<!-- 	<!-- 다음페이지로 가기 --> 
 <%-- 	<c:if test="${paging.curPage ne paging.endPage }"> --%>
 <%-- 	<li><a href="/board/free?curPage=${paging.curPage+1 }&search=${Search }">&gt;</a></li> --%>
 <%-- 	</c:if> --%>
 	
-<!-- 	<!-- 다음페이징 리스트로 가기 --> -->
+<!-- 	<!-- 다음페이징 리스트로 가기 --> 
 <%-- 	<c:if test="${paging.endPage ne paging.totalPage }"> --%>
 <%-- 	<li><a href="/board/free?curPage=${paging.startPage+paging.pageCount }&search=${Search }">&raquo;</a></li> --%>
 <%-- 	</c:if> --%>
 <%-- 	<c:if test="${paging.endPage eq paging.totalPage }"> --%>
 <!-- 	<li class="disabled"><a>&raquo;</a></li> -->
 <%-- 	</c:if> --%>
-<!-- 	<!-- 끝페이지 가기 --> -->
+<!-- 	<!-- 끝페이지 가기 --> 
 <%-- 	<c:if test="${paging.curPage ne paging.totalPage }"> --%>
 <%-- 	<li><a href="/board/free?curPage=${paging.totalPage }&search=${Search }">&rarr;끝</a></li> --%>
 <%-- 	</c:if> --%>
