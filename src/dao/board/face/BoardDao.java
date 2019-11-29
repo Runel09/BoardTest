@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.board.Board;
 import dto.board.BoardFile;
+import dto.board.Report;
 import util.Paging;
 
 public interface BoardDao {
@@ -86,7 +87,9 @@ public interface BoardDao {
 
 	public int getCountRecommend(Board recommendBoard);
 
-	public void insertReport(Board board);
+	public void plusReport(Board board);
+
+	public void insertReport(Report report);
 
 
 	

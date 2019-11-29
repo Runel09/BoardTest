@@ -29,6 +29,7 @@ import dto.board.Board;
 import dto.board.BoardFile;
 import dto.board.Comment;
 import dto.board.Recommend;
+import dto.board.Report;
 import service.board.face.BoardService;
 import util.Paging;
 
@@ -696,7 +697,15 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void updateReport(Board board) {
-		boardDao.insertReport(board);
+		boardDao.plusReport(board);
+		
+	}
+
+
+	@Override
+	public void insertReport(Report report) {
+		boardDao.insertReport(report);
+		
 	}
 
 

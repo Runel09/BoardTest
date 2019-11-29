@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.board.Board;
+import dto.board.Report;
 import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 
@@ -20,21 +21,34 @@ public class BoardReportController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.getRequestDispatcher("/WEB-INF/views/board/report.jsp").forward(req, resp);
 	
-		Board board = new Board();
-		
-		int boardno = Integer.parseInt(req.getParameter("boardno"));
-		board.setBoardno(boardno);
-		
-//		System.out.println(boardno);
-		
-		boardService.updateReport(board);
-		
-		resp.sendRedirect("/board/free");
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		Report report = new Report();
+		Board board = new Board();
+		
+		int boardno = Integer.parseInt(req.getParameter("boardno"));
+		System.out.println(boardno);
+		String content = req.getParameter("content");
+		System.out.println(content);
+		String db_id = (String) req.getAttribute("db_id");
+		System.out.println(db_id);
+		String reason = req.getParameter("reason");
+		System.out.println(reason);
+		report.setBoardno(boardno);
+		report.setContent(content);
+		report.setDb_id(db_id);
+		report.setReason(reason);
+		boardService.insertReport(report);
+		
+		board.setBoardno(boardno);
+		boardService.updateReport(board);
+		// insert 해야함. report에서 받아온 정보들
+		resp.sendRedirect("/board/view?boardno="+boardno);
 	}
 
 }

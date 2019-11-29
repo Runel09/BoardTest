@@ -41,16 +41,16 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function() {
+
 	if(${isRecommend}) {
 		$("#btnRecommend")
 			.addClass("btn-warning")
 			.html('추천 취소');
-		} 
-	else {
+		} else {
 		$("#btnRecommend")
 			.addClass("btn-primary")
 			.html('추천');
-	}
+		}
 
 	$("#btnRecommend").click(function() {
 		
@@ -60,8 +60,8 @@ $(document).ready(function() {
 			, data: { "boardno": '${board.boardno }' }
 			, dataType: "json"
 			, success: function( data ) {
-// 				console.log("성공");
-// 				console.log(data);
+				console.log("성공");
+				console.log(data);
 
 				if( data.result ) { //추천 성공
 					$("#btnRecommend")
@@ -86,6 +86,8 @@ $(document).ready(function() {
 				
 			}
 		});
+	});
+	
 });
 </script>
 

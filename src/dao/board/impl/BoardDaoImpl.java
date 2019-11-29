@@ -13,6 +13,7 @@ import dao.board.face.BoardDao;
 import dbutil.DBConn;
 import dto.board.Board;
 import dto.board.BoardFile;
+import dto.board.Report;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao{
@@ -859,7 +860,7 @@ public class BoardDaoImpl implements BoardDao{
 	   }
 
 	@Override
-	public void insertReport(Board board) {
+	public void plusReport(Board board) {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
@@ -877,6 +878,31 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		
 		
+	}
+
+	@Override
+	public void insertReport(Report report) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "INSERT INTO report(boardno, content, db_id, reason)";
+		sql += " VALUES(?, ?, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, report.getBoardno());
+			ps.setString(2, report.getContent());
+			ps.setString(3, report.getDb_id());
+			ps.setString(4, report.getReason());
+			
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
