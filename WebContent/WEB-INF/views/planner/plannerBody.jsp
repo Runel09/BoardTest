@@ -114,6 +114,25 @@ html, body {
 // 			console.log($(this).attr("location-lng"));
 			
 		    map.setCenter(new google.maps.LatLng($(this).attr("location-lat"), $(this).attr("location-lng")));
+		});
+		$(".center").on("click", "#listSetbtn", function() {
+			$.ajax({
+				type: "get"
+				, url: "/planner/placeInfo"
+				, data: {"place_number":0}
+				, dataType: "html"
+				, success: function(data) {
+					$("#indexList").html(data);
+				}
+				, error: function() {
+					console.log("fail");
+				}
+			})
+			
+// 			console.log($(this).attr("location-lat"));
+// 			console.log($(this).attr("location-lng"));
+			
+		    
 		})
 	});	
 </script>

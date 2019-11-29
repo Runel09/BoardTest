@@ -23,6 +23,7 @@
 			<div>${marker.business_hours}</div>
 			<div>${marker.tel_number}</div>
 			<div>${marker.place_information}</div>
+			<button id="listSetbtn">리스트로</button>
 		</div>
 	</c:when>
 </c:choose>

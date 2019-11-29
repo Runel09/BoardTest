@@ -102,6 +102,18 @@ for (i = 0; i < result.length; i++) {
 
 };
 function addIndex(ind){
+	$.ajax({
+		type: "get"
+		, url: "/planner/placeInfo"
+		, data: {"place_number":result[ind].place_number}
+		, dataType: "html"
+		, success: function(data) {
+			$("#indexList").html(data);
+		}
+		, error: function() {
+			console.log("fail");
+		}
+	})
 	 if (($("#indexBody").children().size()==0 || $("#indexBody").children().size()==6) && result[ind].cate!="숙소"){
         	alert("첫 장소와 마지막 장소는 숙소만 선택 가능 합니다.")
     		return false;
@@ -146,9 +158,11 @@ function addIndex(ind){
 			console.log(decodeString[0].lng[0]);
 			console.log(decodeString[0].lat);
 			for (var i = 1; i <= decodeString.length; ++i) {
-					console.log(decodeString.length);
-				   var index = (decodeString.length-1);
-
+// 					console.log(decodeString.length);
+				   var index = i-1;
+					if(decodeString.length==1){
+						return false;
+					}
 				   console.log(decodeString[index].lat());
 				   console.log(decodeString[index].lng());
 			}	   

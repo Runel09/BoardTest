@@ -56,54 +56,96 @@ html, body {
 </style>
 
 <script type="text/javascript">
-	function initMap() {
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom : 14,
-			center : {
-				lat : 34.366,
-				lng : -89.519
-			}
-		});
-		var poly = new google.maps.Polyline({
-			strokeColor : '#000000',
-			strokeOpacity : 1,
-			strokeWeight : 3,
-			map : map
-		});
+function initMap() {
+	
+	  var directionsService = new google.maps.DirectionsService;
+	  var directionsRenderer = new google.maps.DirectionsRenderer;
+	  var map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 6,
+	    center: {lat: 41.85, lng: -87.65}
+	  });
+	  directionsRenderer.setMap(map);
 
-		// Add a listener for the click event
-		google.maps.event.addListener(map, 'click', function(event) {
-			addLatLngToPoly(event.latLng, poly);
-		});
+	  document.getElementById('submit').addEventListener('click', function() {
+	    calculateAndDisplayRoute(directionsService, directionsRenderer);
+	  });
 	}
 
-	/**
-	 * Handles click events on a map, and adds a new point to the Polyline.
-	 * Updates the encoding text area with the path's encoded values.
-	 */
-	function addLatLngToPoly(latLng, poly) {
-		var path = poly.getPath();
-		// Because path is an MVCArray, we can simply append a new coordinate
-		// and it will automatically appear
-		path.push(latLng);
+	function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+	  var waypts = [];
+	  var checkboxArray = [];
+	  
+	  checkboxArray[0].value=new google.maps.LatLng(35.63290000000001,139.88039);
+	  checkboxArray[1].value=new google.maps.LatLng(35.67448,139.81470000000002);
+	  checkboxArray[2].value=new google.maps.LatLng(35.695440000000005,139.79215000000002);
+	  checkboxArray[3].value=new google.maps.LatLng(35.67231,139.77291000000002);
+	  checkboxArray[4].value=new google.maps.LatLng(35.667500000000004,139.76375000000002);
+	  for(var i = 0 ; i<5 ;i++){
+	  waypts.push({
+	        location: checkboxArray[i].value,
+	        stopover: true
+	      });
+	  }
 
-		// Update the text field to display the polyline encodings
-		var encodeString = google.maps.geometry.encoding.encodePath(path);
-		if (encodeString) {
-			document.getElementById('encoded-polyline').value = encodeString;
-		}
+	  directionsService.route({
+	    origin: new google.maps.LatLng(35.64088,139.92978000000002),
+	    destination: new google.maps.LatLng(35.69859,139.70794),
+	    waypoints: waypts,
+	    optimizeWaypoints: true,
+	    travelMode: 'TRANSIT'
+	  }, function(response, status) {
+	    if (status === 'OK') {
+	      directionsRenderer.setDirections(response);
+	      var route = response.routes[0];
+	      var summaryPanel = document.getElementById('directions-panel');
+	      summaryPanel.innerHTML = '';
+	      // For each route, display summary information.
+	      for (var i = 0; i < route.legs.length; i++) {
+	        var routeSegment = i + 1;
+	        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+	            '</b><br>';
+	        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+	        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+	        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+	        summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
+	      }
+	    } else {
+	      window.alert('Directions request failed due to ' + status);
+	    }
+	  });
 	}
 </script>
 </head>
 <body>
 	<div id="map"></div>
-	<div id="right-panel">
-		<div>Encoding:</div>
-		<textarea id="encoded-polyline"></textarea>
-	</div>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
-		
+<div id="right-panel">
+<div>
+<b>Start:</b>
+<select id="start">
+  <option value="Halifax, NS">Halifax, NS</option>
+  
+</select>
+<br>
+<b>Waypoints:</b> <br>
+<i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
+<select multiple id="waypoints">
+  <option value="montreal, quebec">Montreal, QBC</option>
+ 
+</select>
+<br>
+<b>End:</b>
+<select id="end">
+  <option value="Vancouver, BC">Vancouver, BC</option>
+  
+</select>
+<br>
+  <input type="submit" id="submit">
+</div>
+<div id="directions-panel"></div>
+</div>
+<!-- Replace the value of the key parameter with your own API key. -->
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
 	</script>
 </body>
 </html>
