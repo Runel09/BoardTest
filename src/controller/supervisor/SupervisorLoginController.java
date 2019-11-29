@@ -26,7 +26,7 @@ public class SupervisorLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		//VIEW 지정
-		req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_login.jsp").forward(req, resp);		
+		req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_loginform.jsp").forward(req, resp);		
 
 	}
 	
@@ -48,10 +48,14 @@ public class SupervisorLoginController extends HttpServlet {
 			req.getSession().setAttribute("login", login);
 			req.getSession().setAttribute("super_id", supervisor.getSuper_id());
 			req.getSession().setAttribute("super_pw", supervisor.getSuper_pw());
+
+			resp.sendRedirect("/supervisor/main");
 			
+		}else {
+			resp.sendRedirect("/supervisor/login");
+//			req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_loginfail.jsp");
 		}
-		
-		resp.sendRedirect("/supervisor/main");
+
 				
 	}
 

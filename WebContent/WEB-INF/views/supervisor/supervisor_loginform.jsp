@@ -32,6 +32,18 @@ $(document).ready(function(){
 
 <div class ="container" style="center">
 
+
+<%
+
+if(session.getAttribute("login")!=null&&(boolean)session.getAttribute("login")){
+%>
+
+	<form action="/supervisor/logout" method="get">
+		<button>로그아웃</button>
+	</form>
+
+<%
+}else{%>
 <form action ="/supervisor/login" method="post" class="form-horizontal">
    <fieldset style='margin: 0 auto;width:300px'>
       <legend>관리자 로그인</legend><br>
@@ -43,10 +55,11 @@ $(document).ready(function(){
          </div>      
          <div class="form-group">
             <button type="button" id="btnLogin" class="btn btn-success" >로그인</button>
-            <button type="button" id="btnCancel" class="btn btn-danger">취소</button>
+            <button type="reset" id="btnCancel" class="btn btn-danger">취소</button>
          </div>   
    </fieldset>
 </form>
+<%} %>	
 </div>
 
 
