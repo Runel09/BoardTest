@@ -45,4 +45,6 @@ public interface SupervisorDao {
 	public int memberselectCntAll(HttpServletRequest req);
 
 
+
+
 }

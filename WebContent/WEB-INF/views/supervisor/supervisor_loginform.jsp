@@ -51,7 +51,7 @@ if(session.getAttribute("login")!=null&&(boolean)session.getAttribute("login")){
             <input type="text" name="supervisor_id" id="supervisor_id"class="form-control" placeholder="아이디">
          </div>
          <div class="form-group">         
-            <input type="text" name ="supervisor_pw" id="supervisor_pw" class="form-control" placeholder="비밀번호">
+            <input type="password" name ="supervisor_pw" id="supervisor_pw" class="form-control" placeholder="비밀번호">
          </div>      
          <div class="form-group">
             <button type="button" id="btnLogin" class="btn btn-success" >로그인</button>

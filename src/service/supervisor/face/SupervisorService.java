@@ -57,4 +57,9 @@ public interface SupervisorService {
 	
 	public Paging memberListgetPaging(HttpServletRequest req);
 
+	/**
+	 * 장소정보 수정
+	 * @param req-요청정보 객체(place_number사용)
+	 */
+	public void UpdatePlace(HttpServletRequest req);
 }

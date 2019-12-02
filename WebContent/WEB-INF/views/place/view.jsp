@@ -138,6 +138,19 @@ function warningModal(content) {
 <div class="container">
 
 <h1 class="name">게시판 - 장소정보 상세보기</h1>
+
+<!-- 관리자 로그인 됐을  때만 수정,삭제 버튼 보이게 -->
+<div class="text-right">
+
+<c:if test="${super_id eq 'supervisor' }">
+<button  type="button" class="btn btn-warning" onclick="location.href='/supervisor/placeupdate?place_number=${viewplace.place_number}'">수정</button>
+
+<button type="button" class="btn btn-danger">삭제</button>
+
+</c:if>
+</div>
+
+
 <img src="/image/${viewplace.place_number}.PNG">
 
 
@@ -188,8 +201,7 @@ function warningModal(content) {
 <tr><td class="info"  colspan="7">첨부파일</td></tr>
 <tr><td colspan="4">${viewfile.originname }</td></tr>
 </c:if>
-
-
+</table>
 
 
 <!-- 댓글 처리 -->
