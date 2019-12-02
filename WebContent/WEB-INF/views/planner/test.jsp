@@ -5,14 +5,6 @@
 <script type="text/javascript">
 
 var index = new Array();
-var customLabel = {
-restaurant : {
-label : 'R'
-},
-bar : {
-label : 'B'
-}
-};
 var ploy;
 var result = new Array();
 var path;
@@ -39,7 +31,6 @@ ploy = new google.maps.Polyline({
 
   ploy.setMap(map);
 
-
 <c:forEach items="${markers}" var="marker">
 	
 	var json  =new Object();
@@ -54,17 +45,19 @@ ploy = new google.maps.Polyline({
 //	console.log("jsoninfo="+JSON.stringify(result));
 			
 var infowindow = new google.maps.InfoWindow();
-
+var markers = new Array();
 var marker, i;
 for (i = 0; i < result.length; i++) {  
   marker = new google.maps.Marker({
     id:result[i].place_number,
     name:result[i].place_name,
+    label:result[i].cate,
     position: new google.maps.LatLng(result[i].lat, result[i].lng),
     map: map
     
     
   });
+  markers.push(marker);
 //     console.log(result[i]);
 
   google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -80,27 +73,33 @@ for (i = 0; i < result.length; i++) {
       map.setZoom(15);
       map.setCenter(this.getPosition());
       
-      
-      
-//         if (($("#indexBody").children().size()==0 || $("#indexBody").children().size()==6) && result[this.id].cate!="숙소"){
-//         	alert("첫 장소와 마지막 장소는 숙소만 선택 가능 합니다.")
-//     		return false;
-//     	  }
-//// 		            console.log($("#indexBody").children().size());
-//         if($("#indexBody").children().size()==7){
-//         	alert("장소는 5개 까지만 선택 가능합니다")
-//         	return false;
-//         }
-        
-//       $("#indexBody").append("<div class='index' id='"+this.name+"'>"+this.name+"<hr>"+result[this.id].detail+"<button onclick='deleteIndex(this);'>삭제</button></div>");
-//       path.push(marker.position);
-//       path.getAt();
     });
     
     
-};
+  
 
 };
+var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',gridSize:50} );
+};
+function openWindow(){
+	var divInd = $(this.parentNode);
+	var divBody=$("#indexBody")
+	var index=divInd.index();
+	
+	var opwin=window.open("../map/test?startNo="+divBody.children("div").eq(index-1).attr("data-place_no")+"&endNo="+divInd.attr("data-place_no"),
+            "childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
+// 	$(opwin.document.getElementById("startIdx")).attr("data-location-lat")=
+		
+// 	$(opwin.doucument).ready(function(){
+// 		$(opwin.document.getElementById("startIdx_lat")).val(result[(divBody.children("div").eq(index-1).attr("data-place_no"))].lat);
+// 		$(opwin.document.getElementById("startIdx_lng")).val(result[(divBody.children("div").eq(index-1).attr("data-place_no"))].lng);
+// 		$(opwin.document.getElementById("endIdx_lat")).val(result[(divBody.children("div").eq(index).attr("data-place_no"))].lat);
+// 		$(opwin.document.getElementById("endIdx_lng")).val('Integer.parresult[(divBody.children("div").eq(index).attr("data-place_no"))-1].lng');
+	
+// 	})	
+		
+}
 function addIndex(ind){
 	$.ajax({
 		type: "get"
@@ -124,9 +123,15 @@ function addIndex(ind){
         	return false;
         }
         if($("#indexBody").children().size()>=1){
-        	var div = $("#indexBody").append("<div class='index'><input type='hidden' value='"+result[ind].cate+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button>경로검색</button><button>삭제</button></div>");
+        	var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' value='"+result[ind].cate+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button>경로검색</button><button>삭제</button></div>");
+            var button = div.children().eq($("#indexBody").children().size()-1).children("button").eq(0);
+//             console.log(button);
+			button.on('click', openWindow);
+			
+            
+
         }else{
-			var div = $("#indexBody").append("<div class='index'><input type='hidden' value='"+result[ind].cate+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button>삭제</button></div>");
+			var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' value='"+result[ind].cate+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button>삭제</button></div>");
         }
       var button = div.children().children().eq(-1);
       button.on('click', function(){
@@ -181,10 +186,10 @@ function addIndex(ind){
 <div id="map"></div>
 <c:set value="${centerplace }" var="center" />
 <c:if test="${center.place_number ne 0}">
-<script
-	src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
+	<script
+		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
 	</script>
 </c:if>
 

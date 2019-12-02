@@ -17,6 +17,8 @@ public class MapTestController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		req.setAttribute("startNo", (req.getParameter("startNo")));
+		req.setAttribute("endNo", (req.getParameter("endNo")));
 		req.getRequestDispatcher("/WEB-INF/views/planner/placeTest.jsp").forward(req, resp);
 	}
 }

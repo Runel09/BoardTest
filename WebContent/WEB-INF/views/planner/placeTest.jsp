@@ -23,11 +23,7 @@
 }
 
 ​
-  #right-panel select {
-	width: 100%;
-}
 
-​
   #right-panel i {
 	font-size: 12px;
 }
@@ -38,15 +34,21 @@ html, body {
 	padding: 0;
 }
 
+html {
+	height: 600px;
+}
+
 #map {
 	height: 100%;
-	width: 50%;
+	width: 100%;
 	float: left;
 }
 
 #right-panel {
-	width: 46%;
+	height: 100%;
+	width: 30%;
 	float: left;
+	overflow: auto;
 }
 
 #encoded-polyline {
@@ -56,96 +58,119 @@ html, body {
 </style>
 
 <script type="text/javascript">
-function initMap() {
+	var op = $(opener.document.getElementById("indexBody"));
+	$(document).ready(function(){
+	console.log(opener.result[0].lat);
+	$("#startIdx_lat").val(opener.result[${startNo}].lat);
+	$("#startIdx_lng").val(opener.result[${startNo}].lng);
+	$("#endIdx_lat").val(opener.result[${endNo}].lat);
+	$("#endIdx_lng").val(opener.result[${endNo}].lng);
 	
-	  var directionsService = new google.maps.DirectionsService;
-	  var directionsRenderer = new google.maps.DirectionsRenderer;
-	  var map = new google.maps.Map(document.getElementById('map'), {
-	    zoom: 6,
-	    center: {lat: 41.85, lng: -87.65}
-	  });
-	  directionsRenderer.setMap(map);
+	})
+	function initMap() {
 
-	  document.getElementById('submit').addEventListener('click', function() {
-	    calculateAndDisplayRoute(directionsService, directionsRenderer);
-	  });
+		var directionsService = new google.maps.DirectionsService;
+		var directionsRenderer = new google.maps.DirectionsRenderer;
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 6,
+			center : {
+				lat : 41.85,
+				lng : -87.65
+			}
+		});
+		directionsRenderer.setMap(map);
+
+		calculateAndDisplayRoute(directionsService, directionsRenderer);
+		// 		console.log(op.result[0].lat)
+
 	}
 
 	function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-	  var waypts = [];
-	  var checkboxArray = [];
-	  
-	  checkboxArray[0].value=new google.maps.LatLng(35.63290000000001,139.88039);
-	  checkboxArray[1].value=new google.maps.LatLng(35.67448,139.81470000000002);
-	  checkboxArray[2].value=new google.maps.LatLng(35.695440000000005,139.79215000000002);
-	  checkboxArray[3].value=new google.maps.LatLng(35.67231,139.77291000000002);
-	  checkboxArray[4].value=new google.maps.LatLng(35.667500000000004,139.76375000000002);
-	  for(var i = 0 ; i<5 ;i++){
-	  waypts.push({
-	        location: checkboxArray[i].value,
-	        stopover: true
-	      });
-	  }
+		var waypts = [];
+		var checkboxArray = [];
 
-	  directionsService.route({
-	    origin: new google.maps.LatLng(35.64088,139.92978000000002),
-	    destination: new google.maps.LatLng(35.69859,139.70794),
-	    waypoints: waypts,
-	    optimizeWaypoints: true,
-	    travelMode: 'TRANSIT'
-	  }, function(response, status) {
-	    if (status === 'OK') {
-	      directionsRenderer.setDirections(response);
-	      var route = response.routes[0];
-	      var summaryPanel = document.getElementById('directions-panel');
-	      summaryPanel.innerHTML = '';
-	      // For each route, display summary information.
-	      for (var i = 0; i < route.legs.length; i++) {
-	        var routeSegment = i + 1;
-	        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-	            '</b><br>';
-	        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-	        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-	        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-	        summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
-	      }
-	    } else {
-	      window.alert('Directions request failed due to ' + status);
-	    }
-	  });
+		// 		for (var i = 0; i < op.size(); i++) {
+
+		// 		}
+		// 		checkboxArray[0] = new google.maps.LatLng(35.63290000000001, 139.88039);
+		// 		checkboxArray[1] = new google.maps.LatLng(35.67448, 139.81470000000002);
+		// 		checkboxArray[2] = new google.maps.LatLng(35.695440000000005,
+		// 				139.79215000000002);
+		// 		checkboxArray[3] = new google.maps.LatLng(35.67231, 139.77291000000002);
+		// 		checkboxArray[4] = new google.maps.LatLng(35.667500000000004,
+		// 				139.76375000000002);
+		// 		for (var i = 0; i < 5; i++) {
+		// 			waypts.push({
+		// 				location : checkboxArray[i],
+		// 				stopover : true
+		// 			});
+		// 		}
+
+		directionsService.route({
+			origin : new google.maps.LatLng(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng),
+			destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
+			// 			waypoints : waypts,
+			optimizeWaypoints : true,
+			travelMode : 'DRIVING'
+		}, function(response, status) {
+			if (status === 'OK') {
+				directionsRenderer.setDirections(response);
+				var route = response.routes[0];
+				var summaryPanel = document.getElementById('directions-panel');
+				summaryPanel.innerHTML = '';
+				// For each route, display summary information.
+				for (var i = 0; i < route.legs.length; i++) {
+					var routeSegment = i + 1;
+					summaryPanel.innerHTML += '<b>Route Segment: '
+							+ routeSegment + '</b><br>';
+					summaryPanel.innerHTML += route.legs[i].distance.text
+							+ '<br>';
+					summaryPanel.innerHTML += route.legs[i].duration.text
+							+ '<br><hr>';
+				}
+			} else {
+				window.alert('Directions request failed due to ' + status);
+			}
+		});
 	}
 </script>
 </head>
 <body>
-	<div id="map"></div>
-<div id="right-panel">
-<div>
-<b>Start:</b>
-<select id="start">
-  <option value="Halifax, NS">Halifax, NS</option>
-  
-</select>
-<br>
-<b>Waypoints:</b> <br>
-<i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br>
-<select multiple id="waypoints">
-  <option value="montreal, quebec">Montreal, QBC</option>
- 
-</select>
-<br>
-<b>End:</b>
-<select id="end">
-  <option value="Vancouver, BC">Vancouver, BC</option>
-  
-</select>
-<br>
-  <input type="submit" id="submit">
-</div>
-<div id="directions-panel"></div>
-</div>
-<!-- Replace the value of the key parameter with your own API key. -->
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
+	<div style="width: 100%; height: 100%">
+		<div id="left-panel" style="float: left; width: 60%; height: 100%">
+			<div id="map"></div>
+		</div>
+		<div id="right-panel">
+			<form action="#" method="get">
+				<div>
+
+					<div>
+						<label id="startLab">출발지</label>
+						<input id="startIdx_lat" name="startIdx_lat" type="hidden" value="">
+						<input id="startIdx_lng" name="startIdx_lng" type="hidden" value="">
+					</div>
+					<div>
+						<label id="endLab">도착지</label>
+						<input id="endIdx_lat" name="endIdx_lat" type="hidden" value="">
+						<input id="endIdx_lng" name="endIdx_lng" type="hidden" value="">
+						<br>
+						<b>교통수단:</b>
+					</div>
+					<select id="travalOption">
+						<option value="BICYCLING">자전거</option>
+						<option value="DRIVING">자동차</option>
+						<option value="TRANSIT">대중교통</option>
+						<option value="WALKING">도보</option>
+					</select> <br> <input type="submit" id="submit">
+				</div>
+				<div id="directions-panel"></div>
+			</form>
+		</div>
+	</div>
+	<!-- Replace the value of the key parameter with your own API key. -->
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZL82RRYpAr7GrwdJQ5S11-pDaZJs3n9c&callback=initMap">
+		
 	</script>
 </body>
 </html>

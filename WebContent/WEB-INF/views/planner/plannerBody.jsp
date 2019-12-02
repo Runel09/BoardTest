@@ -113,7 +113,7 @@ html, body {
 // 			console.log($(this).attr("location-lat"));
 // 			console.log($(this).attr("location-lng"));
 			
-		    map.setCenter(new google.maps.LatLng($(this).attr("location-lat"), $(this).attr("location-lng")));
+		    map.setCenter(new google.maps.LatLng($(this).attr("data-location-lat"), $(this).attr("data-location-lng")));
 		});
 		$(".center").on("click", "#listSetbtn", function() {
 			$.ajax({
