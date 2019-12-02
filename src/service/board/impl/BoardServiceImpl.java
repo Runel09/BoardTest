@@ -12,10 +12,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.board.face.BoardDao;
 import dao.board.face.BoardFileDao;
@@ -29,6 +29,7 @@ import dto.board.Board;
 import dto.board.BoardFile;
 import dto.board.Comment;
 import dto.board.Recommend;
+import dto.board.Report;
 import service.board.face.BoardService;
 import util.Paging;
 
@@ -46,11 +47,30 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	@Override
-	public List<Board> getList(Paging paging) {
+	public List<Board> getFreeList(Paging paging) {
 
-		return boardDao.selectAll(paging);
+		return boardDao.selectFreeAll(paging);
 	}
 
+	@Override
+	public List<Board> getTipList(Paging paging) {
+
+		return boardDao.selectTipAll(paging);
+	}
+
+	@Override
+	public List<Board> getQuestionList(Paging paging) {
+
+		return boardDao.selectQuestionAll(paging);
+	}
+
+	@Override
+	public List<Board> getPlannerList(Paging paging) {
+
+		return boardDao.selectPlannerAll(paging);
+	}
+
+	
 	
 	@Override
 	public Board getBoardno(HttpServletRequest req) {
@@ -101,6 +121,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
 			paging.setSearch(req.getParameter("search"));
+			paging.setSearchno(Integer.parseInt(req.getParameter("searchno")));
 		}
 		
 		return paging;
@@ -677,7 +698,15 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void updateReport(Board board) {
-		boardDao.insertReport(board);
+		boardDao.plusReport(board);
+		
+	}
+
+
+	@Override
+	public void insertReport(Report report) {
+		boardDao.insertReport(report);
+		
 	}
 
 

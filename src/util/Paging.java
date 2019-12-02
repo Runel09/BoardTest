@@ -3,7 +3,16 @@ package util;
 public class Paging {
 	
 	private String search;
+	private int searchno;
 	
+	public int getSearchno() {
+		return searchno;
+	}
+
+	public void setSearchno(int searchno) {
+		this.searchno = searchno;
+	}
+
 	public String getSearch() {
 		return search;
 	}
@@ -58,9 +67,10 @@ public class Paging {
 	
 	@Override
 	public String toString() {
-		return "Paging [search=" + search + ", curPage=" + curPage + ", totalCount=" + totalCount + ", listCount="
-				+ listCount + ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage
-				+ ", endPage=" + endPage + ", startNo=" + startNo + ", endNo=" + endNo + "]";
+		return "Paging [search=" + search + ", searchno=" + searchno + ", curPage=" + curPage + ", totalCount="
+				+ totalCount + ", listCount=" + listCount + ", totalPage=" + totalPage + ", pageCount=" + pageCount
+				+ ", startPage=" + startPage + ", endPage=" + endPage + ", startNo=" + startNo + ", endNo=" + endNo
+				+ "]";
 	}
 
 	//페이징 정보 생성
@@ -68,6 +78,7 @@ public class Paging {
 		if(totalCount==0) return;//게시글이 없는 경우
 		
 		//기본값 설정 
+		if(search==null)	setSearch("");
 		if(curPage==0) setCurPage(1);//첫 페이지 기본값 세팅
 		if(pageCount==0) setPageCount(10);//페이지수 기본값
 		if(listCount==0) setListCount(10);//게시글수 기본값

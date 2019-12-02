@@ -1,4 +1,4 @@
-package controller.board;
+package controller.supervisor;
 
 import java.io.IOException;
 
@@ -17,27 +17,23 @@ import dao.board.face.BoardDao;
 import dao.board.impl.BoardDaoImpl;
 import dto.board.Board;
 import dto.board.BoardFile;
-import service.board.face.BoardService;
-import service.board.impl.BoardServiceImpl;
 
-@WebServlet("/board/write")
-public class BoardWriteController extends HttpServlet {
+/**
+ * Servlet implementation class SupervisorInsertNotice
+ */
+@WebServlet("/supervisor/insertnotice")
+public class SupervisorInsertNotice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	BoardService boardService = new BoardServiceImpl();
-	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/views/board/write.jsp")
 		.forward(req, resp);
-		
-	}
+		}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setCharacterEncoding("UTF-8");
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+req.setCharacterEncoding("UTF-8");
 		
 //		Board board = new Board();
 //		
@@ -121,9 +117,11 @@ public class BoardWriteController extends HttpServlet {
 				
 		boardDao.insert(board);
 		boardDao.insertFile(boardFile);
-		
+
 		resp.sendRedirect("/board/free");
-		
+
 	}
 
 }
+
+

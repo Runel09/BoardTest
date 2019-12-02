@@ -1,6 +1,7 @@
 package controller.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.board.Board;
-import dto.board.BoardFile;
 import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
+import util.Paging;
 
-@WebServlet("/board/update")
-public class BoardUpdateController extends HttpServlet {
+@WebServlet("/board/free")
+public class BoardFreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardService boardService = new BoardServiceImpl();
@@ -22,22 +23,20 @@ public class BoardUpdateController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Board board = boardService.getBoardno(req);
-		BoardFile boardFile = boardService.getBoardFileByBoardno(board.getBoardno());
-		
-		req.setAttribute("board", board);
-		req.setAttribute("boardFile", boardFile);
-		
-		req.getRequestDispatcher("/WEB-INF/views/board/update.jsp")
-		.forward(req, resp);
-	}
+		//요청파라미터에서 curPage를 구하고 Paging 객체 반환
+		Paging paging = boardService.getPaging(req);
+//		System.out.println(paging);
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//Paging 객체를 MODEL값으로 지정
+		req.setAttribute("paging", paging);
 		
-		boardService.update(req);
+		List<Board> list = boardService.getFreeList(paging);
+		System.out.println(list);
+		req.setAttribute("list", list);
 		
-		resp.sendRedirect("/board/free");
+		req.getRequestDispatcher("/WEB-INF/views/board/free.jsp")
+		.forward(req, resp);
+		
 	}
 
 }
