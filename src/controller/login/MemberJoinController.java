@@ -34,7 +34,7 @@ public class MemberJoinController extends HttpServlet {
 		Member member;
 		
 		member = memberservice.getLoginMember(req);
-	
+//		System.out.println("22131"+member);
 		memberservice.join(member);
 
 		resp.sendRedirect("/main");

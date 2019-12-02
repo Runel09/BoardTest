@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService{
 	public Member getLoginMember(HttpServletRequest req) {
 		
 		Member member = new Member() ;
-		
+		System.out.println(req.getParameter("userid"));
 		member.setUser_id(req.getParameter("userid"));
 		member.setUser_pw(req.getParameter("userpw"));
 //		member.setDB_Nick(req.getParameter("usernick"));

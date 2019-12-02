@@ -88,17 +88,20 @@ public class MemberDaoImpl implements MemberDao{
 		sql	+= "insert into userinfo(USER_NUMBER , USER_ID, USER_PW, USER_NAME"
 				+ ", USER_NICK, USER_GENDER, USER_EMAIL, USER_ADDR, USER_ADDR_DETAIL, USER_MAILNUM"
 				+ ", USER_BIRTH ,USER_phnum) ";
+
 		
 		sql += " values( USER_seq.nextval,?,?,?,?,0,?,?,?,?,?,?)";
+//		sql += " commit";
 //			System.out.println(sql);
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, member.getUser_email());
-			ps.setString(2, member.getUser_id());
-			ps.setString(3, member.getUser_pw());
-			ps.setString(4, member.getUser_name());
-			ps.setString(5, member.getUser_nick());
+			ps.setString(1, member.getUser_id());
+			System.out.println(member.getUser_id());
+			ps.setString(2, member.getUser_pw());
+			ps.setString(3, member.getUser_name());
+			ps.setString(4, member.getUser_nick());
+			ps.setString(5, member.getUser_email());
 			ps.setString(6, member.getUser_addr());
 			ps.setString(7, member.getUser_addr_detail());
 			ps.setString(8, member.getUser_mailnum());
@@ -120,10 +123,7 @@ public class MemberDaoImpl implements MemberDao{
     public boolean duplicateIdCheck(String id){
     	
     	conn = DBConn.getConnection();
-       
-    	// 쿼리
-       	conn = DBConn.getConnection();
-        
+     
     	// 쿼리
     	String query = null;
     	query = "SELECT USER_ID FROM Userinfo WHERE USER_ID=?";

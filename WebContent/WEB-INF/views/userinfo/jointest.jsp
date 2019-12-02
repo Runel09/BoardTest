@@ -39,7 +39,7 @@
 		{
 			var form = document.userInfo;
 		
-			if(!form.id.value){
+			if(!form.userid.value){
 				warningModal("아이디를 입력하세요.");
 				return false;
 			}
@@ -49,7 +49,7 @@
 				return false;
 			}
 			
-			if(!form.password.value){
+			if(!form.userpw.value){
 				warningModal("비밀번호를 입력하세요.");
 				return false;
 			}
@@ -60,37 +60,37 @@
 				return false;
 			}	
 			
-			if(!form.name.value){
+			if(!form.username.value){
 				warningModal("이름을 입력하세요.");
 				return false;
 			}
 			
-			if(!form.birthyy.value){
+			if(!form.userbirthyy.value){
 				warningModal("년도를 입력하세요.");
 				return false;
 			}
 			
-			if(isNaN(form.birthyy.value)){
+			if(isNaN(form.userbirthyy.value)){
 				warningModal("년도는 숫자만 입력가능합니다.");
 				return false;
 			}
 			
-			if(form.birthmm.value == "00"){
+			if(form.userbirthmm.value == "00"){
 				warningModal("월을 선택하세요.");
 				return false;
 			}
 			
-			if(!form.birthdd.value){
+			if(!form.userbirthdd.value){
 				warningModal("날짜를 입력하세요.");
 				return false;
 			}
 			
-			if(isNaN(form.birthdd.value)){
+			if(isNaN(form.userbirthdd.value)){
 				warningModal("날짜는 숫자만 입력가능합니다.");
 				return false;
 			}
 			
-			if(!form.mail1.value){
+			if(!form.usermail.value){
 				warningModal("메일 주소를 입력하세요.");
 				return false;
 			}
@@ -173,7 +173,7 @@
 				<tr>
 					<td id="title">아이디</td>
 					<td>
-						<input type="text" name="id" maxlength="50" onkeydown="inputIdChk()">
+						<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
 						<input type="button" value="중복확인" onclick="openIdChk()">	
 						<input type="hidden" name="idDuplication" value="idUncheck" >
 					</td>
@@ -182,7 +182,7 @@
 				<tr>
 					<td id="title">비밀번호</td>
 					<td>
-						<input type="password" name="password" maxlength="50">
+						<input type="password" name="userpw" maxlength="50">
 					</td>
 				</tr>
 				
@@ -196,7 +196,7 @@
 				<tr>
 					<td id="title">이름</td>
 					<td>
-						<input type="text" name="name" maxlength="50">
+						<input type="text" name="username" maxlength="50">
 					</td>
 				</tr>
 					
@@ -211,8 +211,8 @@
 				<tr>
 					<td id="title">생일</td>
 					<td>
-						<input type="text" name="birthyy" maxlength="4" placeholder="년(4자)" size="6">
-						<select name="birthmm">
+						<input type="text" name="userbirth" maxlength="4" placeholder="년(4자)" size="6">
+						<select name="userbirthmm">
 							<option value="00">월</option>
 							<option value="01" >1</option>
 							<option value="02" >2</option>
@@ -227,19 +227,19 @@
 							<option value="11" >11</option>
 							<option value="12" >12</option>
 						</select>
-						<input type="text" name="birthdd" maxlength="2" placeholder="일" size="4">
+						<input type="text" name="userbirthdd" maxlength="2" placeholder="일" size="4">
 					</td>
 				</tr>
 					
 				<tr>
 					<td id="title">이메일</td>
 					<td>
-						<input type="text" name="mail1" maxlength="50">@
+						<input type="text" name="usermail" maxlength="50">@
 						<select name="mail2">
 							<option>naver.com</option>
 							<option>daum.net</option>
 							<option>gmail.com</option>
-							<option>nate.com</option>						
+							<option></option>						
 						</select>
 					</td>
 				</tr>
@@ -247,13 +247,13 @@
 				<tr>
 					<td id="title">휴대전화</td>
 					<td>
-						<input type="text" name="phone"/>
+						<input type="text" name="userphone"/>
 					</td>
 				</tr>
 				<tr>
 					<td id="title">주소</td>
 					<td>
-						<input type="text" size="50" name="address"/>
+						<input type="text" size="50" name="useraddress"/>
 					</td>
 				</tr>
 			</table>
