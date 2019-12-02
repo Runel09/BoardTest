@@ -7,17 +7,77 @@
 
 <html>
 <head>
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
-<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- Bootstrqp 3.3.2 밑에 3개  -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 
+#logo {
+  font-family:Audiowide;
+  font-size:130px;
+  color: white;
+   margin:100px; 
+   margin: auto; 
+   margin-left: -30px; 
+   margin-top: -200px; 
+/*  position:absolute; */
+/*     top:-5%; left:50%; */
+/*     transform: translate(-50%, -50%); */
+    
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 
+  text-shadow: 
+  1px 1px 0 rgba(36,117,203,1),
+  13px 3px 0 rgba(36,117,203,0.9),
+  5px 5px 0 rgba(36,117,203,0.8),
+  17px 7px 0 rgba(36,117,203,0.7),
+  9px -15px 0 rgba(36,117,203,0.6),
+  -11px 11px 0 rgba(36,117,203,0.5),
+  7px -13px 0 rgba(36,117,203,0.4),
+  15px 30px 0 rgba(36,117,203,0.3),
+  -20px 17px 0 rgba(36,117,203,0.2),
+  -19px 19px 0 rgba(36,117,203,0.1),
+  30px -21px 0 rgba(36,117,203,0.08),
+  23px 23px 0 rgba(36,117,203,0.06),
+  -25px 40px 0 rgba(36,117,203,0.04),
+  27px 27px 0 rgba(36,117,203,0.02),
+  -29px 29px 0 rgba(36,117,203,0.0);
+}
+
+/* travelers 로고  */
+ #logo:hover { */
+   -webkit-transform: rotate(1deg) scale(1.02); 
+   -moz-transform: rotate(1deg) scale(1.02); 
+   -o-transform: rotate(1deg) scale(1.02); 
+   -ms-transform: rotate(1deg) scale(1.02); 
+   transform: rotate(1deg) scale(1.02); 
+  
+  text-shadow: 
+  10px 1px 0 rgba(36,117,203,0.1),
+  13px 23px 0 rgba(36,117,203,0.2),
+  15px 5px 0 rgba(36,117,203,0.03),
+  17px 7px 0 rgba(36,117,203,0.04),
+  9px 15px 0 rgba(36,117,203,0.2),
+  -11px -11px 0 rgba(36,117,203,0.06),
+  17px -13px 0 rgba(36,117,203,0.07),
+  15px 30px 0 rgba(36,117,203,0.1),
+  -20px -17px 0 rgba(36,117,203,0.06),
+  -19px 19px 0 rgba(36,117,203,0.08),
+  5px 21px 0 rgba(36,117,203,0.02),
+  23px -23px 0 rgba(36,117,203,0.1),
+  25px 40px 0 rgba(36,117,203,0.2),
+  27px 17px 0 rgba(36,117,203,0.1),
+  -29px -29px 0 rgba(36,117,203,0.1);
+}
 .form-signin
 {
     max-width: 330px;
@@ -104,8 +164,13 @@ body {
    -moz-background-size: cover; 
    -o-background-size: cover; 
   background-size: cover;
+  
 }
-
+.col-md-4{
+ position:absolute;
+    top:50%; left:50%;
+    transform: translate(-50%, -50%);
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -114,7 +179,8 @@ body {
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">T r a v e l e r s</h1>
+         <div class="text-center" id="logo">TRAVELERS</div>
+<!--             <h1 class="text-center login-title">T r a v e l e r s</h1> -->
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">

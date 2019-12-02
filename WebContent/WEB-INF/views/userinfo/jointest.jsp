@@ -1,26 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <html>
 <head>
 	<title>회원가입 화면</title>
+<script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- Bootstrqp 3.3.2 밑에 3개  -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 	<style type="text/css">
-		table{
-			margin-left:auto; 
-			margin-right:auto;
-			border:3px solid skyblue;
-		}
+/* 		table{ */
+/* 			margin-left:auto;  */
+/* 			margin-right:auto; */
+/* 			border:3px solid skyblue; */
+/* 		} */
 		
-		td{
-			border:1px solid skyblue
-		}
+/* 		td{ */
+/* 			border:1px solid skyblue */
+/* 		} */
 		
-		#title{
-			background-color:skyblue
-		}
+/* 		#title{ */
+/* 			background-color:skyblue */
+/* 		} */
+
+
 	</style>
 
 	<script type="text/javascript">
@@ -31,80 +40,80 @@
 			var form = document.userInfo;
 		
 			if(!form.id.value){
-				alert("아이디를 입력하세요.");
+				warningModal("아이디를 입력하세요.");
 				return false;
 			}
 			
 			if(form.idDuplication.value != "idCheck"){
-				alert("아이디 중복체크를 해주세요.");
+				warningModal("아이디 중복체크를 해주세요.");
 				return false;
 			}
 			
 			if(!form.password.value){
-				alert("비밀번호를 입력하세요.");
+				warningModal("비밀번호를 입력하세요.");
 				return false;
 			}
 			
 			// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
 			if(form.password.value != form.passwordcheck.value ){
-				alert("비밀번호를 동일하게 입력하세요.");
+				warningModal("비밀번호를 동일하게 입력하세요.");
 				return false;
 			}	
 			
 			if(!form.name.value){
-				alert("이름을 입력하세요.");
+				warningModal("이름을 입력하세요.");
 				return false;
 			}
 			
 			if(!form.birthyy.value){
-				alert("년도를 입력하세요.");
+				warningModal("년도를 입력하세요.");
 				return false;
 			}
 			
 			if(isNaN(form.birthyy.value)){
-				alert("년도는 숫자만 입력가능합니다.");
+				warningModal("년도는 숫자만 입력가능합니다.");
 				return false;
 			}
 			
 			if(form.birthmm.value == "00"){
-				alert("월을 선택하세요.");
+				warningModal("월을 선택하세요.");
 				return false;
 			}
 			
 			if(!form.birthdd.value){
-				alert("날짜를 입력하세요.");
+				warningModal("날짜를 입력하세요.");
 				return false;
 			}
 			
 			if(isNaN(form.birthdd.value)){
-				alert("날짜는 숫자만 입력가능합니다.");
+				warningModal("날짜는 숫자만 입력가능합니다.");
 				return false;
 			}
 			
 			if(!form.mail1.value){
-				alert("메일 주소를 입력하세요.");
+				warningModal("메일 주소를 입력하세요.");
 				return false;
 			}
 			
 			if(!form.phone.value){
-				alert("전화번호를 입력하세요.");
+				warningModal("전화번호를 입력하세요.");
 				return false;
 			}
 			
 			if(isNaN(form.phone.value)){
-				alert("전화번호는 - 제외한 숫자만 입력해주세요.");
+				warningModal("전화번호는 - 제외한 숫자만 입력해주세요.");
 				return false;
 			}
 			
 			if(!form.address.value){
-				alert("주소를 입력하세요.");
+				warningModal("주소를 입력하세요.");
 				return false;
 			}
 		}
 		
 		// 취소 버튼 클릭시 첫화면으로 이동
 		function goFirstForm() {
-			location.href="MainForm.do";
+			location.href="/main";
 		}	
 		
 		// 아이디 중복체크 화면open
@@ -122,7 +131,12 @@
 		function inputIdChk(){
 			document.userInfo.idDuplication.value ="idUncheck";
 		}
-		
+		//경고 모달 호출 메서드
+		   function warningModal(content) {
+		      $(".modal-contents").text(content);
+		      $("#defaultModal").modal('show');
+		   }
+		 
 	</script>
 	
 </head>
@@ -131,7 +145,26 @@
 		<b><font size="6" color="gray">회원가입</font></b>
 		<br><br><br>
 		
-		
+		<!-- 경고 모달창 -->
+            <div class="modal fade" id="defaultModal">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-danger">
+                        <div class="modal-header panel-heading">
+                            <h4 class="modal-title">오류 메시지</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+       
+            <!--// 경고 모달창 -->
+            
+             
 		<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 		<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
 		<form method="post" action="/member/join" 

@@ -14,6 +14,9 @@ public interface MemberDao {
 	 */
 	public void insert(Member member);
 
-	
+	/*
+	 * 아이디 중복여부
+	 */
+	public boolean duplicateIdCheck(String id);
 	
 }

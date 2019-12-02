@@ -17,8 +17,8 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member member = new Member() ;
 		
-		member.setDB_Id(req.getParameter("userid"));
-		member.setDB_Pw(req.getParameter("userpw"));
+		member.setUser_id(req.getParameter("userid"));
+		member.setUser_pw(req.getParameter("userpw"));
 //		member.setDB_Nick(req.getParameter("usernick"));
 		
 		return member;
@@ -52,6 +52,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		memberDao.insert(member);
 		
+	}
+
+	@Override
+	public boolean idcheck(String id) {
+		
+		return memberDao.duplicateIdCheck(id);
 	}
 
 

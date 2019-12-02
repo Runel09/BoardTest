@@ -20,5 +20,7 @@ public interface MemberService {
 	public void join(Member member);
 	
 	
+	public boolean idcheck(String id);
+	
 	
 }

@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>아이디 중복 체크</title>
 	
 	<style type="text/css">
@@ -26,7 +27,7 @@
 		}
 
 	</style>
-	
+		
 	<script type="text/javascript">
 	
 		var httpRequest = null;
@@ -69,14 +70,28 @@
 				alert("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
 				return false;
 			}
+			//제대로된 아이디를 입력했을때
 			else
 			{
-				var param="id="+id
-				httpRequest = getXMLHttpRequest();
-				httpRequest.onreadystatechange = callback;
-				httpRequest.open("POST", "MemberIdCheckAction.do", true);	
-				httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
-				httpRequest.send(param);
+			        $.ajax({
+			           type:'post',
+			           url: '/Login/chk', 
+			           data: {id: id},
+			           dataType: "json",
+			           success: function(data) {
+//			              console.log(data.result); 
+			              
+			              if(data.result) {
+			                 //true : 아이디가 중복
+			              alert("중복 됨여");
+			                  return false;
+			              }
+			              else{
+			            	  alert("중복 안됨여");
+			  				return false;
+			              }
+			           }
+			        });
 			}
 		}
 		
