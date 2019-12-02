@@ -152,18 +152,18 @@ public class SupervisorDaoImpl implements SupervisorDao{
 //				System.out.println("HERE");
 				Member member = new Member();// 각 행을 처리할 DTO
 
-				member.setUser_Num(rs.getInt("user_num"));
+				member.setUser_number(rs.getInt("user_num"));
 //				member.setDB_Email(rs.getString("db_email"));
-				member.setDB_Id(rs.getString("db_id"));
-				member.setDB_Pw(rs.getString("db_pw"));
-				member.setDB_Name(rs.getString("db_name"));
+				member.setUser_id(rs.getString("db_id"));
+				member.setUser_pw(rs.getString("db_pw"));
+				member.setUser_name(rs.getString("db_name"));
 //				member.setDB_Nick(rs.getString("db_nick"));
 //				member.setDB_Gender(rs.getInt("db_gender"));
 //				member.setDB_Addr(rs.getString("db_addr"));
 //				member.setDB_Addr_detail(rs.getString("db_addr_detail"));
 //				member.setDB_Mailnum(rs.getString("db_mailnum"));
 //				member.setDB_Birth(rs.getString("db_birth"));
-				member.setDB_Phnum(rs.getString("db_phnum"));
+				member.setUser_phnum(rs.getString("db_phnum"));
 				
 				list.add(member);
 			
@@ -186,7 +186,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 
 		try {
 			ps = conn.prepareStatement(sql);// 수행객체 얻기
-			ps.setInt(1, member.getUser_Num());
+			ps.setInt(1, member.getUser_number());
 			rs = ps.executeQuery();// sql 수행결과 얻기
 
 		} catch (SQLException e) {
