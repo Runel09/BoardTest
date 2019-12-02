@@ -190,7 +190,6 @@ $(document).ready(function() {
 		<c:if test="${userid eq board.id }">
 			<button id="btnUpdate" class="btn btn-info">수정</button>
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
-			<button id="btnRecommend" style="margin-top: 30px;"></button>
 		</c:if>
 
 	</div>

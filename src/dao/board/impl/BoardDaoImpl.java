@@ -71,10 +71,16 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'free'";
+		sql	+=	"        WHERE checkboard = '자유'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -88,7 +94,7 @@ public class BoardDaoImpl implements BoardDao{
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			if(paging.getSearch()!=null && !"".equals(paging.getSearch())) {
 				
 				ps.setString(1, "%"+paging.getSearch()+"%");
 				ps.setInt(2, paging.getStartNo());
@@ -137,10 +143,16 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'tip'";
+		sql	+=	"        WHERE checkboard = '여행팁'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -204,10 +216,16 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'question'";
+		sql	+=	"        WHERE checkboard = '질문'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -273,8 +291,14 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"        FROM board";
 		sql	+=	"        WHERE checkboard = 'planner'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";

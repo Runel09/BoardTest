@@ -136,12 +136,29 @@ div.pullRight a:hover:before
    
 </table>
 
+<c:if test="${!empty userid }">
 <a href="/board/write" style="float: right;"><button>글쓰기</button></a>
+</c:if>
+<c:if test="${empty userid }">
+<a href="/member/login" style="float: right;"><button>글쓰기</button></a>
+</c:if>
 
-<form action="/board/question" method="get">
-검색어 : <input type="text" name="search">
-<button>검색</button>
-</form>
+	<form action="/board/free" method="get">
+		<div style="width: 12%; float: left; margin-left: 21px;">
+			<select name="searchno">
+				<option value="1" selected="selected">제목</option>
+				<option value="2">내용</option>
+				<option value="3">작성자</option>
+			</select> 
+		</div>
+
+		<div class="input-group" style="width: 20%; float: left;">
+			<input type="text" class="form-control" name="search"
+				placeholder="검색어를 입력해주세요"> <span class="input-group-btn">
+				<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
+			</span>
+		</div>
+	</form>
 
 <jsp:include page="/WEB-INF/views/layout/question_paging.jsp" />
 

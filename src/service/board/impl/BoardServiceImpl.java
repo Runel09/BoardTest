@@ -121,6 +121,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
 			paging.setSearch(req.getParameter("search"));
+			paging.setSearchno(Integer.parseInt(req.getParameter("searchno")));
 		}
 		
 		return paging;

@@ -98,9 +98,9 @@ tr td:not(:first-child), tr th:not(:first-child) {
 
    <tr>
    		<td>  
-		<input id="free" type="radio" name="checkboard" value="free">자유
-		<input id="tip" type="radio" name="checkboard" value="tip">여행팁
-		<input id="question" type="radio" name="checkboard" value="question">질문
+		<input id="free" type="radio" name="checkboard" value="자유">자유
+		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
+		<input id="question" type="radio" name="checkboard" value="질문">질문
    		</td>
    		<td><div id="cate"></div></td>
    </tr>

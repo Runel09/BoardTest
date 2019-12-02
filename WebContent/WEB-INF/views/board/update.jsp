@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
 <script type="text/javascript"
-src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+src="/resource/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script type="text/javascript">
 // <form>이 submit되면
@@ -17,6 +17,7 @@ src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 function submitContents(elClickedObj) {
    // 에디터의 내용이 textarea에 적용된다
    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+   
    try {
       elClickedObj.form.submit(); // <form> submit 수행
    } catch(e) {}
@@ -27,6 +28,7 @@ function submitContents(elClickedObj) {
 <script type="text/javascript">
 
 $(document).ready(function() {
+	
    $("#btnWrite").click(function() {
       
       // 스마트에디터의 내용을 <textarea>에 적용
@@ -58,7 +60,7 @@ $(document).ready(function() {
 
 	});
    
-})
+});
 
 </script>
 
@@ -83,7 +85,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
 
 <div class="container">
 
-<h1>글쓰기 페이지</h1>
+<h1>수정</h1>
 <hr>
 
 
@@ -93,23 +95,33 @@ tr td:not(:first-child), tr th:not(:first-child) {
    
    <tr>
    		<td>
-<%--    		<c:if test=${board.checkboard eq "free"}>   --%>
-<!-- 		<input id="free" type="radio" name="checkboard" value="free" checked="checked">자유 -->
-<%-- 		</c:if> --%>
+   		
+   		<c:if test="${board.checkboard eq 'free'}">  
+		<input id="free" type="radio" name="checkboard" value="free" checked="checked">자유
+		</c:if>
+		
+		<c:if test="${board.checkboard ne 'free'}">  
 		<input id="free" type="radio" name="checkboard" value="free">자유
+		</c:if>
 		
-<%-- 		<c:if test=${board.checkboard eq "tip"}>   --%>
-<!-- 		<input id="tip" type="radio" name="checkboard" value="tip" checked="checked">여행팁 -->
-<%-- 		</c:if> --%>
+		<c:if test="${board.checkboard eq 'tip'}">  		
+		<input id="tip" type="radio" name="checkboard" value="tip" checked="checked" >여행팁
+		</c:if>
+		
+		<c:if test="${board.checkboard ne 'tip'}">  
 		<input id="tip" type="radio" name="checkboard" value="tip">여행팁
+		</c:if>
 		
-<%-- 		<c:if test=${board.checkboard eq "question"}>   --%>
-<!-- 		<input id="question" type="radio" name="checkboard" value="question" checked="checked">질문 -->
-<%-- 		</c:if> --%>
+		<c:if test="${board.checkboard eq 'question'}">  
+		<input id="question" type="radio" name="checkboard" value="question" checked="checked">질문
+		</c:if>
+		
+		<c:if test="${board.checkboard ne 'question'}">  
 		<input id="question" type="radio" name="checkboard" value="question">질문
+   		</c:if>
    		</td>
    		
-   		<td><div id="cate"></div></td>
+   		<td><div id="cate">${board.checkboard}</div></td>
    </tr>
    
    <tr>
@@ -124,9 +136,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
    <tr>
       <th class="info">내용:</th>
       <td><textarea name="content" id="content" rows="30" cols="140" >${board.content }</textarea>
-<!-- <script> -->
-<!-- //    CKEDITOR.replace( 'content' ); -->
-<!-- </script> -->
+
 </td>
    </tr>
    
@@ -146,7 +156,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 
-<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 <!-- 스마트 에디터 적용 코드 -->
 <!-- <textarea>태그에 스마트 에디터의 스킨을 입히는 코드 -->   
@@ -155,7 +165,7 @@ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
    oAppRef: oEditors,
    elPlaceHolder: "content",
-   sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+   sSkinURI: "/resource/se2/SmartEditor2Skin.html",
    fCreator: "createSEditor2"
 });
 </script>

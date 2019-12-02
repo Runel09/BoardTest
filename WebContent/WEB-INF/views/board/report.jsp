@@ -74,13 +74,14 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <h1>신고</h1>
 <hr>
 
-<form action="/board/report" method="post" encType="multipart/form-data">
+<form action="/board/report" method="post">
 		<input type="hidden" name="boardno" value="${boardno }"/>
+		<input type="hidden" name="userid" value="${userid }"/>
 		<table class="table table-bordered">
 
 			<tr>
 				<td class="info">아이디</td>
-				<td>${board.db_id }</td>
+				<td>${userid }</td>
 			</tr>
 			<tr>
 				<td class="info">신고사유</td>

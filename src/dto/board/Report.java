@@ -2,7 +2,7 @@ package dto.board;
 
 public class Report {
 	 
-	private String db_id;	
+	 private String db_id;	
 	 private int boardno; 
 	 private String reason; 
 	 private String content;

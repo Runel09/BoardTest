@@ -21,6 +21,9 @@ public class BoardReportController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		int boardno = Integer.parseInt(req.getParameter("boardno"));
+		req.setAttribute("boardno", boardno);
+		
 		req.getRequestDispatcher("/WEB-INF/views/board/report.jsp").forward(req, resp);
 	
 
@@ -28,26 +31,21 @@ public class BoardReportController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.setCharacterEncoding("utf-8");
+		
 		Report report = new Report();
 		Board board = new Board();
 		
 		int boardno = Integer.parseInt(req.getParameter("boardno"));
-		System.out.println(boardno);
-		String content = req.getParameter("content");
-		System.out.println(content);
-		String db_id = (String) req.getAttribute("db_id");
-		System.out.println(db_id);
-		String reason = req.getParameter("reason");
-		System.out.println(reason);
 		report.setBoardno(boardno);
-		report.setContent(content);
-		report.setDb_id(db_id);
-		report.setReason(reason);
-		boardService.insertReport(report);
-		
 		board.setBoardno(boardno);
+		report.setContent(req.getParameter("content"));
+		report.setDb_id(req.getParameter("userid"));
+		report.setReason(req.getParameter("reason"));
+		
+		boardService.insertReport(report);
 		boardService.updateReport(board);
-		// insert 해야함. report에서 받아온 정보들
+
 		resp.sendRedirect("/board/view?boardno="+boardno);
 	}
 
