@@ -13,6 +13,7 @@ import dao.board.face.BoardDao;
 import dbutil.DBConn;
 import dto.board.Board;
 import dto.board.BoardFile;
+import dto.board.Report;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao{
@@ -69,10 +70,16 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'free'";
+		sql	+=	"        WHERE checkboard = '자유'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -86,7 +93,7 @@ public class BoardDaoImpl implements BoardDao{
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			if(paging.getSearch()!=null && !"".equals(paging.getSearch())) {
 				
 				ps.setString(1, "%"+paging.getSearch()+"%");
 				ps.setInt(2, paging.getStartNo());
@@ -135,10 +142,16 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'tip'";
+		sql	+=	"        WHERE checkboard = '여행팁'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -202,10 +215,16 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
 		sql	+=	"        SELECT *";
 		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'question'";
+		sql	+=	"        WHERE checkboard = '질문'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -271,8 +290,14 @@ public class BoardDaoImpl implements BoardDao{
 		sql	+=	"        FROM board";
 		sql	+=	"        WHERE checkboard = 'planner'";
 		
-		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -858,7 +883,7 @@ public class BoardDaoImpl implements BoardDao{
 	   }
 
 	@Override
-	public void insertReport(Board board) {
+	public void plusReport(Board board) {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
@@ -876,6 +901,31 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		
 		
+	}
+
+	@Override
+	public void insertReport(Report report) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "INSERT INTO report(boardno, content, db_id, reason)";
+		sql += " VALUES(?, ?, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, report.getBoardno());
+			ps.setString(2, report.getContent());
+			ps.setString(3, report.getDb_id());
+			ps.setString(4, report.getReason());
+			
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

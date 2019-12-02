@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.board.Board;
+import dto.board.Report;
 import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 
@@ -20,21 +21,32 @@ public class BoardReportController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-	
-		Board board = new Board();
-		
 		int boardno = Integer.parseInt(req.getParameter("boardno"));
-		board.setBoardno(boardno);
+		req.setAttribute("boardno", boardno);
 		
-//		System.out.println(boardno);
-		
-		boardService.updateReport(board);
-		
-		resp.sendRedirect("/board/free");
+		req.getRequestDispatcher("/WEB-INF/views/board/report.jsp").forward(req, resp);
+	
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("utf-8");
+		
+		Report report = new Report();
+		Board board = new Board();
+		
+		int boardno = Integer.parseInt(req.getParameter("boardno"));
+		report.setBoardno(boardno);
+		board.setBoardno(boardno);
+		report.setContent(req.getParameter("content"));
+		report.setDb_id(req.getParameter("userid"));
+		report.setReason(req.getParameter("reason"));
+		
+		boardService.insertReport(report);
+		boardService.updateReport(board);
 
+		resp.sendRedirect("/board/view?boardno="+boardno);
 	}
 
 }

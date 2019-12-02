@@ -42,26 +42,7 @@ $(document).ready(function() {
       
       history.back(-1);
    })
-   
 
-   $("#free").click(function() {
-   
-   $("#cate").html("자유");
-
-});
-	
-   $("#tip").click(function() {
-		   
-   $("#cate").html("여행팁");
-
-});
-	   
-	$("#question").click(function() {
-		   
-	$("#cate").html("질문");
-
-});
-	
 });
 
 
@@ -90,48 +71,39 @@ tr td:not(:first-child), tr th:not(:first-child) {
 
 <div class="container">
 
-<h1>글쓰기</h1>
+<h1>신고</h1>
 <hr>
 
-<form action="/board/write" method="post" encType="multipart/form-data">
-<table class="table table-bordered">
+<form action="/board/report" method="post">
+		<input type="hidden" name="boardno" value="${boardno }"/>
+		<input type="hidden" name="userid" value="${userid }"/>
+		<table class="table table-bordered">
 
-   <tr>
-   		<td>  
-		<input id="free" type="radio" name="checkboard" value="자유">자유
-		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
-		<input id="question" type="radio" name="checkboard" value="질문">질문
-   		</td>
-   		<td><div id="cate"></div></td>
-   </tr>
+			<tr>
+				<td class="info">아이디</td>
+				<td>${userid }</td>
+			</tr>
+			<tr>
+				<td class="info">신고사유</td>
+				<td>
+					<input type="radio" name="reason" value="영리/홍보" id="r0" /><label for="r0">영리/홍보</label>
+					<input type="radio" name="reason" value="음란" id="r1" /><label for="r1">음란</label>
+					<input type="radio" name="reason" value="욕설" id="r2" /><label for="r2">욕설</label>
+					<input type="radio" name="reason" value="신상노출" id="r3" /><label for="r3">신상노출</label>
+					<input type="radio" name="reason" value="도배" id="r4" /><label for="r4">도배</label>
+					<input type="radio" name="reason" value="기타" id="r5" /><label for="r5">기타</label>
+				</td>
+			</tr>
 
-   <tr>
-      <td class="info">아이디</td><td>${userid }</td>
-   <tr>
+			<tr>
+				<th class="info">내용</th>
+				<td>
+					<textarea name="content" id="content" rows="30" cols="140"></textarea>
+				</td>
+			</tr>
 
-   
-   <tr>
-      <th class="info" >제목</th>
-      <td><input type="text" placeholder="제목을 입력하세요." name="title" required="required" style="width: 650px;"/></td>
-   </tr>
-
-   <tr>
-      <th class="info">내용</th>
-      <td><textarea name="content" id="content" rows="30" cols="140">
-</textarea>
-<!-- <script> -->
-<!-- //    CKEDITOR.replace( 'content' ); -->
-<!-- </script> -->
-</td>
-   </tr>
-
-   <tr>
-      <th class="info">첨부파일:</th>
-      <td><input type="file" placeholder="파일을 선택하세요. " name="file" /></td>
-   </tr>
-
-</table>
-      <button type="button" id="btnCancel" style="float: right">취소</button>
+		</table>
+		<button type="button" id="btnCancel" style="float: right">취소</button>
       <button id="btnWrite" style="float: right">작성</button>
 </form>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

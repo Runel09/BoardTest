@@ -9,6 +9,7 @@ import dto.board.Board;
 import dto.board.BoardFile;
 import dto.board.Comment;
 import dto.board.Recommend;
+import dto.board.Report;
 import util.Paging;
 
 public interface BoardService {
@@ -123,4 +124,8 @@ public interface BoardService {
 
 
 	public void updateReport(Board board);
+
+
+
+	public void insertReport(Report report);
 }
