@@ -1,11 +1,12 @@
-package web.service.impl;
+package service.login.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
-import web.dao.face.MemberDao;
-import web.dao.impl.MemberDaoImpl;
-import web.dto.Member;
-import web.service.face.MemberService;
+import dao.login.face.MemberDao;
+import dao.login.impl.MemberDaoImpl;
+import dto.login.Member;
+import service.login.face.MemberService;
+
 
 public class MemberServiceImpl implements MemberService{
 
@@ -15,9 +16,9 @@ public class MemberServiceImpl implements MemberService{
 	public Member getLoginMember(HttpServletRequest req) {
 		
 		Member member = new Member() ;
-		
-		member.setDB_Id(req.getParameter("userid"));
-		member.setDB_Pw(req.getParameter("userpw"));
+		System.out.println(req.getParameter("userid"));
+		member.setUser_id(req.getParameter("userid"));
+		member.setUser_pw(req.getParameter("userpw"));
 //		member.setDB_Nick(req.getParameter("usernick"));
 		
 		return member;
@@ -52,5 +53,12 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.insert(member);
 		
 	}
+
+	@Override
+	public boolean idcheck(String id) {
+		
+		return memberDao.duplicateIdCheck(id);
+	}
+
 
 }
