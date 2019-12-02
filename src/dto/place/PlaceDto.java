@@ -130,5 +130,6 @@ public class PlaceDto {
 				+ ", place_information=" + place_information + ", favorite_count=" + favorite_count + ", review_number="
 				+ review_number + ", review_score=" + review_score + ", review_char=" + review_char + "]";
 	}
+
 	
 }

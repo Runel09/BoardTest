@@ -24,7 +24,7 @@ public class SupervisorLogoutController extends HttpServlet {
 	      
 	      session.removeAttribute("login");
 	      session.removeAttribute("super_id");
-	      session.removeAttribute("super_pw");
+//	      session.removeAttribute("super_pw");
 	      
 	      resp.sendRedirect("/supervisor/login");
 		}
