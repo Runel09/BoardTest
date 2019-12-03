@@ -36,6 +36,15 @@ $(document).ready(function(){
 	$("#btnReport").click(function() {
 		$(location).attr("href", "/board/report?boardno=${board.boardno }");
 	});
+	
+	//추천버튼 동작
+	$("#emptylogin").click(function() {
+		var result = confirm("로그인하실?");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	});
 });
 </script>
 
@@ -43,6 +52,8 @@ $(document).ready(function(){
 $(document).ready(function() {
 
 	if(${isRecommend}) {
+		
+	
 		$("#btnRecommend")
 			.addClass("btn-warning")
 			.html('추천 취소');
@@ -147,7 +158,12 @@ $(document).ready(function() {
 
 	<!-- 버튼을 통한 페이지 이동 -->
 	<div class="text-center">
+		<c:if test="${!empty userid }">
 		<button id="btnRecommend" class="btn btn-primary"></button>
+		</c:if>
+		<c:if test="${empty userid }">
+		<button id="emptylogin" class="btn btn-primary">추천</button>
+		</c:if>
 		<button id="btnReport" class="btn btn-primary">신고</button>
 	</div>
 	<div class="text-right">

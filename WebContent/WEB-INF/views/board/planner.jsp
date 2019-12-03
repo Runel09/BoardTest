@@ -13,9 +13,6 @@ table, th {
 	text-align: center;
 }
 
-tr td:nth-child(2) {
-	text-align: left;
-}
 
 tr td:not(:first-child), tr th:not(:first-child) {
 	border-left: 1px solid white;
@@ -76,6 +73,7 @@ div.pullRight a:hover:before
 	color: white;
 }
 
+
 </style>
 
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
@@ -90,8 +88,44 @@ div.pullRight a:hover:before
   <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
 </div>
 
-<h2 style="text-align:center;">여행자들의 일정보기</h2>
-
+ <h2 style="text-align:center; ">여행자들의 일정보기</h2>
+ <table class="table">
+      
+        <tr >
+          <th>여행지</th>
+          <td>국내</td>
+          <td>일본</td>
+          <td>홍콩</td>
+          <td>싱가포르</td>
+          <td>대만</td>
+          <td>태국</td>
+          <td>미국</td>
+        </tr>
+        <tr class="danger">
+          <th>여행일</th>
+          <td>1-3일</td>
+          <td>4-6일</td>
+          <td>7-10일</td>
+          <td>11-15일</td>
+          <td>15일이상</td>
+        </tr>
+        <tr>
+          <th>여행시기</th>
+          <td>봄</td>
+          <td>여름</td>
+          <td>가을</td>
+          <td>겨울</td>
+        </tr>
+        <tr class="success">
+          <th>여행테마</th>
+          <td>가족여행</td>
+          <td>나홀로여행</td>
+          <td>커플여행</td>
+          <td>친구와함께</td>
+          <td>비지니스여행</td>
+        </tr>
+ </table>
+    
 <div class="container">
 
 <h1 style="float:left;">플래너 게시판</h1>
@@ -120,24 +154,6 @@ div.pullRight a:hover:before
 </c:forEach>
    
 </table>
-
-
-	<form action="/board/free" method="get">
-		<div style="width: 12%; float: left; margin-left: 21px;">
-			<select name="searchno">
-				<option value="1" selected="selected">제목</option>
-				<option value="2">내용</option>
-				<option value="3">작성자</option>
-			</select> 
-		</div>
-
-		<div class="input-group" style="width: 20%; float: left;">
-			<input type="text" class="form-control" name="search"
-				placeholder="검색어를 입력해주세요"> <span class="input-group-btn">
-				<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
-			</span>
-		</div>
-	</form>
 
 <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" />
 
