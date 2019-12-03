@@ -60,7 +60,3 @@ $(document).ready(function() {
 // })();
 </script>
 <div id="indexList"></div>
-
-<button id="ajaxButton" type="button">Make a request</button>
-
-

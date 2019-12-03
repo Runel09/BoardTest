@@ -62,7 +62,7 @@ for (i = 0; i < result.length; i++) {
 
   google.maps.event.addListener(marker, 'click', (function(marker, i) {
     return function() {
-      infowindow.setContent(result[i].place_name+"<br>"+result[i].detail+"<br><button id = 'insertBtn"+i+"' onclick='addIndex("+i+");'> 장소 추가 </button>");
+      infowindow.setContent(result[i].place_name+"<br>"+result[i].detail+"<br><button type='button' id = 'insertBtn"+i+"' onclick='addIndex("+i+");'> 장소 추가 </button>");
       infowindow.open(map, marker);
       
     }
@@ -74,11 +74,10 @@ for (i = 0; i < result.length; i++) {
       map.setCenter(this.getPosition());
       
     });
-    
-    
-  
 
 };
+
+////-------------
 var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',gridSize:50} );
 };
@@ -123,7 +122,7 @@ function addIndex(ind){
         	return false;
         }
         if($("#indexBody").children().size()>=1){
-        	var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' value='"+result[ind].cate+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button>경로검색</button><button>삭제</button></div>");
+        	var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input name='place_cate' type='hidden' value='"+result[ind].cate+"'/><input type='hidden' name='place_no' value='"+result[ind].place_number+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button type='button'>경로검색</button><button type='button'>삭제</button></div>");
             var button = div.children().eq($("#indexBody").children().size()-1).children("button").eq(0);
 //             console.log(button);
 			button.on('click', openWindow);
@@ -131,7 +130,7 @@ function addIndex(ind){
             
 
         }else{
-			var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' value='"+result[ind].cate+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button>삭제</button></div>");
+			var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' name='place_cate' value='"+result[ind].cate+"'/><input type='hidden' name='place_no' value='"+result[ind].place_number+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button type='button'>삭제</button></div>");
         }
       var button = div.children().children().eq(-1);
       button.on('click', function(){
