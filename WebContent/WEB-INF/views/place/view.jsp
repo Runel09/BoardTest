@@ -41,56 +41,78 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+// 	$("#btnCommInsert").click(function(){
+// 	    if(!'${login}'){
+	    	
+// 	    	warningModal("로그인이 필요합니다")
+	    	
+// 	    }
+// 	   })
 	// 댓글 입력
 	$("#btnCommInsert").click(function() {
-		// 게시글 번호.... ${viewBoard.boardno }
-	//		console.log($("#commentWriter").val());
-	console.log($("#commentContent").val());
+		 if(!'${login}'){
+			 
+		    	
+		    	warningModal("로그인이 필요합니다")
+		    	
+		    	
+		    }	
 		
-	 warningModal("입력하소 시ㅠ은 메ㅣ지를 이2력");
+		
+		
+// 	${viewplace.place_number }
+// 	//		console.log($("#commentWriter").val());
 	
-// 		$form = $("<form>").attr({
-// 			action: "/comment/insert",
-// 			method: "post"
-// 		}).append(
-// 			$("<input>").attr({
-// 				type:"hidden",
-// 				name:"boardNo",
-// 				value:"${viewBoard.boardno }"
-// 			})
-// 		).append(
-// 			$("<input>").attr({
-// 				type:"hidden",
-// 				name:"userid",
-// 				value:"${sessionScope.userid }"
-// 			})
-// 		).append(
-// 			$("<textarea>")
-// 				.attr("name", "content")
-// 				.css("display", "none")
-// 				.text($("#commentContent").val())
-// 		);
-// 		$(document.body).append($form);
-// 		$form.submit();
+	else if('${login}'){
+		console.log($("#commentContent").val());
+	
 		
+
+		$form = $("<form>").attr({
+			action: "/place/comment",
+			method: "post"
+		}).append(
+			$("<input>").attr({
+				type:"hidden",
+				name:"place_number",
+				value:"${viewplace.place_number }"
+			})
+		).append(
+			$("<input>").attr({
+				type:"hidden",
+				name:"user_number",
+				value:"${sessionScope.user_number }"
+			})
+		).append(
+			$("<textarea>")
+				.attr("name", "review_char")
+				.css("display", "none")
+				.text($("#commentContent").val())
+		);
+		
+		$(document.body).append($form);
+		
+		$form.submit();
+	}	
 	});
+	
+	
+	
 	
 });
 
 //댓글 삭제
-function deleteComment(commentNo) {
+function deleteComment(review_number) {
 	$.ajax({
 		type: "post"
-		, url: "/comment/delete"
+		, url: "/place/commentdelete"
 		, dataType: "json"
 		, data: {
-			commentNo: commentNo
+			"review_number": review_number
 		}
 		, success: function(data){
 			if(data.success) {
-				
-				$("[data-commentno='"+commentNo+"']").remove();
-				
+				$("[data-review_number='"+review_number+"']").remove();
 			} else {
 				alert("댓글 삭제 실패");
 			}
@@ -109,11 +131,12 @@ function warningModal(content) {
 
 
 
+
 </script>
 <!-- 경고 모달창 -->
             <div class="modal fade" id="defaultModal">
                <div class="modal-dialog">
-                    <div class="modal-content panel-success">
+                    <div class="modal-content panel-danger">
                         <div class="modal-header panel-heading">
                             <h4 class="modal-title">오류 메시지</h4>
                         </div>
@@ -122,6 +145,9 @@ function warningModal(content) {
                         </div>
                         <div class="modal-footer">
                            <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                           <form action ="/member/login" method="get">
+                           <button type = "submit" class="btn btn-primary">로그인</button>
+                           </form>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -135,23 +161,53 @@ function warningModal(content) {
 
 
 
-<div class="container">
 
 <h1 class="name">게시판 - 장소정보 상세보기</h1>
 
-<!-- 관리자 로그인 됐을  때만 수정,삭제 버튼 보이게 -->
-<div class="text-right">
+<!-- <div id = "sliderbox" class= "tokyo"> -->
+<!-- 	<ul id= "slider"> -->
+<%-- 	<li><img style = "height:350px;"  src="/image/${viewplace.place_number}_1.jpg"></li> --%>
+<%-- 	<li><img style = "height:350px;"  src="/image/${viewplace.place_number}_2.jpg"></li> --%>
+<!-- 	</ul> -->
+<%-- <%-- <img src="/image/${viewplace.place_number}_2.PNG"> --%> 
+<!-- </div> -->
 
-<c:if test="${super_id eq 'supervisor' }">
-<button  type="button" class="btn btn-warning" onclick="location.href='/supervisor/placeupdate?place_number=${viewplace.place_number}'">수정</button>
 
-<button type="button" class="btn btn-danger">삭제</button>
 
-</c:if>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style= "width:750px; left:530px;">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox"  >
+    <div class="item active"  >
+      <img style = "height:400px;"  src="/image/${viewplace.place_number}_1.jpg">
+     
+    </div>
+    <div class="item" >
+      <img style = "height:400px;"  src="/image/${viewplace.place_number}_2.jpg">
+<%--       <img style = "height:350px;"  src="/image/${viewplace.place_number}_2.jpg"> --%>
+      
+    </div>
+    ...
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  
 </div>
 
-
-<img src="/image/${viewplace.place_number}.PNG">
 
 
 
@@ -201,7 +257,8 @@ function warningModal(content) {
 <tr><td class="info"  colspan="7">첨부파일</td></tr>
 <tr><td colspan="4">${viewfile.originname }</td></tr>
 </c:if>
-</table>
+
+
 
 
 <!-- 댓글 처리 -->
@@ -223,28 +280,33 @@ function warningModal(content) {
 <!-- <button onclick='location.href="/member/join";'>회원가입</button> -->
 <!-- </div> -->
 <%-- </c:if> --%>
+
+
+
+
+
 <!-- 댓글 리스트 -->
 <table class="table table-striped table-hover table-condensed">
 <thead>
 <tr>
 	<th style="width: 10%;">유저번호</th>
-	
+	<th style="width: 10%;">장소번호</th>
 	<th style="width: 65%;">댓글</th>
-	<th style="width: 20%;">작성일</th>
+<!-- 	<th style="width: 20%;">작성일</th> -->
 	<th style="width: 5%;"></th>
 </tr>
 </thead>
 <tbody id="commentBody">
 <c:forEach items="${commentList }" var="comment">
-<tr data-commentno="${comment.commentNo }">
-	<td>${comment.userno }</td>
-	
-	<td>${comment.content }</td>
-	<td><fmt:formatDate value="${comment.writtenDate }" pattern="yy-MM-dd hh:mm:ss" /></td>
+<tr data-review_number="${comment.review_number }">
+	<td>${comment.user_number }</td>
+	<td>${comment.place_number }</td>
+	<td>${comment.review_char }</td>
+<%-- 	<td><fmt:formatDate value="${comment.writtenDate }" pattern="yy-MM-dd hh:mm:ss" /></td> --%>
 	<td>
-		<c:if test="${sessionScope.userid eq comment.userid }">
+		<c:if test="${sessionScope.user_number eq comment.user_number }">
 		<button class="btn btn-default btn-xs"
-			onclick="deleteComment(${comment.commentNo });">삭제</button>
+			onclick="deleteComment(${comment.review_number });">삭제</button>
 		</c:if>
 	</td>
 	
@@ -256,8 +318,11 @@ function warningModal(content) {
 
 <div class="form-inline text-center">
 <%-- 	<input type="text" size="10" class="form-control" id="commentWriter" value="${usernick }" readonly="readonly"/> --%>
-	<textarea rows="1" cols="50" class="form-control" id="commentContent"></textarea>
-	<button id="btnCommInsert" class="btn">입력</button>
+<!-- 	<form  action ="/place/comment" method="post"> -->
+	<textarea rows="1" cols="50" class="form-control" id="commentContent" name="review_char"></textarea>
+	<button id="btnCommInsert" class="btn" type = "button">입력</button>
+	
+<!-- 	</form> -->
 </div>	<!-- 댓글 입력 end -->
 
 
