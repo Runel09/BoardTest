@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.place.face.CommentDao;
-import dbutil.DBConn;
+import dbutill.DBConn;
 import dto.place.Comment;
 import dto.place.PlaceDto;
 
@@ -32,14 +32,13 @@ public class CommentDaoImpl implements CommentDao {
 			= "SELECT * FROM ("
 					+ "SELECT rownum rnum, B.* FROM ("
 					+ "	SELECT"
-					+ "		userno,"
+					+ "		review_number,"
+					+ "		user_number,"
 					+ "		place_number,"
-					+ "		commentno,"
-					+ "		content,"					
-					+ "		writtendate"
-					+ "	FROM PLACECOMMENTB"
-					+ "	WHERE place_number = ?"
-					+ "	ORDER BY writtendate"
+					+ "		review_score,"					
+					+ "		review_char"
+					+ "	FROM review"
+					+ "	WHERE place_number = ?"					
 					+ "	) B"
 					+ ") ORDER BY rnum";
 
@@ -55,11 +54,12 @@ public class CommentDaoImpl implements CommentDao {
 				while( rs.next() ) {
 					Comment comment = new Comment();
 
-					comment.setUserno(rs.getInt("userno"));
+					comment.setReview_number(rs.getInt("review_number"));
+					comment.setUser_number(rs.getInt("user_number"));
 					comment.setPlace_number(rs.getInt("place_number"));
-					comment.setCommentNo(rs.getInt("commentno"));
-					comment.setContent(rs.getString("content"));
-					comment.setWrittenDate(rs.getDate("writtendate"));
+					comment.setReview_score(rs.getInt("review_score"));
+					comment.setReview_char(rs.getString("review_char"));
+					
 
 					commentList.add(comment);
 				}
@@ -85,13 +85,13 @@ public class CommentDaoImpl implements CommentDao {
 			conn = DBConn.getConnection();
 
 			String sql
-			= "INSERT INTO PLACECOMMENTB ("
-					+ "		commentno,"
+			= "INSERT INTO review ("
+					+ "		review_number,"
+					+ "		user_number,"
 					+ "		place_number,"
-					+ "		userno,"
-					+ "		content )"
+					+ "		review_char )"
 					+ "	VALUES ("
-					+ "		PLACECOMMENTB_seq.nextval,"
+					+ "		review_seq.nextval,"
 					+ "		?,"
 					+ "		?,"
 					+ "		? )";
@@ -99,9 +99,9 @@ public class CommentDaoImpl implements CommentDao {
 			try {
 				ps = conn.prepareStatement(sql);
 
-				ps.setInt(1, comment.getPlace_number());
-				ps.setInt(2, comment.getUserno());
-				ps.setString(3, comment.getContent());
+				ps.setInt(1, comment.getUser_number());
+				ps.setInt(2, comment.getPlace_number());
+				ps.setString(3, comment.getReview_char());
 				ps.executeUpdate();
 
 			} catch (SQLException e) {
@@ -123,12 +123,12 @@ public class CommentDaoImpl implements CommentDao {
 			conn = DBConn.getConnection();
 
 			String sql
-			= "DELETE PLACECOMMENTB"
-					+ "	WHERE commentno = ?";
+			= "DELETE review"
+					+ "	WHERE review_number = ?";
 
 			try {
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, comment.getCommentNo());
+				ps.setInt(1, comment.getReview_number());
 				
 				ps.executeUpdate();
 
@@ -148,12 +148,12 @@ public class CommentDaoImpl implements CommentDao {
 
 			conn = DBConn.getConnection();
 
-			String sql = "SELECT COUNT(*) FROM PLACECOMMENTB WHERE commentno=?";
+			String sql = "SELECT COUNT(*) FROM review WHERE review_number=?";
 			
 			int cnt = 0;
 			try {
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, comment.getCommentNo());
+				ps.setInt(1, comment.getReview_number());
 				rs = ps.executeQuery();
 				rs.next();
 				cnt = rs.getInt(1);

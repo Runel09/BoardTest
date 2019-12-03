@@ -3,27 +3,27 @@ package dto.place;
 import java.util.Date;
 
 public class Comment {
-	private int userno;
-	private int commentNo;
+	private int review_number;
+	private int user_number;
 	private int place_number;
-	private String content;
-	private Date WrittenDate;
+	private int review_score;
+	private String review_char;
 	@Override
 	public String toString() {
-		return "Comment [userno=" + userno + ", commentNo=" + commentNo + ", place_number=" + place_number
-				+ ", content=" + content + ", WrittenDate=" + WrittenDate + "]";
+		return "Comment [review_number=" + review_number + ", user_number=" + user_number + ", place_number="
+				+ place_number + ", review_score=" + review_score + ", review_char=" + review_char + "]";
 	}
-	public int getUserno() {
-		return userno;
+	public int getReview_number() {
+		return review_number;
 	}
-	public void setUserno(int userno) {
-		this.userno = userno;
+	public void setReview_number(int review_number) {
+		this.review_number = review_number;
 	}
-	public int getCommentNo() {
-		return commentNo;
+	public int getUser_number() {
+		return user_number;
 	}
-	public void setCommentNo(int commentNo) {
-		this.commentNo = commentNo;
+	public void setUser_number(int user_number) {
+		this.user_number = user_number;
 	}
 	public int getPlace_number() {
 		return place_number;
@@ -31,18 +31,19 @@ public class Comment {
 	public void setPlace_number(int place_number) {
 		this.place_number = place_number;
 	}
-	public String getContent() {
-		return content;
+	public int getReview_score() {
+		return review_score;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setReview_score(int review_score) {
+		this.review_score = review_score;
 	}
-	public Date getWrittenDate() {
-		return WrittenDate;
+	public String getReview_char() {
+		return review_char;
 	}
-	public void setWrittenDate(Date writtenDate) {
-		WrittenDate = writtenDate;
+	public void setReview_char(String review_char) {
+		this.review_char = review_char;
 	}
+	
 	
 	
 	
