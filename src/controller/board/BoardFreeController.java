@@ -31,7 +31,6 @@ public class BoardFreeController extends HttpServlet {
 		req.setAttribute("paging", paging);
 		
 		List<Board> list = boardService.getFreeList(paging);
-		System.out.println(list);
 		req.setAttribute("list", list);
 		
 		req.getRequestDispatcher("/WEB-INF/views/board/free.jsp")
