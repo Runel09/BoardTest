@@ -32,6 +32,7 @@ public class PlaceInsertController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 			placeService.write(req);
+			resp.sendRedirect("/place/list");
 	
 		}
 	

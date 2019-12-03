@@ -369,15 +369,29 @@ public class SupervisorServiceImpl implements SupervisorService{
 		
 		PlaceFile placeFile = placeservice.getfile(place);
 
-		if(placeFile!=null) {
-			File prev = new File(req.getSession().getServletContext().getRealPath("upload"),
+		System.out.println("1"+req);
+		System.out.println("2"+req.getSession());
+		System.out.println("3"+req.getSession().getServletContext());
+		System.out.println("4"+req.getSession().getServletContext().getRealPath("upload"));
+		System.out.println("5"+placeFile);
+		
+//		System.out.println("6"+placeFile.getStoredname());
+		if(placeFile !=null) {
+			File prev
+			= new File(
+					req.getSession()
+					.getServletContext()
+					.getRealPath("upload"),
 					placeFile.getStoredname());
 
 			prev.delete();
 
 			placedao.deletefile(placeFile);
+			placedao.deleteplace(place);
+		}else {
+			placedao.deleteplace(place);
 		}
-		placedao.deleteplace(place);
+		
 
 	}
 

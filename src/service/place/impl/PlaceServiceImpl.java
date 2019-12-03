@@ -325,9 +325,11 @@ public class PlaceServiceImpl implements PlaceService {
 				
 				write(place);
 				
+				if(placeFile.getOriginname()!=null) {
 				placeFile.setPlace_number(place.getPlace_number());
 				
 				placeDao.insertFile(placeFile);
+				}
 				
 		
 	}

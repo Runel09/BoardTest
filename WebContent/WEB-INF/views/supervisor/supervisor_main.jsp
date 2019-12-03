@@ -13,7 +13,7 @@
 <br><br>
 <a href="/supervisor/boardlist">게시판관리</a>
 <br><br>
-<a href="/place/view">장소정보 관리</a>
+<a href="/place/list">장소정보 관리</a>
 <br><br>
 <a href="/supervisor/insertnotice">공지사항 입력</a>
 <br><br>
