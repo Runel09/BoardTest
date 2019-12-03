@@ -18,5 +18,11 @@ public interface MemberDao {
 	 * 아이디 중복여부
 	 */
 	public boolean duplicateIdCheck(String id);
+
+	
+
+	public Member finduserid(Member member) ;
+
+
 	
 }

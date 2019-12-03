@@ -145,8 +145,8 @@ background:url("/image/joinbackground.jpg") o-repeat center center fixed ;
 
 <form class="form-inline">
   <div class="form-group">
-    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+    <label class="sr-only" for="exampleInputEmail3">ID</label>
+    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter ID">
 
   </div>
   <div class="form-group">

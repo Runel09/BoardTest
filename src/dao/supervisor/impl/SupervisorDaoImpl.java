@@ -153,16 +153,16 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				Member member = new Member();// 각 행을 처리할 DTO
 
 				member.setUser_number(rs.getInt("user_num"));
-//				member.setDB_Email(rs.getString("db_email"));
+				member.setUser_email(rs.getString("db_email"));
 				member.setUser_id(rs.getString("db_id"));
 				member.setUser_pw(rs.getString("db_pw"));
 				member.setUser_name(rs.getString("db_name"));
-//				member.setDB_Nick(rs.getString("db_nick"));
-//				member.setDB_Gender(rs.getInt("db_gender"));
-//				member.setDB_Addr(rs.getString("db_addr"));
-//				member.setDB_Addr_detail(rs.getString("db_addr_detail"));
-//				member.setDB_Mailnum(rs.getString("db_mailnum"));
-//				member.setDB_Birth(rs.getString("db_birth"));
+				member.setUser_nick(rs.getString("db_nick"));
+				member.setUser_gender(rs.getInt("db_gender"));
+				member.setUser_addr(rs.getString("db_addr"));
+				member.setUser_addr_detail(rs.getString("db_addr_detail"));
+				member.setUser_mailnum(rs.getString("db_mailnum"));
+				member.setUser_birth(rs.getString("db_birth"));
 				member.setUser_phnum(rs.getString("db_phnum"));
 				
 				list.add(member);

@@ -8,6 +8,9 @@
 <html>
 <head>
 
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway">
+<link href="https://fonts.googleapis.com/css?family=Alatsi&display=swap" rel="stylesheet">
 <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- Bootstrqp 3.3.2 밑에 3개  -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -24,7 +27,7 @@
   color: white;
    margin:100px; 
    margin: auto; 
-   margin-left: -30px; 
+   margin-left: -104px; 
    margin-top: -200px; 
 /*  position:absolute; */
 /*     top:-5%; left:50%; */
@@ -55,7 +58,7 @@
 }
 
 /* travelers 로고  */
- #logo:hover { */
+ #logo:hover { 
    -webkit-transform: rotate(1deg) scale(1.02); 
    -moz-transform: rotate(1deg) scale(1.02); 
    -o-transform: rotate(1deg) scale(1.02); 
@@ -135,16 +138,16 @@
     font-weight: 400;
     display: block;
 }
-.profile-img
-{
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-}
+/* .profile-img */
+/* { */
+/*     width: 96px; */
+/*     height: 96px; */
+/*     margin: 0 auto 10px; */
+/*     display: block; */
+/*     -moz-border-radius: 50%; */
+/*     -webkit-border-radius: 50%; */
+/*     border-radius: 50%; */
+/* } */
 .need-help
 {
     margin-top: 10px;
@@ -159,40 +162,73 @@
     margin-top: 175px;
 }
 
-body { 
-  background: url("/image/background.jpg" )no-repeat center center fixed ; 
-   -webkit-background-size: cover; 
-   -moz-background-size: cover; 
-   -o-background-size: cover; 
-  background-size: cover;
+/* body {  */
+/*   background: url("/image/background.jpg" )no-repeat center center fixed ;  */
+/*    -webkit-background-size: cover;  */
+/*    -moz-background-size: cover;  */
+/*    -o-background-size: cover;  */
+/*   background-size: cover; */
   
+/* } */
+
+body {
+background-color: #141723 ;
+/* background-color: #FFF ; */
+ overflow: hidden;
+ text-align:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	
 }
 .col-md-4{
  position:absolute;
     top:50%; left:50%;
     transform: translate(-50%, -50%);
+    margin :1px;
+}
+#header{
+	text-align:center;
+/* 	background:#0064CD; */
+	font-family: 'Indie Flower', cursive;
+	
+	
 }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
+
+<div id="header" >
+<div style="text-align: center;">
+<!-- <div style="position: fixed;"> -->
+<!-- <a href="/main"><img src="/image/logo.png"  style="width: 78px; margin: 29px; height: 71px;"/></a> -->
+<!-- </div> -->
+<span style="vertical-align: middle; -webkit-text-stroke-width: unset; font-size: 50px; line-height: 129px; margin-left: 10px;  ">
+<a href="/main">Travelers</a>
+</span>
+</div>
+</div>
+
+<div>  </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-         <div class="text-center" id="logo">TRAVELERS</div>
-<!--             <h1 class="text-center login-title">T r a v e l e r s</h1> -->
+        <div class="col-sm-6 col-md-4 col-md-offset-4" >
+<!--          <div class="text-center" id="logo">TRAVELERS</div> -->
+
 
             <div class="account-wall">
-                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                    alt="">
+<!--                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" -->
+<!--                     alt=""> -->
                 <form action="/member/login" method="post" class="form-signin">
                 <input type="text" name="userid" class="form-control" placeholder="ID" required autofocus>
                 <input type="password" name="userpw" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     LogIn</button>
                 <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">기억하기
+                    <a href= "/find/userinfo">ID / 비밀번호 찾기</a>
                 </label>
 <!--  도움말기능   <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span> -->
                 

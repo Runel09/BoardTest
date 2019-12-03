@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService{
 	public Member getLoginMember(HttpServletRequest req) {
 		
 		Member member = new Member() ;
-		System.out.println(req.getParameter("userid"));
+//      System.out.println(req.getParameter("userid"));
 		member.setUser_id(req.getParameter("userid"));
 		member.setUser_pw(req.getParameter("userpw"));
 //		member.setDB_Nick(req.getParameter("usernick"));
@@ -60,5 +60,26 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.duplicateIdCheck(id);
 	}
 
+	@Override
+	public Member finduserid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Member getfindUserParam(HttpServletRequest req) {
+
+		Member member = new Member() ;
+		member.setUser_email(req.getParameter("inputEmail"));
+		member.setUser_name(req.getParameter("inputName"));
+		return member;
+	}
+
+	@Override
+	public Member getUserId(Member member) {
+		return memberDao.finduserid(member);
+	}
+	
+	
 
 }

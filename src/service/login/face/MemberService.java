@@ -23,4 +23,12 @@ public interface MemberService {
 	public boolean idcheck(String id);
 	
 	
+	public Member finduserid();
+	
+	public Member getfindUserParam(HttpServletRequest req);
+	public Member getUserId(Member member);
+	
+
+	
+	
 }
