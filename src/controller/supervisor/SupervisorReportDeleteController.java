@@ -1,4 +1,4 @@
-package controller.board;
+package controller.supervisor;
 
 import java.io.IOException;
 
@@ -8,23 +8,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.board.face.BoardService;
-import service.board.impl.BoardServiceImpl;
+import service.supervisor.face.SupervisorService;
+import service.supervisor.impl.SupervisorServiceImpl;
 
-@WebServlet("/board/listDelete")
-public class BoardListDeleteController extends HttpServlet {
+@WebServlet("/supervisor/reportdelete")
+public class SupervisorReportDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	
-	private BoardService boardService = new BoardServiceImpl();
-	
+
+	SupervisorService supervisorservice = new SupervisorServiceImpl();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String[] check = req.getParameterValues("chk");
-	
-		boardService.deleteCheckBoardno(check);
-		
-		resp.sendRedirect("/board/list");
-	
+
+		if( check != null )	supervisorservice.deleteCheckBoardno(check);
+
+		resp.sendRedirect("/supervisor/reportlist");
+
+
 	}
+
+
+
 }
+
+

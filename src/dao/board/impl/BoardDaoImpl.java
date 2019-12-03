@@ -1077,8 +1077,8 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO report(boardno, content, db_id, reason)";
-		sql += " VALUES(?, ?, ?, ?)";
+		sql += "INSERT INTO report(boardno, content, db_id, reason, reportno)";
+		sql += " VALUES(?,?, ?, ?, report_seq.nextval)";
 		
 		try {
 			ps = conn.prepareStatement(sql);

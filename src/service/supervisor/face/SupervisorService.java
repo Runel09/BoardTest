@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.board.Report;
 import dto.login.Member;
-import dto.place.PlaceDto;
-import dto.place.PlaceFile;
 import dto.supervisor.Supervisor;
 import util.Paging;
 
@@ -65,5 +64,17 @@ public interface SupervisorService {
 	 */
 	public void UpdatePlace(HttpServletRequest req);
 	
+	/**
+	 * 장소정보 삭제
+	 * @param place-삭제할장소정보객체
+	 */
+	public void placeDelete(HttpServletRequest req);
 
+	public Paging reportListgetPaging(HttpServletRequest req);
+
+	public List<Report> getreportList(Paging paging);
+
+	public void DeleteReport(HttpServletRequest req);
+
+	public void deleteCheckBoardno(String[] check);
 }

@@ -363,6 +363,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	      sql +=" tel_number=?, place_information=?";
 	      sql += " WHERE place_number=?";
 	      
+	      
 	      try {
 	         ps = conn.prepareStatement(sql);// sql 수행 객체
 
@@ -420,7 +421,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	            placefile.setStoredname(rs.getString("storedname"));
 //	            placefile.setWritedate(rs.getDate("writedate"));
 	            placefile.setFilesize(rs.getInt("filesize"));
-	            place.setPlace_number(rs.getInt("boardno"));
+	            place.setPlace_number(place.getPlace_number());
 
 	         }
 	      } catch (SQLException e) {
@@ -437,6 +438,59 @@ public class PlaceDaoImpl implements PlaceDao {
 	      return placefile;
 	}
 		
+	
+	@Override
+	public void deletefile(PlaceFile file) {
+		conn= DBConn.getConnection();
+		
+		String sql="";
+		sql+="DELETE FROM placeinfo_file";
+		sql+=" WHERE FILENO=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			ps.setInt(1, file.getFileno());
+			rs = ps.executeQuery();// sql 수행결과 얻기
+			
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			if( rs!=null)rs.close();
+			if( ps!=null)ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
+	}
+
+	@Override
+	public void deleteplace(PlaceDto place) {
+		conn= DBConn.getConnection();
+
+		String sql="";
+		sql+="DELETE FROM placeinfo";
+		sql+=" WHERE place_number=?";
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			ps.setInt(1, place.getPlace_number());
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+	}
 	}
 	
 	

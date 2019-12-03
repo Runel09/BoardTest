@@ -266,7 +266,7 @@ function warningModal(content) {
 <c:if test="${super_id eq 'supervisor' }">
 <button  type="button" class="btn btn-warning" onclick="location.href='/supervisor/placeupdate?place_number=${viewplace.place_number}'">수정</button>
 
-<button type="button" class="btn btn-danger">삭제</button>
+<button type="button" class="btn btn-danger" onclick="location.href='/supervisor/placedelete?place_number=${viewplace.place_number}'">삭제</button>
 
 </c:if>
 </div>
