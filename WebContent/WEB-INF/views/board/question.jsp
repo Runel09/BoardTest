@@ -143,7 +143,8 @@ div.pullRight a:hover:before
 <a href="/member/login" style="float: right;"><button>글쓰기</button></a>
 </c:if>
 
-	<form action="/board/free" method="get">
+
+	<form action="/board/question" method="get">
 		<div style="width: 12%; float: left; margin-left: 21px;">
 			<select name="searchno">
 				<option value="1" selected="selected">제목</option>
@@ -160,7 +161,7 @@ div.pullRight a:hover:before
 		</div>
 	</form>
 
-<jsp:include page="/WEB-INF/views/layout/question_paging.jsp" />
+	<jsp:include page="/WEB-INF/views/layout/question_paging.jsp" />
 
 </div> <!-- .container -->
 

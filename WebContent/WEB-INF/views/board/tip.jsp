@@ -104,10 +104,9 @@ div.pullRight a:hover:before
 </table>
 </div>
 
-
 <div class="container">
 
-<h1 style="float:left;">팁 게시판</h1>
+<h1 style="float:left;">여행팁 게시판</h1>
 <br><br><br><br>
 
 <table class="table table-hover table-condensed table-striped">
@@ -136,6 +135,7 @@ div.pullRight a:hover:before
 </c:forEach>
    
 </table>
+
 <c:if test="${!empty userid }">
 <a href="/board/write" style="float: right;"><button>글쓰기</button></a>
 </c:if>
@@ -143,7 +143,8 @@ div.pullRight a:hover:before
 <a href="/member/login" style="float: right;"><button>글쓰기</button></a>
 </c:if>
 
-	<form action="/board/free" method="get">
+
+	<form action="/board/tip" method="get">
 		<div style="width: 12%; float: left; margin-left: 21px;">
 			<select name="searchno">
 				<option value="1" selected="selected">제목</option>
@@ -160,7 +161,7 @@ div.pullRight a:hover:before
 		</div>
 	</form>
 
-<jsp:include page="/WEB-INF/views/layout/tip_paging.jsp" />
+	<jsp:include page="/WEB-INF/views/layout/tip_paging.jsp" />
 
 </div> <!-- .container -->
 
