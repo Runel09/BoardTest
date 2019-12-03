@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.board.BoardFile;
 import dto.place.Comment;
 import dto.place.PlaceDto;
 import dto.place.PlaceFile;
@@ -52,6 +53,8 @@ public interface PlaceService {
 	
 	
 	public List<PlaceDto> getAlleGeoInfo();
+
+	public PlaceFile getfile(PlaceDto place);
 	
 	
 }

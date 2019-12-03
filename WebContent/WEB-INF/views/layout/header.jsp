@@ -46,7 +46,7 @@ h1.name{
 
 
 .container {
-	width: auto;
+	width: 80%;
 }
 
 #header{
@@ -68,70 +68,6 @@ h1.name{
 	padding:20px 0;
 }
 
-div.container
-{
-    font-family: Raleway;
-    margin: 0 auto;
-	padding: 10em 3em;
-	text-align: center;
-}
-
-div.container a
-{
-    color: #FFF;
-    text-decoration: none;
-    font: 20px Raleway;
-    margin: 0px 10px;
-    padding: 10px 10px;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;
-}
-
-
-.blue
-{
-    background: #2196f3;
-}
-
-
-div.circleBehind a:before, div.circleBehind a:after
-{
-    position: absolute;
-    top: 22px;
-    left: 50%;
-    width: 50px;
-    height: 50px;
-    border: 4px solid #0277bd;
-    transform: translateX(-50%) translateY(-50%) scale(0.8);
-    border-radius: 50%;
-    background: transparent;
-    content: "";
-    opacity: 0;
-    transition: all 0.3s;
-    z-index: -1;
-}
-
-div.circleBehind a:after
-{
-    border-width: 2px;
-    transition: all 0.4s;
-}
-
-div.circleBehind a:hover:before
-{
-    opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(1);
-}
-
-div.circleBehind a:hover:after
-{
-    opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(1.3);
-}
-
-
-
 </style>
 
 </head>
@@ -148,7 +84,7 @@ div.circleBehind a:hover:after
 </span>
 </div>
 
-<div class="container blue circleBehind">
+<div>
   <a class ="menubar">플래너</a>
   <a class ="menubar">장소정보</a>
   <a class ="menubar">게시판</a>
@@ -159,7 +95,5 @@ div.circleBehind a:hover:after
 
 </div>
 
-<hr>
-<hr>
 
 <div id="wrapper">

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.login.Member;
-import service.login.MemberService;
-import service.login.MemberServiceImpl;
+import service.login.face.MemberService;
+import service.login.impl.MemberServiceImpl;
 
 /**
  * Servlet implementation class MemberLoginController
@@ -46,11 +46,11 @@ public class MemberLoginController extends HttpServlet {
 			
 			session.setAttribute("login" , true );
 			
-			session.setAttribute("userid", member2.getDB_Id() );
-			session.setAttribute("usernick", member2.getDB_Nick() );
-			
-			
-			
+			session.setAttribute("userid", member2.getUser_id() );
+			session.setAttribute("usernick", member2.getUser_nick() );
+			session.setAttribute("user_userNum", member2.getUser_number());
+			System.out.println("로그인="+ session.getAttribute("user_number"));
+				
 			resp.sendRedirect("/main");
 		} else {
 			System.out.println("로그인실패");

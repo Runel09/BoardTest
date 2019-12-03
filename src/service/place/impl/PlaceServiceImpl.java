@@ -338,6 +338,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public PlaceDto getPlace_number(HttpServletRequest req) {
 		String param=req.getParameter("place_number");
+		
 		if(param==null) return null;
 		
 		int place_number =Integer.parseInt(param);
@@ -419,6 +420,11 @@ public class PlaceServiceImpl implements PlaceService {
 	public List<PlaceDto> getAlleGeoInfo() {
 		
 		return placeDao.selectAllLocation();
+	}
+
+	@Override
+	public PlaceFile getfile(PlaceDto place) {
+		return placeDao.getfile(place);
 	}
 	
 	

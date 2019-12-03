@@ -1,3 +1,4 @@
+
 <%@page import="dto.board.BoardFile"%>
 <%@page import="dto.board.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%-- <jsp:include page="/WEB-INF/views/layout/header.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
 <script type="text/javascript" src="/js/httpRequest.js"></script>
 
@@ -40,16 +41,16 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function() {
+
 	if(${isRecommend}) {
 		$("#btnRecommend")
 			.addClass("btn-warning")
 			.html('추천 취소');
-		} 
-	else {
+		} else {
 		$("#btnRecommend")
 			.addClass("btn-primary")
 			.html('추천');
-	}
+		}
 
 	$("#btnRecommend").click(function() {
 		
@@ -59,8 +60,8 @@ $(document).ready(function() {
 			, data: { "boardno": '${board.boardno }' }
 			, dataType: "json"
 			, success: function( data ) {
-// 				console.log("성공");
-// 				console.log(data);
+				console.log("성공");
+				console.log(data);
 
 				if( data.result ) { //추천 성공
 					$("#btnRecommend")
@@ -85,6 +86,8 @@ $(document).ready(function() {
 				
 			}
 		});
+	});
+	
 });
 </script>
 
@@ -187,11 +190,10 @@ $(document).ready(function() {
 		<c:if test="${userid eq board.id }">
 			<button id="btnUpdate" class="btn btn-info">수정</button>
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
-			<button id="btnRecommend" style="margin-top: 30px;"></button>
 		</c:if>
 
 	</div>
 
 </div>
 
-<%-- <jsp:include page="/WEB-INF/views/layout/footer.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp" />

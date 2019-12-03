@@ -1,4 +1,4 @@
-package service.login;
+package service.login.face;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +19,8 @@ public interface MemberService {
 	 */ 
 	public void join(Member member);
 	
+	
+	public boolean idcheck(String id);
 	
 	
 }

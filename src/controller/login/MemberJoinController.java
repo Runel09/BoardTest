@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.login.Member;
-import service.login.MemberService;
-import service.login.MemberServiceImpl;
+import service.login.face.MemberService;
+import service.login.impl.MemberServiceImpl;
 
 /**
  * Servlet implementation class MemberJoinController
@@ -24,7 +24,8 @@ public class MemberJoinController extends HttpServlet {
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-		req.getRequestDispatcher("/WEB-INF/views/userinfo/join.jsp").forward(req, resp);
+
+		req.getRequestDispatcher("/WEB-INF/views/userinfo/jointest.jsp").forward(req, resp);
 		
 		
 		}
@@ -34,7 +35,7 @@ public class MemberJoinController extends HttpServlet {
 		Member member;
 		
 		member = memberservice.getLoginMember(req);
-	
+//		System.out.println("22131"+member);
 		memberservice.join(member);
 
 		resp.sendRedirect("/main");

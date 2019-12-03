@@ -3,97 +3,107 @@ package dto.login;
 
 public class Member {
 
-   private int User_Num;
-   private String DB_Email;
-   private String DB_Id;
-   private String DB_Pw;
-   private String DB_Name;
-   private String DB_Nick;
-   private int DB_Gender;
-   private String DB_Addr;
-   private String DB_Addr_detail;
-   private String DB_Mailnum;
-   private String DB_Birth;
-   private String DB_Phnum;
+ 
+private int user_number;
+   private String user_email;
+   private String user_id;
+   private String user_pw;
+   private String user_name;
+   private String user_nick;
+   private int user_gender;
+   private String user_addr;
+   private String user_addr_detail;
+   private String user_mailnum;
+   private String user_birth;
+   private String user_phnum;
    
-   public int getUser_Num() {
-      return User_Num;
-   }
-   public void setUser_Num(int user_Num) {
-      User_Num = user_Num;
-   }
-   public String getDB_Email() {
-      return DB_Email;
-   }
-   public void setDB_Email(String dB_Email) {
-      DB_Email = dB_Email;
-   }
-   public String getDB_Id() {
-      return DB_Id;
-   }
-   public void setDB_Id(String dB_Id) {
-      DB_Id = dB_Id;
-   }
-   public String getDB_Pw() {
-      return DB_Pw;
-   }
-   public void setDB_Pw(String dB_Pw) {
-      DB_Pw = dB_Pw;
-   }
-   public String getDB_Name() {
-      return DB_Name;
-   }
-   public void setDB_Name(String dB_Name) {
-      DB_Name = dB_Name;
-   }
-   public String getDB_Nick() {
-      return DB_Nick;
-   }
-   public void setDB_Nick(String dB_Nick) {
-      DB_Nick = dB_Nick;
-   }
-   public int getDB_Gender() {
-      return DB_Gender;
-   }
-   public void setDB_Gender(int dB_Gender) {
-      DB_Gender = dB_Gender;
-   }
-   public String getDB_Addr() {
-      return DB_Addr;
-   }
-   public void setDB_Addr(String dB_Addr) {
-      DB_Addr = dB_Addr;
-   }
-   public String getDB_Addr_detail() {
-      return DB_Addr_detail;
-   }
-   public void setDB_Addr_detail(String dB_Addr_detail) {
-      DB_Addr_detail = dB_Addr_detail;
-   }
-   public String getDB_Mailnum() {
-      return DB_Mailnum;
-   }
-   public void setDB_Mailnum(String dB_Mailnum) {
-      DB_Mailnum = dB_Mailnum;
-   }
-   public String getDB_Birth() {
-      return DB_Birth;
-   }
-   public void setDB_Birth(String dB_Birth) {
-      DB_Birth = dB_Birth;
-   }
-   public String getDB_Phnum() {
-      return DB_Phnum;
-   }
-   public void setDB_Phnum(String dB_Phnum) {
-      DB_Phnum = dB_Phnum;
-   }
-   @Override
-   public String toString() {
-      return "member [User_Num=" + User_Num + ", DB_Email=" + DB_Email + ", DB_Id=" + DB_Id + ", DB_Pw=" + DB_Pw
-            + ", DB_Name=" + DB_Name + ", DB_Nick=" + DB_Nick + ", DB_Gender=" + DB_Gender + ", DB_Addr=" + DB_Addr
-            + ", DB_Addr_detail=" + DB_Addr_detail + ", DB_Mailnum=" + DB_Mailnum + ", DB_Birth=" + DB_Birth
-            + ", DB_Phnum=" + DB_Phnum + "]";
-   }
+   
+public int getUser_number() {
+	return user_number;
+}
+public void setUser_number(int user_number) {
+	this.user_number = user_number;
+}
+public String getUser_email() {
+	return user_email;
+}
+public void setUser_email(String user_email) {
+	this.user_email = user_email;
+}
+public String getUser_id() {
+	return user_id;
+}
+public void setUser_id(String user_id) {
+	this.user_id = user_id;
+}
+public String getUser_pw() {
+	return user_pw;
+}
+public void setUser_pw(String user_pw) {
+	this.user_pw = user_pw;
+}
+public String getUser_name() {
+	return user_name;
+}
+public void setUser_name(String user_name) {
+	this.user_name = user_name;
+}
+public String getUser_nick() {
+	return user_nick;
+}
+public void setUser_nick(String user_nick) {
+	this.user_nick = user_nick;
+}
+public int getUser_gender() {
+	return user_gender;
+}
+public void setUser_gender(int user_gender) {
+	this.user_gender = user_gender;
+}
+public String getUser_addr() {
+	return user_addr;
+}
+public void setUser_addr(String user_addr) {
+	this.user_addr = user_addr;
+}
+public String getUser_addr_detail() {
+	return user_addr_detail;
+}
+public void setUser_addr_detail(String user_addr_detail) {
+	this.user_addr_detail = user_addr_detail;
+}
+public String getUser_mailnum() {
+	return user_mailnum;
+}
+public void setUser_mailnum(String user_mailnum) {
+	this.user_mailnum = user_mailnum;
+}
+public String getUser_birth() {
+	return user_birth;
+}
+public void setUser_birth(String user_birth) {
+	this.user_birth = user_birth;
+}
+public String getUser_phnum() {
+	return user_phnum;
+}
+public void setUser_phnum(String user_phnum) {
+	this.user_phnum = user_phnum;
+}
+@Override
+public String toString() {
+	return "Member [user_number=" + user_number + ", user_email=" + user_email + ", user_id=" + user_id + ", user_pw="
+			+ user_pw + ", user_name=" + user_name + ", user_nick=" + user_nick + ", user_gender=" + user_gender
+			+ ", user_addr=" + user_addr + ", user_addr_detail=" + user_addr_detail + ", user_mailnum=" + user_mailnum
+			+ ", user_birth=" + user_birth + ", user_phnum=" + user_phnum + "]";
+}
+   
+ 
+
+
+
+
+
+
    
 }
