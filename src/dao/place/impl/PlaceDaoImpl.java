@@ -324,6 +324,120 @@ public class PlaceDaoImpl implements PlaceDao {
 		
 		return list;
 	}
+
+	@Override
+	public void delete(PlaceFile prevfile) {
+		conn= DBConn.getConnection();
+
+	      PlaceFile placefile=new PlaceFile();
+	      String sql="";
+	      sql+="DELETE FROM placeinfo_file";
+	      sql+=" WHERE fileno=?";
+
+	      try {
+	         ps = conn.prepareStatement(sql);// 수행객체 얻기
+	         ps.setInt(1, placefile.getFileno());
+	         rs = ps.executeQuery();// sql 수행결과 얻기
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         try {
+	            if( rs!=null)rs.close();
+	            if( ps!=null)ps.close();
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+	      }
+		
+	}
+
+	@Override
+	public void updatePlace(PlaceDto place) {
+		conn = DBConn.getConnection(); // DB연결
+
+	      // 수행할 SQL 쿼리
+	      String sql = "";
+	      sql += "UPDATE placeinfo SET place_name=?, coordinate_lat=?,coordinate_lng=?,";
+	      sql +=" adress=?, place_cate=?, detail=?,db_web_site=?,business_hours=?,";
+	      sql +=" tel_number=?, place_information=?";
+	      sql += " WHERE place_number=?";
+	      
+	      try {
+	         ps = conn.prepareStatement(sql);// sql 수행 객체
+
+	         // sql쿼리의 ? 채우기
+	         ps.setString(1, place.getPlace_name());
+	         ps.setDouble(2, place.getCoordinate_lat());
+	         ps.setDouble(3, place.getCoordinate_lng());
+	         ps.setString(4, place.getAddress());
+	         ps.setString(5, place.getPlace_cate());
+	         ps.setString(6, place.getDetail());
+	         ps.setString(7, place.getDb_web_site());
+	         ps.setString(8, place.getBusiness_hours());
+	         ps.setString(9, place.getTel_number());
+	         ps.setString(10, place.getPlace_information());
+	         ps.setInt(11, place.getPlace_number());
+	         ps.execute();// sql 수행
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (ps != null)
+	               ps.close();
+	         } catch (SQLException e) {
+
+	            e.printStackTrace();
+	         }
+	      }
+	      
+	      
+	   }
+
+	@Override
+	public PlaceFile getfile(PlaceDto place) {
+		conn = DBConn.getConnection(); // DB연결
+
+	      PlaceFile placefile = null;
+	      
+	      // 수행할 SQL 쿼리
+	      String sql = "";
+	      sql += "SELECT * FROM placeinfo_file";
+	      sql += " WHERE place_number=?";
+	      try {
+	         ps = conn.prepareStatement(sql);// 수행객체 얻기
+	         ps.setInt(1, place.getPlace_number());
+	         rs = ps.executeQuery();// sql 수행결과 얻기
+	         
+
+	         // SQL 수행결과 처리
+	         while (rs.next()) {
+
+	            placefile = new PlaceFile();
+	            placefile.setFileno(rs.getInt("fileno"));
+	            placefile.setOriginname(rs.getString("originname"));
+	            placefile.setStoredname(rs.getString("storedname"));
+//	            placefile.setWritedate(rs.getDate("writedate"));
+	            placefile.setFilesize(rs.getInt("filesize"));
+	            place.setPlace_number(rs.getInt("boardno"));
+
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      finally {
+	         try {
+	            if( rs!=null)rs.close();
+	            if( ps!=null)ps.close();
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+	      }
+	      return placefile;
+	}
+		
+	}
 	
 	
-}
+
