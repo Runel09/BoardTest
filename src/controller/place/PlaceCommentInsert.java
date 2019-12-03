@@ -29,9 +29,10 @@ public class PlaceCommentInsert extends HttpServlet {
 		HttpSession session = null;
 		session=req.getSession();
 		
+		System.out.println(session.getAttribute("user_userNum"));
 		Comment comment = placeService.getComment(req);
-
-//		comment.setUser_number((Integer) session.getAttribute("user_number"));
+		comment.setUser_number((Integer) session.getAttribute("user_userNum"));
+		System.out.println(comment);
 		placeService.insertComment(comment);
 		
 		resp.sendRedirect("/place/view?place_number="+comment.getPlace_number());

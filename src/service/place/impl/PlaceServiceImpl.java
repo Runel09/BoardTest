@@ -396,12 +396,12 @@ public class PlaceServiceImpl implements PlaceService {
 		}
 		
 		String place_number = (String) req.getParameter("place_number");
-		String user_number = (String) req.getParameter("user_number");
+//		String user_number = (String) req.getParameter("user_userNum");
 		String review_char = (String) req.getParameter("review_char");
 		
 		Comment comment = new Comment();
 		comment.setPlace_number( Integer.parseInt(place_number) );
-		comment.setUser_number(Integer.parseInt(user_number));
+//		comment.setUser_number(Integer.parseInt(user_number));
 		comment.setReview_char(review_char);
 		
 		return comment;

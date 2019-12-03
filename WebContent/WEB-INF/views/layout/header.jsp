@@ -159,9 +159,9 @@ div.circleBehind a:hover:after
 </div>
 
 <div class="container blue circleBehind">
-  <a class ="menubar">플래너</a>
-  <a class ="menubar">장소정보</a>
-  <a class ="menubar">게시판</a>
+  <a class ="menubar" href="">플래너</a>
+  <a class ="menubar" href="/place/list">장소정보</a>
+  <a class ="menubar" href="/board/free">게시판</a>
   <a class ="menubar">마이페이지</a>
   
 </div>

@@ -97,6 +97,7 @@ $(document).ready(function() {
 	});
 	
 	
+	 
 	
 	
 });
@@ -295,15 +296,19 @@ function warningModal(content) {
 
 
 
+<form action="/comment/score" method="post">
 <!-- 댓글 리스트 -->
 <table class="table table-striped table-hover table-condensed">
 <thead>
 <tr>
 	<th style="width: 10%;">유저번호</th>
 	<th style="width: 10%;">장소번호</th>
-	<th style="width: 65%;">댓글</th>
+	<th style="width: 50%;">댓글</th>
 <!-- 	<th style="width: 20%;">작성일</th> -->
-	<th style="width: 5%;"></th>
+	<th style="width: 5%;">점수3점</th>
+	<th style="width: 5%;">점수2점</th>
+	<th style="width: 5%;">점수1점</th>
+	<th style="width: 5%;">점수주기</th>
 </tr>
 </thead>
 <tbody id="commentBody">
@@ -312,6 +317,10 @@ function warningModal(content) {
 	<td>${comment.user_number }</td>
 	<td>${comment.place_number }</td>
 	<td>${comment.review_char }</td>
+	<td><input type="radio" name="testInput" value=3 /></td>
+	<td><input type="radio" name="testInput" value=2 /></td>
+	<td><input type="radio" name="testInput" value=1 /></td>
+	<td><button >점수주기</button></td>
 <%-- 	<td><fmt:formatDate value="${comment.writtenDate }" pattern="yy-MM-dd hh:mm:ss" /></td> --%>
 	<td>
 		<c:if test="${sessionScope.user_number eq comment.user_number }">
@@ -321,9 +330,14 @@ function warningModal(content) {
 	</td>
 	
 </tr>
+
+
+
+
 </c:forEach>
 </tbody>
 </table>	<!-- 댓글 리스트 end -->
+</form>
 
 
 <div class="form-inline text-center">

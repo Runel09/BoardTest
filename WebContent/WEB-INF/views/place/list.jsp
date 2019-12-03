@@ -107,7 +107,7 @@ $(document).ready(function(){
         <h4>${place.place_number}</h4><br>
         <p>주소:${place.address}</p><br>
         <p>카테고리:${place.place_cate }</p><br>
-        <p>조회수:${place.favorite_count }</p>
+<%--         <p>조회수:${place.favorite_count }</p> --%>
       </div>
     </div>
   </div>
