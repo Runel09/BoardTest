@@ -144,21 +144,16 @@ div.pullRight a:hover:before
 </c:if>
 
 
-	<form action="/board/tip" method="get">
-		<div style="width: 12%; float: left; margin-left: 21px;">
+	<form class="form-inline" action="/board/tip" method="get">
+		<div class="form-group">
 			<select name="searchno">
 				<option value="1" selected="selected">제목</option>
 				<option value="2">내용</option>
 				<option value="3">작성자</option>
-			</select> 
+			</select> <input type="text" class="form-control" name="search" id="exampleInputEmail2"
+				placeholder="검색어 입력">
 		</div>
-
-		<div class="input-group" style="width: 20%; float: left;">
-			<input type="text" class="form-control" name="search"
-				placeholder="검색어를 입력해주세요"> <span class="input-group-btn">
-				<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
-			</span>
-		</div>
+		<button type="submit" class="btn btn-default">검색</button>
 	</form>
 
 	<jsp:include page="/WEB-INF/views/layout/tip_paging.jsp" />

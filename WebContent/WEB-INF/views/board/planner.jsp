@@ -13,9 +13,6 @@ table, th {
 	text-align: center;
 }
 
-tr td:nth-child(2) {
-	text-align: left;
-}
 
 tr td:not(:first-child), tr th:not(:first-child) {
 	border-left: 1px solid white;
@@ -76,6 +73,7 @@ div.pullRight a:hover:before
 	color: white;
 }
 
+
 </style>
 
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
@@ -90,8 +88,35 @@ div.pullRight a:hover:before
   <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
 </div>
 
-<h2 style="text-align:center;">여행자들의 일정보기</h2>
-
+ <h2 style="text-align:center; ">여행자들의 일정보기</h2>
+ <table class="table table-hover table-condensed table-striped">
+      
+        <tr class="success">
+          <th>Ipsum</th>
+          <td>Dolor</td>
+          <td>Dolor</td>
+          <td>Dolor</td>
+        </tr>
+        <tr class="warning">
+          <th>Ipsum</th>
+          <td>Dolor</td>
+          <td>Dolor</td>
+          <td>Dolor</td>
+        </tr>
+        <tr class="danger">
+          <th>Ipsum</th>
+          <td>Dolor</td>
+          <td>Dolor</td>
+          <td>Dolor</td>
+        </tr>
+        <tr class="info">
+          <th>Ipsum</th>
+          <td>Dolor</td>
+          <td>Dolor</td>
+          <td>Dolor</td>
+        </tr>
+ </table>
+    
 <div class="container">
 
 <h1 style="float:left;">플래너 게시판</h1>
@@ -122,22 +147,17 @@ div.pullRight a:hover:before
 </table>
 
 
-	<form action="/board/free" method="get">
-		<div style="width: 12%; float: left; margin-left: 21px;">
+	<form class="form-inline" action="/board/planner" method="get">
+		<div class="form-group">
 			<select name="searchno">
 				<option value="1" selected="selected">제목</option>
-				<option value="2">내용</option>
 				<option value="3">작성자</option>
-			</select> 
+			</select> <input type="text" class="form-control" name="search" id="exampleInputEmail2"
+				placeholder="검색어 입력">
 		</div>
-
-		<div class="input-group" style="width: 20%; float: left;">
-			<input type="text" class="form-control" name="search"
-				placeholder="검색어를 입력해주세요"> <span class="input-group-btn">
-				<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
-			</span>
-		</div>
+		<button type="submit" class="btn btn-default">검색</button>
 	</form>
+	
 
 <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" />
 
