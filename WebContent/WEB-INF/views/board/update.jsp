@@ -150,7 +150,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
    </tr>
    
 </table>
-      <button id="btnCancel" style="float: right">취소</button>
+      <button type="button" id="btnCancel" style="float: right">취소</button>
       <button id="btnWrite" style="float: right">작성</button>
 </form>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
