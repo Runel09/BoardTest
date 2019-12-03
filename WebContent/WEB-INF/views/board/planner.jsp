@@ -89,31 +89,40 @@ div.pullRight a:hover:before
 </div>
 
  <h2 style="text-align:center; ">여행자들의 일정보기</h2>
- <table class="table table-hover table-condensed table-striped">
+ <table class="table">
       
-        <tr class="success">
-          <th>Ipsum</th>
-          <td>Dolor</td>
-          <td>Dolor</td>
-          <td>Dolor</td>
-        </tr>
-        <tr class="warning">
-          <th>Ipsum</th>
-          <td>Dolor</td>
-          <td>Dolor</td>
-          <td>Dolor</td>
+        <tr >
+          <th>여행지</th>
+          <td>국내</td>
+          <td>일본</td>
+          <td>홍콩</td>
+          <td>싱가포르</td>
+          <td>대만</td>
+          <td>태국</td>
+          <td>미국</td>
         </tr>
         <tr class="danger">
-          <th>Ipsum</th>
-          <td>Dolor</td>
-          <td>Dolor</td>
-          <td>Dolor</td>
+          <th>여행일</th>
+          <td>1-3일</td>
+          <td>4-6일</td>
+          <td>7-10일</td>
+          <td>11-15일</td>
+          <td>15일이상</td>
         </tr>
-        <tr class="info">
-          <th>Ipsum</th>
-          <td>Dolor</td>
-          <td>Dolor</td>
-          <td>Dolor</td>
+        <tr>
+          <th>여행시기</th>
+          <td>봄</td>
+          <td>여름</td>
+          <td>가을</td>
+          <td>겨울</td>
+        </tr>
+        <tr class="success">
+          <th>여행테마</th>
+          <td>가족여행</td>
+          <td>나홀로여행</td>
+          <td>커플여행</td>
+          <td>친구와함께</td>
+          <td>비지니스여행</td>
         </tr>
  </table>
     
@@ -145,19 +154,6 @@ div.pullRight a:hover:before
 </c:forEach>
    
 </table>
-
-
-	<form class="form-inline" action="/board/planner" method="get">
-		<div class="form-group">
-			<select name="searchno">
-				<option value="1" selected="selected">제목</option>
-				<option value="3">작성자</option>
-			</select> <input type="text" class="form-control" name="search" id="exampleInputEmail2"
-				placeholder="검색어 입력">
-		</div>
-		<button type="submit" class="btn btn-default">검색</button>
-	</form>
-	
 
 <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" />
 

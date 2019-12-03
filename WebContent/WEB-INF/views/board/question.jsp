@@ -5,7 +5,26 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<script type="text/javascript">
 
+$(document).ready(function() {
+   
+	$("#btnWrite").click(function() {
+      
+		$(location).attr("href", "/board/write");
+   })
+   
+	//글쓰기버튼 동작
+	$("#emptylogin").click(function() {
+		var result = confirm("로그인하실?");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	});
+});
+   
+</script>
 <style type="text/css">
 
 table, th {
@@ -115,12 +134,13 @@ div.pullRight a:hover:before
 
    <th style="width: 8%">구분</th>
    <th style="width: 7%">게시글번호</th>
-   <th style="width: 36%;">제목</th>
-   <th style="width: 18%">아이디</th>
-<!--    <th style="width: 8%">추천수</th> -->
+   <th style="width: 48%;">제목</th>
+   <th style="width: 11%">아이디</th>
+   <th style="width: 8%">추천수</th>
    <th style="width: 8%">조회수</th>
-   <th style="width: 13%">작성일</th>
+   <th style="width: 10%">작성일</th>
 </tr>
+
 
 <c:forEach var="list" items="${list }">
 <tr>
@@ -128,7 +148,7 @@ div.pullRight a:hover:before
    <td style="text-align:center;">${list.boardno }</td>
    <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
    <td>${list.id }</td>
-<%--    <td>${list.reco }</td> --%>
+   <td>${list.recommend }</td>
    <td>${list.hit }</td>
    <td>${list.writtendate }</td>
 </tr>
@@ -137,10 +157,10 @@ div.pullRight a:hover:before
 </table>
 
 <c:if test="${!empty userid }">
-<a href="/board/write" style="float: right;"><button>글쓰기</button></a>
+<button id="btnWrite" style="float: right;">글쓰기</button>
 </c:if>
 <c:if test="${empty userid }">
-<a href="/member/login" style="float: right;"><button>글쓰기</button></a>
+<button id="emptylogin" style="float: right;">글쓰기</button>
 </c:if>
 
 
