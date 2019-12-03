@@ -89,71 +89,34 @@ div.pullRight a:hover:before
 </div>
 
  <h2 style="text-align:center; ">여행자들의 일정보기</h2>
- <table class="table">
-      
+ <table class="table" style="    width: 57%; margin-left: 18em; font-size: 22px;">
+     
         <tr >
           <th>여행지</th>
-          <td>국내</td>
-          <td>일본</td>
-          <td>홍콩</td>
-          <td>싱가포르</td>
-          <td>대만</td>
-          <td>태국</td>
-          <td>미국</td>
+          <td style="text-align:left;">국내 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp일본 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp홍콩 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp싱가포르 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp대만 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp태국 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp미국</td>
+
         </tr>
         <tr class="danger">
           <th>여행일</th>
-          <td>1-3일</td>
-          <td>4-6일</td>
-          <td>7-10일</td>
-          <td>11-15일</td>
-          <td>15일이상</td>
+          <td style="text-align:left;">1-3일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4-6일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7-10일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp11-15일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp15일이상</td>
+
         </tr>
         <tr>
           <th>여행시기</th>
-          <td>봄</td>
-          <td>여름</td>
-          <td>가을</td>
-          <td>겨울</td>
+          <td style="text-align:left;">봄 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp여름 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp가을 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp겨울</td>
+
         </tr>
         <tr class="success">
           <th>여행테마</th>
-          <td>가족여행</td>
-          <td>나홀로여행</td>
-          <td>커플여행</td>
-          <td>친구와함께</td>
-          <td>비지니스여행</td>
+          <td style="text-align:left;">가족여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp나홀로여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp커플여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp친구와함께 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비지니스여행</td>
         </tr>
+       
  </table>
     
 <div class="container">
 
-<h1 style="float:left;">플래너 게시판</h1>
-
-<table class="table table-hover table-condensed table-striped">
-
-<tr class="info">
-
-   <th style="width: 8%">구분</th>
-   <th style="width: 7%">게시글번호</th>
-   <th style="width: 40%">제목</th>
-   <th style="width: 20%">아이디</th>
-   <th style="width: 10%">조회수</th>
-   <th style="width: 15%">작성일</th>
-</tr>
-
-<c:forEach var="list" items="${list }">
-<tr>
-   <td>${list.checkboard }</td>
-   <td>${list.boardno }</td>
-   <td><a href="/board/view?boardno=${list.boardno }">${list.title }</a></td>
-   <td>${list.id }</td>
-   <td>${list.hit }</td>
-   <td>${list.writtendate }</td>
-</tr>
-</c:forEach>
-   
-</table>
+<h1 style="float:left;">플래너 게시판</h1><br><br><br><br><br>
+<div style="text-align: left;">인기 | 신규</div>
 
 <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" />
 

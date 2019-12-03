@@ -119,6 +119,14 @@ div.pullRight a:hover:before
    <th style="width: 13%">작성일</th>
    <th style="width: 8%">조회수</th>
 </tr>
+<c:forEach var="list" items="${list }">
+<tr>
+   <td>${list.checkboard }</td>
+   <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
+   <td>${list.hit }</td>
+   <td>${list.writtendate }</td>
+</tr>
+</c:forEach>
 
 </table>
 </div>
@@ -141,7 +149,7 @@ div.pullRight a:hover:before
    <th style="width: 10%">작성일</th>
 </tr>
 
-<c:forEach var="list" items="${list }">
+<c:forEach var="list" items="${tiplist }">
 <tr>
    <td>${list.checkboard }</td>
    <td style="text-align:center;">${list.boardno }</td>
