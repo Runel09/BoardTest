@@ -448,5 +448,11 @@ public class PlaceServiceImpl implements PlaceService {
 		// TODO Auto-generated method stub
 		return placeDao.selectAll(paging);
 	}
+
+	@Override
+	public PlaceFile getfile(PlaceDto place) {
+
+		return placeDao.getfile(place);
+	}
 	
 }

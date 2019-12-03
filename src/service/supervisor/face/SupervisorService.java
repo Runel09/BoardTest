@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.login.Member;
+import dto.place.PlaceDto;
+import dto.place.PlaceFile;
 import dto.supervisor.Supervisor;
 import util.Paging;
 
@@ -62,4 +64,6 @@ public interface SupervisorService {
 	 * @param req-요청정보 객체(place_number사용)
 	 */
 	public void UpdatePlace(HttpServletRequest req);
+	
+
 }

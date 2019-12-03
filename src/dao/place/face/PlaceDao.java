@@ -29,4 +29,23 @@ public interface PlaceDao {
 	
 	
 	public List<PlaceDto> selectAll(Paging paging);
+
+	/**
+	 * 이전 파일지우기
+	 * @param prevfile-이전 첨부파일
+	 */
+	public void delete(PlaceFile prevfile);
+
+	/**
+	 * 장소정보 수정
+	 * @param place-수정할 장소
+	 */
+	public void updatePlace(PlaceDto place);
+
+	/**
+	 * 첨부파일 가져오기
+	 * @param place-해당 장소
+	 * @return-첨부파일
+	 */
+	public PlaceFile getfile(PlaceDto place);
 }
