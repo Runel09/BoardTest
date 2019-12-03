@@ -58,17 +58,17 @@ maigin-top:30px;
 
 <br><br><br><br>
 <h2>비밀번호 찾기</h2>
-<form class="form-horizontal" id ="findpwform" action="/find/uerinfo" method = "post">
+<form class="form-horizontal" id ="findpwform" action="/find/userinfo" method = "post">
   <div class="form-group" id="inputId" >
     <label for="inputId" class="col-sm-2 control-label" >아이디</label>
     <div class="col-sm-3">
-      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+      <input type="text" class="form-control" id="inputId" name="inputid" placeholder="ID">
     </div>
   </div>
   <div class="form-group" id="inputname ">
     <label for="inputName" class="col-sm-2 control-label">휴대폰 번호</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputPhone" placeholder="휴대폰 번호">
+      <input type="text" class="form-control" id="inputphnum" name="inputphnum" placeholder="휴대폰 번호">
     </div>
   </div>
  

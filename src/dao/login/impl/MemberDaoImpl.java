@@ -192,6 +192,40 @@ conn = DBConn.getConnection(); //DB 연결
 		return member;
 	}
 
+	@Override
+	public Member finduserpw(Member member2) {
+			
+conn = DBConn.getConnection(); //DB 연결
+		
+		String sql ="";
+		sql	+= "select user_pw from userinfo";
+		sql += "	WHERE USER_ID=?";
+		sql += " and USER_PHNUM=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, member2.getUser_id());
+			ps.setString(2, member2.getUser_phnum());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+			
+			member2.setUser_pw(rs.getString("user_pw"));
+			
+			
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+			
+		return member2;
+
+	}
+
 
 	
 		

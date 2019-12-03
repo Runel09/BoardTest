@@ -25,9 +25,18 @@ public interface MemberService {
 	
 	public Member finduserid();
 	
+	/*
+	 * 이메일과 이름을 입력받아와 아이디찾기
+	 */
 	public Member getfindUserParam(HttpServletRequest req);
-	public Member getUserId(Member member);
 	
+	public Member getUserId(Member member);
+	/*
+	 * 아이디와 휴대폰 번호를 입력받아와 비밀번호 찾기
+	 */
+	public Member getfinduserparam2(HttpServletRequest req);
+	
+	public Member getUserPw(Member member2);
 
 	
 	

@@ -79,7 +79,21 @@ public class MemberServiceImpl implements MemberService{
 	public Member getUserId(Member member) {
 		return memberDao.finduserid(member);
 	}
+
+
+	@Override
+	public Member getfinduserparam2(HttpServletRequest req) {
+		Member member2 = new Member() ;
+		member2.setUser_id(req.getParameter("inputid"));
+		member2.setUser_phnum(req.getParameter("inputphnum"));
+		return member2;
+	}
 	
+	@Override
+	public Member getUserPw(Member member2) {
+		return memberDao.finduserpw(member2);
+		
+	}
 	
 
 }

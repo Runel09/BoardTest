@@ -34,11 +34,20 @@ public class FindUserInfoController extends HttpServlet {
 			Member member = memberservice.getfindUserParam(req);
 //			request.setCharacterEncoding("euc-kr");
 			
-			System.out.println("객체 : " + member);
+			Member member2 = memberservice.getfinduserparam2(req);
 			
-			Member memberResult = memberservice.getUserId(member);
+//			System.out.println("객체 : " + member);
+			System.out.println("객체 : " + member2);
 			
-			System.out.println("컨트롤러 검사 : " + memberResult);
+			
+			
+			
+			
+//			Member memberResult = memberservice.getUserId(member);
+			Member memberResult2 = memberservice.getUserPw(member2);
+			
+//			System.out.println("컨트롤러 검사 : " + memberResult);
+			System.out.println("컨트롤러 검사 : " + memberResult2);
 			
 			
 		}

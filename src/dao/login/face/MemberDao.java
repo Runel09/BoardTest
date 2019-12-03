@@ -20,9 +20,15 @@ public interface MemberDao {
 	public boolean duplicateIdCheck(String id);
 
 	
-
+/*
+ * 아이디찾기
+ */
 	public Member finduserid(Member member) ;
 
+/*
+ * 비밀번호찾기
+ */
+	public Member finduserpw(Member member2);
 
 	
 }
