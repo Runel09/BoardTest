@@ -19,6 +19,7 @@ import dao.place.face.PlaceDao;
 import dao.place.impl.CommentDaoImpl;
 import dao.place.impl.PlaceDaoImpl;
 import dto.place.Comment;
+import dto.place.Paging;
 import dto.place.PlaceDto;
 import dto.place.PlaceFile;
 import service.place.face.PlaceService;
@@ -324,9 +325,11 @@ public class PlaceServiceImpl implements PlaceService {
 				
 				write(place);
 				
+				if(placeFile.getOriginname()!=null) {
 				placeFile.setPlace_number(place.getPlace_number());
 				
 				placeDao.insertFile(placeFile);
+				}
 				
 		
 	}
@@ -338,7 +341,6 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public PlaceDto getPlace_number(HttpServletRequest req) {
 		String param=req.getParameter("place_number");
-		
 		if(param==null) return null;
 		
 		int place_number =Integer.parseInt(param);
@@ -396,13 +398,13 @@ public class PlaceServiceImpl implements PlaceService {
 		}
 		
 		String place_number = (String) req.getParameter("place_number");
-		String userno = (String) req.getParameter("userno");
-		String content = (String) req.getParameter("content");
+//		String user_number = (String) req.getParameter("user_userNum");
+		String review_char = (String) req.getParameter("review_char");
 		
 		Comment comment = new Comment();
 		comment.setPlace_number( Integer.parseInt(place_number) );
-		comment.setUserno(Integer.parseInt(userno));
-		comment.setContent(content);
+//		comment.setUser_number(Integer.parseInt(user_number));
+		comment.setReview_char(review_char);
 		
 		return comment;
 	}
@@ -421,11 +423,38 @@ public class PlaceServiceImpl implements PlaceService {
 		
 		return placeDao.selectAllLocation();
 	}
+	
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		//요청파라미터 curPage 를 파싱한다
+		
+		String param =req.getParameter("curPage");
+		String search =req.getParameter("search");
+		int curPage=0;
+		if(param!=null && !"".equals(param)) {
+				curPage= Integer.parseInt(param);
+					
+			}
+				
+		//Board TB 와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+		int totalCount =placeDao.selectCnAll(search);
+				
+		//Paging 객체 생성
+		Paging paging =new Paging(totalCount,curPage,12);
+		paging.setSearch(search);
+		return paging;
+	}
+	
+	@Override
+	public List getList(Paging paging) {
+		// TODO Auto-generated method stub
+		return placeDao.selectAll(paging);
+	}
 
 	@Override
 	public PlaceFile getfile(PlaceDto place) {
+
 		return placeDao.getfile(place);
 	}
-	
 	
 }

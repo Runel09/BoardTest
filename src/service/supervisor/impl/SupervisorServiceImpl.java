@@ -18,7 +18,7 @@ import dao.place.face.PlaceDao;
 import dao.place.impl.PlaceDaoImpl;
 import dao.supervisor.face.SupervisorDao;
 import dao.supervisor.impl.SupervisorDaoImpl;
-import dto.board.BoardFile;
+import dto.board.Report;
 import dto.login.Member;
 import dto.place.PlaceDto;
 import dto.place.PlaceFile;
@@ -339,6 +339,8 @@ public class SupervisorServiceImpl implements SupervisorService{
 			} // 파일처리 if
 		} // 요청파라미터 처리 while
 
+		place.setPlace_number(Integer.parseInt(req.getParameter("place_number")));
+		
 		if (placeFile.getFilesize() != 0) {
 			PlaceFile prevfile = placeservice.getfile(place);
 			if (prevfile != null) {
@@ -356,5 +358,95 @@ public class SupervisorServiceImpl implements SupervisorService{
 		
 		placedao.updatePlace(place);
 	}
+
+	@Override
+	public void placeDelete(HttpServletRequest req) {
+		PlaceDto place =new PlaceDto();
+		PlaceDao placedao= new PlaceDaoImpl();
+		
+		PlaceService placeservice= new PlaceServiceImpl();
+		place.setPlace_number(Integer.parseInt(req.getParameter("place_number")));
+		
+		PlaceFile placeFile = placeservice.getfile(place);
+
+		System.out.println("1"+req);
+		System.out.println("2"+req.getSession());
+		System.out.println("3"+req.getSession().getServletContext());
+		System.out.println("4"+req.getSession().getServletContext().getRealPath("upload"));
+		System.out.println("5"+placeFile);
+		
+//		System.out.println("6"+placeFile.getStoredname());
+		if(placeFile !=null) {
+			File prev
+			= new File(
+					req.getSession()
+					.getServletContext()
+					.getRealPath("upload"),
+					placeFile.getStoredname());
+
+			prev.delete();
+
+			placedao.deletefile(placeFile);
+			placedao.deleteplace(place);
+		}else {
+			placedao.deleteplace(place);
+		}
+		
+
+	}
+
+	@Override
+	public Paging reportListgetPaging(HttpServletRequest req) {
+		// 요청파라미터 curPage를 파싱한다
+				String param = req.getParameter("curPage");
+				int curPage = 0;
+				if (param != null && !"".equals(param)) {
+					curPage = Integer.parseInt(param);
+				}
+//				System.out.println("curPage: "+curPage);
+
+				// Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+				int totalCount = supervisordao.reportselectCntAll(req);
+				System.out.println("totalcount:" + totalCount);
+				// Paging 객체 생성
+				Paging paging = new Paging(totalCount, curPage);
+				
+				if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
+					paging.setSearch(req.getParameter("search"));
+				}
+				
+				return paging;
+	}
+
+	@Override
+	public List<Report> getreportList(Paging paging) {
+	
+		return supervisordao.getreportList(paging);
+	}
+
+	@Override
+	public void DeleteReport(HttpServletRequest req) {
+		String[] params= req.getParameterValues("check");
+	
+		Report report = new Report();
+
+		for(String param : params) {
+			System.out.println(param);
+
+			report.setReportno(Integer.parseInt(param));
+
+			supervisordao.reportdelete(report);
+
+		}
+		
+	}
+
+	@Override
+	public void deleteCheckBoardno(String[] check) {
+		supervisordao.deleteBoardList(check);
+	}
+
+
+
 
 }

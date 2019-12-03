@@ -54,9 +54,17 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
 		
 		
+	}
 		return list;
 	}
 
@@ -127,7 +135,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return list;
 	}
@@ -200,7 +216,15 @@ public class BoardDaoImpl implements BoardDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		finally {
+	         try {
+	            if(ps!=null) ps.close();
+	            if(rs!=null) rs.close();
+
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+	      }
 		
 		return list;
 	}
@@ -272,7 +296,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		
 		return list;
@@ -345,7 +377,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		
 		return list;
@@ -383,7 +423,15 @@ public class BoardDaoImpl implements BoardDao{
 			
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
 			
 			return boarddetail;
 	}
@@ -408,7 +456,15 @@ public class BoardDaoImpl implements BoardDao{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
 		
 		
 	}
@@ -486,7 +542,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		
 	}
@@ -515,7 +579,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return res;
 	}
@@ -542,7 +614,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -579,7 +659,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return boardFile;
 	}
@@ -612,7 +700,15 @@ public class BoardDaoImpl implements BoardDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return resFile;
 	}
@@ -648,7 +744,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -671,7 +775,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -694,7 +806,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -719,7 +839,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -743,7 +871,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -767,7 +903,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 	}
 
 	@Override
@@ -796,7 +940,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		if(chk==0) {
 			
@@ -833,7 +985,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return chk;
 	}
@@ -898,7 +1058,15 @@ public class BoardDaoImpl implements BoardDao{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
 		
 		
 	}
@@ -909,8 +1077,8 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO report(boardno, content, db_id, reason)";
-		sql += " VALUES(?, ?, ?, ?)";
+		sql += "INSERT INTO report(boardno, content, db_id, reason, reportno)";
+		sql += " VALUES(?,?, ?, ?, report_seq.nextval)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -925,7 +1093,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 	}
 
 

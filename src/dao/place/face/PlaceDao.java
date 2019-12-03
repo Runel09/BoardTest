@@ -2,10 +2,10 @@ package dao.place.face;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
+import dto.place.Paging;
 import dto.place.PlaceDto;
 import dto.place.PlaceFile;
+
 
 public interface PlaceDao {
 	public void insert(PlaceDto place);
@@ -24,18 +24,32 @@ public interface PlaceDao {
 	 * @return DB에 존재하는 모든 장소의 지리정보
 	 */
 	public List<PlaceDto> selectAllLocation();
+	
+	public int selectCnAll(String search);
+	
+	
+	public List<PlaceDto> selectAll(Paging paging);
 
-	public PlaceFile getfile(PlaceDto place);
+	/**
+	 * 이전 파일지우기
+	 * @param prevfile-이전 첨부파일
+	 */
+	public void delete(PlaceFile prevfile);
 
 	/**
 	 * 장소정보 수정
-	 * @param req- 요청객체(place_number)
+	 * @param place-수정할 장소
 	 */
-	void updatePlace(PlaceDto place);
-	
+	public void updatePlace(PlaceDto place);
+
 	/**
-	 * 기존의 첨부파일 삭제
-	 * @param prevfile-기존 첨부파일 객체
+	 * 첨부파일 가져오기
+	 * @param place-해당 장소
+	 * @return-첨부파일
 	 */
-	public void delete(PlaceFile prevfile);
+	public PlaceFile getfile(PlaceDto place);
+
+	void deletefile(PlaceFile file);
+
+	public void deleteplace(PlaceDto place);
 }

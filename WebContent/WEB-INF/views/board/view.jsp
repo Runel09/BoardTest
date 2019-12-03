@@ -36,6 +36,15 @@ $(document).ready(function(){
 	$("#btnReport").click(function() {
 		$(location).attr("href", "/board/report?boardno=${board.boardno }");
 	});
+	
+	//추천버튼 동작
+	$("#emptylogin").click(function() {
+		var result = confirm("로그인하실?");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	});
 });
 </script>
 
@@ -43,6 +52,8 @@ $(document).ready(function(){
 $(document).ready(function() {
 
 	if(${isRecommend}) {
+		
+	
 		$("#btnRecommend")
 			.addClass("btn-warning")
 			.html('추천 취소');
@@ -143,7 +154,29 @@ $(document).ready(function() {
 					onclick="location.href='/board/download?fileno=${file.fileno }';">${file.originname }</td>
 			</tr>
 		</c:if>
+	</table>
 
+	<!-- 버튼을 통한 페이지 이동 -->
+	<div class="text-center">
+		<c:if test="${!empty userid }">
+		<button id="btnRecommend" class="btn btn-primary"></button>
+		</c:if>
+		<c:if test="${empty userid }">
+		<button id="emptylogin" class="btn btn-primary">추천</button>
+		</c:if>
+		<button id="btnReport" class="btn btn-primary">신고</button>
+	</div>
+	<div class="text-right">
+		<button id="btnList" class="btn btn-primary">목록</button>
+		<c:if test="${userid eq board.id }">
+			<button id="btnUpdate" class="btn btn-info">수정</button>
+			<button id="btnDelete" class="btn btn-danger">삭제</button>
+		</c:if>
+
+	</div>
+
+
+	<table class="table table-bordered">
 		<tr>
 			<td class="info" colspan="4">댓글</td>
 		</tr>
@@ -176,24 +209,6 @@ $(document).ready(function() {
 
 	</table>
 
-
-
-	<!-- 목록 페이지로 요청을 발생시키는 링크 -->
-	<!-- <a href="/emp/list">목록</a> -->
-
-	<!-- 버튼을 통한 페이지 이동 -->
-	<div class="text-center">
-		<button id="btnList" class="btn btn-primary">목록</button>		
-		<button id="btnRecommend" class="btn btn-primary"></button>
-		<button id="btnReport" class="btn btn-primary">신고</button>
-	
-		<c:if test="${userid eq board.id }">
-			<button id="btnUpdate" class="btn btn-info">수정</button>
-			<button id="btnDelete" class="btn btn-danger">삭제</button>
-		</c:if>
-
-	</div>
-
-</div>
+</div>  <!-- container -->
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

@@ -54,14 +54,14 @@ $(document).ready(function () {
 
 <tr>
 	
-	<td><input type="checkbox" name="check" value="${member.user_Num}" /></td>
-	<td>${member.user_Num}</td>
+	<td><input type="checkbox" name="check" value="${member.user_number}" /></td>
+	<td>${member.user_number}</td>
 <%-- 	<td><input type="checkbox" name="check" value="${member.User_Num}" /></td> --%>
 <%-- 	<td>${member.User_Num}</td> --%>
-	<td>${member.DB_Id }</td>
-	<td>${member.DB_Pw }</td>
-	<td>${member.DB_Phnum}</td>
-	<td>${member.DB_Name}</td>
+	<td>${member.user_id }</td>
+	<td>${member.user_pw }</td>
+	<td>${member.user_phnum}</td>
+	<td>${member.user_name}</td>
 </tr>
 </c:forEach>
 </table>
