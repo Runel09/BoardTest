@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dao.supervisor.face.SupervisorDao;
 import dbutil.DBConn;
+import dto.board.Report;
 import dto.login.Member;
 import dto.supervisor.Supervisor;
 import util.Paging;
@@ -123,10 +124,10 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		sql += " select * from userinfo";
 		
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
-			sql+=" WHERE db_id LIKE ? or db_PHnum LIKE ? or db_name LIKE ?";
+			sql+=" WHERE user_id LIKE ? or user_phnum LIKE ? or user_name LIKE ?";
 		}
 		
-		sql += " order by user_num desc)B";
+		sql += " order by user_number desc)B";
 		sql += " ORDER BY rnum) BOARD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 
@@ -152,18 +153,18 @@ public class SupervisorDaoImpl implements SupervisorDao{
 //				System.out.println("HERE");
 				Member member = new Member();// 각 행을 처리할 DTO
 
-				member.setUser_number(rs.getInt("user_num"));
+				member.setUser_number(rs.getInt("user_number"));
 //				member.setDB_Email(rs.getString("db_email"));
-				member.setUser_id(rs.getString("db_id"));
-				member.setUser_pw(rs.getString("db_pw"));
-				member.setUser_name(rs.getString("db_name"));
+				member.setUser_id(rs.getString("user_id"));
+				member.setUser_pw(rs.getString("user_pw"));
+				member.setUser_name(rs.getString("user_name"));
 //				member.setDB_Nick(rs.getString("db_nick"));
 //				member.setDB_Gender(rs.getInt("db_gender"));
 //				member.setDB_Addr(rs.getString("db_addr"));
 //				member.setDB_Addr_detail(rs.getString("db_addr_detail"));
 //				member.setDB_Mailnum(rs.getString("db_mailnum"));
 //				member.setDB_Birth(rs.getString("db_birth"));
-				member.setUser_phnum(rs.getString("db_phnum"));
+				member.setUser_phnum(rs.getString("user_phnum"));
 				
 				list.add(member);
 			
@@ -182,7 +183,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 
 		String sql="";
 		sql+="DELETE FROM userinfo";
-		sql+=" WHERE user_num=?";
+		sql+=" WHERE user_number=?";
 
 		try {
 			ps = conn.prepareStatement(sql);// 수행객체 얻기
@@ -211,7 +212,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		String sql = "";
 		sql += "SELECT count(*) FROM userinfo";
 		if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
-		sql +=" WHERE DB_id LIKE ? or db_PHnum LIKE ? or db_name LIKE ?";
+		sql +=" WHERE user_id LIKE ? or user_phnum LIKE ? or user_name LIKE ?";
 		}
 		
 
@@ -246,6 +247,135 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		}
 		// 최종결과 반환
 		return cnt;
+	}
+
+	@Override
+	public int reportselectCntAll(HttpServletRequest req) {
+		
+		conn = DBConn.getConnection(); // DB연결
+
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT count(*) FROM report";
+		if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
+		sql +=" WHERE db_id LIKE ? or reason LIKE ? or content LIKE ?";
+		}
+		
+
+		// 최종 결과 변수
+		int cnt = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
+				ps.setString(1, "%" + req.getParameter("search") + "%");
+				ps.setString(2, "%" + req.getParameter("search")+ "%");
+				ps.setString(3, "%" + req.getParameter("search")+ "%");
+			}
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+			// SQL 수행결과 처리
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		// 최종결과 반환
+		return cnt;
+	}
+
+	@Override
+	public List<Report> getreportList(Paging paging) {
+		
+conn = DBConn.getConnection(); // DB연결
+		
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "select * from(";
+		sql += " Select rownum rnum, B.* FROM(";
+		sql += " select * from report";
+		
+		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			sql+=" WHERE db_id LIKE ? or reason LIKE ? or content LIKE ?";
+		}
+		
+		sql += " order by boardno desc)B";
+		sql += " ORDER BY rnum) BOARD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+
+		List<Report> list = new ArrayList<>();
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			
+			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+				ps.setString(1, "%" + paging.getSearch() + "%");
+				ps.setString(2, "%" + paging.getSearch() + "%");
+				ps.setString(3, "%" + paging.getSearch() + "%");
+				ps.setInt(4, paging.getStartNo());
+				ps.setInt(5, paging.getEndNo());
+			} else {
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			}
+			
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+			// SQL 수행결과 처리
+			while (rs.next()) {
+//				System.out.println("HERE");
+				Report report = new Report();
+				
+				report.setBoardno(rs.getInt("boardno"));
+				report.setDb_id(rs.getString("db_id"));
+				report.setContent(rs.getString("content"));
+				report.setReason(rs.getString("reason"));
+				
+				list.add(report);
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void reportdelete(Report report) {
+		conn= DBConn.getConnection();
+
+		String sql="";
+		sql+="DELETE FROM report";
+		sql+=" WHERE reportno=?";
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			ps.setInt(1, report.getReportno());
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
 	}
 
 

@@ -39,48 +39,34 @@ $(document).ready(function () {
 <h1>user 리스트</h1>
 <hr>
 
-<form action="/supervisor/memberdelete" method="get">
+<form action="/supervisor/reportdelete" method="post">
 <table class="table table-hover table-condenssed table-striped ">
 <tr class="info">
 	<th style="width: 5%"><input type="checkbox" id="checkall"/></th>
-	<th style="width: 10%">user_num</th>
 	<th style="width: 10%">user_id</th>
-	<th style="width: 10%">user_pw</th>
-	<th style="width: 20%">user_phnum</th>
-	<th style="width: 20%">user_name</th>
+	<th style="width: 10%">board_no</th>
+	<th style="width: 10%">reason</th>
+	<th style="width: 20%">content</th>
 </tr>
 
-<c:forEach var="member" items="${list }">
+<c:forEach var="report" items="${list }">
 
 <tr>
 	
-	<td><input type="checkbox" name="check" value="${member.user_number}" /></td>
-	<td>${member.user_number}</td>
-<%-- 	<td><input type="checkbox" name="check" value="${member.User_Num}" /></td> --%>
-<%-- 	<td>${member.User_Num}</td> --%>
-	<td>${member.user_id }</td>
-	<td>${member.user_pw }</td>
-	<td>${member.user_phnum}</td>
-	<td>${member.user_name}</td>
+	<td><input type="checkbox" name="check" value="${report.reportno}" /></td>
+	
+	<td>${report.db_id }</td>
+	<td><a href="/board/view?boardno=${report.boardno }">${report.boardno }</a></td>
+	<td>${report.reason}</td>
+	<td>${report.content}</td>
 </tr>
 </c:forEach>
 </table>
-<!-- <div class="text-right"> -->
-<%-- <c:choose> --%>
 
-<%-- 	<c:when test="${login }"> --%>
-<!-- 		 <a class="btn btn-success" href="/board/write" role="button">글쓰기</a> -->
-<%-- 	</c:when> --%>
-<%-- 	<c:otherwise> --%>
-<!-- 		 <a class="btn btn-success" href="/member/login" role="button">글쓰기</a> -->
-<%-- 	</c:otherwise> --%>
-
-<%-- </c:choose> --%>
-<!-- </div> -->
-<button>삭제</button>
+<button type="submit">삭제</button>
 </form>
 
-<form action="/supervisor/memberlist" method="get" class="text-right" style="float: right">
+<form action="/supervisor/reportlist" method="get" class="text-right" style="float: right">
 <input  type="text" name="search" id="search"/>
 <button>검색</button>
 </form>

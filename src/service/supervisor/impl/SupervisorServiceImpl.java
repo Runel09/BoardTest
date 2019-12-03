@@ -18,6 +18,7 @@ import dao.place.face.PlaceDao;
 import dao.place.impl.PlaceDaoImpl;
 import dao.supervisor.face.SupervisorDao;
 import dao.supervisor.impl.SupervisorDaoImpl;
+import dto.board.Report;
 import dto.login.Member;
 import dto.place.PlaceDto;
 import dto.place.PlaceFile;
@@ -378,6 +379,52 @@ public class SupervisorServiceImpl implements SupervisorService{
 		}
 		placedao.deleteplace(place);
 
+	}
+
+	@Override
+	public Paging reportListgetPaging(HttpServletRequest req) {
+		// 요청파라미터 curPage를 파싱한다
+				String param = req.getParameter("curPage");
+				int curPage = 0;
+				if (param != null && !"".equals(param)) {
+					curPage = Integer.parseInt(param);
+				}
+//				System.out.println("curPage: "+curPage);
+
+				// Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+				int totalCount = supervisordao.reportselectCntAll(req);
+				System.out.println("totalcount:" + totalCount);
+				// Paging 객체 생성
+				Paging paging = new Paging(totalCount, curPage);
+				
+				if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
+					paging.setSearch(req.getParameter("search"));
+				}
+				
+				return paging;
+	}
+
+	@Override
+	public List<Report> getreportList(Paging paging) {
+	
+		return supervisordao.getreportList(paging);
+	}
+
+	@Override
+	public void DeleteReport(HttpServletRequest req) {
+		String[] params= req.getParameterValues("check");
+	
+		Report report = new Report();
+
+		for(String param : params) {
+			System.out.println(param);
+
+			report.setReportno(Integer.parseInt(param));
+
+			supervisordao.reportdelete(report);
+
+		}
+		
 	}
 
 

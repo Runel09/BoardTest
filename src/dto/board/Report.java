@@ -6,9 +6,16 @@ public class Report {
 	 private int boardno; 
 	 private String reason; 
 	 private String content;
+	 private int reportno;
 
 	 
-	 public String getDb_id() {
+	 public int getReportno() {
+		return reportno;
+	}
+	public void setReportno(int reportno) {
+		this.reportno = reportno;
+	}
+	public String getDb_id() {
 		return db_id;
 	}
 	public void setDb_id(String db_id) {
@@ -34,6 +41,7 @@ public class Report {
 	}
 	@Override
 	public String toString() {
-		return "Report [db_id=" + db_id + ", boardno=" + boardno + ", reason=" + reason + ", content=" + content + "]";
+		return "Report [db_id=" + db_id + ", boardno=" + boardno + ", reason=" + reason + ", content=" + content
+				+ ", reportno=" + reportno + "]";
 	}
 }

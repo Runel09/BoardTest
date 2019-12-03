@@ -43,12 +43,12 @@ public class SupervisorPlaceUpdateController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		System.out.println(req.getParameter("place_number"));
+//		System.out.println(req.getParameter("place_number"));
 		
 		req.setCharacterEncoding("UTF-8");
 		supervisorservice.UpdatePlace(req);
 
-		resp.sendRedirect("/place/view?place_number=30");
+		resp.sendRedirect("/place/view?place_number="+req.getParameter("place_number"));
 
 	}
 

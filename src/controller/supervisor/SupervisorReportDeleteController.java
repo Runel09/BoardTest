@@ -1,6 +1,7 @@
 package controller.supervisor;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,22 +9,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.board.Report;
 import service.supervisor.face.SupervisorService;
 import service.supervisor.impl.SupervisorServiceImpl;
+import util.Paging;
 
-/**
- * Servlet implementation class SupervisorPlaceDelete
- */
-@WebServlet("/supervisor/placedelete")
-public class SupervisorPlaceDelete extends HttpServlet {
+@WebServlet("/supervisor/reportdelete")
+public class SupervisorReportDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	
+
+	SupervisorService supervisorservice = new SupervisorServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		SupervisorService supervisorservice= new SupervisorServiceImpl();
+		Report report = new Report();
 		
-		supervisorservice.placeDelete(req);
-		
-		resp.sendRedirect("/place/list");
+		req.setAttribute("report", report);
+	
 	}
-}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		supervisorservice.DeleteReport(req);
+
+		resp.sendRedirect("/supervisor/reportlist");
+	}
+	
+	}
+	
+
