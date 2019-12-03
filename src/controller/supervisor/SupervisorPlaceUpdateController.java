@@ -29,7 +29,7 @@ public class SupervisorPlaceUpdateController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PlaceDto place=placeservice.getPlace_number(req);
-
+		
 		PlaceDto placeview=placeservice.view(place);
 
 		PlaceFile placefile =placeservice.getfile(place);
@@ -43,6 +43,8 @@ public class SupervisorPlaceUpdateController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		System.out.println(req.getParameter("place_number"));
+		
 		req.setCharacterEncoding("UTF-8");
 		supervisorservice.UpdatePlace(req);
 

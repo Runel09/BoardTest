@@ -65,5 +65,9 @@ public interface SupervisorService {
 	 */
 	public void UpdatePlace(HttpServletRequest req);
 	
-
+	/**
+	 * 장소정보 삭제
+	 * @param place-삭제할장소정보객체
+	 */
+	public void placeDelete(HttpServletRequest req);
 }

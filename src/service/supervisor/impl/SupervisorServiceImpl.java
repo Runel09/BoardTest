@@ -18,7 +18,6 @@ import dao.place.face.PlaceDao;
 import dao.place.impl.PlaceDaoImpl;
 import dao.supervisor.face.SupervisorDao;
 import dao.supervisor.impl.SupervisorDaoImpl;
-import dto.board.BoardFile;
 import dto.login.Member;
 import dto.place.PlaceDto;
 import dto.place.PlaceFile;
@@ -339,6 +338,8 @@ public class SupervisorServiceImpl implements SupervisorService{
 			} // 파일처리 if
 		} // 요청파라미터 처리 while
 
+		place.setPlace_number(Integer.parseInt(req.getParameter("place_number")));
+		
 		if (placeFile.getFilesize() != 0) {
 			PlaceFile prevfile = placeservice.getfile(place);
 			if (prevfile != null) {
@@ -356,6 +357,29 @@ public class SupervisorServiceImpl implements SupervisorService{
 		
 		placedao.updatePlace(place);
 	}
+
+	@Override
+	public void placeDelete(HttpServletRequest req) {
+		PlaceDto place =new PlaceDto();
+		PlaceDao placedao= new PlaceDaoImpl();
+		
+		PlaceService placeservice= new PlaceServiceImpl();
+		place.setPlace_number(Integer.parseInt(req.getParameter("place_number")));
+		
+		PlaceFile placeFile = placeservice.getfile(place);
+
+		if(placeFile!=null) {
+			File prev = new File(req.getSession().getServletContext().getRealPath("upload"),
+					placeFile.getStoredname());
+
+			prev.delete();
+
+			placedao.deletefile(placeFile);
+		}
+		placedao.deleteplace(place);
+
+	}
+
 
 
 
