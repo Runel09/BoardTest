@@ -24,14 +24,17 @@ $(document).ready(function () {
 		//클릭되었으면
         if($("#checkall").prop("checked")){
             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-            $("input[name=check]").prop("checked",true);
+            $("input[name=chk]").prop("checked",true);
             //클릭이 안되있으면
         }else{
             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-            $("input[name=check]").prop("checked",false);
+            $("input[name=chk]").prop("checked",false);
         }
-
+		
+		
 	});
+	
+
 });
 </script>
 
@@ -39,7 +42,7 @@ $(document).ready(function () {
 <h1>user 리스트</h1>
 <hr>
 
-<form action="/supervisor/reportdelete" method="post">
+<form action="/supervisor/reportdelete" method="get">
 <table class="table table-hover table-condenssed table-striped ">
 <tr class="info">
 	<th style="width: 5%"><input type="checkbox" id="checkall"/></th>
@@ -53,9 +56,8 @@ $(document).ready(function () {
 
 <tr>
 	
-	<td><input type="checkbox" name="check" value="${report.reportno}" /></td>
-	
-	<td>${report.db_id }</td>
+	<td><input type="checkbox" name="chk" id="checkbox" value="${report.reportno}" /></td>
+	<td>${report.db_id}</td>
 	<td><a href="/board/view?boardno=${report.boardno }">${report.boardno }</a></td>
 	<td>${report.reason}</td>
 	<td>${report.content}</td>
@@ -63,7 +65,9 @@ $(document).ready(function () {
 </c:forEach>
 </table>
 
-<button type="submit">삭제</button>
+
+<button>삭제</button>
+
 </form>
 
 <form action="/supervisor/reportlist" method="get" class="text-right" style="float: right">

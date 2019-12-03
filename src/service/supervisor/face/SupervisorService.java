@@ -75,4 +75,6 @@ public interface SupervisorService {
 	public List<Report> getreportList(Paging paging);
 
 	public void DeleteReport(HttpServletRequest req);
+
+	public void deleteCheckBoardno(String[] check);
 }

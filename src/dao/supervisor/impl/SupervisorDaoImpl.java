@@ -340,6 +340,7 @@ conn = DBConn.getConnection(); // DB연결
 				report.setDb_id(rs.getString("db_id"));
 				report.setContent(rs.getString("content"));
 				report.setReason(rs.getString("reason"));
+				report.setReportno(rs.getInt("reportno"));
 				
 				list.add(report);
 			
@@ -375,6 +376,30 @@ conn = DBConn.getConnection(); // DB연결
 			}
 
 		}
+		
+	}
+
+	@Override
+	public void deleteBoardList(String[] check) {
+		conn = DBConn.getConnection();
+		
+		String sql = "DELETE FROM report";
+		sql += " WHERE reportno=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			for (int i = 0; i < check.length; i++) {
+				
+				ps.setInt(1, Integer.parseInt(check[i]));
+				ps.executeQuery();
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 	}
 

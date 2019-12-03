@@ -37,6 +37,7 @@ public class BoardReportController extends HttpServlet {
 		Board board = new Board();
 		
 		int boardno = Integer.parseInt(req.getParameter("boardno"));
+		report.setReportno(Integer.parseInt(req.getParameter("reportno")));
 		report.setBoardno(boardno);
 		board.setBoardno(boardno);
 		report.setContent(req.getParameter("content"));

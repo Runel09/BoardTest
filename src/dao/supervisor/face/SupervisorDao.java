@@ -51,6 +51,8 @@ public interface SupervisorDao {
 
 	public void reportdelete(Report report);
 
+	void deleteBoardList(String[] check);
+
 
 
 

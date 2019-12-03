@@ -427,6 +427,11 @@ public class SupervisorServiceImpl implements SupervisorService{
 		
 	}
 
+	@Override
+	public void deleteCheckBoardno(String[] check) {
+		supervisordao.deleteBoardList(check);
+	}
+
 
 
 

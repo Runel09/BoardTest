@@ -37,7 +37,7 @@ public class SupervisorReportListController extends HttpServlet {
 
 		List<Report> list = supervisorService.getreportList(paging);
 //		System.out.println("list:" + list);
-//		for( Member m : list) System.out.println(m);
+//		for( Report m : list) System.out.println(m);
 		
 		req.setAttribute("list", list);
 		
