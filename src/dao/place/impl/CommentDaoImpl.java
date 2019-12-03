@@ -38,7 +38,8 @@ public class CommentDaoImpl implements CommentDao {
 					+ "		review_score,"					
 					+ "		review_char"
 					+ "	FROM review"
-					+ "	WHERE place_number = ?"					
+					+ "	WHERE place_number = ?"
+					+ "	ORDER BY review_number"
 					+ "	) B"
 					+ ") ORDER BY rnum";
 
@@ -53,7 +54,7 @@ public class CommentDaoImpl implements CommentDao {
 
 				while( rs.next() ) {
 					Comment comment = new Comment();
-
+					
 					comment.setReview_number(rs.getInt("review_number"));
 					comment.setUser_number(rs.getInt("user_number"));
 					comment.setPlace_number(rs.getInt("place_number"));
