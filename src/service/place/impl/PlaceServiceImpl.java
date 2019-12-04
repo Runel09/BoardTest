@@ -427,9 +427,16 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 		//요청파라미터 curPage 를 파싱한다
+		Paging catePaging = new Paging();
 		
 		String param =req.getParameter("curPage");
 		String search =req.getParameter("search");
+		String cate = req.getParameter("cate");//카테고리별 검색
+		
+		catePaging.setCate(cate);
+		catePaging.setSearch(search);
+		System.out.println(catePaging.getCate());
+		System.out.println(catePaging.getSearch());
 		int curPage=0;
 		if(param!=null && !"".equals(param)) {
 				curPage= Integer.parseInt(param);
@@ -437,11 +444,14 @@ public class PlaceServiceImpl implements PlaceService {
 			}
 				
 		//Board TB 와 curPage 값을 이용한 Paging 객체를 생성하고 반환
-		int totalCount =placeDao.selectCnAll(search);
-				
-		//Paging 객체 생성
+		int totalCount =placeDao.selectCnAll(catePaging);
+		
+		System.out.println(totalCount);
+		
 		Paging paging =new Paging(totalCount,curPage,12);
+		//Paging 객체 생성
 		paging.setSearch(search);
+		paging.setCate(cate);
 		return paging;
 	}
 	

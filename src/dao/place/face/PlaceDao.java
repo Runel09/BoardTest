@@ -25,7 +25,7 @@ public interface PlaceDao {
 	 */
 	public List<PlaceDto> selectAllLocation();
 	
-	public int selectCnAll(String search);
+	public int selectCnAll(Paging paging);
 	
 	
 	public List<PlaceDto> selectAll(Paging paging);

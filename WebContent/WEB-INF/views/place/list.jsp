@@ -30,10 +30,7 @@ tr td:not(:first-child), tr th:not(:first-child){
 
 </style>
 <script type="text/javascript">
-// $(document).ready(function(){
-// 	$("#btnLogout").click(function(){
-// 		$(location).attr("href","/member/logout");
-// 	})
+
 
 $(document).ready(function(){
 	$("#btnWrite").click(function(){
@@ -44,23 +41,27 @@ $(document).ready(function(){
 			$(location).attr("href","/main");
 	});
 	
-// 	$("#checkAll").click(function(){
-// 		  //클릭되었으면
-//         if($("#checkAll").prop("checked")){
-//             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-//             $("input[name=check]").prop("checked",true);
-//             //클릭이 안되있으면
-//         }else{
-//             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-//             $("input[name=check]").prop("checked",false);
-//         }
 
-		
-// 		})
-// 	$("#serch").click(function(){
-		
 	
-// 	})
+	$("btnCateSearch").click(function(){
+		
+		$form = $("<form>").attr({
+			action: "/place/list",
+			method: "get"
+		}).append(
+			$("<input>")
+				.attr("name","cate")
+				.css("display","none")
+				.attr("value",$("<form>").find("[name='cate']:checked").val() ));
+		
+		
+		$(document.body).append($form);
+		
+		$form.submit();
+		
+		
+		
+	})
 	
 		
 		
@@ -75,14 +76,7 @@ $(document).ready(function(){
 <h1>리스트</h1>
 <hr>
 
-<!-- <form action="/select/delete" method="post" > -->
-<!-- 	<tr class ="info"> -->
-<!-- 		<th >장소번호</th> -->
-<!-- 		<th>장소이름</th> -->
-<!-- 		<th>주소</th> -->
-<!-- 		<th>카테고리</th> -->
-<!-- 		<th>조회수</th> -->
-<!-- 	</tr> -->
+
 <c:forEach var= "place"  items = "${list}">
 	
 
@@ -149,8 +143,13 @@ $(document).ready(function(){
 	<tr>
 		<td><input type = "text" name ="search" /></td>
 	</tr>
+	<tr>
+		<td><input type="radio" name="cate" value="음식점"/>음식점
+		<input type="radio" name="cate" value="숙소"/>숙소
+		<input type="radio" name="cate" value="관광명소"/>관광명소</td>
+	</tr>
 </table>
-<button>검색</button>
+<button id="btnCateSearch" class="btn">검색</button>
 </form>
 <jsp:include page="/WEB-INF/views/layout/paging.jsp"/>
 </div>

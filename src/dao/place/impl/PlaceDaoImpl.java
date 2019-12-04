@@ -227,33 +227,44 @@ public class PlaceDaoImpl implements PlaceDao {
 	
 	
 	@Override
-	public int selectCnAll(String search) {
+	public int selectCnAll(Paging paging) {
 		
-		
+		System.out.println("selectcnAll"+paging.getCate());
 		conn=DBConn.getConnection();
 		String sql="";
-		if(search != null) {
+		if(paging.getSearch() != null) {
 			sql += "SELECT count(*) FROM placeinfo";
 			sql += " WHERE place_name LIKE ?";
-		} else {		
+		}
+		else if(paging.getCate() != null){
+			sql +="SELECT count(*) FROM placeinfo";
+			sql +=" WHERE PLACE_CATE LIKE ?";
+		}
+		else{		
 			sql += "SELECT count(*) FROM placeinfo";
 		}
 		//최종 
 		int cnt =0;
 		
 		try {
-			if(search != null) {
+			if(paging.getSearch() != null) {
 			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, "%" + search + "%");
+			   ps.setString(1, "%" + paging.getSearch() + "%");
 			   rs=ps.executeQuery();
-			}else {
+			}
+			else if(paging.getCate() != null) {
+			   ps=conn.prepareStatement(sql);	
+			   ps.setString(2, "%" + paging.getCate() + "%");
+			   rs=ps.executeQuery();
+			}
+			else{
 				ps=conn.prepareStatement(sql);
 				rs=ps.executeQuery();
 			}
 			while(rs.next()) {
 				
 				cnt=rs.getInt(1);
-				
+				System.out.println("cnt:"+cnt);
 			}
 				
 			
@@ -288,6 +299,9 @@ public class PlaceDaoImpl implements PlaceDao {
 		sql += " select place_number, place_name, adress, place_cate, favorite_count from placeinfo";
 		if( paging.getSearch() != null && !"".equals(paging.getSearch()) ) {
 			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+		}
+		else if(paging.getCate() != null) {
+			sql += " where place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
 		}
 		sql += " order by place_number desc";
 		sql += " )B";
