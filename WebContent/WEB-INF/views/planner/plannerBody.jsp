@@ -239,7 +239,13 @@ div div > .selected{
 				});
 				//타이틀 편집 버튼
 				$("#title_set").on('click',function(){
-					
+					if($("#title_char").prop("readonly")){
+						$("#title_char").prop("readonly", false)
+						$("#title_set").text("적용")
+					}else{
+						$("#title_char").prop("readonly", true)
+						$("#title_set").text("편집")
+					}
 				})
 				
 				
@@ -251,8 +257,8 @@ div div > .selected{
 	<div>
 		<div class="container text-center">
 			<div class="top col-md-12">
-				<div class="col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 30.5px">
-					<input id="title_char" name="title_char" type="text"
+				<div class="col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 9px">
+					<p style="color:#337ab7;font-size: 20px; font-weight: 900;">플래너 이름&nbsp;</p> <input id="title_char" name="title_char" type="text"
 						readonly="readonly">
 					<button type="button" id = "title_set">편집</button>
 

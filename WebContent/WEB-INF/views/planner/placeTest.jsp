@@ -81,7 +81,7 @@ html {
 		directionsRenderer.setMap(map);
 
 		calculateAndDisplayRoute(directionsService, directionsRenderer);
-		// 		console.log(op.result[0].lat)
+				console.log(opener.result[0].lat)
 
 	}
 
@@ -89,29 +89,27 @@ html {
 		var waypts = [];
 		var checkboxArray = [];
 
-		// 		for (var i = 0; i < op.size(); i++) {
-
-		// 		}
-		// 		checkboxArray[0] = new google.maps.LatLng(35.63290000000001, 139.88039);
-		// 		checkboxArray[1] = new google.maps.LatLng(35.67448, 139.81470000000002);
-		// 		checkboxArray[2] = new google.maps.LatLng(35.695440000000005,
-		// 				139.79215000000002);
-		// 		checkboxArray[3] = new google.maps.LatLng(35.67231, 139.77291000000002);
-		// 		checkboxArray[4] = new google.maps.LatLng(35.667500000000004,
-		// 				139.76375000000002);
-		// 		for (var i = 0; i < 5; i++) {
-		// 			waypts.push({
-		// 				location : checkboxArray[i],
-		// 				stopover : true
-		// 			});
-		// 		}
-
+				checkboxArray[0] = new google.maps.LatLng(35.63290000000001, 139.88039);
+				checkboxArray[1] = new google.maps.LatLng(35.67448, 139.81470000000002);
+				checkboxArray[2] = new google.maps.LatLng(35.695440000000005,
+						139.79215000000002);
+				checkboxArray[3] = new google.maps.LatLng(35.67231, 139.77291000000002);
+				checkboxArray[4] = new google.maps.LatLng(35.667500000000004,
+						139.76375000000002);
+				for (var i = 0; i < 5; i++) {
+					waypts.push({
+						location : checkboxArray[i],
+						stopover : true
+					});
+				}
+		console.log(${cnt});		
+		console.log(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng);
+		console.log(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng);
+		if(${cnt}==0){
 		directionsService.route({
 			origin : new google.maps.LatLng(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng),
 			destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
-			// 			waypoints : waypts,
-			optimizeWaypoints : true,
-			travelMode : 'TRANSIT'
+			travelMode : google.maps.TravelMode['TRANSIT']
 		}, function(response, status) {
 			if (status === 'OK') {
 				directionsRenderer.setDirections(response);
@@ -132,6 +130,35 @@ html {
 				window.alert('Directions request failed due to ' + status);
 			};
 		});
+			
+		}else{
+			directionsService.route({
+				origin : new google.maps.LatLng(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng),
+				destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
+				waypoint:waypts,
+				optimizeWaypoints : true,
+				travelMode : 'TRANSIT'
+			}, function(response, status) {
+				if (status === 'OK') {
+					directionsRenderer.setDirections(response);
+					var route = response.routes[0];
+					var summaryPanel = document.getElementById('directions-panel');
+					summaryPanel.innerHTML = '';
+					// For each route, display summary information.
+					for (var i = 0; i < route.legs.length; i++) {
+						var routeSegment = i + 1;
+						summaryPanel.innerHTML += '<b>Route Segment: '
+								+ routeSegment + '</b><br>';
+						summaryPanel.innerHTML += route.legs[i].distance.text
+								+ '<br>';
+						summaryPanel.innerHTML += route.legs[i].duration.text
+								+ '<br><hr>';
+					}
+				} else {
+					window.alert('Directions request failed due to ' + status);
+				};
+			});
+		}
 	};
 </script>
 </head>
