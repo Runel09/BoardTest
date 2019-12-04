@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.place.Comment;
 import dto.place.Paging;
 import dto.place.PlaceDto;
 import service.place.face.PlaceService;
@@ -27,12 +28,14 @@ public class PlaceList extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		Paging paging =placeService.getPaging(req);
-		
-		
 		req.setAttribute("paging", paging);
+		
+		
 		
 		List<PlaceDto> placeList=placeService.getList(paging);
 		String search =paging.getSearch();
+		
+		
 		
 		req.setAttribute("list",placeList);
 		req.setAttribute("Search", search);

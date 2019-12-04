@@ -132,7 +132,7 @@ public class PlaceDaoImpl implements PlaceDao {
 				placedto.setBusiness_hours(rs.getString("business_hours"));
 				placedto.setTel_number(rs.getString("tel_number"));
 				placedto.setPlace_information(rs.getString("place_information"));
-				
+				placedto.setReview_score(rs.getInt("review_score"));
 				
 			}
 			
@@ -437,7 +437,17 @@ public class PlaceDaoImpl implements PlaceDao {
 	      return placefile;
 	}
 		
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
 	
 	
 

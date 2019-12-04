@@ -48,4 +48,8 @@ public interface PlaceDao {
 	 * @return-첨부파일
 	 */
 	public PlaceFile getfile(PlaceDto place);
+	
+	
+	
+		
 }

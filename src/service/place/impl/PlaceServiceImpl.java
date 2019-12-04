@@ -398,11 +398,13 @@ public class PlaceServiceImpl implements PlaceService {
 		String place_number = (String) req.getParameter("place_number");
 //		String user_number = (String) req.getParameter("user_userNum");
 		String review_char = (String) req.getParameter("review_char");
-		
+		String review_score= req.getParameter("testInput");
+		System.out.println("ㅎㅇ"+review_score);
 		Comment comment = new Comment();
 		comment.setPlace_number( Integer.parseInt(place_number) );
 //		comment.setUser_number(Integer.parseInt(user_number));
 		comment.setReview_char(review_char);
+		comment.setReview_score(Integer.parseInt(review_score));
 		
 		return comment;
 	}
@@ -454,5 +456,22 @@ public class PlaceServiceImpl implements PlaceService {
 
 		return placeDao.getfile(place);
 	}
+	
+	
+	@Override
+	public PlaceDto insertScore(Comment comment) {
+		// TODO Auto-generated method stub
+		return commentDao.inScore(comment);
+	}
+	
+	
+	@Override
+	public void updateScore(PlaceDto placeDto) {
+		// TODO Auto-generated method stub
+		commentDao.updateScore(placeDto);
+		
+	}
+	
+	
 	
 }

@@ -90,9 +90,11 @@ public class CommentDaoImpl implements CommentDao {
 					+ "		review_number,"
 					+ "		user_number,"
 					+ "		place_number,"
+					+ "		review_score,"
 					+ "		review_char )"
 					+ "	VALUES ("
 					+ "		review_seq.nextval,"
+					+ "		?,"
 					+ "		?,"
 					+ "		?,"
 					+ "		? )";
@@ -102,7 +104,8 @@ public class CommentDaoImpl implements CommentDao {
 
 				ps.setInt(1, comment.getUser_number());
 				ps.setInt(2, comment.getPlace_number());
-				ps.setString(3, comment.getReview_char());
+				ps.setInt(3, comment.getReview_score());
+				ps.setString(4, comment.getReview_char());
 				ps.executeUpdate();
 
 			} catch (SQLException e) {
@@ -172,6 +175,65 @@ public class CommentDaoImpl implements CommentDao {
 			
 			return cnt;
 		}
+	
+		
+	@Override
+	public PlaceDto inScore(Comment comment) {
+		
+		conn = DBConn.getConnection();
+		int score=0;
+		String sql="";
+		PlaceDto placeDto = new PlaceDto();
+		placeDto.setPlace_number(comment.getPlace_number());
+		sql += "select review_score from review";
+		sql += " where place_number=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, comment.getPlace_number());
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				
+				placeDto.setReview_score(rs.getInt("review_score"));
+				score= score+placeDto.getReview_score();
+				placeDto.setReview_score(score);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return placeDto;
+	}
+		
+	
+	@Override
+	public void updateScore(PlaceDto placeDto) {
+		
+		System.out.println("updateScore:"+placeDto.getReview_score());
+		System.out.println("place_number"+placeDto.getPlace_number());
+		conn = DBConn.getConnection();
+		String sql="";
+		
+		sql +="update placeinfo set review_score=?";
+		sql +=" where place_number=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, placeDto.getReview_score());
+			ps.setInt(2, placeDto.getPlace_number());
+			ps.execute();// sql 수행
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
 	
 	
 	
