@@ -22,12 +22,14 @@ import dto.board.BoardFile;
  * Servlet implementation class SupervisorInsertNotice
  */
 @WebServlet("/supervisor/insertnotice")
-public class SupervisorInsertNotice extends HttpServlet {
+public class SupervisorNoticeInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/board/write.jsp")
+		
+		
+		req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_noticeinsert.jsp")
 		.forward(req, resp);
 		}
 	

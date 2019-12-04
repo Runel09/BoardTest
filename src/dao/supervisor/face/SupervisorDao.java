@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.board.Board;
 import dto.board.Report;
 import dto.login.Member;
 import dto.supervisor.Supervisor;
@@ -52,6 +53,16 @@ public interface SupervisorDao {
 	public void reportdelete(Report report);
 
 	void deleteBoardList(String[] check);
+
+	List<Board> getNoticeList(Paging paging);
+
+	int noticeselectCntAll(HttpServletRequest req);
+
+	void noticedelete(Board board);
+
+	void deleteNoticeList(String[] check);
+
+	void deleteMemberList(String[] check);
 
 
 
