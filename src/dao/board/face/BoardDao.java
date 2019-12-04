@@ -91,6 +91,8 @@ public interface BoardDao {
 
 	public void insertReport(Report report);
 
+	public List<Board> selectEventAll(Paging paging);
+
 
 	
 	

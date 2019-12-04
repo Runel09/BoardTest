@@ -710,6 +710,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
+	@Override
+	public List<Board> getEventList(Paging paging) {
+		return boardDao.selectEventAll(paging);
+	}
+
+
 
 	
 }

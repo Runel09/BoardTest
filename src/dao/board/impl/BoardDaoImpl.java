@@ -499,11 +499,10 @@ public class BoardDaoImpl implements BoardDao{
 			while(rs.next()) {
 				
 				cnt = rs.getInt(1);
-				
+				System.out.println(cnt);
 			}
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				
@@ -511,7 +510,6 @@ public class BoardDaoImpl implements BoardDao{
 					ps.close();
 					rs.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -1102,6 +1100,85 @@ public class BoardDaoImpl implements BoardDao{
 		            e.printStackTrace();
 		         }
 		      }
+	}
+
+	@Override
+	public List<Board> selectEventAll(Paging paging) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+=	"    SELECT rownum rnum, B.* FROM (";
+		sql	+=	"        SELECT *";
+		sql	+=	"        FROM board";
+		sql	+=	"        WHERE checkboard = '공지'";
+		
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
+			sql += " AND title LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==2) {
+			sql += " AND content LIKE ?";
+		}
+		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
+			sql += " AND id LIKE ?";
+		}
+		
+		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN ? AND ?";
+
+		List<Board> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			if(paging.getSearch()!=null && !"".equals(paging.getSearch())) {
+				
+				ps.setString(1, "%"+paging.getSearch()+"%");
+				ps.setInt(2, paging.getStartNo());
+				ps.setInt(3, paging.getEndNo());
+				
+			} else {
+				
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			}
+			
+			
+			rs = ps.executeQuery();
+			
+//			System.out.println(rs.next());
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
+				
+				list.add(board);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+		return list;
 	}
 
 
