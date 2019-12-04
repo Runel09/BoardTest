@@ -36,7 +36,7 @@ function id_overlap_check() {
     id_overlap_input = document.querySelector('input[name="username"]');
 
     $.ajax({
-      url: "{% url '/WEB-INF/views/userinfo/idcheckform' %}",//클릭시 정보가 전달되는 컨트롤러
+      url: "{% url '/WEB-INF/views/userinfo/idCheckform' %}",//클릭시 정보가 전달되는 컨트롤러
       data: {
         'username': id_overlap_input.value// 전달 파라미터
       },

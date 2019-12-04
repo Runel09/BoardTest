@@ -36,24 +36,21 @@ maigin-top:30px;
  <div class="form-group" id="inputemail" >
     <label for="inputEmail" class="col-sm-2 control-label" >이메일</label>
     <div class="col-sm-3">
-      <input type="email" class="form-control" id="inputEmail"  name = "inputEmail" placeholder="Email">
+      <input type="email" class="form-control" id="inputEmail"  name = "inputEmail" placeholder="Email" required>
     </div>
   </div>
   <div class="form-group" id="inputname ">
     <label for="inputName" class="col-sm-2 control-label">이름</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputName" name = "inputName"placeholder="Name">
+      <input type="text" class="form-control" id="inputName" name = "inputName"placeholder="Name" required>
     </div><br>
   </div>
  
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-10">
-      <button type="submit" class="btn btn-default">아이디 찾기</button>
-   
-   
+      <button type="submit" class="btn btn-default" name ="findidbutton">아이디 찾기</button>
     </div>
   </div>
- 
 </form>
 
 <br><br><br><br>
@@ -62,19 +59,18 @@ maigin-top:30px;
   <div class="form-group" id="inputId" >
     <label for="inputId" class="col-sm-2 control-label" >아이디</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputId" name="inputid" placeholder="ID">
+      <input type="text" class="form-control" id="inputId" name="inputid" placeholder="ID" required>
     </div>
   </div>
   <div class="form-group" id="inputname ">
     <label for="inputName" class="col-sm-2 control-label">휴대폰 번호</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputphnum" name="inputphnum" placeholder="휴대폰 번호">
+      <input type="text" class="form-control" id="inputphnum" name="inputphnum" placeholder="휴대폰 번호" required>
     </div>
   </div>
- 
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-10">
-      <button type="submit" class="btn btn-default">비밀번호 찾기</button>
+      <button type="submit" class="btn btn-default" name = "findpwbutton">비밀번호 찾기</button>
      </div>
   </div>
   </form>

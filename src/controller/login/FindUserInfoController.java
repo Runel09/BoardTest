@@ -36,19 +36,19 @@ public class FindUserInfoController extends HttpServlet {
 			
 			Member member2 = memberservice.getfinduserparam2(req);
 			
-//			System.out.println("객체 : " + member);
+			System.out.println("객체 : " + member);
 			System.out.println("객체 : " + member2);
 			
 			
 			
 			
 			
-//			Member memberResult = memberservice.getUserId(member);
+			Member memberResult = memberservice.getUserId(member);
 			Member memberResult2 = memberservice.getUserPw(member2);
 			
-//			System.out.println("컨트롤러 검사 : " + memberResult);
+			System.out.println("컨트롤러 검사 : " + memberResult);
 			System.out.println("컨트롤러 검사 : " + memberResult2);
 			
-			
+			resp.sendRedirect("/WEB-INF/views/userinfo/finduserinfoResult.jsp");
 		}
 }
