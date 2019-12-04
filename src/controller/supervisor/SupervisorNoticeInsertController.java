@@ -27,7 +27,9 @@ public class SupervisorNoticeInsertController extends HttpServlet {
 	
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/board/write.jsp")
+		
+		
+		req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_noticeinsert.jsp")
 		.forward(req, resp);
 		}
 	
