@@ -19,7 +19,16 @@ $(document).ready(function(){
 
 	//목록버튼 동작
 	$("#btnList").click(function() {
-		$(location).attr("href", "/board/free");
+		var checkboard = '${board.checkboard}';
+		
+		if( checkboard == '여행팁') {
+			location.href="/board/tip"
+		} else if( checkboard == '질문') {
+			location.href="/board/question"
+		} else if( checkboard == '자유') {
+			location.href="/board/free"
+		} 
+		
 	});
 	
 	//수정버튼 동작

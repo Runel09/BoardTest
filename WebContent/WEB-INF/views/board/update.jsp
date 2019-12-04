@@ -28,6 +28,8 @@ function submitContents(elClickedObj) {
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+
 	
    $("#btnWrite").click(function() {
       
@@ -59,6 +61,7 @@ $(document).ready(function() {
 		$("#cate").html("질문");
 
 	});
+		
    
 });
 
@@ -95,30 +98,36 @@ tr td:not(:first-child), tr th:not(:first-child) {
    
    <tr>
    		<td>
-   		
-   		<c:if test="${board.checkboard eq 'free'}">  
-		<input id="free" type="radio" name="checkboard" value="자유" checked="checked">자유
-		</c:if>
+
+   	  <script type="text/javascript">
+      $(document).ready(function() {
+         $("[name=checkboard][value=${board.checkboard}]").prop("checked", true);
+      })
+      </script>
+<%--    		<c:if test="${board.checkboard eq 'free'}">   --%>
+<!-- 		<input id="free" type="radio" name="checkboard" value="자유" checked="checked">자유 -->
+<%-- 		</c:if> --%>
 		
-		<c:if test="${board.checkboard ne 'free'}">  
+<%-- 		<c:if test="${board.checkboard ne 'free'}">   --%>
 		<input id="free" type="radio" name="checkboard" value="자유">자유
-		</c:if>
+<%-- 		</c:if> --%>
 		
-		<c:if test="${board.checkboard eq 'tip'}">  		
-		<input id="tip" type="radio" name="checkboard" value="여행팁" checked="checked" >여행팁
-		</c:if>
+<%-- 		<c:if test="${board.checkboard eq 'tip'}">  		 --%>
+<!-- 		<input id="tip" type="radio" name="checkboard" value="여행팁" checked="checked" >여행팁 -->
+<%-- 		</c:if> --%>
 		
-		<c:if test="${board.checkboard ne 'tip'}">  
+<%-- 		<c:if test="${board.checkboard ne 'tip'}">   --%>
 		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
-		</c:if>
+<%-- 		</c:if> --%>
 		
-		<c:if test="${board.checkboard eq 'question'}">  
-		<input id="question" type="radio" name="checkboard" value="질문" checked="checked">질문
-		</c:if>
+<%-- 		<c:if test="${board.checkboard eq 'question'}">   --%>
+<!-- 		<input id="question" type="radio" name="checkboard" value="질문" checked="checked">질문 -->
+<%-- 		</c:if> --%>
 		
-		<c:if test="${board.checkboard ne 'question'}">  
+<%-- 		<c:if test="${board.checkboard ne 'question'}">   --%>
 		<input id="question" type="radio" name="checkboard" value="질문">질문
-   		</c:if>
+<%--    		</c:if> --%>
+   		
    		</td>
    		
    		<td><div id="cate">${board.checkboard}</div></td>

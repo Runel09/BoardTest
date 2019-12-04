@@ -5,6 +5,59 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+
+//테마 선택
+($("#tag_body").children().children()).on('click',function() {
+   if(this==this.parentNode.firstElementChild){
+      return false;
+   }
+   $(this.parentNode.firstElementChild).children("input").val(this.innerText)
+   $(this.parentNode).children(".selected").removeClass('selected');
+   $(this).addClass("selected");
+   console.log($(this.parentNode.firstElementChild).children("input").val())
+})
+})
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#tag_body").click(function() {
+		
+		if(this == this.parentNode.firstElementChild) {
+		      return false;
+		  }
+		
+		$.ajax({
+			type: "get"
+			, url: "/board/planner"
+			, data: {"traval_thema": $("#traval_thema"),
+					"travel_season" : $("#travel_season"),
+					"travel_date" : $("#travel_date"),
+					"travel_Place" : $("#travel_Place")
+			}
+			, dataType: "json"
+			, success: function( data ) {
+				console.log("성공");
+				console.log(data);
+			
+				$("#recommend").html(data.cnt);
+		
+			}
+			, error: function() {
+				console.log("실패");
+				
+			}
+		});
+	});
+	
+});
+</script>
+
 
 <style type="text/css">
 
@@ -73,7 +126,28 @@ div.pullRight a:hover:before
 	color: white;
 }
 
+/* 카테고리 */
+.tag_body {
+   width: 0px;
+   margin-left: 29em;
+}
 
+.tag_body div div {
+   float: left;
+   width: 138px;
+   text-align: center;
+   font-size: 23px;
+}
+
+.tag_body div {
+   float: left;
+   width: 1200px;
+   margin-bottom: 6px;
+}
+.selected{
+   color: white;
+   background: black;
+}
 </style>
 
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
@@ -87,34 +161,55 @@ div.pullRight a:hover:before
   <a href="/board/tip" class="menutab" style="font-size:38px;">여행팁</a>
   <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
 </div>
+<br>
+<h2 style="text-align:center; margin-bottom: 70px; ">여행자들의 일정보기</h2>
 
- <h2 style="text-align:center; ">여행자들의 일정보기</h2>
- <table class="table" style="    width: 57%; margin-left: 18em; font-size: 22px;">
-     
-        <tr >
-          <th>여행지</th>
-          <td style="text-align:left;">국내 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp일본 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp홍콩 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp싱가포르 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp대만 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp태국 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp미국</td>
-
-        </tr>
-        <tr class="danger">
-          <th>여행일</th>
-          <td style="text-align:left;">1-3일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4-6일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7-10일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp11-15일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp15일이상</td>
-
-        </tr>
-        <tr>
-          <th>여행시기</th>
-          <td style="text-align:left;">봄 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp여름 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp가을 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp겨울</td>
-
-        </tr>
-        <tr class="success">
-          <th>여행테마</th>
-          <td style="text-align:left;">가족여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp나홀로여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp커플여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp친구와함께 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비지니스여행</td>
-        </tr>
-       
- </table>
+<div class="tag_body" id="tag_body">
+                  <div class="place">
+                     <div id="place_head">
+                        여행지 | <input type="hidden" id="travel_Place" value="" />
+                     </div>
+                     <div>국내</div>
+                     <div>일본</div>
+                     <div>홍콩</div>
+                     <div>싱가포르</div>
+                     <div>대만</div>
+                     <div>태국</div>
+                     <div>미국</div>
+                  </div>
+                  <div class="danger travel_date">
+                     <div id="travel_date_head">
+                        여행일 |<input type="hidden" id="travel_date" value="" />
+                     </div>
+                     <div>1-3일</div>
+                     <div>4-6일</div>
+                     <div>7-10일</div>
+                     <div>11-15일</div>
+                     <div>15일이상</div>
+                  </div>
+                  <div class="travel_season">
+                     <div id="travel_season_head">
+                        여행시기|<input type="hidden" name="travel_season" value="">
+                     </div>
+                     <div>봄</div>
+                     <div>여름</div>
+                     <div>가을</div>
+                     <div>겨울</div>
+                  </div>
+                  <div class="success traval_thema">
+                     <div id ="traval_thema_head">
+                        여행테마|<input type="hidden" id="traval_thema" value="" />
+                     </div>
+                     <div>가족여행</div>
+                     <div>나홀로여행</div>
+                     <div>커플여행</div>
+                     <div>친구와함께</div>
+                     <div>비지니스여행</div>
+                  </div>
+               </div>
     
+<br><br><br><br><br><br><br><br><br><br><br>
 <div class="container">
-
 <h1 style="float:left;">플래너 게시판</h1><br><br><br><br><br>
 <div style="text-align: left;">인기 | 신규</div>
 

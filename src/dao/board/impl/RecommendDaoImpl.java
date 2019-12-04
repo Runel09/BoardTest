@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import dao.board.face.RecommendDao;
 import dbutil.DBConn;
+import dto.board.Board;
 import dto.board.Recommend;
 
 public class RecommendDaoImpl implements RecommendDao {
@@ -60,66 +61,66 @@ public class RecommendDaoImpl implements RecommendDao {
 	}
 	
 	@Override
-	public void insertRecommend(Recommend recommend) {
-		String sql = "";
-		sql += "INSERT INTO recommend";
-		sql += " VALUES ( ?, ? )";
+	public void insertRecommend(Recommend recommendBoard) {
 		
-		//DB 객체
-		PreparedStatement ps = null; 
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "INSERT INTO recommend(boardno, userid)";
+		sql += " VALUES(?, ?)";
 		
 		try {
-			//DB작업
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, recommend.getUserid());
-			ps.setInt(2, recommend.getBoardno());
-
-			ps.executeUpdate();
+			
+			ps.setInt(1, recommendBoard.getBoardno());
+			ps.setString(2, recommendBoard.getUserid());
+			
+			ps.executeQuery();
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			try {
-				//DB객체 닫기
-				if(ps!=null)	ps.close();
-				if(rs!=null)	rs.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
 	}
-	
+
 	@Override
-	public void deleteRecommend(Recommend recommend) {
-		String sql = "";
-		sql += "DELETE recommend";
-		sql += " WHERE userid = ?";
-		sql += " 	AND boardno = ?";
+	public void deleteRecommend(Recommend recommendBoard) {
 		
-		//DB 객체
-		PreparedStatement ps = null; 
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "DELETE FROM recommend";
+		sql += " WHERE boardno=? AND userid=?";
 		
 		try {
-			//DB작업
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, recommend.getUserid());
-			ps.setInt(2, recommend.getBoardno());
-
-			ps.executeUpdate();
+			
+			ps.setInt(1, recommendBoard.getBoardno());
+			ps.setString(2, recommendBoard.getUserid());
+			
+			ps.executeQuery();
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			try {
-				//DB객체 닫기
-				if(ps!=null)	ps.close();
-				if(rs!=null)	rs.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 	}
 	
 	@Override

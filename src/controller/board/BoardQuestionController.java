@@ -24,6 +24,7 @@ public class BoardQuestionController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//요청파라미터에서 curPage를 구하고 Paging 객체 반환
+		req.setAttribute("checkboard", "질문");
 		Paging paging = boardService.getPaging(req);
 //		System.out.println(paging);
 		
