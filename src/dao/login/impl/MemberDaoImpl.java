@@ -87,8 +87,8 @@ public class MemberDaoImpl implements MemberDao{
 		
 		String sql ="";
 		sql	+= "insert into userinfo(USER_NUMBER , USER_ID, USER_PW, USER_NAME"
-				+ ", USER_NICK, USER_GENDER, USER_EMAIL, USER_ADDR, USER_ADDR_DETAIL, USER_MAILNUM"
-				+ ", USER_BIRTH ,USER_phnum) ";
+				+ " , USER_NICK, USER_GENDER, USER_EMAIL, USER_ADDR, USER_ADDR_DETAIL, USER_MAILNUM"
+				+ " , USER_BIRTH ,USER_phnum) ";
 		sql += " values( USER_seq.nextval,?,?,?,?,0,?,?,?,?,?,?)";
 //		sql += " commit";
 //			System.out.println(sql);
@@ -96,29 +96,29 @@ public class MemberDaoImpl implements MemberDao{
 			ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, member.getUser_id());
-//			System.out.println(member.getUser_id());
+			System.out.println(member.getUser_id());
 			ps.setString(2, member.getUser_pw());
-//			System.out.println(member.getUser_pw());
+			System.out.println(member.getUser_pw());
 			ps.setString(3, member.getUser_name());
-//			System.out.println(member.getUser_name());
+			System.out.println(member.getUser_name());
 			ps.setString(4, member.getUser_nick());
-//			System.out.println(member.getUser_nick());
+			System.out.println(member.getUser_nick());
 			
 			ps.setString(5, member.getUser_email());
-//			System.out.println(member.getUser_email());
+			System.out.println(member.getUser_email());
 			ps.setString(6, member.getUser_addr());
-//			System.out.println(member.getUser_addr());
+			System.out.println(member.getUser_addr());
 			ps.setString(7, member.getUser_addr_detail());
-//			System.out.println(member.getUser_addr_detail());
+			System.out.println(member.getUser_addr_detail());
 			ps.setString(8, member.getUser_mailnum());
-//			System.out.println(member.getUser_mailnum());
+			System.out.println(member.getUser_mailnum());
 			ps.setString(9, member.getUser_birth());
-//			System.out.println(member.getUser_birth());
+			System.out.println(member.getUser_birth());
 			ps.setString(10, member.getUser_phnum());
-//			System.out.println(member.getUser_phnum());
+			System.out.println(member.getUser_phnum());
 			
 			ps.executeQuery();
-			
+//			System.out.println(member.getUser_phnum());
 			
 		} catch (SQLException e) {
 			
