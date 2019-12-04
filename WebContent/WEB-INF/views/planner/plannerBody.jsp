@@ -33,7 +33,7 @@
 
 #footer {
 	text-align: center;
-	background: #1DDB16;
+	background: #337ab7;
 }
 </style>
 
@@ -53,27 +53,28 @@ html, body {
 }
 
 .index {
-	border: 1px solid black;
+	border: 2px solid #337ab7;
 }
 
 .left {
-	border: 1px solid black;
+	border: 2px solid #337ab7;
 	float: left;
 	width: 20%;
 	height: 80%;
-	background: lavender;
+	background: white;
 	margin-bottom: 7%
 }
 
 .center {
 	overflow: auto;
-	border: 1px solid black;
+	border: 2px solid #337ab7;
 	float: left;
 	width: 20%;
 	height: 80%;
-	background: lavender;
+	background: white;
 	margin-left: 1%;
-	margin-bottom: 7%
+	margin-bottom: 7%;
+	color: #337ab7;
 }
 
 .right {
@@ -90,27 +91,36 @@ html, body {
 }
 
 .top {
-	height: 120px;
+	height: 90px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .tag_body {
+	border: 2px solid #337ab7;
+	height: 90px;
 	
 }
 
 .tag_body div div {
 	float: left;
 	width: 90px;
+	margin-top: 2px;
+	margin-right: 2px;
+	color: #337ab7;
 }
+.tag_body > div > div:first-child{
+	font-weight: 900;
+}
+
 
 .tag_body div {
 	float: left;
 	width: 800px;
 }
-.selected{
+div div > .selected{
 	color: white;
-	background: black;
+	background: #337ab7;
 }
 </style>
 
@@ -193,8 +203,12 @@ html, body {
 						return false;
 					}
 					$(this.parentNode.firstElementChild).children("input").val(this.innerText)
-					$(this.parentNode).children(".selected").removeClass('selected');
-					$(this).addClass("selected");
+					if($(this).hasClass("selected")){
+						$(this).removeClass("selected")
+					}else{
+						$(this.parentNode).children(".selected").removeClass('selected');
+						$(this).addClass("selected");
+					}
 					console.log($(this.parentNode.firstElementChild).children("input").val())
 				})
 
@@ -223,6 +237,12 @@ html, body {
 // 					$("#index_form").submit();
 
 				});
+				//타이틀 편집 버튼
+				$("#title_set").on('click',function(){
+					
+				})
+				
+				
 			});
 </script>
 
@@ -231,13 +251,13 @@ html, body {
 	<div>
 		<div class="container text-center">
 			<div class="top col-md-12">
-				<div class="col-md-3" style="border: 1px solid black; height: 100%;">
+				<div class="col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 30.5px">
 					<input id="title_char" name="title_char" type="text"
 						readonly="readonly">
-					<button type="button">편집</button>
+					<button type="button" id = "title_set">편집</button>
 
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-6">
 					<div class="tag_body" id="tag_body">
 						<div class="place">
 							<div id="place_head">
@@ -283,7 +303,7 @@ html, body {
 					</div>
 
 				</div>
-				<div class="col-md-2 col-md-offset-2">
+				<div class="col-md-1 col-md-offset-1">
 					<button id="submit_btn">플래너 입력</button>
 				</div>
 			</div>
@@ -293,7 +313,7 @@ html, body {
 					action="/planner/input" style="height: 100%">
 					<div style="height: 86%;"><jsp:include
 							page="/WEB-INF/views/planner/index.jsp" /></div>
-					<hr style="border-top-color: black;">
+					<hr style="border-top-color: #337ab7;">
 					<div style="height: 5%;">
 						<button id="reset_btn" type="button">목록 초기화</button>
 						<button id="search_btn" type="button">전체 경로 검색</button>

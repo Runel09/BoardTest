@@ -5,7 +5,7 @@
 <c:choose>
 	<c:when test="${placeno eq 0}">
 		<div style="height: 40px; margin-top: 15px">
-		<label for="search_no">장소 검색</label><input id="search_no" name="search_no" type="text"/>
+		<label for="search_no">장소 검색&nbsp;&nbsp; </label><input id="search_no" name="search_no" type="text"/>
 		</div>
 		<c:forEach items="${markers}" var="marker">
 			<div style="border: 1px solid #ccc" class="marker"
