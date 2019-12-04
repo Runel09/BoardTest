@@ -14,10 +14,16 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import dao.board.face.BoardDao;
+import dao.board.face.BoardFileDao;
+import dao.board.impl.BoardDaoImpl;
+import dao.board.impl.BoardFileDaoImpl;
 import dao.place.face.PlaceDao;
 import dao.place.impl.PlaceDaoImpl;
 import dao.supervisor.face.SupervisorDao;
 import dao.supervisor.impl.SupervisorDaoImpl;
+import dto.board.Board;
+import dto.board.BoardFile;
 import dto.board.Report;
 import dto.login.Member;
 import dto.place.PlaceDto;
@@ -32,6 +38,7 @@ public class SupervisorServiceImpl implements SupervisorService{
 	
 	//SupervisorDao 객체
 	private SupervisorDao supervisordao = new SupervisorDaoImpl();
+	private BoardDao boardDao = new BoardDaoImpl();
 
 
 	@Override
@@ -444,6 +451,256 @@ public class SupervisorServiceImpl implements SupervisorService{
 	@Override
 	public void deleteCheckBoardno(String[] check) {
 		supervisordao.deleteBoardList(check);
+	}
+
+	@Override
+	public List<Board> getNoticeList(Paging paging) {
+		
+		return supervisordao.getNoticeList(paging);
+	}
+
+	@Override
+	public Paging noticeListgetPaging(HttpServletRequest req) {
+		// 요청파라미터 curPage를 파싱한다
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if (param != null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+		//		System.out.println("curPage: "+curPage);
+
+		// Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환s
+		int totalCount = supervisordao.noticeselectCntAll(req);
+		
+		System.out.println("totalcount:" + totalCount);
+		// Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+
+		if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
+			paging.setSearch(req.getParameter("search"));
+		}
+
+		return paging;
+	}
+
+	@Override
+	public void DeleteNotice(HttpServletRequest req) {
+		String[] params= req.getParameterValues("check");
+
+		Board board= new Board();
+
+		for(String param : params) {
+			System.out.println(param);
+
+			board.setBoardno(Integer.parseInt(param));
+
+			supervisordao.noticedelete(board);
+
+		}
+		
+	}
+
+
+
+	@Override
+	public void UpdateNotice(HttpServletRequest req) {
+		// 1. 파일업로드 형태의 데이터가 맞는지 확인
+				// enctype이 multipart/form-data가 맞는지 호가인
+				boolean isMultipart = false;
+				isMultipart = ServletFileUpload.isMultipartContent(req);
+
+				// 1-1. multipart/form-data인코딩으로 전송되지 안았을 경우
+				if (!isMultipart) {
+					return;
+				}
+				// 1.2 여기 이후는 multipart/form-data로 요청된 상황임
+				// 파일이 전송되었음
+
+				// 2.업로드된 파일을 처리하는 아이템 팩토리 객체 생성
+
+				// ItemFactory :업로드된 파일을 처리하는 방식을 정하는 클래스
+
+				// FileItem : 클라이언트로부터 전송된 데이터를 객체화시킨 것
+
+				// DiskFileItemFactory class
+				// ->디스크기반(HDD)의 파일아이템 처리 API
+				// ->업로드된 파일을 디스크에 임시 저장하고 후처리한다.
+				DiskFileItemFactory factory = null;
+				factory = new DiskFileItemFactory();
+
+				// 3.업로드된 아이템이 용량이 적당히 작으면 메모리에서 처리
+				int maxMem = 1 * 1024 * 1024;// 1MB
+				factory.setSizeThreshold(maxMem);
+
+				// 4.용량이 적당히 크면 임시파일을 만들어서 처리(디스크)
+				ServletContext context = req.getServletContext();
+
+				String path = context.getRealPath("tmp");
+
+				File repository = new File(path);
+
+				// TEST
+				// System.out.println("repository:"+repository);
+
+				factory.setRepository(repository);
+
+				// 5.업로드 허용 용량 기준을 넘지 않을 경우에만 업로드 처리
+				int maxFile = 10 * 1024 * 1024;// 10MB
+
+				// 파일 업로드 객체 생성
+				ServletFileUpload upload = null;
+				upload = new ServletFileUpload(factory);
+
+				// 0파일 업로드 용량제한 설정 : 10 MB
+
+				upload.setFileSizeMax(maxFile);
+
+				// ----- 파일 업로드 준비 완료------
+
+				// 6. 업로드된 데이터 추출(파싱)
+				// 임시 파일 업로드도 같이 수행함
+				List<FileItem> items = null;
+				try {
+					items = upload.parseRequest(req);
+				} catch (FileUploadException e) {
+					e.printStackTrace();
+				}
+
+				// 7.파싱된 데이터 처리하기
+				// items 리스트에 요청파라미터가 파싱되어있음
+
+				// 요청정보의 형태 3가지
+				// 1.빈 파일(용량이0인 파일)
+				// 2.form-data (일반적인 요청파라미터)
+				// 3.파일
+
+				Iterator<FileItem> iter = items.iterator();
+
+				Board board = new Board();
+				BoardFile uploadFile = new BoardFile();
+				BoardFileDao boardfiledao = new BoardFileDaoImpl();
+
+				// 모든 요청정보 처리
+				while (iter.hasNext()) {
+					FileItem item = iter.next();
+
+					// 1) 빈 파일 처리
+					if (item.getSize() <= 0)
+						continue;
+
+					// 2) 일반적인 요청 데이터 처리
+					if (item.isFormField()) {
+						// form-data일 경우
+						// key:value 쌍으로 전달된 요청 파라미터
+
+						// key-getFieldName()
+						// value-getString()
+
+						// 기본 처리 방식
+						/*
+						 * out.println("--- 폼 필드 ---"+"<br>");
+						 * out.println("키 : "+item.getFieldName()+"<br>");
+						 * out.println("값 : "+item.getString()+"<br>");
+						 */
+						// key값에 따라 처리방식 다르게 하기
+						String key = item.getFieldName();
+
+						if ("title".equals(key)) {
+							try {
+								String title = item.getString("utf-8");
+								board.setTitle(title);
+							} catch (UnsupportedEncodingException e) {
+								e.printStackTrace();
+							}
+
+						} else if ("content".equals(key)) {
+							try {
+								board.setContent(item.getString("utf-8"));
+							} catch (UnsupportedEncodingException e) {
+								e.printStackTrace();
+							}
+
+						} else if ("boardno".equals(key)) {
+							try {
+								board.setBoardno(Integer.parseInt(item.getString("utf-8")));
+							} catch (NumberFormatException | UnsupportedEncodingException e) {
+								e.printStackTrace();
+							} // key 값 비교 if
+							
+						} else if ("checkboard".equals(key)) {
+							try {
+								board.setCheckboard(item.getString("utf-8"));
+							} catch (NumberFormatException | UnsupportedEncodingException e) {
+								e.printStackTrace();
+							} // key 값 비교 if
+						}
+						
+					} else {// 3)파일 처리
+						// 업로드 파일 처리 방법 2가지
+						// 1.웹 서버의 로컬 디스크에 저장
+						// 파일의 정보는 DB에 기록
+
+						// 2.DB의 테이블에 컬럼으로 저장
+
+						// ---------------------------------
+
+						// 로컬파일로 저장하고 DB에 기록하느나 방식으로 진행
+
+						// --- UUID 생성 ---
+						UUID uuid = UUID.randomUUID();// 랜덤 UID 생성
+
+						String u = uuid.toString().split("-")[4];
+						// ---------------------------
+
+						// 로컬 파일 저장소에 파일 저장하기
+
+						// 로컬 저장소 파일 객체
+						File up = new File(context.getRealPath("upload"), item.getName() + "_" + u);
+
+						// 파일의 경로는 "/upload"
+						// 파일의 이름은 "원본명_uid"
+
+						// System.out.println(up);
+
+						// ---DB에 업로드 정보 기록하기---
+						// 원본파일명 origin_name
+						// 저장파일명 stored_name
+						// ------------------------
+
+						uploadFile.setOriginname(item.getName());
+						uploadFile.setStoredname(item.getName() + "_" + u);
+						uploadFile.setFilesize((int) item.getSize());
+
+						try {
+							item.write(up);// 실제 업로드
+							item.delete();// 임시 파일 삭제
+						} catch (Exception e) {
+
+							e.printStackTrace();
+						}
+						// -----------------------------
+
+					} // 파일처리 if
+				} // 요청파라미터 처리 while
+
+				if (uploadFile.getFilesize() != 0) {
+					BoardFile prevfile = boardfiledao.getfile(board);
+					if (prevfile != null) {
+						File prev = new File(req.getSession().getServletContext().getRealPath("upload"),
+								prevfile.getStoredname());
+						prev.delete();
+
+						boardfiledao.delete(prevfile);
+					}
+					
+					uploadFile.setBoardno(board.getBoardno());
+//					board.setBoardno(board.getBoardno());
+					boardfiledao.insert(uploadFile);
+					
+				}
+				
+				boardDao.update(board);
+		
 	}
 
 

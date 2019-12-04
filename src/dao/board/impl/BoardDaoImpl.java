@@ -727,7 +727,7 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "UPDATE board SET";
 		sql += " title=?,";
-		sql += " content=?";
+		sql += " content=?,";
 		sql += " checkboard=?";
 		sql += " WHERE boardno=?";
 

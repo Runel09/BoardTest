@@ -22,7 +22,7 @@ import dto.board.BoardFile;
  * Servlet implementation class SupervisorInsertNotice
  */
 @WebServlet("/supervisor/insertnotice")
-public class SupervisorInsertNotice extends HttpServlet {
+public class SupervisorNoticeInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override

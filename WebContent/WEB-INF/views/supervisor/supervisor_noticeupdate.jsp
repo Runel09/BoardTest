@@ -88,37 +88,56 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <h1>수정</h1>
 <hr>
 
-
-<form action="/board/update" method="post" encType="multipart/form-data">
+<form action="/supervisor/noticeupdate" method="post" encType="multipart/form-data">
 <input type="hidden" value="${board.boardno }" name="boardno">
 <table class="table table-bordered">
    
    <tr>
    		<td>
    		
-   		<c:if test="${board.checkboard eq 'free'}">  
-		<input id="free" type="radio" name="checkboard" value="자유" checked="checked">자유
-		</c:if>
+<%--    		<c:if test="${board.checkboard eq 'free'}">   --%>
+<!-- 		<input id="free" type="radio" name="checkboard" value="자유" checked="checked">자유 -->
+<%-- 		</c:if> --%>
 		
-		<c:if test="${board.checkboard ne 'free'}">  
+<%-- 		<c:if test="${board.checkboard ne 'free'}">   --%>
+<!-- 		<input id="free" type="radio" name="checkboard" value="자유">자유 -->
+<%-- 		</c:if> --%>
+		
+<%-- 		<c:if test="${board.checkboard eq 'tip'}">  		 --%>
+<!-- 		<input id="tip" type="radio" name="checkboard" value="여행팁" checked="checked" >여행팁 -->
+<%-- 		</c:if> --%>
+		
+<%-- 		<c:if test="${board.checkboard ne 'tip'}">   --%>
+<!-- 		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁 -->
+<%-- 		</c:if> --%>
+		
+<%-- 		<c:if test="${board.checkboard eq 'question'}">   --%>
+<!-- 		<input id="question" type="radio" name="checkboard" value="질문" checked="checked">질문 -->
+<%-- 		</c:if> --%>
+		
+<%-- 		<c:if test="${board.checkboard ne 'question'}">   --%>
+<!-- 		<input id="question" type="radio" name="checkboard" value="질문">질문 -->
+<%--    		</c:if> --%>
+   		
+<%-- 		<c:if test="${board.checkboard eq 'notice'}">   --%>
+<!-- 		<input id="question" type="radio" name="checkboard" value="공지" checked="checked">공지 -->
+<%-- 		</c:if> --%>
+   		
+<%--    		<c:if test="${board.checkboard ne 'notice'}">   --%>
+<!-- 		<input id="question" type="radio" name="checkboard" value="공지">공지 -->
+<%--    		</c:if> --%>
+<!--    		</td> -->
+
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("[name=checkboard][value=${board.checkboard}]").prop("checked", true);
+		})
+		</script>
 		<input id="free" type="radio" name="checkboard" value="자유">자유
-		</c:if>
-		
-		<c:if test="${board.checkboard eq 'tip'}">  		
-		<input id="tip" type="radio" name="checkboard" value="여행팁" checked="checked" >여행팁
-		</c:if>
-		
-		<c:if test="${board.checkboard ne 'tip'}">  
 		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
-		</c:if>
-		
-		<c:if test="${board.checkboard eq 'question'}">  
-		<input id="question" type="radio" name="checkboard" value="질문" checked="checked">질문
-		</c:if>
-		
-		<c:if test="${board.checkboard ne 'question'}">  
 		<input id="question" type="radio" name="checkboard" value="질문">질문
-   		</c:if>
+		<input id="question" type="radio" name="checkboard" value="공지">공지
+		
    		</td>
    		
    		<td><div id="cate">${board.checkboard}</div></td>
