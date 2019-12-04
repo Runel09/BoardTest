@@ -121,4 +121,6 @@ public interface PlannerService {
 
 	public Planner viewInfo(Planner viewPlanner);
 
+	public Planner getparameter(HttpServletRequest req);
+
 }

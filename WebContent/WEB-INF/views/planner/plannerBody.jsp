@@ -62,7 +62,6 @@ html, body {
 	width: 20%;
 	height: 80%;
 	background: lavender;
-	margin-top: 7%;
 	margin-bottom: 7%
 }
 
@@ -74,7 +73,6 @@ html, body {
 	height: 80%;
 	background: lavender;
 	margin-left: 1%;
-	margin-top: 7%;
 	margin-bottom: 7%
 }
 
@@ -83,13 +81,36 @@ html, body {
 	width: 58%;
 	height: 80%;
 	background: #ffc;
-	margin-top: 7%;
 	margin-bottom: 7%
 }
 
 .container {
 	height: 800px;
 	width: 100%;
+}
+
+.top {
+	height: 120px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.tag_body {
+	
+}
+
+.tag_body div div {
+	float: left;
+	width: 90px;
+}
+
+.tag_body div {
+	float: left;
+	width: 800px;
+}
+.selected{
+	color: white;
+	background: black;
 }
 </style>
 
@@ -127,6 +148,8 @@ html, body {
 									"data-location-lat"), $(this).attr(
 									"data-location-lng")));
 						});
+
+				//center 리스트 반환
 				$(".center").on("click", "#listSetbtn", function() {
 					$.ajax({
 						type : "get",
@@ -147,10 +170,10 @@ html, body {
 					// 			console.log($(this).attr("location-lng"));
 
 				})
-
+				//전체 경로 초기화
 				$("#reset_btn").on('click', function() {
 					$("#indexBody").empty();
-// 					console.log(path);
+					// 					console.log(path);
 					ploy.setMap(null);
 					ploy = new google.maps.Polyline({
 						strokeColor : '#3679e3',
@@ -161,7 +184,45 @@ html, body {
 					ploy.setMap(map);
 
 				});
+				//전체 경로 검색
+				$("#search_btn").on('click', searchAll);
+				
+				//테마 선택
+				($("#tag_body").children().children()).on('click',function() {
+					if(this==this.parentNode.firstElementChild){
+						return false;
+					}
+					$(this.parentNode.firstElementChild).children("input").val(this.innerText)
+					$(this.parentNode).children(".selected").removeClass('selected');
+					$(this).addClass("selected");
+					console.log($(this.parentNode.firstElementChild).children("input").val())
+				})
 
+				//플래너 정보 입력
+				$("#submit_btn").on('click', function() {
+					
+					var $f = $("<form>").attr({method:"", action:""})
+					//인덱스 추가
+					for(var i =0; i<divBody.children("div").size();i++){
+						$f.append( $("<input>").attr({name:"place_no", value:$("#divBody").children("div").eq(i).attr("data-place_no")}) )
+						
+						console.log($("#divBody").children("div").eq(i).attr("data-place_no"));
+					}
+					//타이틀 추가
+						$f.append( $("<input>").attr({name:"title", value:$("#title_char").val()}) );
+						
+						
+// 						.append( $("<input>").attr({name:"name", value:"value"}) )
+// 						.append( $("<input>").attr({name:"name", value:"value"}) )
+// 						.append( $("<input>").attr({name:"name", value:"value"}) )
+// 						.append( $("<input>").attr({name:"name", value:"value"}) )
+						$f.appendTo( $(document.body) );
+					$f.submit();
+					
+					
+// 					$("#index_form").submit();
+
+				});
 			});
 </script>
 
@@ -169,11 +230,67 @@ html, body {
 <body>
 	<div>
 		<div class="container text-center">
+			<div class="top col-md-12">
+				<div class="col-md-3" style="border: 1px solid black; height: 100%;">
+					<input id="title_char" name="title_char" type="text"
+						readonly="readonly">
+					<button type="button">편집</button>
 
+				</div>
+				<div class="col-md-3">
+					<div class="tag_body" id="tag_body">
+						<div class="place">
+							<div id="place_head">
+								여행지 <input type="hidden" id="travel_Place" value="" />
+							</div>
+							<div>국내</div>
+							<div>일본</div>
+							<div>홍콩</div>
+							<div>싱가포르</div>
+							<div>대만</div>
+							<div>태국</div>
+							<div>미국</div>
+						</div>
+						<div class="danger travel_date">
+							<div id="travel_date_head">
+								여행일<input type="hidden" id="travel_date" value="" />
+							</div>
+							<div>1-3일</div>
+							<div>4-6일</div>
+							<div>7-10일</div>
+							<div>11-15일</div>
+							<div>15일이상</div>
+						</div>
+						<div class="travel_season">
+							<div id="travel_season_head">
+								여행시기<input type="hidden" name="travel_season" value="">
+							</div>
+							<div>봄</div>
+							<div>여름</div>
+							<div>가을</div>
+							<div>겨울</div>
+						</div>
+						<div class="success traval_thema">
+							<div id ="traval_thema_head">
+								여행테마<input type="hidden" id="traval_thema" value="" />
+							</div>
+							<div>가족여행</div>
+							<div>나홀로여행</div>
+							<div>커플여행</div>
+							<div>친구와함께</div>
+							<div>비지니스여행</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-2 col-md-offset-2">
+					<button id="submit_btn">플래너 입력</button>
+				</div>
+			</div>
 
 			<div class="left">
-				<form method="post" action="/planner/input" style="height: 100%"
-					onsubmit="return frmsubmit">
+				<form id="index_form" name="index_form" method="post"
+					action="/planner/input" style="height: 100%">
 					<div style="height: 86%;"><jsp:include
 							page="/WEB-INF/views/planner/index.jsp" /></div>
 					<hr style="border-top-color: black;">
@@ -194,11 +311,11 @@ html, body {
 
 			</div>
 		</div>
+		<div id="footer">
+			<small>다 싫어...</small>
+		</div>
 
 
-	</div>
-	<div id="footer">
-		<small>다 싫어...</small>
 	</div>
 </body>
 </html>

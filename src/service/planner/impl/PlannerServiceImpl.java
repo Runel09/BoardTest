@@ -67,4 +67,10 @@ public class PlannerServiceImpl implements PlannerService {
 		return null;
 	}
 
+	@Override
+	public Planner getparameter(HttpServletRequest req) {
+		
+		return null;
+	}
+
 }

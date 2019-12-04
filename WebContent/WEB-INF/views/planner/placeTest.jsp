@@ -111,7 +111,7 @@ html {
 			destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
 			// 			waypoints : waypts,
 			optimizeWaypoints : true,
-			travelMode : 'DRIVING'
+			travelMode : 'TRANSIT'
 		}, function(response, status) {
 			if (status === 'OK') {
 				directionsRenderer.setDirections(response);
@@ -130,9 +130,9 @@ html {
 				}
 			} else {
 				window.alert('Directions request failed due to ' + status);
-			}
+			};
 		});
-	}
+	};
 </script>
 </head>
 <body>
@@ -149,6 +149,13 @@ html {
 						<input id="startIdx_lat" name="startIdx_lat" type="hidden" value="">
 						<input id="startIdx_lng" name="startIdx_lng" type="hidden" value="">
 					</div>
+					<c:forEach var="index" items="${index }">
+						<div>
+						<label id="startLab">경유지</label>
+						<input id="wayPoint_${index }" name="wayPoint_${index }" type="hidden" value="">
+						<input id="wayPoint_${index }" name="wayPoint_${index }" type="hidden" value="">
+					</div>
+					</c:forEach>
 					<div>
 						<label id="endLab">도착지</label>
 						<input id="endIdx_lat" name="endIdx_lat" type="hidden" value="">
@@ -156,7 +163,7 @@ html {
 						<br>
 						<b>교통수단:</b>
 					</div>
-					<select id="travalOption">
+					<select id="travalOption" name="travalOption">
 						<option value="BICYCLING">자전거</option>
 						<option value="DRIVING">자동차</option>
 						<option value="TRANSIT">대중교통</option>

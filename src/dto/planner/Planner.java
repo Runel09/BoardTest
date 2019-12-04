@@ -2,6 +2,7 @@ package dto.planner;
 
 public class Planner {
 	private int PLANNER_NUM;
+	private int USER_NUMBER; 
 	private String PLANNER_NAME;
 	private int plannerIdxNum;
 	private int IdxNum;
@@ -11,7 +12,13 @@ public class Planner {
 	private int trip_date;
 	private int trip_season;
 	private int trip_theme;
-	private int planner_writer;
+	
+	public int getUSER_NUMBER() {
+		return USER_NUMBER;
+	}
+	public void setUSER_NUMBER(int uSER_NUMBER) {
+		USER_NUMBER = uSER_NUMBER;
+	}
 	public int getPLANNER_NUM() {
 		return PLANNER_NUM;
 	}
@@ -72,18 +79,13 @@ public class Planner {
 	public void setTrip_theme(int trip_theme) {
 		this.trip_theme = trip_theme;
 	}
-	public int getPlanner_writer() {
-		return planner_writer;
-	}
-	public void setPlanner_writer(int planner_writer) {
-		this.planner_writer = planner_writer;
-	}
+	
 	@Override
 	public String toString() {
-		return "Planner [PLANNER_NUM=" + PLANNER_NUM + ", PLANNER_NAME=" + PLANNER_NAME + ", plannerIdxNum="
-				+ plannerIdxNum + ", IdxNum=" + IdxNum + ", plannerIdx=" + plannerIdx + ", PLACE_NUMBER=" + PLACE_NUMBER
-				+ ", trip_nation=" + trip_nation + ", trip_date=" + trip_date + ", trip_season=" + trip_season
-				+ ", trip_theme=" + trip_theme + ", planner_writer=" + planner_writer + "]";
+		return "Planner [PLANNER_NUM=" + PLANNER_NUM + ", USER_NUMBER=" + USER_NUMBER + ", PLANNER_NAME=" + PLANNER_NAME
+				+ ", plannerIdxNum=" + plannerIdxNum + ", IdxNum=" + IdxNum + ", plannerIdx=" + plannerIdx
+				+ ", PLACE_NUMBER=" + PLACE_NUMBER + ", trip_nation=" + trip_nation + ", trip_date=" + trip_date
+				+ ", trip_season=" + trip_season + ", trip_theme=" + trip_theme + "]";
 	}
 	
 

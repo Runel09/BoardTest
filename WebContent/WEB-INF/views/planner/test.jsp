@@ -85,9 +85,9 @@ function openWindow(){
 	var divInd = $(this.parentNode);
 	var divBody=$("#indexBody")
 	var index=divInd.index();
-	
-	var opwin=window.open("../map/test?startNo="+divBody.children("div").eq(index-1).attr("data-place_no")+"&endNo="+divInd.attr("data-place_no"),
-            "childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
+	var info ;
+	var opwin=window.open("../map/test?startNo="+divBody.children("div").eq(index-1).attr("data-place_no")+"&endNo="+divInd.attr("data-place_no")
+			,"childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
 // 	$(opwin.document.getElementById("startIdx")).attr("data-location-lat")=
 		
 // 	$(opwin.doucument).ready(function(){
@@ -98,6 +98,25 @@ function openWindow(){
 	
 // 	})	
 		
+}
+
+function searchAll(){
+	var divBody=$("#indexBody")
+	var info ;
+	info = "../map/test?startNo="+divBody.children("div").eq(0).attr("data-place_no")+"&endNo="+divBody.children("div").eq(-1).attr("data-place_no");
+	console.log(divBody.children("div").size())
+	if (divBody.children("div").size()>2){
+		for(var i = 1 ; i<= divBody.children("div").size()-2;i++){
+			info+=("&index"+i+"="+divBody.children("div").eq(i).attr("data-place_no"));
+			console.log(info);
+			console.log(divBody.children("div").eq(i).attr("data-place_no"));
+		}
+	}
+	var opwin=window.open(info,"childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
+	
+	
+	
+	
 }
 function addIndex(ind){
 	$.ajax({
@@ -137,8 +156,9 @@ function addIndex(ind){
     	  var indexDiv=$(this.parentNode);
     	  var indexBody=$(this.parentNode.parentNode);
     	  var index = indexDiv.index();
-    	  console.log(indexDiv.find('input').eq(0).val());
-    	  console.log(indexBody.children().eq(1).children('input').eq(0).val());
+    	  var data_index=indexDiv.attr("data-index"); 
+//     	  console.log(indexDiv.find('input').eq(0).val());
+//     	  console.log(indexBody.children().eq(1).children('input').eq(0).val());
     	  if (index==0){
     		  if(indexBody.children().eq(1).children('input').eq(0).val()!="숙소"){
     		  alert("첫번째 장소는 무조건 숙소여야만 합니다.")
@@ -146,6 +166,7 @@ function addIndex(ind){
     		  }
     	  }
     		indexBody.children().eq(index).remove();
+    		indexBody.children().eq(index).attr("data-index",data_index);
     		path.removeAt(index);
     		if(index==0){
     		indexBody.children().eq(0).children("button").eq(0).remove();
@@ -174,6 +195,8 @@ function addIndex(ind){
 		}
     
 }
+
+
 
 //	var markerCluster = new MarkerClusterer(map, markers,{imagePath: '/resource/img'});
 
