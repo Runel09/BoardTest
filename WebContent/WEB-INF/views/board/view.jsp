@@ -19,7 +19,7 @@ $(document).ready(function(){
 
 	//목록버튼 동작
 	$("#btnList").click(function() {
-		$(location).attr("href", "/board/free");
+		history.back(-1);
 	});
 	
 	//수정버튼 동작

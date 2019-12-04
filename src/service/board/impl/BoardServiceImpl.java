@@ -523,7 +523,15 @@ public class BoardServiceImpl implements BoardService{
 						e.printStackTrace();
 					}
 				}
-
+				
+				if("checkboard".equals(key))
+				{
+					try {
+						board.setCheckboard(item.getString("UTF-8"));
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+				}
 			} else { // 3) 파일 처리
 
 				// 업로드 파일 처리 방법 2가지

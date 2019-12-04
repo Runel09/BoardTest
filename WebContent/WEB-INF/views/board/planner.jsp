@@ -92,23 +92,37 @@ div.pullRight a:hover:before
  <table class="table" style="    width: 57%; margin-left: 18em; font-size: 22px;">
      
         <tr >
-          <th>여행지</th>
-          <td style="text-align:left;">국내 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp일본 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp홍콩 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp싱가포르 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp대만 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp태국 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp미국</td>
-
+          <th>여행지 <input type="hidden" name="travel_Place" value=""/></th>
+          <td>국내</td>
+		  <td>일본</td>
+		  <td>홍콩</td>
+		  <td>싱가포르</td>
+		  <td>대만</td>
+		  <td>태국</td>
+		  <td>미국</td>
         </tr>
         <tr class="danger">
           <th>여행일</th>
-          <td style="text-align:left;">1-3일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4-6일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7-10일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp11-15일 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp15일이상</td>
-
+          <td>1-3일</td>
+		  <td>4-6일</td>
+		  <td>7-10일</td>
+		  <td>11-15일</td>
+		  <td>15일이상</td>
         </tr>
         <tr>
           <th>여행시기</th>
-          <td style="text-align:left;">봄 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp여름 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp가을 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp겨울</td>
-
+          <td>봄</td>
+		  <td>여름</td>
+		  <td>가을</td>
+		  <td>겨울</td>
         </tr>
         <tr class="success">
           <th>여행테마</th>
-          <td style="text-align:left;">가족여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp나홀로여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp커플여행 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp친구와함께 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비지니스여행</td>
+          <td>가족여행</td>
+          <td>나홀로여행</td>
+          <td>커플여행</td>
+          <td>친구와함께</td>
+          <td>비지니스여행</td>
         </tr>
        
  </table>

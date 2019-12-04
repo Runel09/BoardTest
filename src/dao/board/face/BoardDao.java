@@ -76,17 +76,6 @@ public interface BoardDao {
 	public void deleteBoardList(String[] check);
 
 
-	public void insertRecommend(Board recommendBoard);
-
-
-	public void deleteRecommend(Board recommendBoard);
-
-
-	public boolean checkRecommend(Board recommendBoard);
-
-
-	public int getCountRecommend(Board recommendBoard);
-
 	public void plusReport(Board board);
 
 	public void insertReport(Report report);
