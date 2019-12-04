@@ -128,4 +128,8 @@ public interface BoardService {
 
 
 	public void insertReport(Report report);
+
+
+
+	public List<Board> getEventList(Paging paging);
 }

@@ -7,10 +7,6 @@
 
 <html>
 <head>
-
-<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Raleway">
-<link href="https://fonts.googleapis.com/css?family=Alatsi&display=swap" rel="stylesheet">
 <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- Bootstrqp 3.3.2 밑에 3개  -->
 <!-- 합쳐지고 최소화된 최신 CSS -->

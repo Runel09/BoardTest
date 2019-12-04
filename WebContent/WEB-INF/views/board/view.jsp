@@ -19,7 +19,16 @@ $(document).ready(function(){
 
 	//목록버튼 동작
 	$("#btnList").click(function() {
-		$(location).attr("href", "/board/free");
+		var checkboard = '${board.checkboard}';
+		
+		if( checkboard == '여행팁') {
+			location.href="/board/tip"
+		} else if( checkboard == '질문') {
+			location.href="/board/question"
+		} else if( checkboard == '자유') {
+			location.href="/board/free"
+		} 
+		
 	});
 	
 	//수정버튼 동작
@@ -36,6 +45,15 @@ $(document).ready(function(){
 	$("#btnReport").click(function() {
 		$(location).attr("href", "/board/report?boardno=${board.boardno }");
 	});
+	
+	//추천버튼 동작
+	$("#emptylogin").click(function() {
+		var result = confirm("로그인하실?");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	});
 });
 </script>
 
@@ -43,6 +61,8 @@ $(document).ready(function(){
 $(document).ready(function() {
 
 	if(${isRecommend}) {
+		
+	
 		$("#btnRecommend")
 			.addClass("btn-warning")
 			.html('추천 취소');
@@ -91,7 +111,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="container">
+<div class="container" style="width: 76%; margin-left: 16em;">
 
 	<h1>게시물 조회</h1>
 	<hr>
@@ -143,7 +163,29 @@ $(document).ready(function() {
 					onclick="location.href='/board/download?fileno=${file.fileno }';">${file.originname }</td>
 			</tr>
 		</c:if>
+	</table>
 
+	<!-- 버튼을 통한 페이지 이동 -->
+	<div class="text-center">
+		<c:if test="${!empty userid }">
+		<button id="btnRecommend" class="btn btn-primary"></button>
+		</c:if>
+		<c:if test="${empty userid }">
+		<button id="emptylogin" class="btn btn-primary">추천</button>
+		</c:if>
+		<button id="btnReport" class="btn btn-primary">신고</button>
+	</div>
+	<div class="text-right">
+		<button id="btnList" class="btn btn-primary">목록</button>
+		<c:if test="${userid eq board.id }">
+			<button id="btnUpdate" class="btn btn-info">수정</button>
+			<button id="btnDelete" class="btn btn-danger">삭제</button>
+		</c:if>
+
+	</div>
+
+
+	<table class="table table-bordered" >
 		<tr>
 			<td class="info" colspan="4">댓글</td>
 		</tr>
@@ -152,22 +194,23 @@ $(document).ready(function() {
 			<td colspan="5">
 				<form action="/comment/insert" method="get">
 					<textarea class="form-control"
-						style="resize: none; width: 95%; display: inline; float: left;"
+						style="resize: none; width: 82%;/* display: inline; */ float: left; height: 111px; margin-left: 5em;"
 						name="content" required="required"></textarea>
-					<button class="btn" style="height: 54px; width: 5%; padding: 0;">작성</button>
+					<button class="btn" style="height: 112px; width: 8%;">작성</button>
 					<input type="hidden" value="${board.boardno }" name="boardno">
 				</form>
 			</td>
 		</tr>
-		<c:forEach items="${comment }" var="com">
+		<c:forEach items="${comment }" var="comment">
 			<tr>
-				<td>작성자 : ${com.userid }</td>
-				<td colspan="4">
-					<div style="height: 54px;" class="col-md-11 col-sm-11">${com.content }</div>
+				<td style="width: 21%;">작성자 : ${comment.userid }<br> 작성시간 : ${comment.writtendate }</td>
+	
+				<td colspan="2">
+					<div style="height: 54px;" class="col-md-11 col-sm-11">${comment.content }</div>
 					<div class="col-md-1 col-sm-1 text-right">
-						<c:if test="${userid eq com.userid }">
+						<c:if test="${userid eq comment.userid }">
 							<a class="btn btn-info"
-								href="/comment/delete?commentno=${com.commentno }&boardno=${board.boardno}">삭제</a>
+								href="/comment/delete?commentno=${comment.commentno }&boardno=${board.boardno}">삭제</a>
 						</c:if>
 					</div>
 				</td>
@@ -176,24 +219,6 @@ $(document).ready(function() {
 
 	</table>
 
-
-
-	<!-- 목록 페이지로 요청을 발생시키는 링크 -->
-	<!-- <a href="/emp/list">목록</a> -->
-
-	<!-- 버튼을 통한 페이지 이동 -->
-	<div class="text-center">
-		<button id="btnList" class="btn btn-primary">목록</button>		
-		<button id="btnRecommend" class="btn btn-primary"></button>
-		<button id="btnReport" class="btn btn-primary">신고</button>
-	
-		<c:if test="${userid eq board.id }">
-			<button id="btnUpdate" class="btn btn-info">수정</button>
-			<button id="btnDelete" class="btn btn-danger">삭제</button>
-		</c:if>
-
-	</div>
-
-</div>
+</div>  <!-- container -->
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

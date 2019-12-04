@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.board.Board;
+import dto.board.Report;
 import dto.login.Member;
 import dto.supervisor.Supervisor;
 import util.Paging;
@@ -62,4 +64,30 @@ public interface SupervisorService {
 	 * @param req-요청정보 객체(place_number사용)
 	 */
 	public void UpdatePlace(HttpServletRequest req);
+	
+	/**
+	 * 장소정보 삭제
+	 * @param place-삭제할장소정보객체
+	 */
+	public void placeDelete(HttpServletRequest req);
+
+	public Paging reportListgetPaging(HttpServletRequest req);
+
+	public List<Report> getreportList(Paging paging);
+
+	public void DeleteReport(HttpServletRequest req);
+
+	public void deleteCheckBoardno(String[] check);
+
+	public List<Board> getNoticeList(Paging paging);
+
+	public Paging noticeListgetPaging(HttpServletRequest req);
+
+	public void DeleteNotice(HttpServletRequest req);
+
+	public void UpdateNotice(HttpServletRequest req);
+
+	public void deleteCheckNoticeBoardno(String[] check);
+
+	public void deleteCheckuserno(String[] check);
 }

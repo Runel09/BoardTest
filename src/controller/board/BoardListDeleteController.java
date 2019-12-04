@@ -21,7 +21,7 @@ public class BoardListDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String[] check = req.getParameterValues("chk");
-		
+	
 		boardService.deleteCheckBoardno(check);
 		
 		resp.sendRedirect("/board/list");

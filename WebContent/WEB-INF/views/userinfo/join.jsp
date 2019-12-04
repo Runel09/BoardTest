@@ -145,9 +145,15 @@ background:url("/image/joinbackground.jpg") o-repeat center center fixed ;
 
 <form class="form-inline">
   <div class="form-group">
+<<<<<<< HEAD
     <label class="sr-only" for="exampleInputEmail3">ID</label>
     <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter ID">
 
+=======
+    <label class="sr-only" for="exampleInputEmail3">Email address</label>
+    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+
+>>>>>>> refs/remotes/origin/semi
   </div>
   <div class="form-group">
     <label class="sr-only" for="exampleInputPassword3">Password</label>
