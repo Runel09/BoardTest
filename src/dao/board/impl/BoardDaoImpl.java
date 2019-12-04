@@ -499,11 +499,10 @@ public class BoardDaoImpl implements BoardDao{
 			while(rs.next()) {
 				
 				cnt = rs.getInt(1);
-				
+				System.out.println(cnt);
 			}
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				
@@ -511,7 +510,6 @@ public class BoardDaoImpl implements BoardDao{
 					ps.close();
 					rs.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
