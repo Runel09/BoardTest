@@ -703,6 +703,18 @@ public class SupervisorServiceImpl implements SupervisorService{
 		
 	}
 
+	@Override
+	public void deleteCheckNoticeBoardno(String[] check) {
+		supervisordao.deleteNoticeList(check);
+		
+	}
+
+	@Override
+	public void deleteCheckuserno(String[] check) {
+		supervisordao.deleteMemberList(check);
+		
+	}
+
 
 
 

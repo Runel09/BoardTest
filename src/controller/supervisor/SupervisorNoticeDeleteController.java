@@ -23,7 +23,10 @@ public class SupervisorNoticeDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		supervisorservice.DeleteNotice(req);
+		String[] check = req.getParameterValues("check");
+
+		if( check != null )	supervisorservice.deleteCheckNoticeBoardno(check);
+
 
 		resp.sendRedirect("/supervisor/noticelist");
 	}

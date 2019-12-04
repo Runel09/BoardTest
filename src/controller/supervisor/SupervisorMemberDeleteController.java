@@ -23,7 +23,9 @@ public class SupervisorMemberDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		supervisorservice.DeleteUser(req);
+		String[] check = req.getParameterValues("check");
+
+		if( check != null )	supervisorservice.deleteCheckuserno(check);
 
 		resp.sendRedirect("/supervisor/memberlist");
 	}

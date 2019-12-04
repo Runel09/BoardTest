@@ -86,4 +86,8 @@ public interface SupervisorService {
 	public void DeleteNotice(HttpServletRequest req);
 
 	public void UpdateNotice(HttpServletRequest req);
+
+	public void deleteCheckNoticeBoardno(String[] check);
+
+	public void deleteCheckuserno(String[] check);
 }

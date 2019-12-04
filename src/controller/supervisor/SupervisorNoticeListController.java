@@ -27,32 +27,32 @@ public class SupervisorNoticeListController extends HttpServlet implements Servl
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// 관리자 로그인 됐을 경우
-				if (req.getSession().getAttribute("login") != null) {
+		if (req.getSession().getAttribute("login") != null) {
 
 
-					//요청파라미터에서 curPage를 구하고 Paging 객체 반환
-					Paging paging = supervisorservice.noticeListgetPaging(req);
+			//요청파라미터에서 curPage를 구하고 Paging 객체 반환
+			Paging paging = supervisorservice.noticeListgetPaging(req);
 
-					paging.setSearch(req.getParameter("search"));
-					//System.out.println(paging);
-					//Paging 객체를 MODEL값으로 지정
-					System.out.println("search : " + req.getParameter("search"));
-					req.setAttribute("paging", paging);
+			paging.setSearch(req.getParameter("search"));
+			//System.out.println(paging);
+			//Paging 객체를 MODEL값으로 지정
+			System.out.println("search : " + req.getParameter("search"));
+			req.setAttribute("paging", paging);
 
-					List<Board> list = supervisorservice.getNoticeList(paging);
-//							System.out.println("list:" + list);
-//							for( Board m : list) System.out.println(m);
+			List<Board> list = supervisorservice.getNoticeList(paging);
+			//							System.out.println("list:" + list);
+			//							for( Board m : list) System.out.println(m);
 
-					req.setAttribute("list", list);
+			req.setAttribute("list", list);
 
-					req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_noticelist.jsp").forward(req, resp);
-				}else {
-					// 관리자 로그인 안됐을 경우
+			req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_noticelist.jsp").forward(req, resp);
+		}else {
+			// 관리자 로그인 안됐을 경우
 
-					resp.sendRedirect("/supervisor/login");
+			resp.sendRedirect("/supervisor/login");
+		}
+
+
+
 	}
-	
-
-
 }
-	}

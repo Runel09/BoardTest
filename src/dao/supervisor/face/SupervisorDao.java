@@ -60,6 +60,10 @@ public interface SupervisorDao {
 
 	void noticedelete(Board board);
 
+	void deleteNoticeList(String[] check);
+
+	void deleteMemberList(String[] check);
+
 
 
 

@@ -61,19 +61,9 @@ $(document).ready(function () {
 </tr>
 </c:forEach>
 </table>
-<!-- <div class="text-right"> -->
-<%-- <c:choose> --%>
 
-<%-- 	<c:when test="${login }"> --%>
-<!-- 		 <a class="btn btn-success" href="/board/write" role="button">글쓰기</a> -->
-<%-- 	</c:when> --%>
-<%-- 	<c:otherwise> --%>
-<!-- 		 <a class="btn btn-success" href="/member/login" role="button">글쓰기</a> -->
-<%-- 	</c:otherwise> --%>
-
-<%-- </c:choose> --%>
-<!-- </div> -->
 <button>삭제</button>
+
 </form>
 
 <form action="/supervisor/noticelist" method="get" class="text-right" style="float: right">

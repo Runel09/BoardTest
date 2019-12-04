@@ -539,9 +539,70 @@ public class SupervisorDaoImpl implements SupervisorDao{
 			}
 
 		}
-	
+
+
+	}
+
+	@Override
+	public void deleteNoticeList(String[] check) {
+		conn = DBConn.getConnection();
+
+		String sql = "DELETE FROM board";
+		sql += " WHERE boardno=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < check.length; i++) {
+
+				ps.setInt(1, Integer.parseInt(check[i]));
+				ps.executeQuery();
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			}
 		
 	}
+
+	@Override
+	public void deleteMemberList(String[] check) {
+		conn = DBConn.getConnection();
+
+		String sql = "DELETE FROM userinfo";
+		sql += " WHERE user_number=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < check.length; i++) {
+
+				ps.setInt(1, Integer.parseInt(check[i]));
+				ps.executeQuery();
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		
+	}
+		}
 
 
 
