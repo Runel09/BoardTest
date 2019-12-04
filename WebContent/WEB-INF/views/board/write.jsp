@@ -98,11 +98,11 @@ tr td:not(:first-child), tr th:not(:first-child) {
 
    <tr>
    		<td>  
-		<input id="free" type="radio" name="checkboard" value="자유">자유
+		<input id="free" type="radio" name="checkboard" value="자유" checked="checked">자유
 		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
 		<input id="question" type="radio" name="checkboard" value="질문">질문
    		</td>
-   		<td><div id="cate"></div></td>
+   		<td><div id="cate">자유</div></td>
    </tr>
 
    <tr>

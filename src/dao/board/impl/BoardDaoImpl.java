@@ -405,8 +405,9 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT boardno, title, id, content, hit, writtendate, checkboard";
-		sql += " FROM board WHERE boardno=?";
+		sql += "SELECT boardno, title, id, content, hit, writtendate, checkboard ";
+		sql += ",(SELECT count(*) FROM recommend WHERE boardno=?) recommend ";		
+		sql += "FROM board WHERE boardno=?";
 		
 		Board boarddetail = new Board();
 		
@@ -414,6 +415,7 @@ public class BoardDaoImpl implements BoardDao{
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board.getBoardno());
+			ps.setInt(2, board.getBoardno());
 			
 			rs = ps.executeQuery();
 			
@@ -426,6 +428,7 @@ public class BoardDaoImpl implements BoardDao{
 			boarddetail.setHit(rs.getInt("hit"));
 			boarddetail.setWrittendate(rs.getDate("writtendate"));
 			boarddetail.setCheckboard(rs.getString("checkboard"));
+			boarddetail.setRecommend(rs.getInt("recommend"));
 				
 //			System.out.println(boarddetail);
 			

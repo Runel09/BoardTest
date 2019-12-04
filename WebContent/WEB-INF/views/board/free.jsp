@@ -9,6 +9,7 @@
 
 $(document).ready(function() {
    
+
 	$("#btnWrite").click(function() {
       
 		$(location).attr("href", "/board/write");
