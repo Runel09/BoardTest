@@ -30,5 +30,7 @@ public interface MemberDao {
  */
 	public Member finduserpw(Member member2);
 
+	//임시 비밀번호로 업데이트
+	public void updatePw(Member member2);
 	
 }

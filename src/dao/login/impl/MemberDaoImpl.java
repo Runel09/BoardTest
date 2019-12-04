@@ -67,6 +67,7 @@ public class MemberDaoImpl implements MemberDao{
 			
 			member.setUser_number(rs.getInt("user_number"));
 			member.setUser_nick(rs.getString("USER_nick"));
+			member.setUser_email(rs.getString("USER_email"));
 			}
 			
 		} catch (SQLException e) {
@@ -95,26 +96,26 @@ public class MemberDaoImpl implements MemberDao{
 			ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, member.getUser_id());
-			System.out.println(member.getUser_id());
+//			System.out.println(member.getUser_id());
 			ps.setString(2, member.getUser_pw());
-			System.out.println(member.getUser_pw());
+//			System.out.println(member.getUser_pw());
 			ps.setString(3, member.getUser_name());
-			System.out.println(member.getUser_name());
+//			System.out.println(member.getUser_name());
 			ps.setString(4, member.getUser_nick());
-			System.out.println(member.getUser_nick());
+//			System.out.println(member.getUser_nick());
 			
 			ps.setString(5, member.getUser_email());
-			System.out.println(member.getUser_email());
+//			System.out.println(member.getUser_email());
 			ps.setString(6, member.getUser_addr());
-			System.out.println(member.getUser_addr());
+//			System.out.println(member.getUser_addr());
 			ps.setString(7, member.getUser_addr_detail());
-			System.out.println(member.getUser_addr_detail());
+//			System.out.println(member.getUser_addr_detail());
 			ps.setString(8, member.getUser_mailnum());
-			System.out.println(member.getUser_mailnum());
+//			System.out.println(member.getUser_mailnum());
 			ps.setString(9, member.getUser_birth());
-			System.out.println(member.getUser_birth());
+//			System.out.println(member.getUser_birth());
 			ps.setString(10, member.getUser_phnum());
-			System.out.println(member.getUser_phnum());
+//			System.out.println(member.getUser_phnum());
 			
 			ps.executeQuery();
 			
@@ -227,14 +228,28 @@ conn = DBConn.getConnection(); //DB 연결
 	}
 
 
-	
-		
-	
+	@Override
+	public void updatePw(Member member2) {
+		conn = DBConn.getConnection();   //DB 연결
+		String sql = "";
+		sql += "UPDATE userinfo set user_pw = ? where user_id = ?";
 
-	
-	
+		try {
+			ps = conn.prepareStatement(sql);   //수행 객체 얻기
+			ps.setString(1, member2.getUser_pw());   //SQL쿼리의 ? 채우기
+			ps.setString(2, member2.getUser_id());   //SQL쿼리의 ? 채우기
+			rs = ps.executeQuery();            //SQL 수행 결과 얻기
 
-
-	
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(ps!=null)   ps.close();
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}      
+	}
 
 }

@@ -37,7 +37,13 @@ public interface MemberService {
 	public Member getfinduserparam2(HttpServletRequest req);
 	
 	public Member getUserPw(Member member2);
-
+	
+	
+	public void sendEmailPw(Member memberResult2);
+	
+	public String getRamdomPassword(int len);
+	
+	public void ChangePw(Member memberResult2);
 	
 	
 }
