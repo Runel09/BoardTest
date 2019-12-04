@@ -25,14 +25,26 @@ maigin-top:30px;
 
 }
 </style>
-
+<script type="text/javascript">
+function openIdChk(){
+	
+	//새창으로 띄우기
+	window.name = "parentForms";
+	//새창으로띄우고 url형식으로  직접 정보를입력해서 보내주기
+	window.open("/find/id?inputEmail="+$("#inputEmail").val()+"&inputName="+$("#inputName").val(),
+			"chkforms", "width=500, height=300, resizable = no, scrollbars = no");
+	
+	$("#inputEmail").val("")
+	$("#inputName").val("")
+}
+</script>
 <meta charset="UTF-8">
 <title>FindUserInfo</title>
 </head>
 <body>
 <h2>아이디 찾기</h2>
 
-<form class="form-horizontal" id ="findidform" action="/find/userinfo" method = "post">
+<form class="form-horizontal" id ="findidform" action="/find/id" method = "post">
  <div class="form-group" id="inputemail" >
     <label for="inputEmail" class="col-sm-2 control-label" >이메일</label>
     <div class="col-sm-3">
@@ -48,7 +60,8 @@ maigin-top:30px;
  
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-10">
-      <button type="submit" class="btn btn-default" name ="findidbutton">아이디 찾기</button>
+      <button type="button" class="btn btn-default" name ="findidbutton" onclick="openIdChk()">아이디 찾기</button>
+     
     </div>
   </div>
 </form>

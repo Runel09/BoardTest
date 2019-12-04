@@ -31,7 +31,9 @@ public class LoginChkFormController extends HttpServlet {
 	
 	@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// TODO Auto-generated method stub
+		resp.setCharacterEncoding("utf-8");
+		
+		// TODO Auto-generated method stub
 		String id = req.getParameter("id");
 		System.out.println("contorller " +id);
 		boolean check = memberservice.idcheck(id);
