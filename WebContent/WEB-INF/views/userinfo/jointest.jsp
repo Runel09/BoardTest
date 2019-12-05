@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 
+<!DOCTYPE html>
 <html>
 <head>
-	<title>È¸¿ø°¡ÀÔ È­¸é</title>
+	<title>íšŒì›ê°€ì… í™”ë©´</title>
 <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<!-- Bootstrqp 3.3.2 ¹Ø¿¡ 3°³  -->
-<!-- ÇÕÃÄÁö°í ÃÖ¼ÒÈ­µÈ ÃÖ½Å CSS -->
+<!-- Bootstrqp 3.3.2 ë°‘ì— 3ê°œ  -->
+<!-- í•©ì³ì§€ê³  ìµœì†Œí™”ëœ ìµœì‹  CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- ºÎ°¡ÀûÀÎ Å×¸¶ -->
+<!-- ë¶€ê°€ì ì¸ í…Œë§ˆ -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- ÇÕÃÄÁö°í ÃÖ¼ÒÈ­µÈ ÃÖ½Å ÀÚ¹Ù½ºÅ©¸³Æ® -->
+<!-- í•©ì³ì§€ê³  ìµœì†Œí™”ëœ ìµœì‹  ìë°”ìŠ¤í¬ë¦½íŠ¸ -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 	<style type="text/css">
@@ -34,89 +35,89 @@
 
 	<script type="text/javascript">
 	
-		// È¸¿ø°¡ÀÔ È­¸éÀÇ ÀÔ·Â°ªµéÀ» °Ë»çÇÑ´Ù.
-		function checkValue()
+		// íšŒì›ê°€ì… í™”ë©´ì˜ ì…ë ¥ê°’ë“¤ì„ ê²€ì‚¬í•œë‹¤.
+		function checkValue()	
 		{
 			var form = document.userInfo;
 		
 			if(!form.userid.value){
-				warningModal("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(form.idDuplication.value != "idCheck"){
-				warningModal("¾ÆÀÌµğ Áßº¹Ã¼Å©¸¦ ÇØÁÖ¼¼¿ä.");
+				warningModal("ì•„ì´ë”” ì¤‘ë³µì²´í¬ë¥¼ í•´ì£¼ì„¸ìš”.");
 				return false;
 			}
 			
 			if(!form.userpw.value){
-				warningModal("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
-			// ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎ¿¡ ÀÔ·ÂµÈ °ªÀÌ µ¿ÀÏÇÑÁö È®ÀÎ
+			// ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì— ì…ë ¥ëœ ê°’ì´ ë™ì¼í•œì§€ í™•ì¸
 			if(form.password.value != form.passwordcheck.value ){
-				warningModal("ºñ¹Ğ¹øÈ£¸¦ µ¿ÀÏÇÏ°Ô ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë™ì¼í•˜ê²Œ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}	
 			
 			if(!form.username.value){
-				warningModal("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(!form.userbirthyy.value){
-				warningModal("³âµµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ë…„ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(isNaN(form.userbirthyy.value)){
-				warningModal("³âµµ´Â ¼ıÀÚ¸¸ ÀÔ·Â°¡´ÉÇÕ´Ï´Ù.");
+				warningModal("ë…„ë„ëŠ” ìˆ«ìë§Œ ì…ë ¥ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 				return false;
 			}
 			
 			if(form.userbirthmm.value == "00"){
-				warningModal("¿ùÀ» ¼±ÅÃÇÏ¼¼¿ä.");
+				warningModal("ì›”ì„ ì„ íƒí•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(!form.userbirthdd.value){
-				warningModal("³¯Â¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ë‚ ì§œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(isNaN(form.userbirthdd.value)){
-				warningModal("³¯Â¥´Â ¼ıÀÚ¸¸ ÀÔ·Â°¡´ÉÇÕ´Ï´Ù.");
+				warningModal("ë‚ ì§œëŠ” ìˆ«ìë§Œ ì…ë ¥ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 				return false;
 			}
 			
 			if(!form.usermail.value){
-				warningModal("¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(!form.phone.value){
-				warningModal("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 			
 			if(isNaN(form.phone.value)){
-				warningModal("ÀüÈ­¹øÈ£´Â - Á¦¿ÜÇÑ ¼ıÀÚ¸¸ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+				warningModal("ì „í™”ë²ˆí˜¸ëŠ” - ì œì™¸í•œ ìˆ«ìë§Œ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 				return false;
 			}
 			
 			if(!form.address.value){
-				warningModal("ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				warningModal("ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				return false;
 			}
 		}
 		
-		// Ãë¼Ò ¹öÆ° Å¬¸¯½Ã Ã¹È­¸éÀ¸·Î ÀÌµ¿
+		// ì·¨ì†Œ ë²„íŠ¼ í´ë¦­ì‹œ ì²«í™”ë©´ìœ¼ë¡œ ì´ë™
 		function goFirstForm() {
 			location.href="/main";
 		}	
 		
-		// ¾ÆÀÌµğ Áßº¹Ã¼Å© È­¸éopen
+		// ì•„ì´ë”” ì¤‘ë³µì²´í¬ í™”ë©´open
 		function openIdChk(){
 		
 			
@@ -125,13 +126,13 @@
 					"chkform", "width=500, height=300, resizable = no, scrollbars = no");	
 		}
 
-		// ¾ÆÀÌµğ ÀÔ·ÂÃ¢¿¡ °ª ÀÔ·Â½Ã hidden¿¡ idUncheck¸¦ ¼¼ÆÃÇÑ´Ù.
-		// ÀÌ·¸°Ô ÇÏ´Â ÀÌÀ¯´Â Áßº¹Ã¼Å© ÈÄ ´Ù½Ã ¾ÆÀÌµğ Ã¢ÀÌ »õ·Î¿î ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇßÀ» ¶§
-		// ´Ù½Ã Áßº¹Ã¼Å©¸¦ ÇÏµµ·Ï ÇÑ´Ù.
+		// ì•„ì´ë”” ì…ë ¥ì°½ì— ê°’ ì…ë ¥ì‹œ hiddenì— idUncheckë¥¼ ì„¸íŒ…í•œë‹¤.
+		// ì´ë ‡ê²Œ í•˜ëŠ” ì´ìœ ëŠ” ì¤‘ë³µì²´í¬ í›„ ë‹¤ì‹œ ì•„ì´ë”” ì°½ì´ ìƒˆë¡œìš´ ì•„ì´ë””ë¥¼ ì…ë ¥í–ˆì„ ë•Œ
+		// ë‹¤ì‹œ ì¤‘ë³µì²´í¬ë¥¼ í•˜ë„ë¡ í•œë‹¤.
 		function inputIdChk(){
 			document.userInfo.idDuplication.value ="idUncheck";
 		}
-		//°æ°í ¸ğ´Ş È£Ãâ ¸Ş¼­µå
+		//ê²½ê³  ëª¨ë‹¬ í˜¸ì¶œ ë©”ì„œë“œ
 		   function warningModal(content) {
 		      $(".modal-contents").text(content);
 		      $("#defaultModal").modal('show');
@@ -139,81 +140,90 @@
 		 
 	</script>
 	
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 		<br><br>
-		<b><font size="6" color="gray">È¸¿ø°¡ÀÔ</font></b>
+		<b><font size="6" color="gray">íšŒì›ê°€ì…</font></b>
 		<br><br><br>
 		
-		<!-- °æ°í ¸ğ´ŞÃ¢ -->
+		<!-- ê²½ê³  ëª¨ë‹¬ì°½ -->
             <div class="modal fade" id="defaultModal">
                <div class="modal-dialog">
                     <div class="modal-content panel-danger">
                         <div class="modal-header panel-heading">
-                            <h4 class="modal-title">¿À·ù ¸Ş½ÃÁö</h4>
+                            <h4 class="modal-title">ì˜¤ë¥˜ ë©”ì‹œì§€</h4>
                         </div>
                         <div class="modal-body">
                             <p class="modal-contents"></p>
                         </div>
                         <div class="modal-footer">
-                           <button type="button" class="btn btn-primary" data-dismiss="modal">È®ÀÎ</button>
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">í™•ì¸</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
        
-            <!--// °æ°í ¸ğ´ŞÃ¢ -->
+            <!--// ê²½ê³  ëª¨ë‹¬ì°½ -->
             
              
-		<!-- ÀÔ·ÂÇÑ °ªÀ» Àü¼ÛÇÏ±â À§ÇØ form ÅÂ±×¸¦ »ç¿ëÇÑ´Ù -->
-		<!-- °ª(ÆÄ¶ó¹ÌÅÍ) Àü¼ÛÀº POST ¹æ½Ä, Àü¼ÛÇÒ ÆäÀÌÁö´Â JoinPro.jsp -->
+		<!-- ì…ë ¥í•œ ê°’ì„ ì „ì†¡í•˜ê¸° ìœ„í•´ form íƒœê·¸ë¥¼ ì‚¬ìš©í•œë‹¤ -->
+		<!-- ê°’(íŒŒë¼ë¯¸í„°) ì „ì†¡ì€ POST ë°©ì‹, ì „ì†¡í•  í˜ì´ì§€ëŠ” JoinPro.jsp -->
 		<form method="post" action="/member/join" 
 				name="userInfo" onsubmit="return checkValue()">
 			<table>
 				<tr>
-					<td id="title">¾ÆÀÌµğ</td>
+					<td id="title">ì•„ì´ë””</td>
 					<td>
 						<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
-						<input type="button" value="Áßº¹È®ÀÎ" onclick="openIdChk()">	
+						<input type="button" value="ì¤‘ë³µí™•ì¸" onclick="openIdChk()">	
 						<input type="hidden" name="idDuplication" value="idUncheck" >
 					</td>
 				</tr>
 						
 				<tr>
-					<td id="title">ºñ¹Ğ¹øÈ£</td>
+					<td id="title">ë‹‰ë„¤ì„</td>
+					<td>
+						<input type="text" name="usernick" maxlength="50">
+					</td>
+				</tr>
+				
+				<tr>
+					<td id="title">ë¹„ë°€ë²ˆí˜¸</td>
 					<td>
 						<input type="password" name="userpw" maxlength="50">
 					</td>
 				</tr>
 				
 				<tr>
-					<td id="title">ºñ¹Ğ¹øÈ£ È®ÀÎ</td>
+					<td id="title">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</td>
 					<td>
 						<input type="password" name="passwordcheck" maxlength="50">
 					</td>
 				</tr>
 					
 				<tr>
-					<td id="title">ÀÌ¸§</td>
+					<td id="title">ì´ë¦„</td>
 					<td>
 						<input type="text" name="username" maxlength="50">
 					</td>
 				</tr>
 					
 				<tr>
-					<td id="title">¼ºº°</td>
+					<td id="title">ì„±ë³„</td>
 					<td>
-						<input type="radio" name="gender" value="³²" checked>³²
-						<input type="radio" name="gender" value="¿©" >¿©
+						<input type="radio" name="gender" value="ë‚¨" checked>ë‚¨
+						<input type="radio" name="gender" value="ì—¬" >ì—¬
 					</td>
 				</tr>
 					
 				<tr>
-					<td id="title">»ıÀÏ</td>
+					<td id="title">ìƒì¼</td>
 					<td>
-						<input type="text" name="userbirth" maxlength="4" placeholder="³â(4ÀÚ)" size="6">
+						<input type="text" name="userbirth" maxlength="4" placeholder="ë…„(4ì)" size="6">
 						<select name="userbirthmm">
-							<option value="00">¿ù</option>
+							<option value="00">ì›”</option>
 							<option value="01" >1</option>
 							<option value="02" >2</option>
 							<option value="03" >3</option>
@@ -227,12 +237,12 @@
 							<option value="11" >11</option>
 							<option value="12" >12</option>
 						</select>
-						<input type="text" name="userbirthdd" maxlength="2" placeholder="ÀÏ" size="4">
+						<input type="text" name="userbirthdd" maxlength="2" placeholder="ì¼" size="4">
 					</td>
 				</tr>
 					
 				<tr>
-					<td id="title">ÀÌ¸ŞÀÏ</td>
+					<td id="title">ì´ë©”ì¼</td>
 					<td>
 						<input type="text" name="usermail" maxlength="50">@
 						<select name="mail2">
@@ -245,21 +255,33 @@
 				</tr>
 					
 				<tr>
-					<td id="title">ÈŞ´ëÀüÈ­</td>
+					<td id="title">íœ´ëŒ€ì „í™”</td>
 					<td>
-						<input type="text" name="userphone"/>
+						<input type="text" name="userphnum"/>
 					</td>
 				</tr>
 				<tr>
-					<td id="title">ÁÖ¼Ò</td>
+					<td id="title">ìš°í¸ë²ˆí˜¸</td>
 					<td>
-						<input type="text" size="50" name="useraddress"/>
+						<input type="text" size="50" name="usermailnum"/>
+					</td>
+				</tr>
+				<tr>
+					<td id="title">ì£¼ì†Œ</td>
+					<td>
+						<input type="text" size="50" name="useraddr"/>
+					</td>
+				</tr>
+				<tr>
+					<td id="title">ìƒì„¸ì£¼ì†Œ</td>
+					<td>
+						<input type="text" size="50" name="useraddrdetail"/>
 					</td>
 				</tr>
 			</table>
 			<br>
-			<input type="submit" value="°¡ÀÔ"/>  
-			<input type="button" value="Ãë¼Ò" onclick="goFirstForm()">
+			<input type="submit" value="ê°€ì…"/>  
+			<input type="button" value="ì·¨ì†Œ" onclick="goFirstForm()">
 		</form>
 
 </body>

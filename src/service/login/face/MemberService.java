@@ -19,7 +19,9 @@ public interface MemberService {
 	 */ 
 	public void join(Member member);
 	
-	
+	/*
+	 * 중복검사
+	 */
 	public boolean idcheck(String id);
 	
 	
@@ -29,21 +31,23 @@ public interface MemberService {
 	 * 이메일과 이름을 입력받아와 아이디찾기
 	 */
 	public Member getfindUserParam(HttpServletRequest req);
-	
 	public Member getUserId(Member member);
+	
+	
 	/*
 	 * 아이디와 휴대폰 번호를 입력받아와 비밀번호 찾기
 	 */
 	public Member getfinduserparam2(HttpServletRequest req);
-	
 	public Member getUserPw(Member member2);
-	
-	
 	public void sendEmailPw(Member memberResult2);
-	
 	public String getRamdomPassword(int len);
-	
 	public void ChangePw(Member memberResult2);
+	
+	
+	Member getmemberParam(HttpServletRequest req);
+	
+	
+
 	
 	
 }

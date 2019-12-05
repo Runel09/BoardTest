@@ -1,13 +1,5 @@
 package service.login.impl;
 
-import javax.servlet.http.HttpServletRequest;
-
-import dao.login.face.MemberDao;
-import dao.login.impl.MemberDaoImpl;
-import dto.login.Member;
-import service.login.face.MemberService;
-import util.Gmail;
-
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -17,6 +9,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+
+import dao.login.face.MemberDao;
+import dao.login.impl.MemberDaoImpl;
+import dto.login.Member;
+import service.login.face.MemberService;
+import util.Gmail;
 
 
 public class MemberServiceImpl implements MemberService{
@@ -135,18 +134,18 @@ public class MemberServiceImpl implements MemberService{
 	      String host = "http://localhost:8082/";
 	      
 	      //임시 비밀번호 생성
-	      String pwTemp = getRamdomPassword(8);
+	      String pwTmember = getRamdomPassword(8);
 	      
 	      //임시 비밀번호 객체에 담기
-	      memberResult2.setUser_pw(pwTemp);
+	      memberResult2.setUser_pw(pwTmember);
 	      
 	      //비밀번호 Update
 	      ChangePw(memberResult2);
 	      
-//	      System.out.println("임시 비번 뭐냐? " + pwTemp);
+//	      System.out.println("임시 비번  " + pwTmember);
 	      
 	      String subject = "TRAVELERS 비밀번호 찾기 입니다.";
-	      String content = "고객님의 임시 비밀번호는 " + pwTemp +  " 입니다. 홈페이지 바로가기: " + 
+	      String content = "고객님의 임시 비밀번호는 " + pwTmember +  " 입니다. 홈페이지 바로가기: " + 
           "<a href='" + host + "main" + "'><br>돌아가기</a>";
 
 	      // SMTP에 접속하기 위한 정보를 기입합니다.
@@ -177,6 +176,63 @@ public class MemberServiceImpl implements MemberService{
 	         e.printStackTrace();
 	      }
 	}
+
+    
+	   @Override
+	   public Member getmemberParam(HttpServletRequest req) {
+		   Member member = new Member(); // 요청 파라미터 저장 객체
+	
+			member.setUser_id(req.getParameter("userid"));
+			member.setUser_nick(req.getParameter("usernick"));
+			member.setUser_pw(req.getParameter("userpw"));
+			member.setUser_name(req.getParameter("username"));
+			member.setUser_email(req.getParameter("usermail"));
+			member.setUser_addr(req.getParameter("useraddr"));
+			member.setUser_addr_detail(req.getParameter("useraddrdetail"));
+			member.setUser_mailnum(req.getParameter("usermailnum"));
+			member.setUser_birth(req.getParameter("userbirth"));
+			member.setUser_phnum(req.getParameter("userphnum"));
+
+	      
+	    
+	      //hiredate
+//	      param = req.getParameter("hiredate");
+//	      
+//	      System.out.println("------ [memberService] hiredate ------");
+//	      System.out.println( param );
+//	      
+//	      if( param !=null && !"".equals(param)) {
+//	         
+//	         // <form>으로 전달된 날짜 데이터는 String 타입으로 오게 된다
+//	         // Date 포맷의 String을 java.util.Date 타입으로 변환해야 한다
+//	      
+////	         // "년-월-일" 형태의 문자열 포맷 객체
+////	         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+////	         
+//	         try {
+//	            // parse() : "Date 포맷" -> java.util.Date
+//	            // format() : java.util.Date -> "Date포맷"
+////	            Date d = format.parse(param);
+////	            
+////	            System.out.println("------ [memberService] d ------");
+////	            System.out.println(d);
+////	            
+////	            member.setHiredate(d);
+//	            
+//	         } catch (ParseException e) {
+//	            // TODO Auto-generated catch block
+//	            e.printStackTrace();
+//	         }
+//	      }
+	      
+	      
+//	      System.out.println("------ [memberService] hiredate ------");
+//	      System.out.println( member.getHiredate() );
+//	      
+//	    
+			System.out.println(member);
+	         return member;
+	   }
 
 
 }
