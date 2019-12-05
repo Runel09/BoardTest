@@ -4,8 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!-- <script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> -->
-<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/supervisor_header.jsp"/>
 
 <script type="text/javascript"
 src="/resource/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>

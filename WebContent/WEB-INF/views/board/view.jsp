@@ -177,10 +177,11 @@ $(document).ready(function() {
 	</div>
 	<div class="text-right">
 		<button id="btnList" class="btn btn-primary">목록</button>
-		<c:if test="${userid eq board.id }">
+		<c:if test="${userid eq board.id or super_id eq 'supervisor'}">
 			<button id="btnUpdate" class="btn btn-info">수정</button>
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
+		
 
 	</div>
 

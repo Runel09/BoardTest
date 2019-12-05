@@ -48,6 +48,12 @@ $(document).ready(function() {
 	    	
 // 	    }
 // 	   })
+
+	$("#btnList").click(function() {
+    $(location).attr("href", "/place/list");
+   		});
+
+
 	// 댓글 입력
 	$("#btnCommInsert").click(function() {
 		 if(!'${login}'){
@@ -88,7 +94,11 @@ $(document).ready(function() {
 				.attr("name", "review_char")
 				.css("display", "none")
 				.text($("#commentContent").val())
-		);
+		).append(
+			$("<input>")
+				.attr("name", "testInput")
+				.css("display", "none")
+				.attr("value", $("#writeReviewForm").find("[name='testInput']:checked").val() ));
 		
 		$(document.body).append($form);
 		
@@ -96,9 +106,7 @@ $(document).ready(function() {
 	}	
 	});
 	
-	
-	 
-	
+
 	
 });
 
@@ -175,7 +183,7 @@ function warningModal(content) {
 
 
 
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style= "width:750px; left:530px;">
+<div id="carousel-example-generic" class="carousel slide container" data-ride="carousel" style= "width:750px; text-align:center;">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -240,6 +248,8 @@ function warningModal(content) {
 <td class="info">전화번호</td><td colspan="3">${viewplace.tel_number }</td>
 </tr>
 
+
+
 <!-- <tr> -->
 <%-- <td class="info">장소정보</td><td colspan="3">${viewplace.place_information }</td> --%>
 <!-- </tr> -->
@@ -250,16 +260,20 @@ function warningModal(content) {
 
 
 
-<tr><td class="info"  colspan="7">장소정보내용</td></tr>
+<tr>
+<td class="info"  >장소정보내용</td><td colspan="3">${viewplace.place_information }</td>
+<td class="info"  >점수</td><td colspan="3">${viewplace.review_score }</td>
 
-<tr><td colspan="7">${viewplace.place_information }</td></tr>
+</tr>
+
+
 
 <c:if test="${viewplace.place_number eq viewfile.place_number}">
 <tr><td class="info"  colspan="7">첨부파일</td></tr>
 <tr><td colspan="4">${viewfile.originname }</td></tr>
 </c:if>
 
-
+</table>
 <!-- 관리자 로그인 됐을  때만 수정,삭제 버튼 보이게 -->
 <div class="text-right">
 
@@ -295,35 +309,33 @@ function warningModal(content) {
 
 
 
-
-<form action="/comment/score" method="post">
+ 
 <!-- 댓글 리스트 -->
-<table class="table table-striped table-hover table-condensed">
+<div class="continer" style="text-align: -webkit-center;">
+<!-- <div style="align: center;"> -->
+<table class="table table-striped table-hover table-condensed " style= "width:1000px; ">
 <thead>
 <tr>
+<!-- 	<th style="width: 10%;"></th> -->
 	<th style="width: 10%;">유저번호</th>
 	<th style="width: 10%;">장소번호</th>
-	<th style="width: 50%;">댓글</th>
-<!-- 	<th style="width: 20%;">작성일</th> -->
-	<th style="width: 5%;">점수3점</th>
-	<th style="width: 5%;">점수2점</th>
-	<th style="width: 5%;">점수1점</th>
-	<th style="width: 5%;">점수주기</th>
+	<th style="width: 60%;">댓글</th>
+	<th style="width: 10%;"></th>
+
 </tr>
 </thead>
 <tbody id="commentBody">
 <c:forEach items="${commentList }" var="comment">
 <tr data-review_number="${comment.review_number }">
-	<td>${comment.user_number }</td>
-	<td>${comment.place_number }</td>
+<!-- 	<td></td> -->
+	<td class="info">${comment.user_number }</td>
+	<td class="warning">${comment.place_number }</td>
 	<td>${comment.review_char }</td>
-	<td><input type="radio" name="testInput" value=3 /></td>
-	<td><input type="radio" name="testInput" value=2 /></td>
-	<td><input type="radio" name="testInput" value=1 /></td>
-	<td><button >점수주기</button></td>
-<%-- 	<td><fmt:formatDate value="${comment.writtenDate }" pattern="yy-MM-dd hh:mm:ss" /></td> --%>
+	
+	
+
 	<td>
-		<c:if test="${sessionScope.user_number eq comment.user_number }">
+		<c:if test="${sessionScope.user_userNum eq comment.user_number }">
 		<button class="btn btn-default btn-xs"
 			onclick="deleteComment(${comment.review_number });">삭제</button>
 		</c:if>
@@ -331,28 +343,33 @@ function warningModal(content) {
 	
 </tr>
 
-
-
-
 </c:forEach>
 </tbody>
 </table>	<!-- 댓글 리스트 end -->
-</form>
+<!-- </div> -->
+</div>
 
 
-<div class="form-inline text-center">
+<!-- <form action="/place/comment" method="post" > -->
+<div id="writeReviewForm" class="form-inline text-center">
 <%-- 	<input type="text" size="10" class="form-control" id="commentWriter" value="${usernick }" readonly="readonly"/> --%>
 <!-- 	<form  action ="/place/comment" method="post"> -->
+	
+	
+	3점<input type="radio" name="testInput" value="3" />
+	2점<input type="radio" name="testInput" value="2" />
+	1점<input type="radio" name="testInput" value="1" />
+	
 	<textarea rows="1" cols="50" class="form-control" id="commentContent" name="review_char"></textarea>
 	<button id="btnCommInsert" class="btn" type = "button">입력</button>
 	
 <!-- 	</form> -->
 </div>	<!-- 댓글 입력 end -->
-
+<!-- </form> -->
 
 
 <div class="text-center">   
-   <button id="btnList" class="btn btn-primary">목록</button>
+   <button id="btnList" class="btn btn-primary" onclick='href=""'>목록</button>
 </div>
 
 </div>	<!-- 댓글 처리 end -->
@@ -366,7 +383,7 @@ function warningModal(content) {
 
 <!------------------------------------------------------------->
 
-</div><!-- .container -->
+<!-- </div>.container -->
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
 

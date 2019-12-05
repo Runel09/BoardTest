@@ -4,7 +4,7 @@
  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %> 
-<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/supervisor_header.jsp"/>
 <style type="text/css">
 table, th{
 	text-align: center;
