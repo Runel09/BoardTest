@@ -3,14 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- jquery 2.2.4 -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-</head>
+<jsp:include page="/WEB-INF/views/layout/supervisor_header.jsp"/>
 <script type= "text/javascript">
 $(document).ready(function(){
    //로그인 버튼 클릭 시 form submit
@@ -18,10 +11,6 @@ $(document).ready(function(){
       $(this).parents("form").submit();
    })
    
-   //취소 버튼 누르면 뒤로가기
-   $("#btnCancel").click(function() {
-      history.go(-1);
-   })
 
 });
 
@@ -32,12 +21,10 @@ $(document).ready(function(){
 
 <div class ="container" style="center">
 
-
 <%
 
 if(session.getAttribute("login")!=null&&(boolean)session.getAttribute("login")){
 %>
-
 	<form action="/supervisor/logout" method="get">
 		<button>로그아웃</button>
 	</form>
@@ -45,7 +32,7 @@ if(session.getAttribute("login")!=null&&(boolean)session.getAttribute("login")){
 <%
 }else{%>
 <form action ="/supervisor/login" method="post" class="form-horizontal">
-   <fieldset style='margin: 0 auto;width:300px'>
+   <fieldset style='margin:-67px auto;width:300px'>
       <legend>관리자 로그인</legend><br>
          <div class="form-group">
             <input type="text" name="supervisor_id" id="supervisor_id"class="form-control" placeholder="아이디">
