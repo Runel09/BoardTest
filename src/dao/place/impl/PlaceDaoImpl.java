@@ -458,7 +458,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	            placefile.setStoredname(rs.getString("storedname"));
 //	            placefile.setWritedate(rs.getDate("writedate"));
 	            placefile.setFilesize(rs.getInt("filesize"));
-	            place.setPlace_number(place.getPlace_number());
+	            place.setPlace_number(rs.getInt("boardno"));
 
 	         }
 	      } catch (SQLException e) {
