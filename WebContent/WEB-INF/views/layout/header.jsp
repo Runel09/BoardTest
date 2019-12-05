@@ -39,21 +39,29 @@ hr {
 
 
 a.menubar{
-	margin:83px;
+	margin: 7%;
 	font-size:25px;
 	font-family: 'Alatsi', sans-serif;
+	color: #282c37;
+	text-decoration:none;
 }
 h1.name{
 	font-size:25px;
 	font-family: 'Alatsi', sans-serif;
-	color:#337ab7;
+	color:#282c37;
 	text-align:center;
 }
 
-
+.loginbtngroup{
+	position: absolute;
+    right: 0px;
+    display: inline-block;
+    width: 180px
+	}
 
 .container {
-	width: auto;
+	min-width: 800px;
+    width: 81%;
 }
 
 #header{
@@ -139,9 +147,6 @@ div.circleBehind a:hover:after
 
 
 
-
-
-
 </style>
 
 </head>
@@ -150,15 +155,33 @@ div.circleBehind a:hover:after
 <div id="header" >
 
 
-<div style="text-align: center;">
+<div style="margin-bottom: 26px;">
 <!-- <div style="position: fixed;"> -->
 <!-- <a href="/main"><img src="/image/logo.png"  style="width: 78px; margin: 29px; height: 71px;"/></a> -->
 <!-- </div> -->
-<span style="vertical-align: middle; -webkit-text-stroke-width: unset; font-size: 100px; line-height: 129px;  "><a href="/main">Travelers</a>
+
+
+
+
+<span style="vertical-align: middle; -webkit-text-stroke-width: unset; font-size: 100px; line-height: 129px; " ><a href="/main" style="color:#282c37; text-decoration:none;">Travelers</a>
+</span>
+
+<div class="loginbtngroup">
+<span>
+<c:if test="${empty login }">
+<a href="/member/login"><button type="button" class="btn btn-primary" style="margin-right: 1%; font-family: auto;
+}">로그인</button></a>
+<a href="/member/join"><button type="button" class="btn btn-success" style="font-family: auto;
+}">회원가입</button></a>
+</c:if>
+<c:if test="${login eq true }">
+<a href="/member/logout"><button type="button" class="btn btn-danger" style="font-family: auto;
+}">로그아웃</button></a>
+</c:if>
 </span>
 </div>
 
-<div class="container blue circleBehind">
+<div class="container" id ="font">
   <a class ="menubar" href="">플래너</a>
   <a class ="menubar" href="/place/list">장소정보</a>
   <a class ="menubar" href="/board/free">게시판</a>
@@ -185,15 +208,7 @@ div.circleBehind a:hover:after
 <!-- </ul> -->
 <!-- </div> -->
 
-
-
 </div>
 
-
-
-
-
-<hr>
-<hr>
 
 <div id="wrapper">
