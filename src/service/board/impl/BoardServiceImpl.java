@@ -28,6 +28,7 @@ import dao.board.impl.RecommendDaoImpl;
 import dto.board.Board;
 import dto.board.BoardFile;
 import dto.board.Comment;
+import dto.board.PlanBoard;
 import dto.board.Recommend;
 import dto.board.Report;
 import service.board.face.BoardService;
@@ -65,8 +66,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> getPlannerList(Paging paging) {
-
+	public List<PlanBoard> getPlannerList(Paging paging) {
+//		System.out.println("BoardService.getPlannerList : "+paging);
 		return boardDao.selectPlannerAll(paging);
 	}
 
@@ -127,6 +128,35 @@ public class BoardServiceImpl implements BoardService{
 		return paging;
 	}
 
+	@Override
+	public Paging getPlannerPaging(HttpServletRequest req) {
+		
+		Paging paging = new Paging(0, 0);
+	
+		paging.setTravel_place(req.getParameter("travel_place"));
+		paging.setTravel_date(req.getParameter("travel_date"));
+		paging.setTravel_season(req.getParameter("travel_season"));
+		paging.setTravel_thema(req.getParameter("travel_thema"));
+		
+		//요청파라미터  curPage를 파싱한다
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if(param!=null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+		//Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+		int totalCount = boardDao.selectCntPlanner(paging);
+		
+		//Paging 객체 생성
+		Paging result = new Paging(totalCount, curPage);
+		
+		result.setTravel_place( paging.getTravel_place() );
+		result.setTravel_date( paging.getTravel_date() );
+		result.setTravel_season( paging.getTravel_season() );
+		result.setTravel_thema( paging.getTravel_thema() );
+		
+		return result;
+	}
 
 	@Override
 	public void write(Board board) {

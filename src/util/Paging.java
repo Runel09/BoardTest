@@ -2,36 +2,56 @@ package util;
 
 public class Paging {
 	
+	private String travel_place; // 여행 국가
+	private String travel_date; // 여행 기간
+	private String travel_season; // 여행 시즌
+	private String travel_thema; // 여행 테마
+	public String getTravel_place() {
+		return travel_place;
+	}
+
+	public void setTravel_place(String travel_place) {
+		this.travel_place = travel_place;
+	}
+
+	public String getTravel_date() {
+		return travel_date;
+	}
+
+	public void setTravel_date(String travel_date) {
+		this.travel_date = travel_date;
+	}
+
+	public String getTravel_season() {
+		return travel_season;
+	}
+
+	public void setTravel_season(String travel_season) {
+		this.travel_season = travel_season;
+	}
+
+	public String getTravel_thema() {
+		return travel_thema;
+	}
+
+	public void setTravel_thema(String travel_thema) {
+		this.travel_thema = travel_thema;
+	}
 	private String search;
 	private int searchno;
-	
-	public int getSearchno() {
-		return searchno;
-	}
-
-	public void setSearchno(int searchno) {
-		this.searchno = searchno;
-	}
-
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
-	}
 	private int curPage; // 현재 페이지 번호 (브라우저에서 선택한 페이지 번호)
-
+	
 	private int totalCount; // 총 게시글 수 (DB에서 조회된 전체 결과의 행 수)
 	private int listCount; // 한 페이지 당 출력될 게시글 수
 	private int totalPage; // 총 페이지 수 (계산으로 알아낸다)
-
+	
 	private int pageCount; // 한 화면에 출력될 페이지 수 (직접 설정할 수 있음)
 	private int startPage; // 화면에 보이는 시작 페이지 번호 (계산으로 알아냄)
 	private int endPage; // 화면에 보이는 마지막 페이지 번호 (계산으로 알아냄)
-
+	
 	private int startNo; // 화면에 보이는 페이지의 게시글 시작 번호 (계산으로 알아냄)
 	private int endNo; // 화면에 보이는 페이지의 게시글 끝 번호 (계산으로 알아냄)
+	
 	
 	//총 게시글 수만 입력하는 생성자
 	public Paging(int totalCount) {
@@ -67,10 +87,11 @@ public class Paging {
 	
 	@Override
 	public String toString() {
-		return "Paging [search=" + search + ", searchno=" + searchno + ", curPage=" + curPage + ", totalCount="
-				+ totalCount + ", listCount=" + listCount + ", totalPage=" + totalPage + ", pageCount=" + pageCount
-				+ ", startPage=" + startPage + ", endPage=" + endPage + ", startNo=" + startNo + ", endNo=" + endNo
-				+ "]";
+		return "Paging [travel_place=" + travel_place + ", travel_date=" + travel_date + ", travel_season="
+				+ travel_season + ", travel_thema=" + travel_thema + ", search=" + search + ", searchno=" + searchno
+				+ ", curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
+				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}
 
 	//페이징 정보 생성
@@ -105,6 +126,18 @@ public class Paging {
 
 
 
+	public int getSearchno() {
+		return searchno;
+	}	
+	public void setSearchno(int searchno) {
+		this.searchno = searchno;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public int getCurPage() {
 		return curPage;
 	}
