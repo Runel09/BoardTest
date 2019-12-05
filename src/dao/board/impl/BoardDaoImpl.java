@@ -324,10 +324,9 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
-		sql	+=	"        SELECT board.*";
-		sql +=  "        , (select count(*) from recommend R where R.boardno= board.boardno) recommend";
-		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = '플래너'";
+		sql	+=	"        SELECT planboard.*";
+		sql +=  "        , (select count(*) from recommend R where R.boardno= planboard.boardno) recommend";
+		sql	+=	"        FROM planboard";
 		
 		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
@@ -339,7 +338,7 @@ public class BoardDaoImpl implements BoardDao{
 			sql += " AND id LIKE ?";
 		}
 		
-		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"        ORDER BY planboardno DESC";
 		sql	+=	"    ) B";
 		sql	+=	"    ORDER BY rnum";
 		sql	+=	" ) BOARD";
@@ -508,7 +507,7 @@ public class BoardDaoImpl implements BoardDao{
 			ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, (String)req.getAttribute("checkboard"));
-			System.out.println(req.getAttribute("checkboard"));
+//			System.out.println(req.getAttribute("checkboard"));
 
 			if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
 				ps.setString(2, "%"+req.getParameter("search")+"%");
@@ -533,7 +532,7 @@ public class BoardDaoImpl implements BoardDao{
 					e.printStackTrace();
 				}
 			}
-			System.out.println(cnt);
+//			System.out.println(cnt);
 		return cnt;
 	}
 
