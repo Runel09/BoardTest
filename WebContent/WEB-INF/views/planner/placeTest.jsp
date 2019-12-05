@@ -84,32 +84,38 @@ html {
 				console.log(opener.result[0].lat)
 
 	}
-
+	var waypts = [];
 	function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-		var waypts = [];
+		
+		console.log(new google.maps.LatLng(opener.result[23].lat, opener.result[23].lng))
+		console.log({
+			location : new google.maps.LatLng(opener.result[23].lat, opener.result[23].lng)
+		
+	     })
+		
 		var checkboxArray = [];
-
-				checkboxArray[0] = new google.maps.LatLng(35.63290000000001, 139.88039);
-				checkboxArray[1] = new google.maps.LatLng(35.67448, 139.81470000000002);
-				checkboxArray[2] = new google.maps.LatLng(35.695440000000005,
-						139.79215000000002);
-				checkboxArray[3] = new google.maps.LatLng(35.67231, 139.77291000000002);
-				checkboxArray[4] = new google.maps.LatLng(35.667500000000004,
-						139.76375000000002);
-				for (var i = 0; i < 5; i++) {
-					waypts.push({
-						location : checkboxArray[i],
-						stopover : true
-					});
-				}
+		JSON.parse('${listIndx}', (key,value) =>{
+			if(opener.result[value-1]!=null){
+			console.log(value)
+			console.log(opener.result[value-1].lat)
+			console.log( opener.result[value-1].lng)
+		     waypts.push({
+				location : new google.maps.LatLng(opener.result[value-1].lat, opener.result[value-1].lng)
+				
+		     });
+		}
+		}
+		);
+		
+		
 		console.log(${cnt});		
-		console.log(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng);
-		console.log(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng);
+// 		console.log(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng);
+// 		console.log(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng);
 		if(${cnt}==0){
 		directionsService.route({
 			origin : new google.maps.LatLng(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng),
 			destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
-			travelMode : google.maps.TravelMode['TRANSIT']
+			travelMode : google.maps.TravelMode['DRIVING']
 		}, function(response, status) {
 			if (status === 'OK') {
 				directionsRenderer.setDirections(response);
@@ -135,9 +141,9 @@ html {
 			directionsService.route({
 				origin : new google.maps.LatLng(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng),
 				destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
-				waypoint:waypts,
-				optimizeWaypoints : true,
-				travelMode : 'TRANSIT'
+				waypoints : waypts,
+				optimizeWaypoints:true,
+				travelMode : google.maps.TravelMode['DRIVING']
 			}, function(response, status) {
 				if (status === 'OK') {
 					directionsRenderer.setDirections(response);
@@ -172,23 +178,23 @@ html {
 				<div>
 
 					<div>
-						<label id="startLab">출발지</label>
-						<input id="startIdx_lat" name="startIdx_lat" type="hidden" value="">
-						<input id="startIdx_lng" name="startIdx_lng" type="hidden" value="">
+						<label id="startLab">출발지</label> <input id="startIdx_lat"
+							name="startIdx_lat" type="hidden" value=""> <input
+							id="startIdx_lng" name="startIdx_lng" type="hidden" value="">
 					</div>
 					<c:forEach var="index" items="${index }">
 						<div>
-						<label id="startLab">경유지</label>
-						<input id="wayPoint_${index }" name="wayPoint_${index }" type="hidden" value="">
-						<input id="wayPoint_${index }" name="wayPoint_${index }" type="hidden" value="">
-					</div>
+							<label id="startLab">경유지</label> <input id="wayPoint_${index }"
+								name="wayPoint_${index }" type="hidden" value=""> <input
+								id="wayPoint_${index }" name="wayPoint_${index }" type="hidden"
+								value="">
+						</div>
 					</c:forEach>
 					<div>
-						<label id="endLab">도착지</label>
-						<input id="endIdx_lat" name="endIdx_lat" type="hidden" value="">
-						<input id="endIdx_lng" name="endIdx_lng" type="hidden" value="">
-						<br>
-						<b>교통수단:</b>
+						<label id="endLab">도착지</label> <input id="endIdx_lat"
+							name="endIdx_lat" type="hidden" value=""> <input
+							id="endIdx_lng" name="endIdx_lng" type="hidden" value="">
+						<br> <b>교통수단:</b>
 					</div>
 					<select id="travalOption" name="travalOption">
 						<option value="BICYCLING">자전거</option>

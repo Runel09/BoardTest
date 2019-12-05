@@ -39,7 +39,7 @@ public class PlannerPlaceInfo extends HttpServlet {
 			placeList=placeService.getAlleGeoInfo();
 			req.setAttribute("placeno", placeno);
 			req.setAttribute("markers", placeList);
-		}else if(placeno>=0) {
+		}else if(placeno>0) {
 			place=placeService.view(place);
 			req.setAttribute("placeno", placeno);
 			System.out.println(place.toString());

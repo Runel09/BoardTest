@@ -62,7 +62,8 @@ html, body {
 	width: 20%;
 	height: 80%;
 	background: white;
-	margin-bottom: 7%
+	margin-bottom: 7%;
+	z-index: 10;
 }
 
 .center {
@@ -75,6 +76,7 @@ html, body {
 	margin-left: 1%;
 	margin-bottom: 7%;
 	color: #337ab7;
+	z-index: 10;
 }
 
 .right {
@@ -82,7 +84,8 @@ html, body {
 	width: 58%;
 	height: 80%;
 	background: #ffc;
-	margin-bottom: 7%
+	margin-bottom: 7%;
+	z-index: 1;
 }
 
 .container {
@@ -122,6 +125,55 @@ div div > .selected{
 	color: white;
 	background: #337ab7;
 }
+
+.day_bar{
+	height: 100%;
+	width: 20%;
+	border-right: 2px solid #337ab7;
+	margin: 0;
+	float: left;
+}
+.index_body{
+	height: 580px;
+	width: 80%;
+	margin: 0;
+	float: left;
+	
+	
+}
+
+.day_con{
+	height: 10%;
+	float: left;
+	width: 100%;
+	height: 40px;
+	padding: 9px;
+	border-bottom: 2px solid #337ab7 ;
+}
+.index{
+	height:580px;
+	width:255.83px;
+	z-index: 1;
+	position: absolute;
+	background: white;
+}
+.index_body > .selected_index{
+	height:580px;
+	width:255.83px;
+	z-index: 10;
+	position: absolute;
+	background: white;
+}
+.index_ele{
+	hieght:50px;
+	width: 100%;
+	border-bottom: 1px solid #337ab7 ;
+	
+}
+.selected_con{
+	background: #337ab7;
+	color: white;
+}
 </style>
 
 
@@ -135,6 +187,7 @@ div div > .selected{
 						function() {
 							console.log($(this).attr("data-idx"));
 							var placeno = $(this).attr("data-idx");
+							var trval_place = $()
 							// 			console.log(placeno);
 							$.ajax({
 								type : "get",
@@ -182,7 +235,7 @@ div div > .selected{
 				})
 				//전체 경로 초기화
 				$("#reset_btn").on('click', function() {
-					$("#indexBody").empty();
+					$(".selected_index").empty();
 					// 					console.log(path);
 					ploy.setMap(null);
 					ploy = new google.maps.Polyline({
@@ -205,6 +258,8 @@ div div > .selected{
 					$(this.parentNode.firstElementChild).children("input").val(this.innerText)
 					if($(this).hasClass("selected")){
 						$(this).removeClass("selected")
+						console.log($(this).parent().children().eq(0).children("input"))
+						$(this).parent().children().eq(0).children("input").val("")
 					}else{
 						$(this.parentNode).children(".selected").removeClass('selected');
 						$(this).addClass("selected");
@@ -217,24 +272,17 @@ div div > .selected{
 					
 					var $f = $("<form>").attr({method:"", action:""})
 					//인덱스 추가
-					for(var i =0; i<divBody.children("div").size();i++){
-						$f.append( $("<input>").attr({name:"place_no", value:$("#divBody").children("div").eq(i).attr("data-place_no")}) )
-						
-						console.log($("#divBody").children("div").eq(i).attr("data-place_no"));
+					
+					for (var j = 0 ; j<$(".index_body").children("div").size();j++)
+					for(var i =0; i<$(".index_body").children("div").eq(j).children().size();i++){
+						$f.append( $("<input>").attr({name: i+"day_place_no", value:$(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no")}) )
+						console.log($(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no"));
 					}
 					//타이틀 추가
 						$f.append( $("<input>").attr({name:"title", value:$("#title_char").val()}) );
 						
-						
-// 						.append( $("<input>").attr({name:"name", value:"value"}) )
-// 						.append( $("<input>").attr({name:"name", value:"value"}) )
-// 						.append( $("<input>").attr({name:"name", value:"value"}) )
-// 						.append( $("<input>").attr({name:"name", value:"value"}) )
 						$f.appendTo( $(document.body) );
 					$f.submit();
-					
-					
-// 					$("#index_form").submit();
 
 				});
 				//타이틀 편집 버튼
@@ -246,6 +294,70 @@ div div > .selected{
 						$("#title_char").prop("readonly", true)
 						$("#title_set").text("편집")
 					}
+				});
+				
+				//인덱스 추가버튼
+				$(".day_bar .plus").on("click", function() {
+					var index = $(this).index()+1;
+					console.log(index);
+					var insert=$("<div class='day_con'>").append($("<p>"+index+"일차</p>")).insertBefore($(this));
+					insert.addClass(index+"day");
+					$(".index_body > .selected_index").removeClass("selected_index")
+					$(".index_body").append($("<div class='"+index+"day index selected_index'>"));
+					$(".day_bar > .selected_con").removeClass("selected_con");
+					insert.addClass("selected_con");
+					insert.on('click',function(){
+						var index= $(this).index()+1;
+						if ($(this).index()==$(this).parent().children().eq(-1).index()){
+							return false;	
+						}
+						$(".index_body > .selected_index").removeClass("selected_index")
+						$(".index_body > ."+index+"day").addClass("selected_index")
+						$(".day_bar > .selected_con").removeClass("selected_con");
+						$(".day_bar").children().eq(index-1).addClass("selected_con");
+						ploy.setMap(null);
+						ploy = new google.maps.Polyline({
+							strokeColor : '#3679e3',
+							strokeOpacity : 1.0,
+							strokeWeight : 3
+						});
+
+						ploy.setMap(map);
+						path = ploy.getPath();
+						for(var i =0; i<=$(".selected_index").children().size()-1;i++){
+							var place_num=$(".selected_index").children("div").eq(i).attr("data-place_no")
+							path.push(new google.maps.LatLng(result[place_num-1].lat, result[place_num-1].lng))
+						}
+						path.getAt();
+
+					})
+				});
+				
+					
+				//인덱스 선택 버튼 동작
+				$(".day_bar .day_con").on('click',function(){
+					var index= $(this).index()+1;
+					if ($(this).index()==$(this).parent().children().eq(-1).index()){
+						return false;	
+					}
+					$(".index_body > .selected_index").removeClass("selected_index")
+					$(".index_body > ."+index+"day").addClass("selected_index")
+					$(".day_bar > .selected_con").removeClass("selected_con");
+					$(".day_bar").children("div").eq(index-1).addClass("selected_con");
+					ploy.setMap(null);
+					ploy = new google.maps.Polyline({
+						strokeColor : '#3679e3',
+						strokeOpacity : 1.0,
+						strokeWeight : 3
+					});
+
+					ploy.setMap(map);
+					path = ploy.getPath();
+					for(var i =0; i<=$(".selected_index").children().size()-1;i++){
+						var place_num=$(".selected_index").children("div").eq(i).attr("data-place_no")
+						path.push(new google.maps.LatLng(result[place_num-1].lat, result[place_num-1].lng))
+					}
+					path.getAt();
 				})
 				
 				
@@ -313,18 +425,26 @@ div div > .selected{
 					<button id="submit_btn">플래너 입력</button>
 				</div>
 			</div>
-
+			
+			
 			<div class="left">
-				<form id="index_form" name="index_form" method="post"
-					action="/planner/input" style="height: 100%">
-					<div style="height: 86%;"><jsp:include
-							page="/WEB-INF/views/planner/index.jsp" /></div>
-					<hr style="border-top-color: #337ab7;">
-					<div style="height: 5%;">
+			<div class="day_bar">
+			<div class="day_con 1day selected_con">
+			<p>1일차</p>
+			</div>
+			<div class="day_con plus">
+			<p>+</p>
+			</div>
+			</div>
+				<div class="index_body">
+					<div class="1day index selected_index">
+					</div>
+					
+				</div>
+					<div style="height: 55px; width:255.83px; border-top:  2px solid #337ab7; padding: 12px; float: left;">
 						<button id="reset_btn" type="button">목록 초기화</button>
 						<button id="search_btn" type="button">전체 경로 검색</button>
 					</div>
-				</form>
 			</div>
 			<div class="center">
 				<jsp:include page="/WEB-INF/views/planner/list.jsp" />

@@ -83,9 +83,12 @@ var markerCluster = new MarkerClusterer(map, markers,
 };
 function openWindow(){
 	var divInd = $(this.parentNode);
-	var divBody=$("#indexBody")
+	var divBody=$(".index_body .selected_index")
 	var index=divInd.index();
 	var info ;
+	console.log(divInd.attr("data-place_no"))
+	console.log(divBody)
+	console.log(index)
 	var opwin=window.open("../map/test?startNo="+divBody.children("div").eq(index-1).attr("data-place_no")+"&endNo="+divInd.attr("data-place_no")
 			,"childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
 // 	$(opwin.document.getElementById("startIdx")).attr("data-location-lat")=
@@ -101,15 +104,15 @@ function openWindow(){
 }
 
 function searchAll(){
-	var divBody=$("#indexBody")
+	var divBody=$(".index_body")
 	var info ;
-	info = "../map/test?startNo="+divBody.children("div").eq(0).attr("data-place_no")+"&endNo="+divBody.children("div").eq(-1).attr("data-place_no");
-	console.log(divBody.children("div").size())
-	if (divBody.children("div").size()>2){
-		for(var i = 1 ; i<= divBody.children("div").size()-2;i++){
-			info+=("&index"+i+"="+divBody.children("div").eq(i).attr("data-place_no"));
+	info = "../map/test?startNo="+divBody.children(".selected_index").children().eq(0).attr("data-place_no")+"&endNo="+divBody.children(".selected_index").children().eq(-1).attr("data-place_no");
+	console.log($(".index_body").children(".selected_index").children().size())
+	if ($(".index_body").children(".selected_index").children().size()>2){
+		for(var i = 1 ; i<= $(".index_body").children(".selected_index").children().size()-2;i++){
+			info+=("&index"+i+"="+divBody.children(".selected_index").children().eq(i).attr("data-place_no"));
 			console.log(info);
-			console.log(divBody.children("div").eq(i).attr("data-place_no"));
+			console.log(divBody.children(".selected_index").children().eq(i).attr("data-place_no"));
 		}
 	}
 	var opwin=window.open(info,"childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
@@ -131,25 +134,25 @@ function addIndex(ind){
 			console.log("fail");
 		}
 	})
-	 if (($("#indexBody").children().size()==0 || $("#indexBody").children().size()==6) && result[ind].cate!="숙소"){
+	 if (($(".selected_index").children().size()==0 || $(".selected_index").children().size()==6) && result[ind].cate!="숙소"){
         	alert("첫 장소와 마지막 장소는 숙소만 선택 가능 합니다.")
     		return false;
     	  }
 //        console.log($("#indexBody").children().size());
-        if($("#indexBody").children().size()==7){
+        if($(".selected_index").children().size()==7){
         	alert("장소는 5개 까지만 선택 가능합니다")
         	return false;
         }
-        if($("#indexBody").children().size()>=1){
-        	var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input name='place_cate' type='hidden' value='"+result[ind].cate+"'/><input type='hidden' name='place_no' value='"+result[ind].place_number+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button type='button'>경로검색</button><button type='button'>삭제</button></div>");
-            var button = div.children().eq($("#indexBody").children().size()-1).children("button").eq(0);
+        if($(".selected_index").children().size()>=1){
+        	var div = $(".selected_index").append("<div class='index_ele' data-index='"+$(".selected_index").children().size()+"' data-place_no='"+(ind+1)+"'><input name='place_cate' type='hidden' value='"+result[ind].cate+"'/><input type='hidden' name='place_no' value='"+result[ind].place_number+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button type='button'>경로검색</button><button type='button'>삭제</button></div>");
+            var button = div.children().eq($(".selected_index").children().size()-1).children("button").eq(0);
 //             console.log(button);
 			button.on('click', openWindow);
 			
             
 
         }else{
-			var div = $("#indexBody").append("<div class='index' data-index='"+$("#indexBody").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' name='place_cate' value='"+result[ind].cate+"'/><input type='hidden' name='place_no' value='"+result[ind].place_number+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button type='button'>삭제</button></div>");
+			var div = $(".selected_index").append("<div class='index_ele' data-index='"+$(".selected_index").children().size()+"' data-place_no='"+(ind+1)+"'><input type='hidden' name='place_cate' value='"+result[ind].cate+"'/><input type='hidden' name='place_no' value='"+result[ind].place_number+"'/>"+result[ind].place_name+"<br>"+result[ind].detail+"<button type='button'>삭제</button></div>");
         }
       var button = div.children().children().eq(-1);
       button.on('click', function(){
