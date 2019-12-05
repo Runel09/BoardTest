@@ -49,7 +49,9 @@ public interface PlaceDao {
 	 */
 	public PlaceFile getfile(PlaceDto place);
 	
+	public void deletefile(PlaceFile file);
 	
+	public void deleteplace(PlaceDto place);
 	
 		
 }

@@ -476,7 +476,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	}
 		
 	
-<<<<<<< HEAD
+
 	
 	
 	
@@ -486,8 +486,8 @@ public class PlaceDaoImpl implements PlaceDao {
 	
 	
 	
-}
-=======
+
+
 	@Override
 	public void deletefile(PlaceFile file) {
 		conn= DBConn.getConnection();
@@ -541,7 +541,7 @@ public class PlaceDaoImpl implements PlaceDao {
 		
 	}
 	}
->>>>>>> refs/remotes/origin/semi
+
 	
 	
 
