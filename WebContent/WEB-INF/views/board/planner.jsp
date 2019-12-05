@@ -3,24 +3,31 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<script type="text/javascript" src="/js/httpRequest.js"></script>
+<script type="text/javascript" 
+src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <script type="text/javascript">
-
 $(document).ready(function() {
 	
 
 //테마 선택
 ($("#tag_body").children().children()).on('click',function() {
-   if(this==this.parentNode.firstElementChild){
-      return false;
-   }
-   $(this.parentNode.firstElementChild).children("input").val(this.innerText)
-   $(this.parentNode).children(".selected").removeClass('selected');
-   $(this).addClass("selected");
-   console.log($(this.parentNode.firstElementChild).children("input").val())
-})
-})
+               if(this==this.parentNode.firstElementChild){
+                  return false;
+               }
+               $(this.parentNode.firstElementChild).children("input").val(this.innerText)
+               if($(this).hasClass("selected")){
+                  $(this).removeClass("selected")
+                  console.log($(this).parent().children().eq(0).children("input"))
+                  $(this).parent().children().eq(0).children("input").val("")
+               }else{
+                  $(this.parentNode).children(".selected").removeClass('selected');
+                  $(this).addClass("selected");
+               }
+               console.log($(this.parentNode.firstElementChild).children("input").val())
+            })
+});
 </script>
 
 <script type="text/javascript">
@@ -34,22 +41,23 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "get"
-			, url: "/board/planner"
-			, data: {"traval_thema": $("#traval_thema"),
-					"travel_season" : $("#travel_season"),
-					"travel_date" : $("#travel_date"),
-					"travel_Place" : $("#travel_Place")
+			, url: "/planner/ajax"
+			, data: 
+			{	
+					"travel_place" : $("#travel_place").val(),
+					"travel_date" : $("#travel_date").val(),
+					"travel_season" : $("#travel_season").val(),
+					"traval_thema" : $("#travel_thema").val(),
 			}
-			, dataType: "json"
-			, success: function( data ) {
-				console.log("성공");
-				console.log(data);
-			
-				$("#recommend").html(data.cnt);
-		
+			, dataType: "html"
+			, success: function( html ) 
+			{
+					console.log("성공");
+				
 			}
-			, error: function() {
-				console.log("실패");
+			, error: function() 
+			{
+					console.log("실패");
 				
 			}
 		});
@@ -165,49 +173,49 @@ div.pullRight a:hover:before
 <h2 style="text-align:center; margin-bottom: 70px; ">여행자들의 일정보기</h2>
 
 <div class="tag_body" id="tag_body">
-                  <div class="place">
-                     <div id="place_head">
-                        여행지 | <input type="hidden" id="travel_Place" value="" />
-                     </div>
-                     <div>국내</div>
-                     <div>일본</div>
-                     <div>홍콩</div>
-                     <div>싱가포르</div>
-                     <div>대만</div>
-                     <div>태국</div>
-                     <div>미국</div>
-                  </div>
-                  <div class="danger travel_date">
-                     <div id="travel_date_head">
-                        여행일 |<input type="hidden" id="travel_date" value="" />
-                     </div>
-                     <div>1-3일</div>
-                     <div>4-6일</div>
-                     <div>7-10일</div>
-                     <div>11-15일</div>
-                     <div>15일이상</div>
-                  </div>
-                  <div class="travel_season">
-                     <div id="travel_season_head">
-                        여행시기|<input type="hidden" name="travel_season" value="">
-                     </div>
-                     <div>봄</div>
-                     <div>여름</div>
-                     <div>가을</div>
-                     <div>겨울</div>
-                  </div>
-                  <div class="success traval_thema">
-                     <div id ="traval_thema_head">
-                        여행테마|<input type="hidden" id="traval_thema" value="" />
-                     </div>
-                     <div>가족여행</div>
-                     <div>나홀로여행</div>
-                     <div>커플여행</div>
-                     <div>친구와함께</div>
-                     <div>비지니스여행</div>
-                  </div>
-               </div>
-    
+	<div class="place">
+		<div id="place_head">
+			여행지 | <input type="hidden" id="travel_place" value="" />
+		</div>
+		<div>국내</div>
+		<div>일본</div>
+		<div>홍콩</div>
+		<div>싱가포르</div>
+		<div>대만</div>
+		<div>태국</div>
+		<div>미국</div>
+	</div>
+	<div class="travel_date">
+		<div id="travel_date_head">
+			여행일 |<input type="hidden" id="travel_date" value="" />
+		</div>
+		<div>1-3일</div>
+		<div>4-6일</div>
+		<div>7-10일</div>
+		<div>11-15일</div>
+		<div>15일이상</div>
+	</div>
+	<div class="travel_season">
+		<div id="travel_season_head">
+			여행시기|<input type="hidden" id="travel_season" value="" />
+		</div>
+		<div>봄</div>
+		<div>여름</div>
+		<div>가을</div>
+		<div>겨울</div>
+	</div>
+	<div class="traval_thema">
+		<div id="traval_thema_head">
+			여행테마|<input type="hidden" id="traval_thema" value="" />
+		</div>
+		<div>가족여행</div>
+		<div>나홀로여행</div>
+		<div>커플여행</div>
+		<div>친구와함께</div>
+		<div>비지니스여행</div>
+	</div>
+</div>
+
 <br><br><br><br><br><br><br><br><br><br><br>
 <div class="container">
 <h1 style="float:left;">플래너 게시판</h1><br><br><br><br><br>

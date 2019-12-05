@@ -32,7 +32,7 @@ public class BoardViewController extends HttpServlet {
 		BoardFile boardFile = boardService.getBoardFileByBoardno(board.getBoardno());
 		List<Comment> commentList = boardService.commentList(board);
 		
-		System.out.println(board);
+//		System.out.println(board);
 		
 		req.setAttribute("board", board);
 		req.setAttribute("file", boardFile);
