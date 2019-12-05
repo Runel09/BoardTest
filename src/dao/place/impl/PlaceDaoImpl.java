@@ -230,37 +230,53 @@ public class PlaceDaoImpl implements PlaceDao {
 	public int selectCnAll(Paging paging) {
 		
 		System.out.println("selectcnAll"+paging.getCate());
+		System.out.println(paging.getSearch());
 		conn=DBConn.getConnection();
 		String sql="";
-		if(paging.getSearch() != null) {
-			sql += "SELECT count(*) FROM placeinfo";
-			sql += " WHERE place_name LIKE ?";
-		}
-		else if(paging.getCate() != null){
+//		if(paging.getSearch() != null) {
+//			sql += "SELECT count(*) FROM placeinfo";
+//			sql += " WHERE place_name LIKE ?";
+//		}
+//		else if(paging.getCate() != null){
+//			sql +="SELECT count(*) FROM placeinfo";
+//			sql +=" WHERE PLACE_CATE LIKE ?";
+//		}
+//		else{		
+//			sql += "SELECT count(*) FROM placeinfo";
+//		}
+//		
+		//--------------------------------------------------------
 			sql +="SELECT count(*) FROM placeinfo";
-			sql +=" WHERE PLACE_CATE LIKE ?";
+		if(paging.getSearch() != null && paging.getCate() == null) {
+			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+		}else if(paging.getCate() != null && "".equals(paging.getSearch())) {
+			sql += " where place_cate LIKE '%'||'"+paging.getCate()+"'||'%'"; 		
 		}
-		else{		
-			sql += "SELECT count(*) FROM placeinfo";
-		}
+		
+			
+		
 		//최종 
 		int cnt =0;
 		
 		try {
-			if(paging.getSearch() != null) {
-			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, "%" + paging.getSearch() + "%");
-			   rs=ps.executeQuery();
-			}
-			else if(paging.getCate() != null) {
-			   ps=conn.prepareStatement(sql);	
-			   ps.setString(2, "%" + paging.getCate() + "%");
-			   rs=ps.executeQuery();
-			}
-			else{
-				ps=conn.prepareStatement(sql);
-				rs=ps.executeQuery();
-			}
+//			if(paging.getSearch() != null) {
+//			   ps=conn.prepareStatement(sql);
+//			   ps.setString(1, "%" + paging.getSearch() + "%");
+//			   rs=ps.executeQuery();
+//			}
+//			else if(paging.getCate() != null) {
+//			   ps=conn.prepareStatement(sql);	
+//			   ps.setString(2, "%" + paging.getCate() + "%");
+//			   rs=ps.executeQuery();
+//			}
+//			else{
+//				ps=conn.prepareStatement(sql);
+//				rs=ps.executeQuery();
+//			}
+			
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			
 			while(rs.next()) {
 				
 				cnt=rs.getInt(1);
@@ -297,11 +313,15 @@ public class PlaceDaoImpl implements PlaceDao {
 		sql += "select * from(";
 		sql += " select rownum rnum, B.* FROM(";
 		sql += " select place_number, place_name, adress, place_cate, favorite_count from placeinfo";
-		if( paging.getSearch() != null && !"".equals(paging.getSearch()) ) {
+		if( paging.getSearch() != null && !"".equals(paging.getSearch()) && paging.getCate() == null ) {
 			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
 		}
-		else if(paging.getCate() != null) {
+		else if(paging.getCate() != null && paging.getSearch() == null) {
 			sql += " where place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
+		}
+		else if (paging.getSearch() != null && paging.getCate() != null) {
+			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql += " AND place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
 		}
 		sql += " order by place_number desc";
 		sql += " )B";

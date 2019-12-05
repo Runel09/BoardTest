@@ -52,7 +52,9 @@ $(document).ready(function(){
 			$("<input>")
 				.attr("name","cate")
 				.css("display","none")
-				.attr("value",$("<form>").find("[name='cate']:checked").val() ));
+				.attr("value",$("<form>").find("[name='cate']:checked").val() )
+				);
+		
 		
 		
 		$(document.body).append($form);

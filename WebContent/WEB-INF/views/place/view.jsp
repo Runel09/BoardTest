@@ -183,7 +183,7 @@ function warningModal(content) {
 
 
 
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style= "width:750px; left:530px;">
+<div id="carousel-example-generic" class="carousel slide container" data-ride="carousel" style= "width:750px; text-align:center;">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>

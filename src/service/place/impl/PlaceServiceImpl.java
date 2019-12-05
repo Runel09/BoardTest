@@ -436,7 +436,7 @@ public class PlaceServiceImpl implements PlaceService {
 		catePaging.setCate(cate);
 		catePaging.setSearch(search);
 		System.out.println(catePaging.getCate());
-		System.out.println(catePaging.getSearch());
+		System.out.println("파라미터 확인:"+catePaging.getSearch());
 		int curPage=0;
 		if(param!=null && !"".equals(param)) {
 				curPage= Integer.parseInt(param);
