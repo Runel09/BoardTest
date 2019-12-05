@@ -16,11 +16,13 @@ private int user_number;
    private String user_mailnum;
    private String user_birth;
    private String user_phnum;
+
    
    
 public int getUser_number() {
 	return user_number;
 }
+
 public void setUser_number(int user_number) {
 	this.user_number = user_number;
 }

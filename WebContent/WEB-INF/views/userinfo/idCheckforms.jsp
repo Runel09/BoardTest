@@ -44,6 +44,14 @@
 	      $("#defaultModal").modal('show');
 	   }
 	
+	 //성공 모달 호출 메서드
+	   function successModal(content) {
+	      $(".modal-contents").text(content);
+	      $("#successModal").modal('show');
+	   }
+	
+	   
+	
 		var httpRequest = null;
 		
 		// httpRequest 객체 생성
@@ -80,8 +88,10 @@
 				warningModal("아이디를 입력하지 않았습니다.");
 				return false;
 			} 
+			
 			else if((id < "0" || id > "9") && (id < "A" || id > "Z") && (id < "a" || id > "z")){ 
-				warningModal("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
+ 				warningModal("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
+				
 				return false;
 			}
 			//제대로된 아이디를 입력했을때
@@ -104,7 +114,7 @@
 			                  return false;
 			              }
 			              else{
-			            	  warningModal("사용 가능한 아이디 입니다!");
+			            	  successModal("사용 가능한 아이디 입니다!");
 			                  document.getElementById("cancelBtn").style.visibility='hidden';
 			                    document.getElementById("useBtn").style.visibility='visible';
 						  				return false;
@@ -125,7 +135,7 @@
 			// 중복체크 결과인 idCheck 값을 전달한다.
 			opener.document.userInfo.idDuplication.value ="idCheck";
 			// 회원가입 화면의 ID입력란에 값을 전달
-			opener.document.userInfo.id.value = document.getElementById("userId").value;
+			opener.document.userInfo.userid.value = document.getElementById("userId").value;
 			
 			if (opener != null) {
             	opener.chkForm = null;
@@ -172,6 +182,25 @@
             </div>
        
 <!--             // 경고 모달창 -->
+
+<!-- 성공 모달창 -->
+            <div class="modal fade" id="successModal">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-success">
+                        <div class="modal-header panel-heading">
+                            <h4 class="modal-title">성공입니다</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+<!--             // 성공 모달창 -->
 
 </body>
 </html>

@@ -25,18 +25,20 @@ public class LoginChkFormController extends HttpServlet {
 		
 		
 		// TODO Auto-generated method stub
-		req.getRequestDispatcher("/WEB-INF/views/userinfo/idcheckform.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/userinfo/idCheckforms.jsp").forward(req, resp);
 		
 	}
+	
 	@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// TODO Auto-generated method stub
+		resp.setCharacterEncoding("utf-8");
+		
+		// TODO Auto-generated method stub
 		String id = req.getParameter("id");
 		System.out.println("contorller " +id);
 		boolean check = memberservice.idcheck(id);
 		
 		req.setAttribute("check", check);
-		
 		req.getRequestDispatcher("/WEB-INF/views/userinfo/idCheck.jsp").forward(req, resp);
 
 	}

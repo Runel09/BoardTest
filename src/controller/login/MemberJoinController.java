@@ -32,9 +32,12 @@ public class MemberJoinController extends HttpServlet {
 
 	@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		 resp.setContentType("text/html;charset=UTF-8");
+	      req.setCharacterEncoding("UTF-8");
+
 		Member member;
 		
-		member = memberservice.getLoginMember(req);
+		member = memberservice.getmemberParam(req);
 //		System.out.println("22131"+member);
 		memberservice.join(member);
 
