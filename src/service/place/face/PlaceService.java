@@ -66,8 +66,10 @@ public interface PlaceService {
 	 */
 	public PlaceFile getfile(PlaceDto place);
 
-
-
+	public PlaceDto insertScore(Comment comment);
 	
+	public void updateScore(PlaceDto placeDto);
+	
+
 	
 }

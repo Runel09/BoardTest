@@ -35,4 +35,9 @@ public interface CommentDao {
 	 * @return int - 댓글 갯수
 	 */
 	public int countComment(Comment comment);
+	
+	public PlaceDto inScore(Comment comment);
+	
+	public void updateScore(PlaceDto placeDto);
+	
 }

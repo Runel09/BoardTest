@@ -132,7 +132,7 @@ public class PlaceDaoImpl implements PlaceDao {
 				placedto.setBusiness_hours(rs.getString("business_hours"));
 				placedto.setTel_number(rs.getString("tel_number"));
 				placedto.setPlace_information(rs.getString("place_information"));
-				
+				placedto.setReview_score(rs.getInt("review_score"));
 				
 			}
 			
@@ -227,33 +227,63 @@ public class PlaceDaoImpl implements PlaceDao {
 	
 	
 	@Override
-	public int selectCnAll(String search) {
+	public int selectCnAll(Paging paging) {
 		
-		
+		System.out.println("selectcnAll"+paging.getCate());
+		System.out.println(paging.getSearch());
 		conn=DBConn.getConnection();
 		String sql="";
-		if(search != null) {
-			sql += "SELECT count(*) FROM placeinfo";
-			sql += " WHERE place_name LIKE ?";
-		} else {		
-			sql += "SELECT count(*) FROM placeinfo";
+//		if(paging.getSearch() != null) {
+//			sql += "SELECT count(*) FROM placeinfo";
+//			sql += " WHERE place_name LIKE ?";
+//		}
+//		else if(paging.getCate() != null){
+//			sql +="SELECT count(*) FROM placeinfo";
+//			sql +=" WHERE PLACE_CATE LIKE ?";
+//		}
+//		else{		
+//			sql += "SELECT count(*) FROM placeinfo";
+//		}
+//		
+		//--------------------------------------------------------
+			sql +="SELECT count(*) FROM placeinfo";
+		if(paging.getSearch() != null && paging.getCate() == null) {
+			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+		}else if(paging.getCate() != null && "".equals(paging.getSearch())) {
+			sql += " where place_cate LIKE '%'||'"+paging.getCate()+"'||'%'"; 		
+		}else if(paging.getCate() != null && !"".equals(paging.getSearch())) {
+			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql += " AND place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
 		}
+		
+			
+		
 		//최종 
 		int cnt =0;
 		
 		try {
-			if(search != null) {
-			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, "%" + search + "%");
-			   rs=ps.executeQuery();
-			}else {
-				ps=conn.prepareStatement(sql);
-				rs=ps.executeQuery();
-			}
+//			if(paging.getSearch() != null) {
+//			   ps=conn.prepareStatement(sql);
+//			   ps.setString(1, "%" + paging.getSearch() + "%");
+//			   rs=ps.executeQuery();
+//			}
+//			else if(paging.getCate() != null) {
+//			   ps=conn.prepareStatement(sql);	
+//			   ps.setString(2, "%" + paging.getCate() + "%");
+//			   rs=ps.executeQuery();
+//			}
+//			else{
+//				ps=conn.prepareStatement(sql);
+//				rs=ps.executeQuery();
+//			}
+			
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			
 			while(rs.next()) {
 				
 				cnt=rs.getInt(1);
-				
+				System.out.println("cnt:"+cnt);
 			}
 				
 			
@@ -286,8 +316,15 @@ public class PlaceDaoImpl implements PlaceDao {
 		sql += "select * from(";
 		sql += " select rownum rnum, B.* FROM(";
 		sql += " select place_number, place_name, adress, place_cate, favorite_count from placeinfo";
-		if( paging.getSearch() != null && !"".equals(paging.getSearch()) ) {
+		if( paging.getSearch() != null && !"".equals(paging.getSearch()) && paging.getCate() == null ) {
 			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+		}
+		else if(paging.getCate() != null && paging.getSearch() == null) {
+			sql += " where place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
+		}
+		else if (paging.getSearch() != null && paging.getCate() != null) {
+			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql += " AND place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
 		}
 		sql += " order by place_number desc";
 		sql += " )B";
@@ -421,7 +458,7 @@ public class PlaceDaoImpl implements PlaceDao {
 	            placefile.setStoredname(rs.getString("storedname"));
 //	            placefile.setWritedate(rs.getDate("writedate"));
 	            placefile.setFilesize(rs.getInt("filesize"));
-	            place.setPlace_number(place.getPlace_number());
+	            place.setPlace_number(rs.getInt("boardno"));
 
 	         }
 	      } catch (SQLException e) {
@@ -439,6 +476,18 @@ public class PlaceDaoImpl implements PlaceDao {
 	}
 		
 	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
 	@Override
 	public void deletefile(PlaceFile file) {
 		conn= DBConn.getConnection();
@@ -492,6 +541,7 @@ public class PlaceDaoImpl implements PlaceDao {
 		
 	}
 	}
+
 	
 	
 
