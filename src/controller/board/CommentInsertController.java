@@ -26,17 +26,17 @@ public class CommentInsertController extends HttpServlet {
 		
 		Comment comment = new Comment();
 		
-		int bno = Integer.parseInt(req.getParameter("boardno"));
-		String con = req.getParameter("content");
+		int boardno = Integer.parseInt(req.getParameter("boardno"));
+		String content = req.getParameter("content");
 		
 		
 		comment.setUserid((String) session.getAttribute("userid"));
-		comment.setBoardno(bno);
-		comment.setContent(con);
+		comment.setBoardno(boardno);
+		comment.setContent(content);
 		
 		boardService.commentInsert(comment);
 		
-		resp.sendRedirect("/board/view?boardno="+bno);
+		resp.sendRedirect("/board/view?boardno="+boardno);
 		
 	}
 	

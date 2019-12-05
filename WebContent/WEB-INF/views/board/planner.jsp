@@ -3,8 +3,69 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<script type="text/javascript" src="/js/httpRequest.js"></script>
+<script type="text/javascript" 
+src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+
+//테마 선택
+($("#tag_body").children().children()).on('click',function() {
+               if(this==this.parentNode.firstElementChild){
+                  return false;
+               }
+               $(this.parentNode.firstElementChild).children("input").val(this.innerText)
+               if($(this).hasClass("selected")){
+                  $(this).removeClass("selected")
+                  console.log($(this).parent().children().eq(0).children("input"))
+                  $(this).parent().children().eq(0).children("input").val("")
+               }else{
+                  $(this.parentNode).children(".selected").removeClass('selected');
+                  $(this).addClass("selected");
+               }
+               console.log($(this.parentNode.firstElementChild).children("input").val())
+            })
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#tag_body").click(function() {
+		
+		if(this == this.parentNode.firstElementChild) {
+		      return false;
+		  }
+		
+		$.ajax({
+			type: "get"
+			, url: "/planner/ajax"
+			, data: 
+			{	
+					"travel_place" : $("#travel_place").val(),
+					"travel_date" : $("#travel_date").val(),
+					"travel_season" : $("#travel_season").val(),
+					"traval_thema" : $("#travel_thema").val(),
+			}
+			, dataType: "html"
+			, success: function( html ) 
+			{
+					console.log("성공");
+				
+			}
+			, error: function() 
+			{
+					console.log("실패");
+				
+			}
+		});
+	});
+	
+});
+</script>
+
 
 <style type="text/css">
 
@@ -13,9 +74,6 @@ table, th {
 	text-align: center;
 }
 
-tr td:nth-child(2) {
-	text-align: left;
-}
 
 tr td:not(:first-child), tr th:not(:first-child) {
 	border-left: 1px solid white;
@@ -76,6 +134,28 @@ div.pullRight a:hover:before
 	color: white;
 }
 
+/* 카테고리 */
+.tag_body {
+   width: 0px;
+   margin-left: 29em;
+}
+
+.tag_body div div {
+   float: left;
+   width: 138px;
+   text-align: center;
+   font-size: 23px;
+}
+
+.tag_body div {
+   float: left;
+   width: 1200px;
+   margin-bottom: 6px;
+}
+.selected{
+   color: white;
+   background: black;
+}
 </style>
 
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
@@ -89,55 +169,57 @@ div.pullRight a:hover:before
   <a href="/board/tip" class="menutab" style="font-size:38px;">여행팁</a>
   <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
 </div>
+<br>
+<h2 style="text-align:center; margin-bottom: 70px; ">여행자들의 일정보기</h2>
 
-<h2 style="text-align:center;">여행자들의 일정보기</h2>
+<div class="tag_body" id="tag_body">
+	<div class="place">
+		<div id="place_head">
+			여행지 | <input type="hidden" id="travel_place" value="" />
+		</div>
+		<div>국내</div>
+		<div>일본</div>
+		<div>홍콩</div>
+		<div>싱가포르</div>
+		<div>대만</div>
+		<div>태국</div>
+		<div>미국</div>
+	</div>
+	<div class="travel_date">
+		<div id="travel_date_head">
+			여행일 |<input type="hidden" id="travel_date" value="" />
+		</div>
+		<div>1-3일</div>
+		<div>4-6일</div>
+		<div>7-10일</div>
+		<div>11-15일</div>
+		<div>15일이상</div>
+	</div>
+	<div class="travel_season">
+		<div id="travel_season_head">
+			여행시기|<input type="hidden" id="travel_season" value="" />
+		</div>
+		<div>봄</div>
+		<div>여름</div>
+		<div>가을</div>
+		<div>겨울</div>
+	</div>
+	<div class="traval_thema">
+		<div id="traval_thema_head">
+			여행테마|<input type="hidden" id="traval_thema" value="" />
+		</div>
+		<div>가족여행</div>
+		<div>나홀로여행</div>
+		<div>커플여행</div>
+		<div>친구와함께</div>
+		<div>비지니스여행</div>
+	</div>
+</div>
 
+<br><br><br><br><br><br><br><br><br><br><br>
 <div class="container">
-
-<h1 style="float:left;">플래너 게시판</h1>
-
-<table class="table table-hover table-condensed table-striped">
-
-<tr class="info">
-
-   <th style="width: 8%">구분</th>
-   <th style="width: 7%">게시글번호</th>
-   <th style="width: 40%">제목</th>
-   <th style="width: 20%">아이디</th>
-   <th style="width: 10%">조회수</th>
-   <th style="width: 15%">작성일</th>
-</tr>
-
-<c:forEach var="list" items="${list }">
-<tr>
-   <td>${list.checkboard }</td>
-   <td>${list.boardno }</td>
-   <td><a href="/board/view?boardno=${list.boardno }">${list.title }</a></td>
-   <td>${list.id }</td>
-   <td>${list.hit }</td>
-   <td>${list.writtendate }</td>
-</tr>
-</c:forEach>
-   
-</table>
-
-
-	<form action="/board/free" method="get">
-		<div style="width: 12%; float: left; margin-left: 21px;">
-			<select name="searchno">
-				<option value="1" selected="selected">제목</option>
-				<option value="2">내용</option>
-				<option value="3">작성자</option>
-			</select> 
-		</div>
-
-		<div class="input-group" style="width: 20%; float: left;">
-			<input type="text" class="form-control" name="search"
-				placeholder="검색어를 입력해주세요"> <span class="input-group-btn">
-				<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
-			</span>
-		</div>
-	</form>
+<h1 style="float:left;">플래너 게시판</h1><br><br><br><br><br>
+<div style="text-align: left;">인기 | 신규</div>
 
 <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" />
 

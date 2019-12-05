@@ -9,48 +9,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.login.Member;
-import oracle.net.aso.p;
-import service.supervisor.face.SupervisorService;
-import service.supervisor.impl.SupervisorServiceImpl;
+import dto.board.Board;
+import dto.board.BoardFile;
+import dto.board.Comment;
+import dto.board.Recommend;
+import service.board.face.BoardService;
+import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
 /**
- * Servlet implementation class MemberList
+ * Servlet implementation class SupervisorBoardManageController
  */
-@WebServlet("/supervisor/memberlist")
-public class SupervisorMemberListController extends HttpServlet {
+@WebServlet("/supervisor/boardmanage")
+public class SupervisorBoardManageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	SupervisorService supervisorservice=new SupervisorServiceImpl();
+BoardService boardService = new BoardServiceImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 
 		// 관리자 로그인 됐을 경우
 		if (req.getSession().getAttribute("login") != null) {
 
-
 			//요청파라미터에서 curPage를 구하고 Paging 객체 반환
-			Paging paging = supervisorservice.memberListgetPaging(req);
 
-			paging.setSearch(req.getParameter("search"));
+			req.setAttribute("checkboard", "자유");
+			Paging paging = boardService.getPaging(req);
 			//		System.out.println(paging);
+
 			//Paging 객체를 MODEL값으로 지정
-			System.out.println("search : " + req.getParameter("search"));
 			req.setAttribute("paging", paging);
 
-			List<Member> list = supervisorservice.getuserList(paging);
-			//		System.out.println("list:" + list);
-			//		for( Member m : list) System.out.println(m);
+			List<Board> freelist = boardService.getFreeList(paging);
+			req.setAttribute("freelist", freelist);
 
+			List<Board> list = boardService.getEventList(paging);
 			req.setAttribute("list", list);
 
-			req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_memberlist.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/board/free.jsp")
+			.forward(req, resp);
 		}else {
-			// 관리자 로그인 안됐을 경우
-
 			resp.sendRedirect("/supervisor/login");
-
 		}
 
 	}

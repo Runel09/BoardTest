@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.board.Board;
+import dto.board.Report;
 import dto.login.Member;
 import dto.supervisor.Supervisor;
 import util.Paging;
@@ -29,13 +31,13 @@ public interface SupervisorDao {
 	 * @param paging-페이징 객체
 	 * @return-회원리스트
 	 */
-	List<Member> getUserList(Paging paging);
+	public List<Member> getUserList(Paging paging);
 
 	/**
 	 * 회원삭제
 	 * @param member-삭제할 회원
 	 */
-	void memberdelete(Member member);
+	public void memberdelete(Member member);
 	
 	/**
 	 * 검색한결과 전체 갯수
@@ -43,6 +45,24 @@ public interface SupervisorDao {
 	 * @return-검색결과 갯수
 	 */
 	public int memberselectCntAll(HttpServletRequest req);
+
+	public int reportselectCntAll(HttpServletRequest req);
+
+	public List<Report> getreportList(Paging paging);
+
+	public void reportdelete(Report report);
+
+	void deleteBoardList(String[] check);
+
+	List<Board> getNoticeList(Paging paging);
+
+	int noticeselectCntAll(HttpServletRequest req);
+
+	void noticedelete(Board board);
+
+	void deleteNoticeList(String[] check);
+
+	void deleteMemberList(String[] check);
 
 
 

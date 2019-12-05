@@ -160,7 +160,7 @@ public class BoardServiceImpl implements BoardService{
 			//다운받은 commons가 더 이득이다.
 				
 			//1-1. multipart/form-data 인코딩으로 전송되지 않았을 경우
-			System.out.println(isMultipart);
+//			System.out.println(isMultipart);
 			
 			if( !isMultipart ) {
 				out.append("<h1>enctype이 multipart/form-data가 아님</h1>");
@@ -413,7 +413,7 @@ public class BoardServiceImpl implements BoardService{
 		// 다운받은 commons가 더 이득이다.
 
 		// 1-1. multipart/form-data 인코딩으로 전송되지 않았을 경우
-		System.out.println(isMultipart);
+//		System.out.println(isMultipart);
 
 		// 1.2 여기 이후는 multipart/form-data로 요청된 상황임
 		// 파일이 전송되었음
@@ -523,7 +523,15 @@ public class BoardServiceImpl implements BoardService{
 						e.printStackTrace();
 					}
 				}
-
+				
+				if("checkboard".equals(key))
+				{
+					try {
+						board.setCheckboard(item.getString("UTF-8"));
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+				}
 			} else { // 3) 파일 처리
 
 				// 업로드 파일 처리 방법 2가지
@@ -707,6 +715,12 @@ public class BoardServiceImpl implements BoardService{
 	public void insertReport(Report report) {
 		boardDao.insertReport(report);
 		
+	}
+
+
+	@Override
+	public List<Board> getEventList(Paging paging) {
+		return boardDao.selectEventAll(paging);
 	}
 
 

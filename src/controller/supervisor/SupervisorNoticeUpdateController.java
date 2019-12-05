@@ -8,47 +8,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.place.PlaceDto;
-import dto.place.PlaceFile;
-import service.place.face.PlaceService;
-import service.place.impl.PlaceServiceImpl;
+import dto.board.Board;
+import dto.board.BoardFile;
+import service.board.face.BoardService;
+import service.board.impl.BoardServiceImpl;
 import service.supervisor.face.SupervisorService;
 import service.supervisor.impl.SupervisorServiceImpl;
 
 /**
  * Servlet implementation class SupervisorPlaceUpdateController
  */
-@WebServlet("/supervisor/placeupdate")
-public class SupervisorPlaceUpdateController extends HttpServlet {
+@WebServlet("/supervisor/noticeupdate")
+public class SupervisorNoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
 	SupervisorService supervisorservice = new SupervisorServiceImpl();
-	PlaceService placeservice = new PlaceServiceImpl();
+	BoardService boardService = new BoardServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PlaceDto place=placeservice.getPlace_number(req);
-		
-		PlaceDto placeview=placeservice.view(place);
+		Board board=boardService.getBoardno(req);
+//		PlaceDto placeview=placeservice.view(place);
 
-		PlaceFile placefile =placeservice.getfile(place);
-		req.setAttribute("place", placeview);
-		req.setAttribute("placefile", placefile);
+		BoardFile boardfile =boardService.getBoardFileByBoardno(board.getBoardno());
+		req.setAttribute("board", board);
+		req.setAttribute("boardfile", boardfile);
 
-		req.getRequestDispatcher("/WEB-INF/views/place/update.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_noticeupdate.jsp").forward(req, resp);
 	}
 
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-//		System.out.println(req.getParameter("place_number"));
 		
 		req.setCharacterEncoding("UTF-8");
-		supervisorservice.UpdatePlace(req);
+		supervisorservice.UpdateNotice(req);
 
-		resp.sendRedirect("/place/view?place_number="+req.getParameter("place_number"));
+		resp.sendRedirect("/supervisor/noticelist");
 
 	}
 

@@ -6,25 +6,25 @@
 
 <jsp:include page ="/WEB-INF/views/layout/header.jsp"/>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function() {
-   $("#btnWrite").click(function() {
+/*    $("#btnWrite").click(function() {
       $(location).attr("href", "/board/write");
    });
-   
+    */
    
    $("#btnCancel").click(function() {
       $(location).attr("href", "/board/list");
    });
    
 });
-</script>
+</script> -->
 <script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 
 
    <div class = "container">
    <div class="row">
-<form action="/supervisor/placeupdate" method="post" enctype = "multipart/form-data">
+<form action="/supervisor/placeupdate?place_number=${place.place_number }" method="post" enctype = "multipart/form-data">
    <table class="table table-bordered">
             <thead>
                <tr>
@@ -96,13 +96,17 @@ ${place.place_information }
             </script></td></tr>
 
 <tr>
-<td class="info">첨부파일</td><td colspan="3"><input type = "file" name = "upfile"/></td>
+<td class="info">첨부파일</td><td colspan="3">
+<input type = "file" name = "upfile"/>
+<div>원본파일 : ${placefile.storedname }</div>
+${placefile }
+</td>
 </tr>
 
 </table>
 <div class="text-center">   
    <button  class="btn btn-primary">수정</button>
-   <button  class="btn btn-danger">취소</button>
+   <button  class="btn btn-danger" >취소</button>
 </div>
 </form>
 </div>

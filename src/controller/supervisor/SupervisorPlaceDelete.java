@@ -12,22 +12,18 @@ import service.supervisor.face.SupervisorService;
 import service.supervisor.impl.SupervisorServiceImpl;
 
 /**
- * Servlet implementation class SupervisorMemberDeleteController
+ * Servlet implementation class SupervisorPlaceDelete
  */
-@WebServlet("/supervisor/memberdelete")
-public class SupervisorMemberDeleteController extends HttpServlet {
+@WebServlet("/supervisor/placedelete")
+public class SupervisorPlaceDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	SupervisorService supervisorservice = new SupervisorServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String[] check = req.getParameterValues("check");
-
-		if( check != null )	supervisorservice.deleteCheckuserno(check);
-
-		resp.sendRedirect("/supervisor/memberlist");
+		SupervisorService supervisorservice= new SupervisorServiceImpl();
+		
+		supervisorservice.placeDelete(req);
+		
+		resp.sendRedirect("/place/list");
 	}
-
 }

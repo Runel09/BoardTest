@@ -54,9 +54,17 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
 		
 		
+	}
 		return list;
 	}
 
@@ -68,7 +76,8 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
-		sql	+=	"        SELECT *";
+		sql	+=	"        SELECT board.*";
+		sql +=  "        , (select count(*) from recommend R where R.boardno= board.boardno) recommend";
 		sql	+=	"        FROM board";
 		sql	+=	"        WHERE checkboard = '자유'";
 		
@@ -120,6 +129,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
 				board.setCheckboard(rs.getString("checkboard"));
+				board.setRecommend(rs.getInt("recommend"));
 				
 				list.add(board);
 			}
@@ -127,7 +137,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return list;
 	}
@@ -140,7 +158,8 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
-		sql	+=	"        SELECT *";
+		sql	+=	"        SELECT board.*";
+		sql +=  "        , (select count(*) from recommend R where R.boardno= board.boardno) recommend";
 		sql	+=	"        FROM board";
 		sql	+=	"        WHERE checkboard = '여행팁'";
 		
@@ -192,6 +211,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
 				board.setCheckboard(rs.getString("checkboard"));
+				board.setRecommend(rs.getInt("recommend"));
 				
 				list.add(board);
 			}
@@ -200,7 +220,15 @@ public class BoardDaoImpl implements BoardDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		finally {
+	         try {
+	            if(ps!=null) ps.close();
+	            if(rs!=null) rs.close();
+
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+	      }
 		
 		return list;
 	}
@@ -213,7 +241,8 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
-		sql	+=	"        SELECT *";
+		sql	+=	"        SELECT board.*";
+		sql +=  "        , (select count(*) from recommend R where R.boardno= board.boardno) recommend";
 		sql	+=	"        FROM board";
 		sql	+=	"        WHERE checkboard = '질문'";
 		
@@ -265,6 +294,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
 				board.setCheckboard(rs.getString("checkboard"));
+				board.setRecommend(rs.getInt("recommend"));
 				
 				list.add(board);
 			}
@@ -272,7 +302,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		
 		return list;
@@ -286,9 +324,9 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+=	"    SELECT rownum rnum, B.* FROM (";
-		sql	+=	"        SELECT *";
-		sql	+=	"        FROM board";
-		sql	+=	"        WHERE checkboard = 'planner'";
+		sql	+=	"        SELECT planboard.*";
+		sql +=  "        , (select count(*) from recommend R where R.boardno= planboard.boardno) recommend";
+		sql	+=	"        FROM planboard";
 		
 		if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==1) {
 			sql += " AND title LIKE ?";
@@ -300,7 +338,7 @@ public class BoardDaoImpl implements BoardDao{
 			sql += " AND id LIKE ?";
 		}
 		
-		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"        ORDER BY planboardno DESC";
 		sql	+=	"    ) B";
 		sql	+=	"    ORDER BY rnum";
 		sql	+=	" ) BOARD";
@@ -338,6 +376,7 @@ public class BoardDaoImpl implements BoardDao{
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
 				board.setCheckboard(rs.getString("checkboard"));
+				board.setRecommend(rs.getInt("recommend"));
 				
 				list.add(board);
 			}
@@ -345,7 +384,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		
 		return list;
@@ -357,8 +404,9 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT boardno, title, id, content, hit, writtendate, checkboard";
-		sql += " FROM board WHERE boardno=?";
+		sql += "SELECT boardno, title, id, content, hit, writtendate, checkboard ";
+		sql += ",(SELECT count(*) FROM recommend WHERE boardno=?) recommend ";		
+		sql += "FROM board WHERE boardno=?";
 		
 		Board boarddetail = new Board();
 		
@@ -366,6 +414,7 @@ public class BoardDaoImpl implements BoardDao{
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board.getBoardno());
+			ps.setInt(2, board.getBoardno());
 			
 			rs = ps.executeQuery();
 			
@@ -378,12 +427,21 @@ public class BoardDaoImpl implements BoardDao{
 			boarddetail.setHit(rs.getInt("hit"));
 			boarddetail.setWrittendate(rs.getDate("writtendate"));
 			boarddetail.setCheckboard(rs.getString("checkboard"));
+			boarddetail.setRecommend(rs.getInt("recommend"));
 				
-			System.out.println(boarddetail);
+//			System.out.println(boarddetail);
 			
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
 			
 			return boarddetail;
 	}
@@ -408,7 +466,15 @@ public class BoardDaoImpl implements BoardDao{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
 		
 		
 	}
@@ -421,12 +487,18 @@ public class BoardDaoImpl implements BoardDao{
 		
 		String sql = "";
 		sql += "SELECT count(*)";
-		sql += " FROM board";
+		sql += " FROM board where checkboard=?";
 		
 		if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
-			sql += " WHERE title LIKE ?";
+			if(Integer.parseInt(req.getParameter("searchno")) == 1) {
+				sql += " AND title LIKE ?";				
+			} else if(Integer.parseInt(req.getParameter("searchno")) == 2) {
+				sql += " AND content LIKE ?";				
+			} else if(Integer.parseInt(req.getParameter("searchno")) == 3) {
+				sql += " AND id LIKE ?";				
+			}
 		}
-		
+			
 		sql += " ORDER BY boardno";
 		
 		int cnt = 0;
@@ -434,8 +506,11 @@ public class BoardDaoImpl implements BoardDao{
 		try {
 			ps = conn.prepareStatement(sql);
 			
+			ps.setString(1, (String)req.getAttribute("checkboard"));
+//			System.out.println(req.getAttribute("checkboard"));
+
 			if(req.getParameter("search")!=null&&!"".equals(req.getParameter("search"))) {
-				ps.setString(1, "%"+req.getParameter("search")+"%");
+				ps.setString(2, "%"+req.getParameter("search")+"%");
 			}
 			
 			rs = ps.executeQuery();
@@ -443,11 +518,10 @@ public class BoardDaoImpl implements BoardDao{
 			while(rs.next()) {
 				
 				cnt = rs.getInt(1);
-				
+//				System.out.println(cnt);
 			}
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				
@@ -455,13 +529,13 @@ public class BoardDaoImpl implements BoardDao{
 					ps.close();
 					rs.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			
-			return cnt;
+//			System.out.println(cnt);
+		return cnt;
 	}
+
 
 	@Override
 	public void insert(Board board) {
@@ -486,7 +560,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		
 	}
@@ -515,7 +597,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return res;
 	}
@@ -542,7 +632,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -579,7 +677,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return boardFile;
 	}
@@ -612,7 +718,15 @@ public class BoardDaoImpl implements BoardDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 		return resFile;
 	}
@@ -631,7 +745,7 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "UPDATE board SET";
 		sql += " title=?,";
-		sql += " content=?";
+		sql += " content=?,";
 		sql += " checkboard=?";
 		sql += " WHERE boardno=?";
 
@@ -648,7 +762,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -671,7 +793,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -694,7 +824,15 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
@@ -719,124 +857,19 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
 		
 	}
 
-	@Override
-	public void insertRecommend(Board recommendBoard) {
-		
-		conn = DBConn.getConnection();
-		
-		String sql = "";
-		sql += "INSERT INTO recommend(boardno, userid)";
-		sql += " VALUES(?, ?)";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, recommendBoard.getBoardno());
-			ps.setString(2, recommendBoard.getId());
-			
-			ps.executeQuery();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void deleteRecommend(Board recommendBoard) {
-		
-		conn = DBConn.getConnection();
-		
-		String sql = "";
-		sql += "DELETE FROM recommend";
-		sql += " WHERE boardno=? AND userid=?";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, recommendBoard.getBoardno());
-			ps.setString(2, recommendBoard.getId());
-			
-			ps.executeQuery();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public boolean checkRecommend(Board recommendBoard) {
-		
-		conn = DBConn.getConnection();
-		
-		int chk = 0;
-		
-		String sql = "";
-		sql += "SELECT count(*) FROM recommend";
-		sql += " WHERE boardno=? AND userid=?";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, recommendBoard.getBoardno());
-			ps.setString(2, recommendBoard.getId());
-			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				chk = rs.getInt("count(*)");
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if(chk==0) {
-			
-			return false;
-		} else {
-			
-			return true;
-		}
-		
-	}
-
-	@Override
-	public int getCountRecommend(Board recommendBoard) {
-		
-		conn = DBConn.getConnection();
-		
-		int chk = 0;
-		
-		String sql = "";
-		sql += "SELECT count(*) FROM recommend";
-		sql += " WHERE boardno=?";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, recommendBoard.getBoardno());
-			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				chk = rs.getInt("count(*)");
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return chk;
-	}
+	
 
 	@Override
 	   public String selectNickByUserid(Board board) {
@@ -898,7 +931,15 @@ public class BoardDaoImpl implements BoardDao{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
 		
 		
 	}
@@ -909,8 +950,8 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO report(boardno, content, db_id, reason)";
-		sql += " VALUES(?, ?, ?, ?)";
+		sql += "INSERT INTO report(boardno, content, db_id, reason, reportno)";
+		sql += " VALUES(?,?, ?, ?, report_seq.nextval)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -925,7 +966,69 @@ public class BoardDaoImpl implements BoardDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+	}
+
+	@Override
+	public List<Board> selectEventAll(Paging paging) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+=	"    SELECT rownum rnum, B.* FROM (";
+		sql	+=	"        SELECT *";
+		sql	+=	"        FROM board";
+		sql	+=	"        WHERE checkboard = '공지'";
+		sql	+=	"        ORDER BY boardno DESC";
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN 1 AND 5";
+
+		List<Board> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);			
+			rs = ps.executeQuery();
+			
+//			System.out.println(rs.next());
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
+				
+				list.add(board);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+		return list;
 	}
 
 
