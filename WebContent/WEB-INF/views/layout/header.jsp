@@ -67,7 +67,6 @@ h1.name{
 #header{
 	text-align:center;
 /* 	background:#0064CD; */
-	font-family: 'Indie Flower', cursive;
 	
 	
 }
