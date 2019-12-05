@@ -167,7 +167,31 @@ div.circleBehind a:hover:after
 </div>
 
 
+<!-- <div> -->
+<!-- <ul class="nav nav-pills"> -->
+  
+<!--   <li role="presentation" class="dropdown"> -->
+<!--     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> -->
+<!--       Dropdown <span class="caret"></span> -->
+<!--     </a> -->
+<!--     <ul class="dropdown-menu" role="menu"> -->
+<!--       <li>로그인</li> -->
+<!--       <li>마이페이지</li> -->
+      
+      
+<!--     </ul> -->
+<!--   </li> -->
+  
+<!-- </ul> -->
+<!-- </div> -->
+
+
+
 </div>
+
+
+
+
 
 <hr>
 <hr>

@@ -400,11 +400,13 @@ public class PlaceServiceImpl implements PlaceService {
 		String place_number = (String) req.getParameter("place_number");
 //		String user_number = (String) req.getParameter("user_userNum");
 		String review_char = (String) req.getParameter("review_char");
-		
+		String review_score= req.getParameter("testInput");
+		System.out.println("ㅎㅇ"+review_score);
 		Comment comment = new Comment();
 		comment.setPlace_number( Integer.parseInt(place_number) );
 //		comment.setUser_number(Integer.parseInt(user_number));
 		comment.setReview_char(review_char);
+		comment.setReview_score(Integer.parseInt(review_score));
 		
 		return comment;
 	}
@@ -427,9 +429,16 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 		//요청파라미터 curPage 를 파싱한다
+		Paging catePaging = new Paging();
 		
 		String param =req.getParameter("curPage");
 		String search =req.getParameter("search");
+		String cate = req.getParameter("cate");//카테고리별 검색
+		
+		catePaging.setCate(cate);
+		catePaging.setSearch(search);
+		System.out.println(catePaging.getCate());
+		System.out.println("파라미터 확인:"+catePaging.getSearch());
 		int curPage=0;
 		if(param!=null && !"".equals(param)) {
 				curPage= Integer.parseInt(param);
@@ -437,11 +446,14 @@ public class PlaceServiceImpl implements PlaceService {
 			}
 				
 		//Board TB 와 curPage 값을 이용한 Paging 객체를 생성하고 반환
-		int totalCount =placeDao.selectCnAll(search);
-				
-		//Paging 객체 생성
+		int totalCount =placeDao.selectCnAll(catePaging);
+		
+		System.out.println(totalCount);
+		
 		Paging paging =new Paging(totalCount,curPage,12);
+		//Paging 객체 생성
 		paging.setSearch(search);
+		paging.setCate(cate);
 		return paging;
 	}
 	
@@ -456,5 +468,22 @@ public class PlaceServiceImpl implements PlaceService {
 
 		return placeDao.getfile(place);
 	}
+	
+	
+	@Override
+	public PlaceDto insertScore(Comment comment) {
+		// TODO Auto-generated method stub
+		return commentDao.inScore(comment);
+	}
+	
+	
+	@Override
+	public void updateScore(PlaceDto placeDto) {
+		// TODO Auto-generated method stub
+		commentDao.updateScore(placeDto);
+		
+	}
+	
+	
 	
 }

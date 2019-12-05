@@ -14,8 +14,14 @@ public class Paging {
 	private int startNo;//화면에 보이는 페이지의 게시글 시작 번호(계산으로 알아냄)
 	private int endNo;//화면에 보이는 페이지의 게시글 끝 번호(계산으로 알아냄)
 	private String search;
+	private String cate;
 	
-	
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
+	}
 	public String getSearch() {
 		return search;
 	}
@@ -82,6 +88,12 @@ public class Paging {
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}
+	
+	//카테고리 검색 페이징
+	public Paging() {
+		
+	}
+	
 	
 	public Paging(int totalCount) {
 		this.setTotalCount(totalCount);

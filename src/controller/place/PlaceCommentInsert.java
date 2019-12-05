@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.place.Comment;
+import dto.place.PlaceDto;
 import service.place.face.PlaceService;
 import service.place.impl.PlaceServiceImpl;
 
@@ -29,12 +30,32 @@ public class PlaceCommentInsert extends HttpServlet {
 		HttpSession session = null;
 		session=req.getSession();
 		
-		System.out.println(session.getAttribute("user_userNum"));
+		
+		PlaceDto placeDto = new PlaceDto();
 		Comment comment = placeService.getComment(req);
+		
+		
+		
+		
 		comment.setUser_number((Integer) session.getAttribute("user_userNum"));
-		System.out.println(comment);
+		
 		placeService.insertComment(comment);
 		
+//		System.out.println("commentPlaceNumber:"+comment.getPlace_number());
+		
+		placeDto = placeService.insertScore(comment);
+		
+		placeService.updateScore(placeDto);
+		
+		
+		System.out.println("number 확인"+placeDto.getPlace_number());
+		System.out.println("점수 확인:"+placeDto.getReview_score());
+		
+		req.setAttribute("placeDto", placeDto);
+		req.setAttribute("review", comment);
 		resp.sendRedirect("/place/view?place_number="+comment.getPlace_number());
+		
+		
+		
 	}
 }
