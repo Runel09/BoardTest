@@ -251,6 +251,9 @@ public class PlaceDaoImpl implements PlaceDao {
 			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
 		}else if(paging.getCate() != null && "".equals(paging.getSearch())) {
 			sql += " where place_cate LIKE '%'||'"+paging.getCate()+"'||'%'"; 		
+		}else if(paging.getCate() != null && !"".equals(paging.getSearch())) {
+			sql += " where place_name LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql += " AND place_cate LIKE '%'||'"+paging.getCate()+"'||'%'";
 		}
 		
 			
