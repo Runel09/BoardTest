@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+ <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- Bootstrqp 3.3.2 밑에 3개  -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -27,26 +27,32 @@
 	
 
 	</style>
+<script type="text/javascript">
+// function goBack(){
+// 	window.histroy.back();
+// }
+</script>
 <meta charset="UTF-8">
 <title>TRAVERS 정보조회 결과</title>
 </head>
 <body>
+
 <body onload="pValue()">
 <div id="wrap">
 	<br>
-	<b><font size="4" color="gray">아이디 찾기 결과</font></b>
+	<b><font size="4" color="gray">비밀번호 찾기 결과</font></b>
 	<hr size="1" width="460">
 	<br>
 	<div id="chk">
 		<form id="checkForm">
-			회원님의 아이디는  ${id} 입니다.
+			일치하는 정보가 없습니다.
 		</form>
 		<div id="msg"></div>
 		<br>
-		<input id="closeBtn" name= "closeBtn" type="button" value="확인" onclick="window.close()"><br>
+		<a href="/find/userinfo"><input id="backBtn" name= "closeBtn" type="button" value="돌아가기" ></a> <br>
+	
 		
 	</div>
 </div>	
-
 </body>
 </html>

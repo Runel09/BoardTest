@@ -1,6 +1,7 @@
 package controller.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,7 @@ public class FindUserPwController extends HttpServlet {
 		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			resp.setCharacterEncoding("utf-8");
-			
+			 resp.setContentType("text/html;charset=UTF-8");
 			// TODO Auto-generated method stub
 
 
@@ -45,9 +46,7 @@ public class FindUserPwController extends HttpServlet {
 			
 
 //			System.out.println("컨트롤러 검사 : " + memberResult2);
-			
-			
-			
+					
 			//비번 찾기 성공
 			if(memberResult2.getUser_pw() != null) {
 				
@@ -61,9 +60,9 @@ public class FindUserPwController extends HttpServlet {
 			}
 			
 			else {
-//				System.out.println("찾기 실패");
+				req.getRequestDispatcher("/WEB-INF/views/userinfo/finduserpwFailResult.jsp").forward(req,resp);
 				
-				resp.sendRedirect("/find/userinfo");
+				
 			}
 		}
 		

@@ -35,6 +35,8 @@
 
 	<script type="text/javascript">
 	
+	
+	
 		// 회원가입 화면의 입력값들을 검사한다.
 		function checkValue()	
 		{
@@ -56,10 +58,15 @@
 			}
 			
 			// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-			if(form.password.value != form.passwordcheck.value ){
+			if(form.userpw.value != form.passwordcheck.value ){
 				warningModal("비밀번호를 동일하게 입력하세요.");
 				return false;
 			}	
+			
+			if(!form.usernick.value){
+				warningModal("닉네임을 입력하세요.");
+				return false;
+			}
 			
 			if(!form.username.value){
 				warningModal("이름을 입력하세요.");
@@ -71,7 +78,7 @@
 				return false;
 			}
 			
-			if(isNaN(form.userbirthyy.value)){
+			if(form.userbirthyy.value){
 				warningModal("년도는 숫자만 입력가능합니다.");
 				return false;
 			}
@@ -86,7 +93,7 @@
 				return false;
 			}
 			
-			if(isNaN(form.userbirthdd.value)){
+			if(form.userbirthdd.value){
 				warningModal("날짜는 숫자만 입력가능합니다.");
 				return false;
 			}
@@ -96,26 +103,53 @@
 				return false;
 			}
 			
-			if(!form.phone.value){
+			if(!form.userphnum.value){
 				warningModal("전화번호를 입력하세요.");
 				return false;
 			}
 			
-			if(isNaN(form.phone.value)){
+			if(form.userphnum.value){
 				warningModal("전화번호는 - 제외한 숫자만 입력해주세요.");
 				return false;
 			}
 			
-			if(!form.address.value){
+			if(!form.useraddr.value){
 				warningModal("주소를 입력하세요.");
 				return false;
 			}
+			
+			if(!form.useraddrdetail.value){
+				warningModal("자세한 주소를 입력하세요.");
+				return false;
+			}
+			
 		}
 		
+		//문자 입력시 오류
+		
+			function checkNum(e) {
+		        var keyVal = event.keyCode;
+		 
+		        if(((keyVal >= 48) && (keyVal <= 57))){
+		            return true;
+		        }
+		        else{
+		        	warningModal("숫자만 입력가능합니다");
+		            return false;
+		        }
+		    
+
+
+
+
+		
+		}
 		// 취소 버튼 클릭시 첫화면으로 이동
 		function goFirstForm() {
 			location.href="/main";
 		}	
+		
+	
 		
 		// 아이디 중복체크 화면open
 		function openIdChk(){
@@ -168,17 +202,20 @@
             <!--// 경고 모달창 -->
             
              
-		<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
-		<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
+
+		<!-- 값(파라미터) 전송은 POST 방식-->
 		<form method="post" action="/member/join" 
 				name="userInfo" onsubmit="return checkValue()">
 			<table>
+
+
 				<tr>
 					<td id="title">아이디</td>
 					<td>
 						<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
 						<input type="button" value="중복확인" onclick="openIdChk()">	
 						<input type="hidden" name="idDuplication" value="idUncheck" >
+						
 					</td>
 				</tr>
 						
@@ -213,15 +250,16 @@
 				<tr>
 					<td id="title">성별</td>
 					<td>
-						<input type="radio" name="gender" value="남" checked>남
-						<input type="radio" name="gender" value="여" >여
+						<input type="radio" name="gender" value="1" checked>남
+						<input type="radio" name="gender" value="0" >여
 					</td>
 				</tr>
 					
 				<tr>
-					<td id="title">생일</td>
+					<td id="title">생년월일</td>
 					<td>
-						<input type="text" name="userbirth" maxlength="4" placeholder="년(4자)" size="6">
+						<input type="text" name="userbirth" maxlength="4" placeholder="년(4자)" size="6" min ="1900" max = "2020" onKeyPress="return checkNum(event)" >
+							
 						<select name="userbirthmm">
 							<option value="00">월</option>
 							<option value="01" >1</option>
@@ -237,33 +275,29 @@
 							<option value="11" >11</option>
 							<option value="12" >12</option>
 						</select>
-						<input type="text" name="userbirthdd" maxlength="2" placeholder="일" size="4">
+						<input type="text" name="userbirthdd" maxlength="2" placeholder="일" size="4" min ="01" max = "31" onKeyPress="return checkNum(event)" >
+							
 					</td>
 				</tr>
 					
 				<tr>
 					<td id="title">이메일</td>
 					<td>
-						<input type="text" name="usermail" maxlength="50">@
-						<select name="mail2">
-							<option>naver.com</option>
-							<option>daum.net</option>
-							<option>gmail.com</option>
-							<option></option>						
-						</select>
+						<input type="text" name="usermail" maxlength="50">
+						
 					</td>
 				</tr>
 					
 				<tr>
 					<td id="title">휴대전화</td>
 					<td>
-						<input type="text" name="userphnum"/>
+						<input type="text" name="userphnum" onKeyPress="return checkNum(event)" />
 					</td>
 				</tr>
 				<tr>
 					<td id="title">우편번호</td>
 					<td>
-						<input type="text" size="50" name="usermailnum"/>
+						<input type="text" size="10" name="usermailnum" onKeyPress="return checkNum(event)" />
 					</td>
 				</tr>
 				<tr>

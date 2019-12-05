@@ -39,7 +39,7 @@ function openIdChk(){
 }
 </script>
 <meta charset="UTF-8">
-<title>FindUserInfo</title>
+<title>TRAVERS 정보조회 </title>
 </head>
 <body>
 <h2>아이디 찾기</h2>

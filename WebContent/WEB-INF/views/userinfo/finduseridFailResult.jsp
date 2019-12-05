@@ -28,7 +28,7 @@
 
 	</style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TRAVERS 정보조회 결과</title>
 </head>
 <body>
 <body onload="pValue()">

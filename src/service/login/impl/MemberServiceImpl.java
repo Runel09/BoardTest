@@ -188,6 +188,8 @@ public class MemberServiceImpl implements MemberService{
 			member.setUser_name(req.getParameter("username"));
 			member.setUser_email(req.getParameter("usermail"));
 			member.setUser_addr(req.getParameter("useraddr"));
+			int gender = Integer.parseInt(req.getParameter("gender"));
+			member.setUser_gender(gender);
 			member.setUser_addr_detail(req.getParameter("useraddrdetail"));
 			member.setUser_mailnum(req.getParameter("usermailnum"));
 			member.setUser_birth(req.getParameter("userbirth"));

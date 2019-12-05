@@ -39,7 +39,6 @@ public class LoginChkFormController extends HttpServlet {
 		boolean check = memberservice.idcheck(id);
 		
 		req.setAttribute("check", check);
-		
 		req.getRequestDispatcher("/WEB-INF/views/userinfo/idCheck.jsp").forward(req, resp);
 
 	}
