@@ -22,10 +22,10 @@
 			<div><label>주소</label>${marker.address}</div>
 			<div><label>카테고리</label>${marker.place_cate}</div>
 			<div><label>상세 카테고리</label>${marker.detail}</div>
-			<div><label>장소명</label>${marker.db_web_site}</div>
-			<div><label>장소명</label>${marker.business_hours}</div>
-			<div><label>장소명</label>${marker.tel_number}</div>
-			<div><label>장소명</label>${marker.place_information}</div>
+			<div><label>사이트</label>${marker.db_web_site}</div>
+			<div><label>영업시간</label>${marker.business_hours}</div>
+			<div><label>전화번호</label>${marker.tel_number}</div>
+			<div><label>장소정보</label>${marker.place_information}</div>
 			<button id="listSetbtn">리스트로</button>
 		</div>
 	</c:when>
