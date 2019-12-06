@@ -6,16 +6,14 @@ public class Comment {
 
 	private int commentno;
 	private int boardno;
-	private String userid;
+	private String user_id;
 	private String content;
 	private Date writtendate;
-
 	@Override
 	public String toString() {
-		return "Comment [commentno=" + commentno + ", boardno=" + boardno + ", userid=" + userid + ", content="
+		return "Comment [commentno=" + commentno + ", boardno=" + boardno + ", user_id=" + user_id + ", content="
 				+ content + ", writtendate=" + writtendate + "]";
 	}
-	
 	public int getCommentno() {
 		return commentno;
 	}
@@ -28,11 +26,11 @@ public class Comment {
 	public void setBoardno(int boardno) {
 		this.boardno = boardno;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getContent() {
 		return content;
@@ -46,5 +44,6 @@ public class Comment {
 	public void setWrittendate(Date writtendate) {
 		this.writtendate = writtendate;
 	}
-	
+
+
 }

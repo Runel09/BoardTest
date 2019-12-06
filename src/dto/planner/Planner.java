@@ -4,20 +4,23 @@ public class Planner {
 	private int PLANNER_NUM;
 	private int USER_NUMBER; 
 	private String PLANNER_NAME;
-	private int plannerIdxNum;
-	private int IdxNum;
-	private int plannerIdx;
-	private int PLACE_NUMBER;
-	private int trip_nation;
-	private int trip_date;
-	private int trip_season;
-	private int trip_theme;
+	private String trip_nation;
+	private String trip_date;
+	private String trip_season;
+	private String trip_theme;
+	private double review_score;
 	
-	public int getUSER_NUMBER() {
-		return USER_NUMBER;
+	public double getReview_score() {
+		return review_score;
 	}
-	public void setUSER_NUMBER(int uSER_NUMBER) {
-		USER_NUMBER = uSER_NUMBER;
+	public void setReview_score(double review_score) {
+		this.review_score = review_score;
+	}
+	@Override
+	public String toString() {
+		return "Planner [PLANNER_NUM=" + PLANNER_NUM + ", USER_NUMBER=" + USER_NUMBER + ", PLANNER_NAME=" + PLANNER_NAME
+				+ ", trip_nation=" + trip_nation + ", trip_date=" + trip_date + ", trip_season=" + trip_season
+				+ ", trip_theme=" + trip_theme + ", review_score=" + review_score + "]";
 	}
 	public int getPLANNER_NUM() {
 		return PLANNER_NUM;
@@ -25,68 +28,43 @@ public class Planner {
 	public void setPLANNER_NUM(int pLANNER_NUM) {
 		PLANNER_NUM = pLANNER_NUM;
 	}
+	public int getUSER_NUMBER() {
+		return USER_NUMBER;
+	}
+	public void setUSER_NUMBER(int uSER_NUMBER) {
+		USER_NUMBER = uSER_NUMBER;
+	}
 	public String getPLANNER_NAME() {
 		return PLANNER_NAME;
 	}
 	public void setPLANNER_NAME(String pLANNER_NAME) {
 		PLANNER_NAME = pLANNER_NAME;
 	}
-	public int getPlannerIdxNum() {
-		return plannerIdxNum;
-	}
-	public void setPlannerIdxNum(int plannerIdxNum) {
-		this.plannerIdxNum = plannerIdxNum;
-	}
-	public int getIdxNum() {
-		return IdxNum;
-	}
-	public void setIdxNum(int idxNum) {
-		IdxNum = idxNum;
-	}
-	public int getPlannerIdx() {
-		return plannerIdx;
-	}
-	public void setPlannerIdx(int plannerIdx) {
-		this.plannerIdx = plannerIdx;
-	}
-	public int getPLACE_NUMBER() {
-		return PLACE_NUMBER;
-	}
-	public void setPLACE_NUMBER(int pLACE_NUMBER) {
-		PLACE_NUMBER = pLACE_NUMBER;
-	}
-	public int getTrip_nation() {
+	public String getTrip_nation() {
 		return trip_nation;
 	}
-	public void setTrip_nation(int trip_nation) {
+	public void setTrip_nation(String trip_nation) {
 		this.trip_nation = trip_nation;
 	}
-	public int getTrip_date() {
+	public String getTrip_date() {
 		return trip_date;
 	}
-	public void setTrip_date(int trip_date) {
+	public void setTrip_date(String trip_date) {
 		this.trip_date = trip_date;
 	}
-	public int getTrip_season() {
+	public String getTrip_season() {
 		return trip_season;
 	}
-	public void setTrip_season(int trip_season) {
+	public void setTrip_season(String trip_season) {
 		this.trip_season = trip_season;
 	}
-	public int getTrip_theme() {
+	public String getTrip_theme() {
 		return trip_theme;
 	}
-	public void setTrip_theme(int trip_theme) {
+	public void setTrip_theme(String trip_theme) {
 		this.trip_theme = trip_theme;
 	}
 	
-	@Override
-	public String toString() {
-		return "Planner [PLANNER_NUM=" + PLANNER_NUM + ", USER_NUMBER=" + USER_NUMBER + ", PLANNER_NAME=" + PLANNER_NAME
-				+ ", plannerIdxNum=" + plannerIdxNum + ", IdxNum=" + IdxNum + ", plannerIdx=" + plannerIdx
-				+ ", PLACE_NUMBER=" + PLACE_NUMBER + ", trip_nation=" + trip_nation + ", trip_date=" + trip_date
-				+ ", trip_season=" + trip_season + ", trip_theme=" + trip_theme + "]";
-	}
 	
 
 }

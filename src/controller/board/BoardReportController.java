@@ -41,7 +41,7 @@ public class BoardReportController extends HttpServlet {
 		report.setBoardno(boardno);
 		board.setBoardno(boardno);
 		report.setContent(req.getParameter("content"));
-		report.setDb_id(req.getParameter("userid"));
+		report.setUser_id(req.getParameter("user_id"));
 		report.setReason(req.getParameter("reason"));
 
 		boardService.insertReport(report);

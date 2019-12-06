@@ -2,24 +2,22 @@ package dto.board;
 
 public class Report {
 	 
-	 private String db_id;	
+	 private String user_id;	
 	 private int boardno; 
 	 private String reason; 
 	 private String content;
 	 private int reportno;
-
-	 
-	 public int getReportno() {
-		return reportno;
+	
+	 @Override
+	public String toString() {
+		return "Report [user_id=" + user_id + ", boardno=" + boardno + ", reason=" + reason + ", content=" + content
+				+ ", reportno=" + reportno + "]";
 	}
-	public void setReportno(int reportno) {
-		this.reportno = reportno;
+	public String getUser_id() {
+		return user_id;
 	}
-	public String getDb_id() {
-		return db_id;
-	}
-	public void setDb_id(String db_id) {
-		this.db_id = db_id;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public int getBoardno() {
 		return boardno;
@@ -39,9 +37,12 @@ public class Report {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	@Override
-	public String toString() {
-		return "Report [db_id=" + db_id + ", boardno=" + boardno + ", reason=" + reason + ", content=" + content
-				+ ", reportno=" + reportno + "]";
+	public int getReportno() {
+		return reportno;
 	}
+	public void setReportno(int reportno) {
+		this.reportno = reportno;
+	}
+
+	
 }

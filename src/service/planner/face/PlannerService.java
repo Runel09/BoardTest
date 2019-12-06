@@ -5,38 +5,20 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.place.PlaceDto;
+import dto.planner.Index;
 import dto.planner.Marker;
 import dto.planner.Planner;
 
 
 public interface PlannerService {
-//	/**
-//	 * 
-//	 * @param e-전달 받은 empno가 들어있는 Emp형 입력정보
-//	 * @return Emp
-//	 */
-//	public Emp detail(Emp e);
-//	
-//	/**
-//	 *  Emp형 정보를 전달받아 DB에 입력
-//	 * @param emp-DB에 입력될 Emp형 정보
-//	 */
-//	public void join(Emp emp);
-//	
-//	/**
-//	 * 
-//	 * @param req- 전달받은 회원 정보
-//	 * @return Emp - 입력받은 정보를  Emp형으로 저장
-//	 */
-
 //	public Emp getEmpParam(HttpServletRequest req);
 	
 	//PL-01
-	//	 플래너에서 일정 추천수를 받은 플래너들을 사용
-	//	 사용자들의 추천수를 참조하여 추천수 순으로 출력
+	//	 플래너에서 일정 점수수를 받은 플래너들을 사용
+	//	 플래너들의 점수를 참조하여 추천수 순으로 출력
 	/**
-	 * Planner 테이블의 목록을 조회 추천수 순으로 Sorting 해서 출력
-	 * @return List<Planner>-전체조회+추천수 20이상 플래너 목록
+	 * Planner 테이블의 목록을 조회+점수수 순으로 Sorting 해서 출력
+	 * @return List<Planner>-전체조회+점수 20이상 플래너 목록
 	 */
 	public List<Planner> presetList();
 	
@@ -58,6 +40,7 @@ public interface PlannerService {
 	//	 국가-도시-지역순으로 필터링 해서 지도에 표기되게함
 	/**
 	 *  req객체를 통해 현재 페이지에 표기되는 지도의 모서리 좌표 획득후 전달
+	 * map.getBounds() 메서드 사용
 	 * 
 	 * @param req 페이지에 표시된 지도 좌표(4개 모서리)
 	 * @return 해당 좌표들 안에 존재하는 장소들 목록
@@ -122,5 +105,12 @@ public interface PlannerService {
 	public Planner viewInfo(Planner viewPlanner);
 
 	public Planner getparameter(HttpServletRequest req);
+
+	public List<Index> getIndex(HttpServletRequest req);
+
+
+	public void write(String[][] list);
+
+	public int getPlannerNum();
 
 }

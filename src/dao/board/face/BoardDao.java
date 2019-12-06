@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.board.Board;
 import dto.board.BoardFile;
-import dto.board.PlanBoard;
 import dto.board.Report;
+import dto.planner.Planner;
 import util.Paging;
 
 public interface BoardDao {
@@ -27,15 +27,18 @@ public interface BoardDao {
 	 * @return List - 조회된 게시글 목록
 	 */
 	public List<Board> selectFreeAll(Paging paging);
+	
 	public List<Board> selectQuestionAll(Paging paging);
+	
 	public List<Board> selectTipAll(Paging paging);
-	public List<PlanBoard> selectPlannerNewAll(Paging paging);
-	public List<PlanBoard> selectPlannerHotAll(Paging paging);
+	
+	public List<Planner> selectPlannerNewAll(Paging paging);
+	
+	public List<Planner> selectPlannerHotAll(Paging paging);
 
 	public Board selectBoardByBoardno(Board board);
 
 	public void updateHit(Board board);
-
 	
 	public int selectCntPlanner(Paging paging);
 	
@@ -59,27 +62,19 @@ public interface BoardDao {
 	
 	public void insertFile(BoardFile boardFile);
 
-
 	public BoardFile selectBoardFileByBoardno(int boardno);
-
 
 	public BoardFile selectByFileno(BoardFile boardFile);
 
-
 	public Board selectByBoardno(Board board);
-
 
 	public void update(Board board);
 
-
 	public void deleteFileByBoardno(Board board);
-
 
 	public void deleteBoardByboardno(Board board);
 
-
 	public void deleteBoardList(String[] check);
-
 
 	public void plusReport(Board board);
 

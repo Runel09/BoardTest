@@ -338,7 +338,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				Report report = new Report();
 				
 				report.setBoardno(rs.getInt("boardno"));
-				report.setDb_id(rs.getString("db_id"));
+				report.setUser_id(rs.getString("db_id"));
 				report.setContent(rs.getString("content"));
 				report.setReason(rs.getString("reason"));
 				report.setReportno(rs.getInt("reportno"));
@@ -447,7 +447,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("TITLE"));
-				board.setId(rs.getString("user_id"));
+				board.setUser_id(rs.getString("ID"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));

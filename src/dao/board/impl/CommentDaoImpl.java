@@ -25,7 +25,7 @@ public class CommentDaoImpl implements CommentDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT commentno, boardno, userid, content, writtendate";
+		sql += "SELECT commentno, boardno, user_id, content, writtendate";
 		sql += " FROM commenttb WHERE boardno = ? ORDER BY commentno DESC";
 		
 		List<Comment> list = new ArrayList<>();
@@ -44,7 +44,7 @@ public class CommentDaoImpl implements CommentDao{
 				
 				comment.setCommentno(rs.getInt("commentno"));
 				comment.setBoardno(rs.getInt("boardno"));
-				comment.setUserid(rs.getString("userid"));
+				comment.setUser_id(rs.getString("user_id"));
 				comment.setContent(rs.getString("content"));
 				comment.setWrittendate(rs.getDate("writtendate"));
 				
@@ -66,14 +66,14 @@ public class CommentDaoImpl implements CommentDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO commenttb(commentno, boardno, userid, content, writtendate)";
+		sql += "INSERT INTO commenttb(commentno, boardno, user_id, content, writtendate)";
 		sql += " VALUES(commentTB_seq.nextVal, ?, ?, ?, sysdate)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, comment.getBoardno());
-			ps.setString(2,	comment.getUserid());
+			ps.setString(2,	comment.getUser_id());
 			ps.setString(3,	comment.getContent());
 			
 			ps.executeUpdate();
