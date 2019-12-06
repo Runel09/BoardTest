@@ -8,12 +8,19 @@ public class Planner {
 	private String trip_date;
 	private String trip_season;
 	private String trip_theme;
+	private double review_score;
 	
+	public double getReview_score() {
+		return review_score;
+	}
+	public void setReview_score(double review_score) {
+		this.review_score = review_score;
+	}
 	@Override
 	public String toString() {
 		return "Planner [PLANNER_NUM=" + PLANNER_NUM + ", USER_NUMBER=" + USER_NUMBER + ", PLANNER_NAME=" + PLANNER_NAME
 				+ ", trip_nation=" + trip_nation + ", trip_date=" + trip_date + ", trip_season=" + trip_season
-				+ ", trip_theme=" + trip_theme + "]";
+				+ ", trip_theme=" + trip_theme + ", review_score=" + review_score + "]";
 	}
 	public int getPLANNER_NUM() {
 		return PLANNER_NUM;

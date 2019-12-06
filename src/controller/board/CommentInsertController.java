@@ -30,7 +30,7 @@ public class CommentInsertController extends HttpServlet {
 		String content = req.getParameter("content");
 		
 		
-		comment.setUserid((String) session.getAttribute("userid"));
+		comment.setUser_id((String) session.getAttribute("user_id"));
 		comment.setBoardno(boardno);
 		comment.setContent(content);
 		

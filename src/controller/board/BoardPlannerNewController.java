@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.board.PlanBoard;
+import dto.planner.Planner;
 import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
@@ -28,7 +28,7 @@ public class BoardPlannerNewController extends HttpServlet {
 		Paging paging = boardService.getPaging(req);
 		//Paging 객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);	
-		List<PlanBoard> list = boardService.getPlannerNewList(paging);	
+		List<Planner> list = boardService.getPlannerNewList(paging);	
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/views/board/plannernew.jsp")
 		.forward(req, resp);

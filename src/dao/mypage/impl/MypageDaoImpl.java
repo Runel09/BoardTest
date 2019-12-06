@@ -105,7 +105,7 @@ public class MypageDaoImpl implements MypageDao {
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("TITLE"));
-				board.setId(rs.getString("ID"));
+				board.setUser_id(rs.getString("ID"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));

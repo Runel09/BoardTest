@@ -62,10 +62,10 @@ $(document).ready(function() {
 			, url: "/planner/hot"
 			, data: 
 			{	
-					"travel_place" : $("#travel_place").val(),
-					"travel_date" : $("#travel_date").val(),
-					"travel_season" : $("#travel_season").val(),
-					"travel_thema" : $("#travel_thema").val(),
+					"trip_nation" : $("#trip_nation").val(),
+					"trip_date" : $("#trip_date").val(),
+					"trip_season" : $("#trip_season").val(),
+					"trip_theme" : $("#trip_theme").val(),
 			}
 			, dataType: "html"
 			, success: function( html ) 
@@ -220,7 +220,7 @@ div.pullRight a:hover:before
 <div class="tag_body" id="tag_body">
 	<div class="place">
 		<div id="place_head" style="font-weight: bold;">
-			여행지 <input type="hidden" id="travel_place" value="" />
+			여행지 <input type="hidden" id="trip_nation" value="" />
 		</div>
 		<div>국내</div>
 		<div>일본</div>
@@ -230,9 +230,9 @@ div.pullRight a:hover:before
 		<div>태국</div>
 		<div>미국</div>
 	</div>
-	<div class="travel_date">
-		<div id="travel_date_head" style="font-weight: bold;">
-			여행일<input type="hidden" id="travel_date" value="" />
+	<div class="trip_date">
+		<div id="trip_date_head" style="font-weight: bold;">
+			여행일<input type="hidden" id="trip_date" value="" />
 		</div>
 		<div>1-3일</div>
 		<div>4-6일</div>
@@ -240,18 +240,18 @@ div.pullRight a:hover:before
 		<div>11-15일</div>
 		<div>15일이상</div>
 	</div>
-	<div class="travel_season">
-		<div id="travel_season_head" style="font-weight: bold;">
-			여행시기<input type="hidden" id="travel_season" value="" />
+	<div class="trip_season">
+		<div id="trip_season_head" style="font-weight: bold;">
+			여행시기<input type="hidden" id="trip_season" value="" />
 		</div>
 		<div>봄</div>
 		<div>여름</div>
 		<div>가을</div>
 		<div>겨울</div>
 	</div>
-	<div class="traval_thema">
-		<div id="traval_thema_head" style="font-weight: bold;">
-			여행테마<input type="hidden" id="travel_thema" value="" />
+	<div class="trip_theme">
+		<div id="trip_theme_head" style="font-weight: bold;">
+			여행테마<input type="hidden" id="trip_theme" value="" />
 		</div>
 		<div>가족여행</div>
 		<div>나홀로여행</div>
