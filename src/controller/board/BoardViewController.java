@@ -32,8 +32,10 @@ public class BoardViewController extends HttpServlet {
 		BoardFile boardFile = boardService.getBoardFileByBoardno(board.getBoardno());
 		List<Comment> commentList = boardService.commentList(board);
 		
+//		System.out.println(board);
+		
 		req.setAttribute("board", board);
-		req.setAttribute("boardFile", boardFile);
+		req.setAttribute("file", boardFile);
 		req.setAttribute("comment", commentList);
 		req.setAttribute("nick", boardService.getNick(board));
 		

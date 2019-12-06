@@ -34,15 +34,15 @@ public class BoardDownloadController extends HttpServlet {
 		
 		// 다운로드 대상 파일 정보 조회하기
 		boardFile = boardService.getFile(boardFile);
-		System.out.println(boardFile);
+//		System.out.println(boardFile);
 
 		// 다운로드용 File 객체 만들기
 		String path = getServletContext().getRealPath("upload"); // 경로
 		String filename = boardFile.getStoredname(); // 파일이름
 
 		File file = new File(path, filename);
-		System.out.println("FILE : " + file);
-		System.out.println("FILE exists() : " + file.exists());
+//		System.out.println("FILE : " + file);
+//		System.out.println("FILE exists() : " + file.exists());
 
 		// -- 파일 다운로드 시키기 --
 		// 응답 정보 객체를 설정한다

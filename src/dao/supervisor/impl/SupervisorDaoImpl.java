@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dao.supervisor.face.SupervisorDao;
 import dbutil.DBConn;
+import dto.board.Board;
 import dto.board.Report;
 import dto.login.Member;
 import dto.supervisor.Supervisor;
@@ -298,18 +299,18 @@ public class SupervisorDaoImpl implements SupervisorDao{
 	@Override
 	public List<Report> getreportList(Paging paging) {
 		
-conn = DBConn.getConnection(); // DB연결
-		
+		conn = DBConn.getConnection(); // DB연결
+
 		// 수행할 SQL 쿼리
 		String sql = "";
 		sql += "select * from(";
 		sql += " Select rownum rnum, B.* FROM(";
 		sql += " select * from report";
-		
+
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 			sql+=" WHERE db_id LIKE ? or reason LIKE ? or content LIKE ?";
 		}
-		
+
 		sql += " order by boardno desc)B";
 		sql += " ORDER BY rnum) BOARD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
@@ -317,7 +318,7 @@ conn = DBConn.getConnection(); // DB연결
 		List<Report> list = new ArrayList<>();
 		try {
 			ps = conn.prepareStatement(sql);// 수행객체 얻기
-			
+
 			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
 				ps.setString(1, "%" + paging.getSearch() + "%");
 				ps.setString(2, "%" + paging.getSearch() + "%");
@@ -328,7 +329,7 @@ conn = DBConn.getConnection(); // DB연결
 				ps.setInt(1, paging.getStartNo());
 				ps.setInt(2, paging.getEndNo());
 			}
-			
+
 			rs = ps.executeQuery();// sql 수행결과 얻기
 
 			// SQL 수행결과 처리
@@ -402,6 +403,206 @@ conn = DBConn.getConnection(); // DB연결
 		
 		
 	}
+
+	@Override
+	public List<Board> getNoticeList(Paging paging) {
+		conn = DBConn.getConnection(); // DB연결
+
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "select * from(";
+		sql += " Select rownum rnum, B.* FROM(";
+		sql += " select * from board";
+
+		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+			sql+=" WHERE title LIKE ? or id LIKE ? or content LIKE ?";
+		}
+
+		sql += " order by boardno desc)B";
+		sql += " ORDER BY rnum) BOARD";
+		sql += " WHERE rnum BETWEEN ? AND ? and checkboard='공지'";
+
+		List<Board> list = new ArrayList<>();
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+
+			if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
+				ps.setString(1, "%" + paging.getSearch() + "%");
+				ps.setString(2, "%" + paging.getSearch() + "%");
+				ps.setString(3, "%" + paging.getSearch() + "%");
+				ps.setInt(4, paging.getStartNo());
+				ps.setInt(5, paging.getEndNo());
+			} else {
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+	
+			}
+
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+			// SQL 수행결과 처리
+			while (rs.next()) {
+//				System.out.println("HERE");
+				Board board= new Board();
+				
+				board.setBoardno(rs.getInt("boardno"));
+				board.setTitle(rs.getString("TITLE"));
+				board.setId(rs.getString("ID"));
+				board.setContent(rs.getString("content"));
+				board.setHit(rs.getInt("hit"));
+				board.setWrittendate(rs.getDate("writtendate"));
+				board.setCheckboard(rs.getString("checkboard"));
+				
+				list.add(board);
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	@Override
+	public int noticeselectCntAll(HttpServletRequest req) {
+		conn = DBConn.getConnection(); // DB연결
+
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "SELECT count(*) FROM board";
+		if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
+			System.out.println(1);
+			sql +=" WHERE checkboard='공지'";
+			sql += " AND (title LIKE ? ";
+			sql += " or id LIKE ? ";
+			sql += " or content LIKE ?)";
+		} else {
+			System.out.println(2);
+			sql += " WHERE checkboard='공지'";
+		}
+
+		// 최종 결과 변수
+		int cnt = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			if(req.getParameter("search")!=null && !"".equals(req.getParameter("search"))) {
+				ps.setString(1, "%" + req.getParameter("search") + "%");
+				ps.setString(2, "%" + req.getParameter("search")+ "%");
+				ps.setString(3, "%" + req.getParameter("search")+ "%");
+			}
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+			// SQL 수행결과 처리
+			while (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+		// 최종결과 반환
+		return cnt;
+	}
+
+	@Override
+	public void noticedelete(Board board) {
+		conn= DBConn.getConnection();
+
+		String sql="";
+		sql+="DELETE FROM board";
+		sql+=" WHERE boardno=?";
+
+		try {
+			ps = conn.prepareStatement(sql);// 수행객체 얻기
+			ps.setInt(1, board.getBoardno());
+			rs = ps.executeQuery();// sql 수행결과 얻기
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+
+	}
+
+	@Override
+	public void deleteNoticeList(String[] check) {
+		conn = DBConn.getConnection();
+
+		String sql = "DELETE FROM board";
+		sql += " WHERE boardno=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < check.length; i++) {
+
+				ps.setInt(1, Integer.parseInt(check[i]));
+				ps.executeQuery();
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			}
+		
+	}
+
+	@Override
+	public void deleteMemberList(String[] check) {
+		conn = DBConn.getConnection();
+
+		String sql = "DELETE FROM userinfo";
+		sql += " WHERE user_number=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < check.length; i++) {
+
+				ps.setInt(1, Integer.parseInt(check[i]));
+				ps.executeQuery();
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		
+	}
+		}
 
 
 

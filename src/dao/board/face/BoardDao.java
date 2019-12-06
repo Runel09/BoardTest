@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.board.Board;
 import dto.board.BoardFile;
+import dto.board.PlanBoard;
 import dto.board.Report;
 import util.Paging;
 
@@ -28,12 +29,15 @@ public interface BoardDao {
 	public List<Board> selectFreeAll(Paging paging);
 	public List<Board> selectQuestionAll(Paging paging);
 	public List<Board> selectTipAll(Paging paging);
-	public List<Board> selectPlannerAll(Paging paging);
+	public List<PlanBoard> selectPlannerAll(Paging paging);
 
 	public Board selectBoardByBoardno(Board board);
 
 	public void updateHit(Board board);
 
+	
+	public int selectCntPlanner(Paging paging);
+	
 	/**
 	 * 총 게시글 수 조회
 	 * @param req 
@@ -76,20 +80,11 @@ public interface BoardDao {
 	public void deleteBoardList(String[] check);
 
 
-	public void insertRecommend(Board recommendBoard);
-
-
-	public void deleteRecommend(Board recommendBoard);
-
-
-	public boolean checkRecommend(Board recommendBoard);
-
-
-	public int getCountRecommend(Board recommendBoard);
-
 	public void plusReport(Board board);
 
 	public void insertReport(Report report);
+
+	public List<Board> selectEventAll(Paging paging);
 
 
 	

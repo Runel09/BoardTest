@@ -25,7 +25,7 @@ public interface PlaceDao {
 	 */
 	public List<PlaceDto> selectAllLocation();
 	
-	public int selectCnAll(String search);
+	public int selectCnAll(Paging paging);
 	
 	
 	public List<PlaceDto> selectAll(Paging paging);
@@ -48,8 +48,10 @@ public interface PlaceDao {
 	 * @return-첨부파일
 	 */
 	public PlaceFile getfile(PlaceDto place);
-
-	void deletefile(PlaceFile file);
-
+	
+	public void deletefile(PlaceFile file);
+	
 	public void deleteplace(PlaceDto place);
+	
+		
 }

@@ -4,7 +4,7 @@
  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %> 
-<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/supervisor_header.jsp"/>
 <style type="text/css">
 table, th{
 	text-align: center;
@@ -39,7 +39,7 @@ $(document).ready(function () {
 </script>
 
 <div class="container">
-<h1>user 리스트</h1>
+<h1>Report 리스트</h1>
 <hr>
 
 <form action="/supervisor/reportdelete" method="get">

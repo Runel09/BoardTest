@@ -1,5 +1,6 @@
 package dao.board.face;
 
+import dto.board.Board;
 import dto.board.Recommend;
 
 public interface RecommendDao {

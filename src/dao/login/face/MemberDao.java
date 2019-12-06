@@ -18,5 +18,19 @@ public interface MemberDao {
 	 * 아이디 중복여부
 	 */
 	public boolean duplicateIdCheck(String id);
+
+	
+/*
+ * 아이디찾기
+ */
+	public Member finduserid(Member member) ;
+
+/*
+ * 비밀번호찾기
+ */
+	public Member finduserpw(Member member2);
+
+	//임시 비밀번호로 업데이트
+	public void updatePw(Member member2);
 	
 }

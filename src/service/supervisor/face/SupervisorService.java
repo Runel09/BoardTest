@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.board.Board;
 import dto.board.Report;
 import dto.login.Member;
 import dto.supervisor.Supervisor;
@@ -77,4 +78,16 @@ public interface SupervisorService {
 	public void DeleteReport(HttpServletRequest req);
 
 	public void deleteCheckBoardno(String[] check);
+
+	public List<Board> getNoticeList(Paging paging);
+
+	public Paging noticeListgetPaging(HttpServletRequest req);
+
+	public void DeleteNotice(HttpServletRequest req);
+
+	public void UpdateNotice(HttpServletRequest req);
+
+	public void deleteCheckNoticeBoardno(String[] check);
+
+	public void deleteCheckuserno(String[] check);
 }

@@ -9,6 +9,7 @@
 
 $(document).ready(function() {
    
+
 	$("#btnWrite").click(function() {
       
 		$(location).attr("href", "/board/write");
@@ -118,9 +119,17 @@ div.pullRight a:hover:before
 <tr class="info">
    <th style="width: 8%">구분</th>
    <th style="width: 36%;">제목</th>
-   <th style="width: 13%">작성일</th>
    <th style="width: 8%">조회수</th>
+   <th style="width: 13%">작성일</th>
 </tr>
+<c:forEach var="list" items="${list }">
+<tr>
+   <td>${list.checkboard }</td>
+   <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
+   <td>${list.hit }</td>
+   <td>${list.writtendate }</td>
+</tr>
+</c:forEach>
 
 </table>
 </div>
@@ -143,7 +152,7 @@ div.pullRight a:hover:before
    <th style="width: 10%">작성일</th>
 </tr>
 
-<c:forEach var="list" items="${list }">
+<c:forEach var="list" items="${freelist }">
 <tr>
    <td>${list.checkboard }</td>
    <td style="text-align:center;">${list.boardno }</td>
