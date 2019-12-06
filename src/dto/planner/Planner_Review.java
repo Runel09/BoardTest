@@ -4,7 +4,7 @@ public class Planner_Review {
 	private int review_num;
 	private int user_num;
 	private int planner_num;
-	private int review_score;
+	private Double review_score;
 	private int review_char;
 	@Override
 	public String toString() {
@@ -29,10 +29,10 @@ public class Planner_Review {
 	public void setPlanner_num(int planner_num) {
 		this.planner_num = planner_num;
 	}
-	public int getReview_score() {
+	public Double getReview_score() {
 		return review_score;
 	}
-	public void setReview_score(int review_score) {
+	public void setReview_score(Double review_score) {
 		this.review_score = review_score;
 	}
 	public int getReview_char() {

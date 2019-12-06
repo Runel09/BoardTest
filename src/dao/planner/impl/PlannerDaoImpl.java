@@ -1,9 +1,20 @@
 package dao.planner.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import dao.planner.face.PlannerDao;
+import dbutil.DBConn;
+import dto.planner.Index;
 import dto.planner.Planner;
 
 public class PlannerDaoImpl implements PlannerDao {
+	private Connection conn = null; // DB연결 객체
+	private PreparedStatement ps = null; // SQL 수행 객체
+	private ResultSet rs = null; // SQL수행 결과 객체
 
 	@Override
 	public Planner getParam(Planner SelectedPlanner) {
@@ -12,15 +23,109 @@ public class PlannerDaoImpl implements PlannerDao {
 	}
 
 	@Override
-	public void insert(String[][] list) {
-		// TODO Auto-generated method stub
-		
+	public int getPlannerNum() {
+		int planner_num = 0;
+		conn = DBConn.getConnection();// DB 연결
+		String sql = "";
+		sql += "SELECT planner_seq.NEXTVAL FROM DUAL";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				planner_num = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return planner_num;
 	}
 
 	@Override
-	public int getPlannerNum() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void insert_planner(Planner planner) {
+		conn = DBConn.getConnection();// DB 연결
+		// 수행할 SQL 쿼리
+		String sql = "";
+
+		sql += "INSERT INTO PLANNERINFO(PLANNER_NUM, USER_NUMBER, PLANNER_NAME, TRIP_NATION, TRIP_DATE, TRIP_SEASON, TRIP_THEME)";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, planner.getPLANNER_NUM());
+			ps.setInt(2, planner.getUSER_NUMBER());
+			ps.setString(3, planner.getPLANNER_NAME());
+			ps.setString(4, planner.getTrip_nation());
+			ps.setString(5, planner.getTrip_date());
+			ps.setString(6, planner.getTrip_season());
+			ps.setString(7, planner.getTrip_theme());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	@Override
+	public void insert_index(List<Index> indexList) {
+		conn = DBConn.getConnection();// DB 연결
+		// 수행할 SQL 쿼리
+		String sql = "";
+
+		sql += "INSERT INTO PLANNER_IDX(INDEX_NUM, PLANNER_NUM, PLACE_NUMBER, PLANNER_DATE)";
+		sql += " VALUES (planner_index_seq.nextval, ?, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			for(int i = 0 ;i<indexList.size();i++) {
+				ps.setInt(1, indexList.get(i).getPlanner_num());
+				ps.setInt(2, indexList.get(i).getPlace_num());
+				ps.setInt(3, indexList.get(i).getPlanner_date());
+				ps.executeUpdate();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (rs != null)
+					rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
 	}
 
 }

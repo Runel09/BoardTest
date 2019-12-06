@@ -60,6 +60,7 @@ public class PlannerInputController extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/views/planner/plannerBody.jsp").forward(req, resp);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int plannerno=0;
@@ -73,13 +74,16 @@ public class PlannerInputController extends HttpServlet {
 		int planner_num= plannerService.getPlannerNum();
 		planner.setPLANNER_NUM(planner_num);
 		for(int i =0 ; i<indexList.size();i++) {
-			indexList.get(i).setIndex_num(planner_num);
+			indexList.get(i).setPlanner_num(planner_num);
 		}
 		HttpSession session=null;
+		session=req.getSession();
 		session.getAttribute("user_userNum");
-		planner.setUSER_NUMBER((int) session.getAttribute("user_userNum"));
+		if(session.getAttribute("user_userNum")!=null) {
+			planner.setUSER_NUMBER((int) session.getAttribute("user_userNum"));
+		}
 		plannerService.write(planner);
-		plannerService.insetIndex(indexList);
+		plannerService.insertIndex(indexList);
 
 		resp.sendRedirect("/planner/view?plannerno="+plannerno);
 		
