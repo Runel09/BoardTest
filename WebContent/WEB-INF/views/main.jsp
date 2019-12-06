@@ -223,8 +223,8 @@ $(document).ready(function(){
 
 <div id="sliderbox">
 	<ul id="slider">
-		<li><img src="/image/alex-knight-wfwUpfVqrKU-unsplash.jpg"/></li>
 		<li><img src="/image/lisheng-chang-m9BBVrPl87M-unsplash.jpg"/></li>
+		<li><img src="/image/alex-knight-wfwUpfVqrKU-unsplash.jpg"/></li>
 		<li><img src="/image/sebastian-pena-lambarri-7i5HMCGupVw-unsplash.jpg"/></li>
 		<li><img src="/image/sebastien-jermer-n7DY58YFg9E-unsplash.jpg"/></li>
 		<li><img src="/image/sutirta-budiman-kjOBqwMUnWw-unsplash.jpg"/></li>
