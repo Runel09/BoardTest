@@ -15,7 +15,7 @@ import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
 @WebServlet("/planner/new")
-public class PlannerAjaxController extends HttpServlet {
+public class PlannerAjaxNewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	
