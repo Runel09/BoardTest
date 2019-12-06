@@ -166,9 +166,10 @@ public class CommentDaoImpl implements CommentDao {
 				e.printStackTrace();
 			} finally {
 				try {
-					rs.close();
-					ps.close();
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -203,6 +204,14 @@ public class CommentDaoImpl implements CommentDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return placeDto;
@@ -228,6 +237,13 @@ public class CommentDaoImpl implements CommentDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
