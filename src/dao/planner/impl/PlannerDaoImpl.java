@@ -11,4 +11,16 @@ public class PlannerDaoImpl implements PlannerDao {
 		return null;
 	}
 
+	@Override
+	public void insert(String[][] list) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getPlannerNum() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

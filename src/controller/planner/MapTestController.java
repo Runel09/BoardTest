@@ -2,7 +2,6 @@ package controller.planner;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+
+
+
+
+
+
 
 /**
  * Servlet implementation class MapTestController
@@ -33,6 +38,7 @@ public class MapTestController extends HttpServlet {
 				listIndx.add(Integer.parseInt(req.getParameter(query)));
 				System.out.println(Integer.parseInt(req.getParameter(query)));
 				cnt+=1;
+				System.out.println(cnt+"회");
 			}
 		}
 		

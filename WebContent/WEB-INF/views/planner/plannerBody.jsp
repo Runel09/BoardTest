@@ -270,17 +270,21 @@ div div > .selected{
 				//플래너 정보 입력
 				$("#submit_btn").on('click', function() {
 					
-					var $f = $("<form>").attr({method:"", action:""})
+					var $f = $("<form>").attr({method:"post", action:"/planner/input"})
 					//인덱스 추가
 					
-					for (var j = 0 ; j<$(".index_body").children("div").size();j++)
+					for (var j = 0 ; j<=$(".index_body").children("div").size();j++)
 					for(var i =0; i<$(".index_body").children("div").eq(j).children().size();i++){
-						$f.append( $("<input>").attr({name: j+"day_place_no", value:$(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no")}) )
+						$f.append( $("<input>").attr({name: (j+1)+"day_place_no", value:$(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no")}) )
 						console.log($(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no"));
 					}
 					//타이틀 추가
 						$f.append( $("<input>").attr({name:"title", value:$("#title_char").val()}) );
-						
+					//테마 추가
+						$f.append($("<input>").attr({name:"travel_Place", value:$("#travel_Place").val()}))
+						$f.append($("<input>").attr({name:"travel_date", value:$("#travel_date").val()}))
+						$f.append($("<input>").attr({name:"travel_season", value:$("#travel_season").val()}))
+						$f.append($("<input>").attr({name:"traval_thema", value:$("#traval_thema").val()}))
 						$f.appendTo( $(document.body) );
 					$f.submit();
 
@@ -420,7 +424,7 @@ div div > .selected{
 						</div>
 						<div class="travel_season">
 							<div id="travel_season_head">
-								여행시기<input type="hidden" name="travel_season" value="">
+								여행시기<input type="hidden" id="travel_season" value="">
 							</div>
 							<div>봄</div>
 							<div>여름</div>
@@ -477,7 +481,10 @@ div div > .selected{
 			</div>
 		</div>
 		<div id="footer">
-			<small>다 싫어...</small>
+<%-- 			<c:forEach var="" items=""> --%>
+				
+			
+<%-- 			</c:forEach> --%>
 		</div>
 
 

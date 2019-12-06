@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.place.PlaceDto;
+import dto.planner.Index;
 import dto.planner.Planner;
 import service.place.face.PlaceService;
 import service.place.impl.PlaceServiceImpl;
@@ -61,13 +63,24 @@ public class PlannerInputController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int plannerno=0;
-		Planner planner = new Planner();
-		String[] result=req.getParameterValues("place_no");
-		for(int i =0;i<result.length;i++){
-			System.out.println(result[i]);
-		}
+		req.setCharacterEncoding("UTF-8");
+		//인덱스 리스트 파싱
+		List<Index> indexList =plannerService.getIndex(req);
+//		System.out.println(indexList.toString());
 		
-//		planner = plannerService.getparameter(req);
+		Planner planner=plannerService.getparameter(req);
+//		System.out.println(planner.toString());
+		int planner_num= plannerService.getPlannerNum();
+		planner.setPLANNER_NUM(planner_num);
+		for(int i =0 ; i<indexList.size();i++) {
+			indexList.get(i).setIndex_num(planner_num);
+		}
+		HttpSession session=null;
+		session.getAttribute("user_userNum");
+		planner.setUSER_NUMBER((int) session.getAttribute("user_userNum"));
+		plannerService.write(planner);
+		plannerService.insetIndex(indexList);
+
 		resp.sendRedirect("/planner/view?plannerno="+plannerno);
 		
 		
