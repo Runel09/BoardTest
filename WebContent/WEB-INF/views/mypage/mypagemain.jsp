@@ -69,8 +69,8 @@ $('#testBtn').click(function(e){
    display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 36%;
-    height: 200px;
+    width: 39%;
+    height: 531px;
     padding: 16px;
     margin: 33px;
     border: 1px solid #ddd;
@@ -115,11 +115,11 @@ $('#testBtn').click(function(e){
          </ul>
          <hr>
          <ul class="userinfo">
-         <li>이름:</li>
-         <li>닉네임:</li>
-         <li>이메일:</li>
-         <li>주소:</li>
-         <li>전화번호:</li>
+         <li>이름:${member.user_name}</li>
+         <li>닉네임:${member.user_nick }</li>
+         <li>이메일:${member.user_email }</li>
+         <li>주소:${member.user_addr } /${member.user_addr_detail }</li>
+         <li>전화번호:${member.user_phnum }</li>
          </ul>
          
          <hr>
@@ -167,11 +167,27 @@ $('#testBtn').click(function(e){
       </div>
       
       <div class="inner_con2">
-         <p style="text-align:left; font-size:25px">활동이력</p>
+         <!-- 내가쓴 게시물  -->
+         <p style="text-align:left; font-size:25px">내가 작성한 게시글</p>
          <hr>
-         <a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
-         내가쓴댓글가져오기
-         찜하기한글가져오기
+         <table class="table table-hover table-condenssed table-striped ">
+		<tr class="board">
+			<th style="width: 10%">카테고리</th>
+			<th style="width: 10%">제목</th>
+	
+		</tr>
+		
+		<c:forEach var="board" items="${list }">
+		
+		<tr>
+			<td>${board.checkboard}</td> 
+			<td><a href="/board/view?boardno=${board.boardno }">${board.title}</a></td>
+
+		</tr>
+		</c:forEach>
+		</table>
+         
+<jsp:include page="/WEB-INF/views/layout/mypage_paging.jsp" />
       </div>
 
       
