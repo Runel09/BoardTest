@@ -46,7 +46,7 @@ div.container
 {
     font-family: Raleway;
     margin: 0 auto;
-	padding: 1em 7em;
+	padding: 4em 7em;
 	text-align: center;
 }
 
