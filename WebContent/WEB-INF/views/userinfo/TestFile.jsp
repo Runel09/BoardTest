@@ -8,58 +8,412 @@
 
 <!--  jquery 2.2.4  -->
 <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<srcipt src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<!-- Bootstrqp 3.3.2 밑에 3개  -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style type = text/css>
+ 
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  background: #ededed;
+}
+
+input, button {
+  border: none;
+  outline: none;
+  background: none;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+$contW: 900px;
+$imgW: 260px;
+$formW: $contW - $imgW;
+$switchAT: 1.2s;
+
+$inputW: 260px;
+$btnH: 36px;
+
+$diffRatio: ($contW - $imgW) / $contW;
+
+@mixin signUpActive {
+  .cont.s--signup & {
+    @content;
+  }
+}
+
+.tip {
+  font-size: 20px;
+  margin: 40px auto 50px;
+  text-align: center;
+}
+
+.cont {
+  overflow: hidden;
+  position: relative;
+  width: $contW;
+  height: 550px;
+  margin: 0 auto 100px;
+  background: #fff;
+}
+
+.form {
+  position: relative;
+  width: $formW;
+  height: 100%;
+  transition: transform $switchAT ease-in-out;
+  padding: 50px 30px 0;
+}
+
+.sub-cont {
+  overflow: hidden;
+  position: absolute;
+  left: $formW;
+  top: 0;
+  width: $contW;
+  height: 100%;
+  padding-left: $imgW;
+  background: #fff;
+  transition: transform $switchAT ease-in-out;
+
+  @include signUpActive {
+    transform: translate3d($formW * -1,0,0);
+  }
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  width: $inputW;
+  height: $btnH;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.img {
+  overflow: hidden;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: $imgW;
+  height: 100%;
+  padding-top: 360px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: $contW;
+    height: 100%;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
+    background-size: cover;
+    transition: transform $switchAT ease-in-out;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+  }
+
+  @include signUpActive {
+    &:before {
+      transform: translate3d($formW,0,0);
+    }
+  }
+
+  &__text {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    color: #fff;
+    transition: transform $switchAT ease-in-out;
+
+    h2 {
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    &.m--up {
+
+      @include signUpActive {
+        transform: translateX($imgW*2);
+      }
+    }
+
+    &.m--in {
+      transform: translateX($imgW * -2);
+
+      @include signUpActive {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__btn {
+    overflow: hidden;
+    z-index: 2;
+    position: relative;
+    width: 100px;
+    height: $btnH;
+    margin: 0 auto;
+    background: transparent;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px;
+    cursor: pointer;
+    
+    &:after {
+      content: '';
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #fff;
+      border-radius: 30px;
+    }
+
+    span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      transition: transform $switchAT;
+      
+      &.m--in {
+        transform: translateY($btnH*-2);
+        
+        @include signUpActive {
+          transform: translateY(0);
+        }
+      }
+      
+      &.m--up {
+        @include signUpActive {
+          transform: translateY($btnH*2);
+        }
+      }
+    }
+  }
+}
+
+h2 {
+  width: 100%;
+  font-size: 26px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  width: $inputW;
+  margin: 25px auto 0;
+  text-align: center;
+
+  span {
+    font-size: 12px;
+    color: #cfcfcf;
+    text-transform: uppercase;
+  }
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.forgot-pass {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #cfcfcf;
+}
+
+.submit {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background: #d4af7a;
+  text-transform: uppercase;
+}
+
+.fb-btn {
+  border: 2px solid #d3dae9;
+  color: darken(#d3dae9, 20%);
+
+  span {
+    font-weight: bold;
+    color: darken(#768cb6, 20%);
+  }
+}
+
+.sign-in {
+  transition-timing-function: ease-out;
+
+  @include signUpActive {
+    transition-timing-function: ease-in-out;
+    transition-duration: $switchAT;
+    transform: translate3d($formW,0,0);
+  }
+}
+
+.sign-up {
+  transform: translate3d($contW * -1,0,0);
+
+  @include signUpActive {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.icon-link {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  width: 32px;
+
+  img {
+    width: 100%;
+    vertical-align: top;
+  }
+
+  &--twitter {
+    left: auto;
+    right: 5px;
+  }
+}
+
+</style>
 <script type="text/javascript">
-
-//경고 모달 호출 메서드
-function warningModal(content) {
-   $(".modal-contents").text(content);
-   $("#defaultModal").modal('show');
-}
-
-function test(){
-	warningModal("gkdld");
-	
-}
-
-// $(document).ready(function(){
-// 	$('#myModal').modal({
-// 		  keyboard: false
-// 	})
-	
-// });
+<srcipt src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+document.querySelector('.img__btn').addEventListener('click', function() {
+	  document.querySelector('.cont').classList.toggle('s--signup');
+	});
+</script>
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>WELCOME TRAVELERS!</title>
 </head>
 <body>
-<!-- 경고 모달창 -->
-            <div class="modal fade" id="defaultModal">
-               <div class="modal-dialog">
-                    <div class="modal-content panel-danger">
-                        <div class="modal-header panel-heading">
-                            <h4 class="modal-title">오류 메시지</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p class="modal-contents"></p>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-       
-            <!--// 경고 모달창 -->
-            
-            <button id = "button" onclick="test()">하이여</button>
+<!-- <p class="tip">Enjoy Your Life! Enjoy Your Travel!</p> -->
+<!-- <div class="cont"> -->
+<!--   <div class="form sign-in"> -->
+<!--     <h2>Welcome back,</h2> -->
+<!--     <label> -->
+<!--       <span>User Id</span> -->
+<!--       <input type="email" /> -->
+<!--     </label> -->
+<!--     <label> -->
+<!--       <span>Password</span> -->
+<!--       <input type="password" /> -->
+<!--     </label> -->
+<!--     <a href= "/find/userinfo"><p class="forgot-pass">Forgot password?</p></a> -->
+<!--     <button type="button" class="submit">Sign In</button> -->
+<!--     <button type="button" class="fb-btn">Connect with <span>facebook</span></button> -->
+<!--   </div> -->
+<!--   <div class="sub-cont"> -->
+<!--     <div class="img"> -->
+<!--       <div class="img__text m--up"> -->
+<!--         <h2>New here?</h2> -->
+<!--         <p>Sign up and discover great amount of new opportunities!</p> -->
+<!--       </div> -->
+<!--       <div class="img__text m--in"> -->
+<!--         <h2>One of us?</h2> -->
+<!--         <p>If you already has an account, just sign in. We've missed you!</p> -->
+<!--       </div> -->
+<!--       <div class="img__btn"> -->
+<!--         <span class="m--up">Sign Up</span> -->
+<!--         <span class="m--in">Sign In</span> -->
+<!--       </div> -->
+<!--     </div> -->
+
+<!--   </div> -->
+<!-- </div> -->
+<p class="tip">Click on button in image container</p>
+<div class="cont">
+  <div class="form sign-in">
+    <h2>Welcome back,</h2>
+    <label>
+      <span>Email</span>
+      <input type="email" />
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" />
+    </label>
+    <p class="forgot-pass">Forgot password?</p>
+    <button type="button" class="submit">Sign In</button>
+    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <div class="form sign-up">
+      <h2>Time to feel like home,</h2>
+      <label>
+        <span>Name</span>
+        <input type="text" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" />
+      </label>
+      <button type="button" class="submit">Sign Up</button>
+      <button type="button" class="fb-btn">Join with <span>facebook</span></button>
+    </div>
+  </div>
+</div>
+
+<a href="https://dribbble.com/shots/3306190-Login-Registration-form" target="_blank" class="icon-link">
+  <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/256/Dribbble-icon.png">
+</a>
+<a href="https://twitter.com/NikolayTalanov" target="_blank" class="icon-link icon-link--twitter">
+  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png">
+</a>
 </body>
 </html>

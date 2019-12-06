@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.board.Board;
 import dto.board.BoardFile;
 import dto.board.Comment;
+import dto.board.PlanBoard;
 import dto.board.Recommend;
 import dto.board.Report;
 import util.Paging;
@@ -33,7 +34,7 @@ public interface BoardService {
 	public List<Board> getFreeList(Paging paging);
 	public List<Board> getTipList(Paging paging);
 	public List<Board> getQuestionList(Paging paging);
-	public List<Board> getPlannerList(Paging paging);
+	public List<PlanBoard> getPlannerList(Paging paging);
 	
 	public Board getBoardno(HttpServletRequest req);
 
@@ -132,4 +133,9 @@ public interface BoardService {
 
 
 	public List<Board> getEventList(Paging paging);
+	
+	
+	
+	public Paging getPlannerPaging(HttpServletRequest req);
+
 }

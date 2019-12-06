@@ -1,9 +1,9 @@
-
 package dbutil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 
 public class DBConn {
 	
@@ -43,5 +43,6 @@ public class DBConn {
 		return conn;//DB연결 객체 반환
 	}
 	
+
 }
 
