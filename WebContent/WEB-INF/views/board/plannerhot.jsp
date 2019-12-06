@@ -262,7 +262,7 @@ div.pullRight a:hover:before
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br>
-<div class="container">
+<div class="container" style="width:1450px; margin-bottom: -125px;">
 <h1 style="float:left; font-family: 'NIXGONL-Vb';">플래너 게시판</h1><br><br><br><br><br>
 
 <div id="order">
@@ -270,12 +270,12 @@ div.pullRight a:hover:before
 <span style="float:left; font-family: 'NIXGONL-Vb';"> | </span> 
 <span id="hot" style="cursor:pointer; float:left; font-family: 'NIXGONL-Vb'; margin-left:8px;"><a  style="color:red;" href="/board/plannerhot">평점순</a></span>
 </div>
-<br><br><br><br><br><br>
+</div> <!-- .container -->
+<br>
 <div id="plannercontent"></div>
 
 <%-- <jsp:include page="/WEB-INF/views/board/planner_sub.jsp" /> --%>
 <jsp:include page="/WEB-INF/views/layout/plannerhot_paging.jsp" />
 
-</div> <!-- .container -->
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
