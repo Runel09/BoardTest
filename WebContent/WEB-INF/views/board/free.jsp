@@ -159,7 +159,7 @@ div.pullRight a:hover:before
    <td>${list.checkboard }</td>
    <td style="text-align:center;">${list.boardno }</td>
    <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
-   <td>${list.id }</td>
+   <td>${list.user_id }</td>
    <td>${list.recommend }</td>
    <td>${list.hit }</td>
    <td>${list.writtendate }</td>
