@@ -6,34 +6,6 @@
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5de76b36d96992700fcaa8ab/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-
-
-//마우스 스크롤링
-
-jQuery(document).ready(function($){
-	   
-	   $('a.scroll-link').click(function(e){
-	      e.preventDefault();
-	      $id = $(this).attr('href');
-	      $('body,html').animate({
-	         scrollTop: $($id).offset().top -20
-	      }, 750);
-	   });
-	   
-	});
-</script>
-<!--End of Tawk.to Script-->
 <style type="text/css">
 /*
 마우스 스크롤링
@@ -134,6 +106,7 @@ h2 {
    align-items: center;
    justify-content: center;
    text-align: center; 
+  
 }
 
 
@@ -170,6 +143,35 @@ ul#slider li img{
 }
 </style>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5de76b36d96992700fcaa8ab/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+
+
+//마우스 스크롤링
+
+jQuery(document).ready(function($){
+	   
+	   $('a.scroll-link').click(function(e){
+	      e.preventDefault();
+	      $id = $(this).attr('href');
+	      $('body,html').animate({
+	         scrollTop: $($id).offset().top -20
+	      }, 750);
+	   });
+	   
+	});
+</script>
+<!--End of Tawk.to Script-->
+
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -197,13 +199,13 @@ $(function(){
      if(eventValues <0 && !flag){
     	 // roll down mouse wheel 
     	 flag = true; 
-    	 $('html, body').animate( { scrollTop : '+='+scmove }, 1500 ,function(){ flag = false; }); }; 
+    	 $('html, body').animate( { scrollTop : '+='+scmove }, 750 ,function(){ flag = false; }); }; 
     	
     	 // 양수이면 위로 올린 것 
     	 if(eventValues >0 && !flag){ 
     	// roll up mouse wheel 
     	flag = true; 
-    	$('html, body').animate( { scrollTop : '-='+scmove }, 1500 ,function(){ flag = false; }); };
+    	$('html, body').animate( { scrollTop : '-='+scmove }, 750 ,function(){ flag = false; }); };
 
        
     });

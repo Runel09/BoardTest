@@ -131,7 +131,7 @@ public class MemberServiceImpl implements MemberService{
 
 		 // 사용자에게 보낼 메시지를 기입합니다.
 	      String from = "bgan0064@gmail.com";
-	      String host = "http://localhost:8082/";
+	      String host = "http://192.168.10.149:8082/";
 	      
 	      //임시 비밀번호 생성
 	      String pwTmember = getRamdomPassword(8);
