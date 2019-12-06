@@ -23,6 +23,8 @@ public interface MypageService {
 
 	public void userUpdate(HttpServletRequest req);
 
+	public void deleteMember(HttpServletRequest req);
+
 
 	
 }

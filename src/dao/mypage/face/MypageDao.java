@@ -21,6 +21,10 @@ public interface MypageDao {
 
 	void updateMemberinfo(HttpServletRequest req);
 
+	void deleteMemberbyId(HttpServletRequest req);
 
+	void deleteBoardbyId(HttpServletRequest req);
+
+	void deleteCommentbyId(HttpServletRequest req);
 
 }

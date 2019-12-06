@@ -98,7 +98,9 @@ req.setCharacterEncoding("UTF-8");
 		Board board = new Board();
 		
 		board.setTitle(mul.getParameter("title"));
+
 		board.setUser_id((String)req.getSession().getAttribute("userid"));
+
 		board.setContent(mul.getParameter("content"));
 		board.setCheckboard(mul.getParameter("checkboard"));
 				

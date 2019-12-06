@@ -78,5 +78,13 @@ public class MypageServiceImpl implements MypageService {
 		mypageDao.updateMemberinfo(req);
 		
 	}
+
+	@Override
+	public void deleteMember(HttpServletRequest req) {
+		
+		mypageDao.deleteBoardbyId(req);
+		mypageDao.deleteCommentbyId(req);
+		mypageDao.deleteMemberbyId(req);
+	}
 	
 }

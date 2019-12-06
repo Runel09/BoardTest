@@ -18,7 +18,7 @@ public class SupervisorMainController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		 // 관리자 로그인 됐을 경우
-	      if (req.getSession().getAttribute("login") != null) {
+	      if (req.getSession().getAttribute("super_login") != null) {
 	         
 
 		req.getRequestDispatcher("/WEB-INF/views/supervisor/supervisor_main.jsp").forward(req, resp);

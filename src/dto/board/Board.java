@@ -12,6 +12,26 @@ public class Board {
 	private Date writtendate;
 	private int recommend;
 	private String checkboard;
+	
+	public int getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
+	public String getCheckboard() {
+		return checkboard;
+	}
+	public void setCheckboard(String checkboard) {
+		this.checkboard = checkboard;
+	}
+	public int getBoardrepo() {
+		return boardrepo;
+	}
+	public void setBoardrepo(int boardrepo) {
+		this.boardrepo = boardrepo;
+	}
+
 	private int boardrepo;
 	
 	@Override
@@ -50,32 +70,15 @@ public class Board {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+
 	public Date getWrittendate() {
 		return writtendate;
 	}
+
 	public void setWrittendate(Date writtendate) {
 		this.writtendate = writtendate;
 	}
-	public int getRecommend() {
-		return recommend;
-	}
-	public void setRecommend(int recommend) {
-		this.recommend = recommend;
-	}
-	public String getCheckboard() {
-		return checkboard;
-	}
-	public void setCheckboard(String checkboard) {
-		this.checkboard = checkboard;
-	}
-	public int getBoardrepo() {
-		return boardrepo;
-	}
-	public void setBoardrepo(int boardrepo) {
-		this.boardrepo = boardrepo;
-	}
-	
-	
+
 	
 	
 }
