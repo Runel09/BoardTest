@@ -116,6 +116,7 @@ $('#testBtn').click(function(e){
          <hr>
          <ul class="userinfo">
          <li>이름:${member.user_name}</li>
+         <li>아이디:${member.user_id}</li>
          <li>닉네임:${member.user_nick }</li>
          <li>이메일:${member.user_email }</li>
          <li>주소:${member.user_addr } /${member.user_addr_detail }</li>
@@ -126,41 +127,41 @@ $('#testBtn').click(function(e){
          
          <ul class="list-group">
            <li class="list-group-item list-group-item-info"><p style="font-size: 25px"><!-- 모달을 열기 위한 버튼 -->
-         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal">
-      		   비밀번호 수정
+         <button type="button" class="btn btn-info" onclick= "location.href='/mypage/update'">
+      		   회원정보 수정
          </button></p></li>
-           <li class="list-group-item list-group-item-info"><p style="font-size: 25px"> <button type="button" class="btn btn-info">회원탈퇴</button></p></li>
+           <li class="list-group-item list-group-item-info"><p style="font-size: 25px"> <button type="button" class="btn btn-info" >회원탈퇴</button></p></li>
          </ul>
 
          
          <!-- 모달 영역 -->
-         <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog" role="document">
-         <div class="modal-content">
-         <div class="modal-header">
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-         <h4 class="modal-title" id="myModalLabel">비밀번호 수정</h4>
-         </div>
+<!--          <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> -->
+<!--          <div class="modal-dialog" role="document"> -->
+<!--          <div class="modal-content"> -->
+<!--          <div class="modal-header"> -->
+<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+<!--          <h4 class="modal-title" id="myModalLabel">비밀번호 수정</h4> -->
+<!--          </div> -->
          
-         <form id="form" runat="server">
-            <input type='file' id="imgInput"/>
-            <img id="image_section" src="#" alt="your image"/>
-         </form>
+<!--          <form id="form" runat="server"> -->
+<!--             <input type='file' id="imgInput"/> -->
+<!--             <img id="image_section" src="#" alt="your image"/> -->
+<!--          </form> -->
          
-         <form action="/mypage/pwmodify" method="post">
-            <div class="modal-body">
-            현재비밀번호<input type="password" name="password1"> <br>
-            수정할비밀번호<input type="password" name="password2"> <br>
-            수정할비밀번호 확인<input type="password" name="password2">
-            </div>
-         </form>
-         <div class="modal-footer">
-         <button type="button" class="btn btn-primary">확인</button>
-         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-         </div>
-         </div>
-         </div>
-         </div>
+<!--          <form action="/mypage/pwmodify" method="post"> -->
+<!--             <div class="modal-body"> -->
+<!--             현재비밀번호<input type="password" name="password1"> <br> -->
+<!--             수정할비밀번호<input type="password" name="password2"> <br> -->
+<!--             수정할비밀번호 확인<input type="password" name="password2"> -->
+<!--             </div> -->
+<!--          </form> -->
+<!--          <div class="modal-footer"> -->
+<!--          <button type="button" class="btn btn-primary">확인</button> -->
+<!--          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button> -->
+<!--          </div> -->
+<!--          </div> -->
+<!--          </div> -->
+<!--          </div> -->
          
          <br>
         

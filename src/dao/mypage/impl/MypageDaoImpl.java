@@ -160,5 +160,102 @@ public class MypageDaoImpl implements MypageDao {
 		return cnt;
 	}
 
+	@Override
+	public Member selectMemberbyUserid(Member member) {
+		
+		conn = DBConn.getConnection(); // DB연결
+		
+		String sql="";
+		sql +="SELECT * FROM userinfo";
+		sql +=" WHERE user_id=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, member.getUser_id());
+			rs = ps.executeQuery();// sql 수행결과 얻기
+			
+			while(rs.next()) {
+				
+				member.setUser_number(rs.getInt("user_number"));
+				member.setUser_email(rs.getString("user_email"));
+				member.setUser_id(rs.getString("user_id"));
+//				member.setUser_pw(rs.getString("user_pw"));
+				member.setUser_name(rs.getString("user_name"));
+				member.setUser_nick(rs.getString("user_nick"));
+				member.setUser_gender(rs.getInt("user_gender"));
+				member.setUser_addr(rs.getString("user_addr"));
+				member.setUser_addr_detail(rs.getString("user_addr_detail"));
+				member.setUser_mailnum(rs.getString("user_mailnum"));
+				member.setUser_birth(rs.getString("user_birth"));
+				member.setUser_phnum(rs.getString("user_phnum"));
+				
+				
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		return member;
+	}
+
+	@Override
+	public void updateMemberinfo(HttpServletRequest req) {
+		conn = DBConn.getConnection(); // DB연결
+		
+		
+		// 수행할 SQL 쿼리
+		String sql = "";
+		sql += "UPDATE userinfo SET user_pw=?,";
+		sql +=" user_nick=?,user_name=?,user_email=?,user_phnum=?,";
+		sql +=" user_addr=?,user_addr_detail=?";
+		sql += " WHERE user_id=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);// sql 수행 객체
+
+			Member member= new  Member();
+			// sql쿼리의 ? 채우기
+			
+			ps.setString(1, req.getParameter("pw"));
+			ps.setString(2, req.getParameter("nick"));
+			ps.setString(3, req.getParameter("name"));
+			ps.setString(4, req.getParameter("email"));
+			ps.setString(5, req.getParameter("phnum"));
+			ps.setString(6, req.getParameter("addr"));
+			ps.setString(7, req.getParameter("addr_detail"));
+			ps.setString(8, (String)req.getSession().getAttribute("userid"));
+			
+//			// sql쿼리의 ? 채우기
+//			ps.setString(1,req.getParameter("user_id"));
+//			ps.setString(2, req.getParameter("user_pw"));
+//			ps.setString(3, req.getParameter("user_nick"));
+//			ps.setString(4, req.getParameter("user_name"));
+//			ps.setString(5, req.getParameter("user_email"));
+//			ps.setString(6, req.getParameter("user_phnum"));
+//			ps.setString(7, req.getParameter("user_addr"));
+//			ps.setString(8, req.getParameter("user_addr_detail"));
+//			ps.setString(9, (String)req.getSession().getAttribute("user_id"));
+			ps.execute();// sql 수행
+			System.out.println(req.getParameter("name"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
 	
 }

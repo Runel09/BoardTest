@@ -3,6 +3,7 @@ package service.mypage.impl;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import dao.mypage.face.MypageDao;
 import dao.mypage.impl.MypageDaoImpl;
@@ -50,7 +51,32 @@ public class MypageServiceImpl implements MypageService {
 		return paging;
 	}
 
+	@Override
+	public Member getupdateUserId(HttpServletRequest req) {
+		HttpSession session = null;
+		session=req.getSession();
+		
+		String userid = ((String)session.getAttribute("userid"));
+		if(userid == null)
+			return null;
+		
+		Member member= new Member();
+		member.setUser_id(userid);
+		
+		return member;
+	}
 
+	@Override
+	public Member view(Member member) {
+		
+		return mypageDao.selectMemberbyUserid(member);
+	}
 
-
+	@Override
+	public void userUpdate(HttpServletRequest req) {
+		
+		mypageDao.updateMemberinfo(req);
+		
+	}
+	
 }

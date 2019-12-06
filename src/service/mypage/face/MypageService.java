@@ -17,6 +17,12 @@ public interface MypageService {
 
 	public Paging mypageReviewListgetPaging(HttpServletRequest req);
 
+	public Member getupdateUserId(HttpServletRequest req);
+
+	public Member view(Member member);
+
+	public void userUpdate(HttpServletRequest req);
+
 
 	
 }

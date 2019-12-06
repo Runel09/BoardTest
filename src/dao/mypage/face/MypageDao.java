@@ -17,6 +17,10 @@ public interface MypageDao {
 
 	int mypageboardselectCntAll(HttpServletRequest req);
 
+	Member selectMemberbyUserid(Member member);
+
+	void updateMemberinfo(HttpServletRequest req);
+
 
 
 }
