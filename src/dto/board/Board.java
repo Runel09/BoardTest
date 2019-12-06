@@ -6,7 +6,7 @@ public class Board {
 	
 	private int boardno;
 	private String title;
-	private String id;
+	private String user_id;
 	private String content;
 	private int hit;
 	private Date writtendate;
@@ -31,7 +31,7 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardno=" + boardno + ", title=" + title + ", id=" + id + ", content=" + content + ", hit=" + hit
+		return "Board [boardno=" + boardno + ", title=" + title + ", user_id=" + user_id + ", content=" + content + ", hit=" + hit
 				+ ", writtendate=" + writtendate + ", recommend=" + recommend + ", checkboard=" + checkboard + "]";
 	}
 
@@ -52,11 +52,11 @@ public class Board {
 	}
 
 	public String getId() {
-		return id;
+		return user_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getContent() {

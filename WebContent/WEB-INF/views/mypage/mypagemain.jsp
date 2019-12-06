@@ -130,7 +130,8 @@ $('#testBtn').click(function(e){
          <button type="button" class="btn btn-info" onclick= "location.href='/mypage/update'">
       		   회원정보 수정
          </button></p></li>
-           <li class="list-group-item list-group-item-info"><p style="font-size: 25px"> <button type="button" class="btn btn-info" >회원탈퇴</button></p></li>
+           <li class="list-group-item list-group-item-info"><p style="font-size: 25px"> 
+           <button type="button" class="btn btn-info" onclick="location.href='/mypage/delete'">회원탈퇴</button></p></li>
          </ul>
 
          

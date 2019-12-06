@@ -255,7 +255,100 @@ public class MypageDaoImpl implements MypageDao {
 		}
 		
 	}
+
+	@Override
+	public void deleteBoardbyId(HttpServletRequest req) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "DELETE FROM board";
+		sql += " WHERE user_id=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, (String)req.getSession().getAttribute("userid"));
+
+			ps.executeQuery();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+	}
+	
+	
+	@Override
+	public void deleteCommentbyId(HttpServletRequest req) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "DELETE FROM commenttb";
+		sql += " WHERE user_id=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, (String)req.getSession().getAttribute("userid"));
+
+			ps.executeQuery();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+	}
+	
+	
+	@Override
+	public void deleteMemberbyId(HttpServletRequest req) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "DELETE FROM userinfo";
+		sql += " WHERE user_id=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, (String)req.getSession().getAttribute("userid"));
+
+			ps.executeQuery();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+	}
+	}
 	
 	
 	
-}
+

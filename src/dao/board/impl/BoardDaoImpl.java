@@ -125,7 +125,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setId(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -290,7 +290,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setId(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -741,7 +741,7 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO board(boardno,title,id,content,hit,writtendate,checkboard)";
+		sql += "INSERT INTO board(boardno,title,user_id,content,hit,writtendate,checkboard)";
 		sql += " VALUES(?,?,?,?,0,sysdate,?)";
 		
 		try {
@@ -1204,7 +1204,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setId(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));

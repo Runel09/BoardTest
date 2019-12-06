@@ -45,7 +45,7 @@ public class SupervisorLoginController extends HttpServlet {
 			supervisor = supervisorservice.getMemberByUserid(supervisor);
 			
 			//세션정보 저장
-			req.getSession().setAttribute("login", login);
+			req.getSession().setAttribute("super_login", login);
 			req.getSession().setAttribute("super_id", supervisor.getSuper_id());
 //			req.getSession().setAttribute("super_pw", supervisor.getSuper_pw());
 

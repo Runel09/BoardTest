@@ -28,7 +28,7 @@ $(document).ready(function () {
          <tr>
             <td>${board.boardno }</td>
             <td>${board.title }</td>
-            <td>${board.id }</td>
+            <td>${board.user_id }</td>
             <td>${board.hit }</td>
             <td>${board.writtendate }</td>
          </tr>
@@ -51,7 +51,7 @@ $(document).ready(function () {
    <div class="text-center">
    
    <c:choose >
-   <c:when test="${board.id eq userid }">
+   <c:when test="${board.user_id eq userid }">
    <button  id="btnUpdate" class="btn btn-default" onclick="location.href='/supervisor/noticeupdate?boardno=${board.boardno}'">수정</button>
   
 <%--    <button  id="btnDelete" class="btn btn-default" onclick="location.href='/supervisor/noticedelete?boardno=${board.boardno}'">삭제</button> --%>
