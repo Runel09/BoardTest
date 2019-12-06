@@ -76,11 +76,11 @@ h2 {
 
 .hero {
    position: relative;
-   min-height: 8vh;
+   min-height: 5vh;
    display: flex;
    align-items: center;
    justify-content: center;
-   padding: 3rem 2rem;
+   padding: 2rem 2rem;
    color: white;
    background: {
       image: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%), url('https://source.unsplash.com/random/1920x1080/?sky');
@@ -244,7 +244,6 @@ $(document).ready(function(){
          <circle class="scroll" cx="36.5" cy="31.5" r="4.5" fill="#FFF"/>
       </g>
    </svg>
-   <span style="margin: -34px; font-size: 32px; font-family: fantasy;">↓</span>
    </a>
    
 </div>
