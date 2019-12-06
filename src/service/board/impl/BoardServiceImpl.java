@@ -66,12 +66,16 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<PlanBoard> getPlannerList(Paging paging) {
+	public List<PlanBoard> getPlannerNewList(Paging paging) {
 //		System.out.println("BoardService.getPlannerList : "+paging);
-		return boardDao.selectPlannerAll(paging);
+		return boardDao.selectPlannerNewAll(paging);
 	}
 
-	
+	@Override
+	public List<PlanBoard> getPlannerHotList(Paging paging) {
+//		System.out.println("BoardService.getPlannerList : "+paging);
+		return boardDao.selectPlannerHotAll(paging);
+	}
 	
 	@Override
 	public Board getBoardno(HttpServletRequest req) {

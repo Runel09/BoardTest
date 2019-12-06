@@ -15,7 +15,8 @@ $(document).ready(function() {
 	
 
 //테마 선택
-($("#tag_body").children().children()).on('click',function() {
+($("#tag_body").children().children()).on('click',function() 
+			{
                if(this==this.parentNode.firstElementChild){
                   return false;
                }
@@ -30,6 +31,20 @@ $(document).ready(function() {
                }
                console.log($(this.parentNode.firstElementChild).children("input").val())
             })
+           
+            
+    $("#hot").click(function() {
+		
+		$(this).addClass("hotnew");
+		$("#new").removeClass("hotnew");
+	})
+	
+	$("#new").click(function() {
+		
+		$(this).addClass("hotnew")
+		$("#hot").removeClass("hotnew");
+	})
+            
 });
 </script>
 
@@ -44,7 +59,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "get"
-			, url: "/planner/ajax"
+			, url: "/planner/new"
 			, data: 
 			{	
 					"travel_place" : $("#travel_place").val(),
@@ -68,6 +83,28 @@ $(document).ready(function() {
 		});
 	});
 	
+
+	
+	$("#order span").click(function() {
+		$.ajax({
+			type : "get",
+			url : "/planner/ajax",
+			data : {
+				type: $(this).attr("id")
+			},
+			dataType : "html",
+			success : function(html) {
+// 				console.log($("#hot").text());
+				html
+			},
+			error : function() {
+				console.log("실패");
+
+			}
+		});
+	});
+	
+
 });
 </script>
 
@@ -150,6 +187,7 @@ div.pullRight a:hover:before
    width: 138px;
    text-align: center;
    font-size: 23px;
+   cursor: pointer;
 }
 
 .tag_body div {
@@ -161,6 +199,9 @@ div.pullRight a:hover:before
    color: white;
    background: black;
 }
+
+
+
 </style>
 
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
@@ -179,8 +220,8 @@ div.pullRight a:hover:before
 
 <div class="tag_body" id="tag_body">
 	<div class="place">
-		<div id="place_head">
-			여행지 | <input type="hidden" id="travel_place" value="" />
+		<div id="place_head" style="font-weight: bold;">
+			여행지 <input type="hidden" id="travel_place" value="" />
 		</div>
 		<div>국내</div>
 		<div>일본</div>
@@ -191,8 +232,8 @@ div.pullRight a:hover:before
 		<div>미국</div>
 	</div>
 	<div class="travel_date">
-		<div id="travel_date_head">
-			여행일 |<input type="hidden" id="travel_date" value="" />
+		<div id="travel_date_head" style="font-weight: bold;">
+			여행일<input type="hidden" id="travel_date" value="" />
 		</div>
 		<div>1-3일</div>
 		<div>4-6일</div>
@@ -201,8 +242,8 @@ div.pullRight a:hover:before
 		<div>15일이상</div>
 	</div>
 	<div class="travel_season">
-		<div id="travel_season_head">
-			여행시기|<input type="hidden" id="travel_season" value="" />
+		<div id="travel_season_head" style="font-weight: bold;">
+			여행시기<input type="hidden" id="travel_season" value="" />
 		</div>
 		<div>봄</div>
 		<div>여름</div>
@@ -210,8 +251,8 @@ div.pullRight a:hover:before
 		<div>겨울</div>
 	</div>
 	<div class="traval_thema">
-		<div id="traval_thema_head">
-			여행테마|<input type="hidden" id="travel_thema" value="" />
+		<div id="traval_thema_head" style="font-weight: bold;">
+			여행테마<input type="hidden" id="travel_thema" value="" />
 		</div>
 		<div>가족여행</div>
 		<div>나홀로여행</div>
@@ -224,13 +265,18 @@ div.pullRight a:hover:before
 <br><br><br><br><br><br><br><br><br><br><br>
 <div class="container">
 <h1 style="float:left; font-family: 'NIXGONL-Vb';">플래너 게시판</h1><br><br><br><br><br>
-<div style="text-align: left;">인기 | 신규</div>
 
+<div id="order">
+<span id="new" style="cursor:pointer; float:left; font-family: 'NIXGONL-Vb';  "><a href="/board/plannernew" style="color:red;">최신순</a></span>
+<span style="float:left; font-family: 'NIXGONL-Vb';"> | </span> 
+<span id="hot" style="cursor:pointer; float:left; font-family: 'NIXGONL-Vb'; margin-left:8px;"><a href="/board/plannerhot">평점순</a></span>
+</div>
+<br><br><br><br><br><br>
 <div id="plannercontent"></div>
 
 <%-- <jsp:include page="/WEB-INF/views/board/planner_sub.jsp" /> --%>
-<%-- <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/layout/plannernew_paging.jsp" />
 
 </div> <!-- .container -->
-
+<br><br><br><br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
