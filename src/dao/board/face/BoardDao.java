@@ -29,7 +29,8 @@ public interface BoardDao {
 	public List<Board> selectFreeAll(Paging paging);
 	public List<Board> selectQuestionAll(Paging paging);
 	public List<Board> selectTipAll(Paging paging);
-	public List<PlanBoard> selectPlannerAll(Paging paging);
+	public List<PlanBoard> selectPlannerNewAll(Paging paging);
+	public List<PlanBoard> selectPlannerHotAll(Paging paging);
 
 	public Board selectBoardByBoardno(Board board);
 

@@ -15,6 +15,7 @@ src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<td>${plan.travel_season }</td>
 	<td>${plan.travel_date }</td>
 	<td>${plan.travel_thema }</td>
+	<td>${plan.review_score }</td>
 </tr>
 </c:forEach>
 </table>

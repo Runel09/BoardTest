@@ -2,6 +2,14 @@ package util;
 
 public class Paging {
 	
+	private String order;
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
 	private String travel_place; // 여행 국가
 	private String travel_date; // 여행 기간
 	private String travel_season; // 여행 시즌
@@ -87,11 +95,11 @@ public class Paging {
 	
 	@Override
 	public String toString() {
-		return "Paging [travel_place=" + travel_place + ", travel_date=" + travel_date + ", travel_season="
-				+ travel_season + ", travel_thema=" + travel_thema + ", search=" + search + ", searchno=" + searchno
-				+ ", curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
+		return "Paging [order=" + order + ", travel_place=" + travel_place + ", travel_date=" + travel_date
+				+ ", travel_season=" + travel_season + ", travel_thema=" + travel_thema + ", search=" + search
+				+ ", searchno=" + searchno + ", curPage=" + curPage + ", totalCount=" + totalCount + ", listCount="
+				+ listCount + ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}
 
 	//페이징 정보 생성
