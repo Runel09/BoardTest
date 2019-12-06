@@ -46,7 +46,7 @@ html {
 
 #right-panel {
 	height: 100%;
-	width: 30%;
+	width: 38%;
 	float: left;
 	overflow: auto;
 }
@@ -65,8 +65,9 @@ html {
 	$("#startIdx_lng").val(opener.result[${startNo}].lng);
 	$("#endIdx_lat").val(opener.result[${endNo}].lat);
 	$("#endIdx_lng").val(opener.result[${endNo}].lng);
+	});
 	
-	})
+	
 	function initMap() {
 
 		var directionsService = new google.maps.DirectionsService;
@@ -122,10 +123,12 @@ html {
 				var route = response.routes[0];
 				var summaryPanel = document.getElementById('directions-panel');
 				summaryPanel.innerHTML = '';
+				$("#startLab").text("출발지 :"+route.legs[0].start_address )
+				$("#endLab").text("출발지 :"+route.legs[0].end_address )
 				// For each route, display summary information.
 				for (var i = 0; i < route.legs.length; i++) {
 					var routeSegment = i + 1;
-					summaryPanel.innerHTML += '<b>Route Segment: '
+					summaryPanel.innerHTML += '<b>구간 : '
 							+ routeSegment + '</b><br>';
 					summaryPanel.innerHTML += route.legs[i].distance.text
 							+ '<br>';
@@ -142,7 +145,6 @@ html {
 				origin : new google.maps.LatLng(opener.result[${startNo}-1].lat, opener.result[${startNo}-1].lng),
 				destination : new google.maps.LatLng(opener.result[${endNo}-1].lat, opener.result[${endNo}-1].lng),
 				waypoints : waypts,
-				optimizeWaypoints:true,
 				travelMode : google.maps.TravelMode['DRIVING']
 			}, function(response, status) {
 				if (status === 'OK') {
@@ -150,11 +152,13 @@ html {
 					var route = response.routes[0];
 					var summaryPanel = document.getElementById('directions-panel');
 					summaryPanel.innerHTML = '';
+					$("#startLab").text("출발지 :"+route.legs[0].start_address )
+					$("#endLab").text("도착지 :"+route.legs[${cnt}].end_address )
 					// For each route, display summary information.
 					for (var i = 0; i < route.legs.length; i++) {
 						var routeSegment = i + 1;
-						summaryPanel.innerHTML += '<b>Route Segment: '
-								+ routeSegment + '</b><br>';
+						 summaryPanel.innerHTML += route.legs[i].start_address + ' 에서 ';
+			              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
 						summaryPanel.innerHTML += route.legs[i].distance.text
 								+ '<br>';
 						summaryPanel.innerHTML += route.legs[i].duration.text
@@ -178,31 +182,31 @@ html {
 				<div>
 
 					<div>
-						<label id="startLab">출발지</label> <input id="startIdx_lat"
+						<label id="startLab"></label> <input id="startIdx_lat"
 							name="startIdx_lat" type="hidden" value=""> <input
 							id="startIdx_lng" name="startIdx_lng" type="hidden" value="">
 					</div>
-					<c:forEach var="index" items="${index }">
+					
+					<c:forEach var="index" items="${Index }">
 						<div>
-							<label id="startLab">경유지</label> <input id="wayPoint_${index }"
+							<label id="porint_${index}">경유지</label> <input id="wayPoint_${index }"
 								name="wayPoint_${index }" type="hidden" value=""> <input
 								id="wayPoint_${index }" name="wayPoint_${index }" type="hidden"
 								value="">
 						</div>
 					</c:forEach>
 					<div>
-						<label id="endLab">도착지</label> <input id="endIdx_lat"
+						<label id="endLab"></label> <input id="endIdx_lat"
 							name="endIdx_lat" type="hidden" value=""> <input
 							id="endIdx_lng" name="endIdx_lng" type="hidden" value="">
-						<br> <b>교통수단:</b>
 					</div>
-					<select id="travalOption" name="travalOption">
-						<option value="BICYCLING">자전거</option>
-						<option value="DRIVING">자동차</option>
-						<option value="TRANSIT">대중교통</option>
-						<option value="WALKING">도보</option>
-					</select> <br> <input type="submit" id="submit">
+<!-- 						<br> <b>교통수단:</b> -->
+<!-- 					<select id="travalOption" name="travalOption"> -->
+<!-- 						<option value="DRIVING">자동차</option> -->
+<!-- 						<option value="WALKING">도보</option> -->
+<!-- 					</select> <br> <input type="submit" id="submit"> -->
 				</div>
+				<hr>
 				<div id="directions-panel"></div>
 			</form>
 		</div>

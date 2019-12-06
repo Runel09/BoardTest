@@ -275,7 +275,7 @@ div div > .selected{
 					
 					for (var j = 0 ; j<$(".index_body").children("div").size();j++)
 					for(var i =0; i<$(".index_body").children("div").eq(j).children().size();i++){
-						$f.append( $("<input>").attr({name: i+"day_place_no", value:$(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no")}) )
+						$f.append( $("<input>").attr({name: j+"day_place_no", value:$(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no")}) )
 						console.log($(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no"));
 					}
 					//타이틀 추가
@@ -298,6 +298,7 @@ div div > .selected{
 				
 				//인덱스 추가버튼
 				$(".day_bar .plus").on("click", function() {
+					//인덱스 추가 처리
 					var index = $(this).index()+1;
 					console.log(index);
 					var insert=$("<div class='day_con'>").append($("<p>"+index+"일차</p>")).insertBefore($(this));
@@ -306,6 +307,24 @@ div div > .selected{
 					$(".index_body").append($("<div class='"+index+"day index selected_index'>"));
 					$(".day_bar > .selected_con").removeClass("selected_con");
 					insert.addClass("selected_con");
+					
+					//맵 초기화
+					ploy.setMap(null);
+					ploy = new google.maps.Polyline({
+						strokeColor : '#3679e3',
+						strokeOpacity : 1.0,
+						strokeWeight : 3
+					});
+
+					ploy.setMap(map);
+					path = ploy.getPath();
+					for(var i =0; i<=$(".selected_index").children().size()-1;i++){
+						var place_num=$(".selected_index").children("div").eq(i).attr("data-place_no")
+						path.push(new google.maps.LatLng(result[place_num-1].lat, result[place_num-1].lng))
+					}
+					path.getAt();
+					
+					//인덱스 변경 버튼 클릭
 					insert.on('click',function(){
 						var index= $(this).index()+1;
 						if ($(this).index()==$(this).parent().children().eq(-1).index()){

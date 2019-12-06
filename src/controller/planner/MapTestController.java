@@ -26,6 +26,7 @@ public class MapTestController extends HttpServlet {
 		System.out.println(req.getParameter("endNo"));
 		int cnt = 0;
 		ArrayList<Integer> listIndx = new ArrayList<Integer>();
+		ArrayList<Integer> Index = new ArrayList<Integer>();
 		for(int i = 1 ; i<=5;i++) {
 			String query = "index"+i;
 			if(req.getParameter(query)!=null) {
@@ -38,8 +39,9 @@ public class MapTestController extends HttpServlet {
 		Gson gson = new Gson();
 		String json = gson.toJson(listIndx);
 		System.out.println(json);
+		Index=listIndx;
 		
-		
+		req.setAttribute("Index", Index);
 		req.setAttribute("listIndx", json);
 		req.setAttribute("cnt", cnt);
 		req.getRequestDispatcher("/WEB-INF/views/planner/placeTest.jsp").forward(req, resp);
