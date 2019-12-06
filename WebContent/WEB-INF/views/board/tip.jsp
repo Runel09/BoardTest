@@ -154,7 +154,7 @@ div.pullRight a:hover:before
    <td>${list.checkboard }</td>
    <td style="text-align:center;">${list.boardno }</td>
    <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
-   <td>${list.id }</td>
+   <td>${list.user_id }</td>
    <td>${list.recommend }</td>
    <td>${list.hit }</td>
    <td>${list.writtendate }</td>
@@ -163,10 +163,10 @@ div.pullRight a:hover:before
    
 </table>
 
-<c:if test="${!empty userid }">
+<c:if test="${!empty user_id }">
 <button id="btnWrite" style="float: right;">글쓰기</button>
 </c:if>
-<c:if test="${empty userid }">
+<c:if test="${empty user_id }">
 <button id="emptylogin" style="float: right;">글쓰기</button>
 </c:if>
 

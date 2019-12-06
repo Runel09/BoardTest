@@ -28,9 +28,9 @@ import dao.board.impl.RecommendDaoImpl;
 import dto.board.Board;
 import dto.board.BoardFile;
 import dto.board.Comment;
-import dto.board.PlanBoard;
 import dto.board.Recommend;
 import dto.board.Report;
+import dto.planner.Planner;
 import service.board.face.BoardService;
 import util.Paging;
 
@@ -66,13 +66,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<PlanBoard> getPlannerNewList(Paging paging) {
+	public List<Planner> getPlannerNewList(Paging paging) {
 //		System.out.println("BoardService.getPlannerList : "+paging);
 		return boardDao.selectPlannerNewAll(paging);
 	}
 
 	@Override
-	public List<PlanBoard> getPlannerHotList(Paging paging) {
+	public List<Planner> getPlannerHotList(Paging paging) {
 //		System.out.println("BoardService.getPlannerList : "+paging);
 		return boardDao.selectPlannerHotAll(paging);
 	}
@@ -137,10 +137,10 @@ public class BoardServiceImpl implements BoardService{
 		
 		Paging paging = new Paging(0, 0);
 	
-		paging.setTravel_place(req.getParameter("travel_place"));
-		paging.setTravel_date(req.getParameter("travel_date"));
-		paging.setTravel_season(req.getParameter("travel_season"));
-		paging.setTravel_thema(req.getParameter("travel_thema"));
+		paging.setTrip_nation(req.getParameter("trip_nation"));
+		paging.setTrip_date(req.getParameter("trip_date"));
+		paging.setTrip_season(req.getParameter("trip_season"));
+		paging.setTrip_theme(req.getParameter("trip_theme"));
 		
 		//요청파라미터  curPage를 파싱한다
 		String param = req.getParameter("curPage");
@@ -154,10 +154,10 @@ public class BoardServiceImpl implements BoardService{
 		//Paging 객체 생성
 		Paging result = new Paging(totalCount, curPage);
 		
-		result.setTravel_place( paging.getTravel_place() );
-		result.setTravel_date( paging.getTravel_date() );
-		result.setTravel_season( paging.getTravel_season() );
-		result.setTravel_thema( paging.getTravel_thema() );
+		result.setTrip_nation( paging.getTrip_nation() );
+		result.setTrip_date( paging.getTrip_date() );
+		result.setTrip_season( paging.getTrip_season() );
+		result.setTrip_theme( paging.getTrip_theme() );
 		
 		return result;
 	}
@@ -375,7 +375,7 @@ public class BoardServiceImpl implements BoardService{
 					board.setBoardno(nextVal);
 					
 //					board.setTitle(req.getParameter("title"));
-					board.setId((String)req.getSession().getAttribute("userid"));
+					board.setUser_id((String)req.getSession().getAttribute("userid"));
 //					board.setContent(req.getParameter("content"));
 					
 					write(board);
@@ -707,11 +707,11 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		//로그인한 아이디
-		String userid = (String) req.getSession().getAttribute("userid");
+		String userid = (String) req.getSession().getAttribute("user_id");
 		
 		Recommend recommend = new Recommend();
 		recommend.setBoardno(boardno);
-		recommend.setUserid(userid);
+		recommend.setUser_id(userid);
 		
 		return recommend;
 	}

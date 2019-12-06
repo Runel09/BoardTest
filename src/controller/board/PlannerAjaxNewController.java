@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.board.PlanBoard;
+import dto.planner.Planner;
 import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
@@ -27,7 +27,7 @@ public class PlannerAjaxNewController extends HttpServlet {
 		Paging paging = boardService.getPlannerPaging(req);
 		
 		
-		List<PlanBoard> list = boardService.getPlannerNewList(paging);
+		List<Planner> list = boardService.getPlannerNewList(paging);
 		
 //		System.out.println(list);
 		

@@ -100,7 +100,7 @@ public class BoardWriteController extends HttpServlet {
 		Board board = new Board();
 		
 		board.setTitle(mul.getParameter("title"));
-		board.setId((String)req.getSession().getAttribute("userid"));
+		board.setUser_id((String)req.getSession().getAttribute("user_id"));
 		board.setContent(mul.getParameter("content"));
 		board.setCheckboard(mul.getParameter("checkboard"));
 				

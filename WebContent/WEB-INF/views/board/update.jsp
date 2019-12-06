@@ -134,7 +134,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
    </tr>
    
    <tr>
-      <td class="info">아이디</td><td>${userid }</td>
+      <td class="info">아이디</td><td>${user_id }</td>
    <tr>
    
    <tr>
