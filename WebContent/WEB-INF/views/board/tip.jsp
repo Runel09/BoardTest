@@ -116,8 +116,8 @@ div.pullRight a:hover:before
 <tr class="info">
    <th style="width: 8%">구분</th>
    <th style="width: 36%;">제목</th>
-   <th style="width: 13%">작성일</th>
    <th style="width: 8%">조회수</th>
+   <th style="width: 13%">작성일</th>
 </tr>
 <c:forEach var="list" items="${list }">
 <tr>

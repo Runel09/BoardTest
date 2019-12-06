@@ -78,14 +78,14 @@ h1.name {
 	padding: 20px 0;
 }
 
-div.container {
+p.container {
 	font-family: Raleway;
 	margin: 0 auto;
 	padding: 10em 3em;
 	text-align: center;
 }
 
-div.container a {
+p.container a {
 	color: #FFF;
 	text-decoration: none;
 	font: 20px Raleway;
@@ -166,13 +166,13 @@ div.circleBehind a:hover:after {
 </span>
 </div>
 
-<div class="container" id ="font">
+<p class="container" style="margin-top: 20px;">
   <a class ="menubar" href="">플래너</a>
   <a class ="menubar" href="/place/list">장소정보</a>
   <a class ="menubar" href="/board/free">게시판</a>
   <a class ="menubar">마이페이지</a>
   
-</div>
+</p>
 
 
 <!-- <div> -->
