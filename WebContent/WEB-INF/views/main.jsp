@@ -175,6 +175,42 @@ ul#slider li img{
 
 
 <script type="text/javascript">
+$(function(){
+	var flag= false;
+    $("html, body").on('mousewheel DOMMouseScroll', function(e) {
+        var E = e.originalEvent;
+        delta = 0;
+        eventValues = 0;
+        console.log(E);
+// e.detail => 파이어폭스를위한 값
+        if (E.detail) {
+        	eventValues = E.detail * -40;
+//             $('body').text(delta);
+        }else{
+        	eventValues = E.wheelDelta;
+//             $('body').text(delta);
+        };
+     // minus nav height(50px) 
+		var scmove = $(this).height() - $(".l-header-pc").height();
+		
+     // 음수이면 아래로 내린 것 
+     if(eventValues <0 && !flag){
+    	 // roll down mouse wheel 
+    	 flag = true; 
+    	 $('html, body').animate( { scrollTop : '+='+scmove }, 1500 ,function(){ flag = false; }); }; 
+    	
+    	 // 양수이면 위로 올린 것 
+    	 if(eventValues >0 && !flag){ 
+    	// roll up mouse wheel 
+    	flag = true; 
+    	$('html, body').animate( { scrollTop : '-='+scmove }, 1500 ,function(){ flag = false; }); };
+
+       
+    });
+});
+
+
+
 $(document).ready(function(){	
 	
 	//모든 이미지 리스트

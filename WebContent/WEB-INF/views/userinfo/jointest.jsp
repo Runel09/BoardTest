@@ -258,7 +258,7 @@
 				<tr>
 					<td id="title">생년월일</td>
 					<td>
-						<input type="text" name="userbirth" maxlength="4" placeholder="년(4자)" size="6" min ="1900" max = "2020" onKeyPress="return checkNum(event)" >
+						<input type="email" name="userbirth" maxlength="4" placeholder="년(4자)" size="6" min="1900" max="2020" onKeyPress="return checkNum(event)" >
 							
 						<select name="userbirthmm">
 							<option value="00">월</option>
