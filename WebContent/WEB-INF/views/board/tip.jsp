@@ -64,7 +64,7 @@ div.container a
 
 .yellow
 {
-    background: #f7bcbc;
+    background: #2b90d9;
     
 }
 
@@ -98,18 +98,18 @@ div.pullRight a:hover:before
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
 
 <div class="community">
-<span>커뮤니티</span>
+<span style="font-family: 'NIXGONL-Vb';">커뮤니티</span>
 </div>
 
-  <a href="/board/planner" class="menutab" style="font-size:38px;">플래너</a>
-  <a href="/board/free" class="menutab" style="font-size:38px; ">자유</a>
-  <a href="/board/tip" class="menutab" style="font-size:38px; color: white;">여행팁</a>
-  <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
+  <a href="/board/planner" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">플래너</a>
+  <a href="/board/free" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">자유</a>
+  <a href="/board/tip" class="menutab" style="font-size:38px; color: white; font-family: 'NIXGONL-Vb';">여행팁</a>
+  <a href="/board/question" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">질문</a>
 </div>
 
 <div class="container">
 
-<h1 style="float:left;">※공지사항을 알려드립니다</h1>
+<h1 style="float:left; font-family: 'NIXGONL-Vb';">※공지사항을 알려드립니다</h1>
 <br><br><br><br>
 <table class="table table-hover table-condensed table-striped">
 
@@ -133,7 +133,7 @@ div.pullRight a:hover:before
 
 <div class="container">
 
-<h1 style="float:left;">여행팁 게시판</h1>
+<h1 style="float:left; font-family: 'NIXGONL-Vb';">여행팁 게시판</h1>
 <br><br><br><br>
 
 <table class="table table-hover table-condensed table-striped">
