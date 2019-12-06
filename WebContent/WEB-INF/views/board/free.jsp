@@ -49,7 +49,7 @@ div.container
 {
     font-family: Raleway;
     margin: 0 auto;
-	padding: 1em 7em;
+	padding: 4em 7em;
 	text-align: center;
 }
 
@@ -106,7 +106,7 @@ div.pullRight a:hover:before
 <span style="font-family: 'NIXGONL-Vb';">커뮤니티</span>
 </div>
 
-  <a href="/board/planner" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">플래너</a>
+  <a href="/board/plannernew" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">플래너</a>
   <a href="/board/free" class="menutab" style="font-size:38px; color: white; font-family: 'NIXGONL-Vb';">자유</a>
   <a href="/board/tip" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">여행팁</a>
   <a href="/board/question" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">질문</a>

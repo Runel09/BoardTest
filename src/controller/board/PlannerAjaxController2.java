@@ -14,8 +14,8 @@ import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/planner/new")
-public class PlannerAjaxController extends HttpServlet {
+@WebServlet("/planner/hot")
+public class PlannerAjaxController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	
@@ -27,7 +27,7 @@ public class PlannerAjaxController extends HttpServlet {
 		Paging paging = boardService.getPlannerPaging(req);
 		
 		
-		List<PlanBoard> list = boardService.getPlannerNewList(paging);
+		List<PlanBoard> list = boardService.getPlannerHotList(paging);
 		
 //		System.out.println(list);
 		

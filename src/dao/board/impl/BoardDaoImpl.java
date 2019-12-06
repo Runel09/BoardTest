@@ -324,7 +324,7 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "";
 		sql += "SELECT count(*) FROM (";
 		sql	+= "        SELECT planboard.*";
-		sql += "        , (select count(*) from planrecommend R where R.planboardno= planboard.planboardno) recommend";
+		sql += "        , (select count(*) from planrecommend R where R.plannerno= planboard.plannerno) recommend";
 		sql	+= "        FROM planboard";
 		sql += " WHERE 1=1";
 
@@ -391,16 +391,19 @@ public class BoardDaoImpl implements BoardDao{
 		return cnt;
 	}
 
+	
 	@Override
-	public List<PlanBoard> selectPlannerAll(Paging paging) {
+	public List<PlanBoard> selectPlannerNewAll(Paging paging) {
 
 		conn = DBConn.getConnection();
 
+//		합 : 
+//		수 : count(*)
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+= "    SELECT rownum rnum, B.* FROM (";
 		sql	+= "        SELECT planboard.*";
-		sql += "        , (select count(*) from planrecommend R where R.planboardno= planboard.planboardno) recommend";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.plannerno= planboard.plannerno) score";
 		sql	+= "        FROM planboard";
 		sql += " WHERE 1=1";
 		
@@ -420,13 +423,15 @@ public class BoardDaoImpl implements BoardDao{
 			sql += " AND Travel_thema = ?";
 		}
 		
-		sql	+=	"        ORDER BY recommend DESC";
+		sql	+=	"        ORDER BY plannerno DESC";			
 		sql	+=	"    ) B";
 		sql	+=	"    ORDER BY rnum";
 		sql	+=	" ) BOARD";
 		sql	+=	" WHERE rnum BETWEEN ? AND ?";
 
+//		System.out.println(sql);
 		List<PlanBoard> list = new ArrayList<>();
+//		System.out.println(sql);
 		
 		try {
 			
@@ -453,100 +458,7 @@ public class BoardDaoImpl implements BoardDao{
 
 			ps.setInt(psnum++, paging.getStartNo());
 			ps.setInt(psnum, paging.getEndNo());
-			
-//				if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place())) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date())) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season())) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema()))) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setInt(2, paging.getStartNo());
-//					ps.setInt(3, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_season());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_thema());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setString(3, paging.getTravel_season());
-//					ps.setInt(4, paging.getStartNo());
-//					ps.setInt(5, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setString(3, paging.getTravel_thema());
-//					ps.setInt(4, paging.getStartNo());
-//					ps.setInt(5, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_season());
-//					ps.setString(3, paging.getTravel_thema());
-//					ps.setInt(4, paging.getStartNo());
-//					ps.setInt(5, paging.getEndNo());
-//				} else {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setString(3, paging.getTravel_season());
-//					ps.setString(4, paging.getTravel_thema());
-//					ps.setInt(5, paging.getStartNo());
-//					ps.setInt(6, paging.getEndNo());
-//				}
-			
-			
-//
-//			} else if ((paging.getTravel_date()!=null || !"".equals(paging.getTravel_date())) {
-//				
-//				if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setInt(2, paging.getStartNo());
-//				ps.setInt(3, paging.getEndNo());
-//			} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setString(2, paging.getTravel_season());
-//				ps.setInt(3, paging.getStartNo());
-//				ps.setInt(4, paging.getEndNo());
-//			} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setString(2, paging.getTravel_thema());
-//				ps.setInt(3, paging.getStartNo());
-//				ps.setInt(4, paging.getEndNo());
-//			} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setString(2, paging.getTravel_season());
-//				ps.setString(2, paging.getTravel_thema());
-//				ps.setInt(3, paging.getStartNo());
-//				ps.setInt(4, paging.getEndNo());
-//			}
-//	
-//			} else if ((paging.getTravel_season()!=null || !"".equals(paging.getTravel_season())) {
-//				if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_season());
-//					ps.setInt(2, paging.getStartNo());
-//					ps.setInt(3, paging.getEndNo());
-//				} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_season());
-//					ps.setString(2, paging.getTravel_thema());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				}
-//			} else if ((paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//				if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_season());
-//					ps.setInt(2, paging.getStartNo());
-//					ps.setInt(3, paging.getEndNo());
-//			}
-//			}
-			
-//			System.out.println(rs.next());
-			
+		
 			
 			
 			rs = ps.executeQuery();
@@ -558,7 +470,7 @@ public class BoardDaoImpl implements BoardDao{
 				planBoard.setTravel_date(rs.getString("travel_date"));
 				planBoard.setTravel_season(rs.getString("travel_season"));
 				planBoard.setTravel_thema(rs.getString("travel_thema"));
-				
+				planBoard.setReview_score(rs.getDouble("score"));
 				
 				list.add(planBoard);
 			}
@@ -579,6 +491,110 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return list;
 	}
+	
+	
+	
+	@Override
+	public List<PlanBoard> selectPlannerHotAll(Paging paging) {
+
+		conn = DBConn.getConnection();
+
+//		합 : 
+//		수 : count(*)
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+= "    SELECT rownum rnum, B.* FROM (";
+		sql	+= "        SELECT planboard.*";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.plannerno= planboard.plannerno) score";
+		sql	+= "        FROM planboard";
+		sql += " WHERE 1=1";
+		
+		if(paging.getTravel_place()!=null && !"".equals(paging.getTravel_place())) {
+			sql += " AND Travel_place = ?";
+		}
+		
+		if(paging.getTravel_date()!=null && !"".equals(paging.getTravel_date())) {
+			sql += " AND Travel_date = ?";
+		}
+		
+		if(paging.getTravel_season()!=null && !"".equals(paging.getTravel_season())) {
+			sql += " AND Travel_season = ?";
+		}
+				
+		if(paging.getTravel_thema()!=null && !"".equals(paging.getTravel_thema())) {
+			sql += " AND Travel_thema = ?";
+		}
+		
+		sql	+=	"        ORDER BY score DESC nulls last";			
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN ? AND ?";
+
+//		System.out.println(sql);
+		List<PlanBoard> list = new ArrayList<>();
+//		System.out.println(sql);
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			
+			
+			int psnum = 1;
+			if( paging.getTravel_place() != null && !"".equals(paging.getTravel_place()) ) {
+				ps.setString(psnum++, paging.getTravel_place());
+			}
+			
+			if( paging.getTravel_date()!=null && !"".equals(paging.getTravel_date()) ) {
+				ps.setString(psnum++, paging.getTravel_date());
+			}
+			
+			if( paging.getTravel_season()!=null && !"".equals(paging.getTravel_season()) ) {
+				ps.setString(psnum++, paging.getTravel_season());
+			}
+
+
+			if( paging.getTravel_thema()!=null && !"".equals(paging.getTravel_thema()) ) {
+				ps.setString(psnum++, paging.getTravel_thema());
+			}
+
+			ps.setInt(psnum++, paging.getStartNo());
+			ps.setInt(psnum, paging.getEndNo());
+		
+			
+			
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				PlanBoard planBoard = new PlanBoard();
+				
+				planBoard.setTravel_place(rs.getString("travel_place"));
+				planBoard.setTravel_date(rs.getString("travel_date"));
+				planBoard.setTravel_season(rs.getString("travel_season"));
+				planBoard.setTravel_thema(rs.getString("travel_thema"));
+				planBoard.setReview_score(rs.getDouble("score"));
+				
+				list.add(planBoard);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+		
+		return list;
+	}
+	
+	
 	
 	@Override
 	public Board selectBoardByBoardno(Board board) {

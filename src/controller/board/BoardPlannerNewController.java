@@ -14,8 +14,8 @@ import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/board/planner")
-public class BoardPlannerController extends HttpServlet {
+@WebServlet("/board/plannernew")
+public class BoardPlannerNewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardService boardService = new BoardServiceImpl();
@@ -28,9 +28,9 @@ public class BoardPlannerController extends HttpServlet {
 		Paging paging = boardService.getPaging(req);
 		//Paging 객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);	
-		List<PlanBoard> list = boardService.getPlannerList(paging);	
+		List<PlanBoard> list = boardService.getPlannerNewList(paging);	
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/WEB-INF/views/board/planner.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/board/plannernew.jsp")
 		.forward(req, resp);
 		
 		
@@ -40,11 +40,5 @@ public class BoardPlannerController extends HttpServlet {
 		
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	
-	
-	}
 
 }

@@ -61,7 +61,7 @@ h1.name {
 
 .container {
 	min-width: 800px;
-	width: 81%;
+	width: 72%;
 }
 
 #header {

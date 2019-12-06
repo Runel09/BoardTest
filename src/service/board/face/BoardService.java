@@ -34,7 +34,8 @@ public interface BoardService {
 	public List<Board> getFreeList(Paging paging);
 	public List<Board> getTipList(Paging paging);
 	public List<Board> getQuestionList(Paging paging);
-	public List<PlanBoard> getPlannerList(Paging paging);
+	public List<PlanBoard> getPlannerNewList(Paging paging);
+	public List<PlanBoard> getPlannerHotList(Paging paging);
 	
 	public Board getBoardno(HttpServletRequest req);
 
