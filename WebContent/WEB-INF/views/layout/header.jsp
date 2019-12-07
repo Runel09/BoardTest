@@ -155,13 +155,15 @@ div.circleBehind a:hover:after {
 <span>
 <c:if test="${empty login }">
 <a href="/member/login"><button type="button" class="btn btn-primary" style="margin-right: 1%; font-family: auto;
-}">로그인</button></a>
+}">login</button></a>
 <a href="/member/join"><button type="button" class="btn btn-success" style="font-family: auto;
-}">회원가입</button></a>
+}">join</button></a>
 </c:if>
 <c:if test="${login eq true }">
+<a href="/mypage/main"><button type="button" class="btn btn-primary" style=" margin-right: 1%; font-family: auto;
+}">mypage</button></a>
 <a href="/member/logout"><button type="button" class="btn btn-danger" style="font-family: auto;
-}">로그아웃</button></a>
+}">logout</button></a>
 </c:if>
 </span>
 </div>

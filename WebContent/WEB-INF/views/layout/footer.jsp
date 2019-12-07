@@ -16,7 +16,7 @@ body {
 }
 
 </style>
-<hr>
+<hr style="margin-top:100px;">
 <br><br>
 <div class="fotter center" style="background-color: #FFF">      
          <a href="http://192.168.10.95:8888/clause">서비스소개 |</a>
