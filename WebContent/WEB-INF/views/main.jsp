@@ -292,6 +292,8 @@ $(document).ready(function(){
    <jsp:include page="/WEB-INF/views/search/searchAir.jsp"/>
    <jsp:include page="/WEB-INF/views/search/searchHotel.jsp"/>
 </div>
+
+
    <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 
 

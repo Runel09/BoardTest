@@ -167,10 +167,10 @@ div.circleBehind a:hover:after {
 </div>
 
 <p class="container" style="margin-top: 20px;">
-  <a class ="menubar" href="">플래너</a>
+  <a class ="menubar" href="/board/plannernew">플래너</a>
   <a class ="menubar" href="/place/list">장소정보</a>
   <a class ="menubar" href="/board/free">게시판</a>
-  <a class ="menubar" href="/mypage/main">마이페이지</a>
+  <a class ="menubar" href="/search/air">항공권/호텔</a>
   
 </p>
 

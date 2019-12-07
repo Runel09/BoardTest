@@ -37,7 +37,7 @@ public class BoardViewController extends HttpServlet {
 		req.setAttribute("board", board);
 		req.setAttribute("file", boardFile);
 		req.setAttribute("comment", commentList);
-		req.setAttribute("nick", boardService.getNick(board));
+		req.setAttribute("user_nick", boardService.getNick(board));
 		
 		//추천 상태 전달
 		Recommend recommend = new Recommend();
