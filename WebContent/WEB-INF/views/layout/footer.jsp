@@ -16,7 +16,8 @@ body {
 }
 
 </style>
-
+<hr>
+<br><br>
 <div class="fotter center" style="background-color: #FFF">      
          <a href="http://192.168.10.95:8888/clause">서비스소개 |</a>
          <a href="http://192.168.10.95:8888/clause"> 회원약관 |</a>
@@ -28,6 +29,6 @@ body {
       </span>
       </div>
    </div>
-
+<br><br><br>
 </body>
 </html>

@@ -114,7 +114,7 @@ $('#testBtn').click(function(e){
            <li class="list-group-item list-group-item-info"><p style="font-size: 25px">나의정보</p></li>
          </ul>
          <hr>
-         <ul class="userinfo">
+         <ul class="userinfo" style="list-style: none;">
          <li>이름:${member.user_name}</li>
          <li>아이디:${member.user_id}</li>
          <li>닉네임:${member.user_nick }</li>
