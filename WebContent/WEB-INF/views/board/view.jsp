@@ -132,7 +132,7 @@ $(document).ready(function() {
 			<td class="info">아이디</td>
 			<td>${board.user_id }</td>
 			<td class="info">닉네임</td>
-			<td>[ 회원가입완료되면 추가 ]</td>
+			<td>${board.user_nick }</td>
 		</tr>
 
 		<tr>

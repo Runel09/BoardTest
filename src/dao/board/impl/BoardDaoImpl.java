@@ -1077,10 +1077,10 @@ public class BoardDaoImpl implements BoardDao{
 
 	      //수행할 SQL쿼리
 	      String sql = "";
-	      sql += "SELECT usernick FROM member ";
+	      sql += "SELECT user_nick FROM member ";
 	      sql += "WHERE user_id = ?";
 
-	      String nick = null;
+	      String user_nick = null;
 	      
 	      try {
 	         //SQL 쿼리수행객체
@@ -1093,7 +1093,7 @@ public class BoardDaoImpl implements BoardDao{
 	         rs = ps.executeQuery();
 
 	         while( rs.next() ) {
-	            nick = rs.getString("usernick");
+	            user_nick = rs.getString("user_nick");
 	            
 	         }
 
@@ -1110,7 +1110,7 @@ public class BoardDaoImpl implements BoardDao{
 	         }
 	      }
 
-	      return nick;
+	      return user_nick;
 	   }
 
 	@Override
