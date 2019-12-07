@@ -338,7 +338,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				Report report = new Report();
 				
 				report.setBoardno(rs.getInt("boardno"));
-				report.setDb_id(rs.getString("db_id"));
+				report.setUser_id(rs.getString("db_id"));
 				report.setContent(rs.getString("content"));
 				report.setReason(rs.getString("reason"));
 				report.setReportno(rs.getInt("reportno"));
@@ -415,13 +415,13 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		sql += " select * from board";
 
 		if(paging.getSearch()!=null&&!"".equals(paging.getSearch())) {
-			sql+=" WHERE title LIKE ? or id LIKE ? or content LIKE ?";
+			sql+=" WHERE title LIKE ? or user_id LIKE ? or content LIKE ?";
 		}
 
 		sql += " order by boardno desc)B";
 		sql += " ORDER BY rnum) BOARD";
 		sql += " WHERE rnum BETWEEN ? AND ? and checkboard='공지'";
-
+	
 		List<Board> list = new ArrayList<>();
 		try {
 			ps = conn.prepareStatement(sql);// 수행객체 얻기
@@ -447,7 +447,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("TITLE"));
-				board.setId(rs.getString("ID"));
+				board.setUser_id(rs.getString("ID"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -459,7 +459,8 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(list);
+		
+		System.out.println("noticelist:"+list);
 		return list;
 	}
 
@@ -474,7 +475,7 @@ public class SupervisorDaoImpl implements SupervisorDao{
 			System.out.println(1);
 			sql +=" WHERE checkboard='공지'";
 			sql += " AND (title LIKE ? ";
-			sql += " or id LIKE ? ";
+			sql += " or user_id LIKE ? ";
 			sql += " or content LIKE ?)";
 		} else {
 			System.out.println(2);

@@ -6,7 +6,7 @@ import javax.mail.PasswordAuthentication;
 public class Gmail extends Authenticator {
 		
 	/**
-	 * 안병주
+	 * 
 	 * 2019-12-04
 	 * 
 	 * Gmail SMTP를 사용하기위한  구글 계정 인증

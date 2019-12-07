@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.board.PlanBoard;
+import dto.planner.Planner;
 import service.board.face.BoardService;
 import service.board.impl.BoardServiceImpl;
 import util.Paging;
 
-@WebServlet("/planner/ajax")
-public class PlannerAjaxController extends HttpServlet {
+@WebServlet("/planner/new")
+public class PlannerAjaxNewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	
@@ -27,9 +27,9 @@ public class PlannerAjaxController extends HttpServlet {
 		Paging paging = boardService.getPlannerPaging(req);
 		
 		
-		List<PlanBoard> list = boardService.getPlannerList(paging);
+		List<Planner> list = boardService.getPlannerNewList(paging);
 		
-		System.out.println(list);
+//		System.out.println(list);
 		
 		req.setAttribute("list", list);
 		

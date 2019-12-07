@@ -131,7 +131,7 @@ public class MemberServiceImpl implements MemberService{
 
 		 // 사용자에게 보낼 메시지를 기입합니다.
 	      String from = "bgan0064@gmail.com";
-	      String host = "http://localhost:8082/";
+	      String host = "http://192.168.10.149:8082/";
 	      
 	      //임시 비밀번호 생성
 	      String pwTmember = getRamdomPassword(8);
@@ -196,42 +196,7 @@ public class MemberServiceImpl implements MemberService{
 			member.setUser_phnum(req.getParameter("userphnum"));
 
 	      
-	    
-	      //hiredate
-//	      param = req.getParameter("hiredate");
-//	      
-//	      System.out.println("------ [memberService] hiredate ------");
-//	      System.out.println( param );
-//	      
-//	      if( param !=null && !"".equals(param)) {
-//	         
-//	         // <form>으로 전달된 날짜 데이터는 String 타입으로 오게 된다
-//	         // Date 포맷의 String을 java.util.Date 타입으로 변환해야 한다
-//	      
-////	         // "년-월-일" 형태의 문자열 포맷 객체
-////	         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-////	         
-//	         try {
-//	            // parse() : "Date 포맷" -> java.util.Date
-//	            // format() : java.util.Date -> "Date포맷"
-////	            Date d = format.parse(param);
-////	            
-////	            System.out.println("------ [memberService] d ------");
-////	            System.out.println(d);
-////	            
-////	            member.setHiredate(d);
-//	            
-//	         } catch (ParseException e) {
-//	            // TODO Auto-generated catch block
-//	            e.printStackTrace();
-//	         }
-//	      }
-	      
-	      
-//	      System.out.println("------ [memberService] hiredate ------");
-//	      System.out.println( member.getHiredate() );
-//	      
-//	    
+
 			System.out.println(member);
 	         return member;
 	   }

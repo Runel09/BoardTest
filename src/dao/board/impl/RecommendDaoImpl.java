@@ -23,7 +23,7 @@ public class RecommendDaoImpl implements RecommendDao {
 		String sql = "";
 		sql += "SELECT count(*) FROM recommend";
 		sql += " WHERE boardno = ?";
-		sql += " 	AND userid = ?";
+		sql += " 	AND user_id = ?";
 		
 		//DB 객체
 		PreparedStatement ps = null; 
@@ -35,7 +35,7 @@ public class RecommendDaoImpl implements RecommendDao {
 			//DB작업
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, recommend.getBoardno());
-			ps.setString(2, recommend.getUserid());
+			ps.setString(2, recommend.getUser_id());
 
 			rs = ps.executeQuery();
 			
@@ -66,14 +66,14 @@ public class RecommendDaoImpl implements RecommendDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO recommend(boardno, userid)";
+		sql += "INSERT INTO recommend(boardno, user_id)";
 		sql += " VALUES(?, ?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, recommendBoard.getBoardno());
-			ps.setString(2, recommendBoard.getUserid());
+			ps.setString(2, recommendBoard.getUser_id());
 			
 			ps.executeQuery();
 			
@@ -99,13 +99,13 @@ public class RecommendDaoImpl implements RecommendDao {
 		
 		String sql = "";
 		sql += "DELETE FROM recommend";
-		sql += " WHERE boardno=? AND userid=?";
+		sql += " WHERE boardno=? AND user_id=?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, recommendBoard.getBoardno());
-			ps.setString(2, recommendBoard.getUserid());
+			ps.setString(2, recommendBoard.getUser_id());
 			
 			ps.executeQuery();
 			

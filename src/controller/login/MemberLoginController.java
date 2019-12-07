@@ -49,12 +49,12 @@ public class MemberLoginController extends HttpServlet {
 			session.setAttribute("userid", member2.getUser_id() );
 			session.setAttribute("usernick", member2.getUser_nick() );
 			session.setAttribute("user_userNum", member2.getUser_number());
-			System.out.println("로그인="+ session.getAttribute("user_number"));
+//			System.out.println("로그인="+ session.getAttribute("user_number"));
 				
 			resp.sendRedirect("/main");
 		} else {
 			System.out.println("로그인실패");
-			resp.sendRedirect("/main");
+			resp.sendRedirect("/member/login");
 		}
 
 	}

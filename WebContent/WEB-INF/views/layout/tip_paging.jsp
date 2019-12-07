@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<script>
+
+window.scrollTo(0,document.body.scrollHeight);
+
+</script>
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 
