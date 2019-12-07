@@ -702,7 +702,7 @@ function inputIdChk(){
 	        }	    
 }
 $(document).ready(function() {
-	$("input[name=userbirthyy], input[name=userbirthmm], input[name=userbirthdd]").keyup(function(e) {
+	$("input[name=userbirt], input[name=userbirthmm], input[name=userbirthdd]").keyup(function(e) {
         var keyVal = e.keyCode;
         console.log(keyVal)
  

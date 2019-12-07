@@ -156,8 +156,6 @@ div.circleBehind a:hover:after {
 <c:if test="${empty login }">
 <a href="/member/login"><button type="button" class="btn btn-primary" style="margin-right: 1%; font-family: auto;
 }">login</button></a>
-<a href="/member/join"><button type="button" class="btn btn-success" style="font-family: auto;
-}">join</button></a>
 </c:if>
 <c:if test="${login eq true }">
 <a href="/mypage/main"><button type="button" class="btn btn-primary" style=" margin-right: 1%; font-family: auto;

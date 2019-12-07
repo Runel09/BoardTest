@@ -43,7 +43,9 @@ public interface MemberService {
 	public String getRamdomPassword(int len);
 	public void ChangePw(Member memberResult2);
 	
-	
+	/*
+	 * 회원가입시 값저장
+	 */
 	Member getmemberParam(HttpServletRequest req);
 	
 	

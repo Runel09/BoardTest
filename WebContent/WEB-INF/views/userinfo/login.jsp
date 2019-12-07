@@ -230,7 +230,7 @@ Travelers
                 
             
             <a href="/member/join" class="text-center new-account">회원가입 </a>
-            </form>.000000000000000ju2aqoooooooooooooooobbbbbbbbbbbbb
+            </form>
             </div>
         </div>
         
