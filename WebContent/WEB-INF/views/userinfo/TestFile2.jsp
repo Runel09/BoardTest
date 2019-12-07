@@ -3,8 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="///cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+
+
 <style type ="text/css">
 html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
 
@@ -42,7 +48,7 @@ body {
 }
 /* 회원가입 부분 세로길이 */
 .frame-long {
-  height: 1000px;
+  height: 1200px;
 }
 
 /* 회원가입 부분 가로길이 */
@@ -204,6 +210,16 @@ li {
   background: rgba(255,255,255,.2);
 }
 
+.form-stylings {
+  width: 25%;
+  height: 35px;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,.2);
+}
+
 label {
   font-weight: 400;
   text-transform: uppercase;
@@ -321,9 +337,10 @@ label {
   height: 35px;
 	border: none;
 	border-radius: 20px;
-  margin-top: 23px;
+  margin-top: 35px;
   background-color: #1059FF;
 }
+
 
 .btn-signin {
   float: left;
@@ -520,7 +537,7 @@ a.btn-goback:hover {
 </style>
 
 
-<script>
+<script type="text/javascript">
 $(function() {
 	$(".btn").click(function() {
 		$(".form-signin").toggleClass("form-signin-left");
@@ -541,6 +558,8 @@ $(function() {
   $(".frame").toggleClass("frame-short");
 	});
 });
+
+
 
 $(function() {
 	$(".btn-signin").click(function() {
@@ -574,7 +593,7 @@ function inputIdChk(){
 //경고 모달 호출 메서드
    function warningModal(content) {
       $(".modal-contents").text(content);
-      $("#defaultModal").modal('show');
+      $("#defaultModals").modal('show');
    }
 	
 	// 회원가입 화면의 입력값들을 검사한다.
@@ -666,9 +685,13 @@ function inputIdChk(){
 	}
 	
 	//문자 입력시 오류
+
+	
 	
 		function checkNum(e) {
-	        var keyVal = event.keyCode;
+	        var keyVal = e.keyCode;
+	        
+	        console.log(keyVal)
 	 
 	        if(((keyVal >= 48) && (keyVal <= 57))){
 	            return true;
@@ -676,10 +699,23 @@ function inputIdChk(){
 	        else{
 	        	warningModal("숫자만 입력가능합니다");
 	            return false;
-	        }
-	    
+	        }	    
 }
-
+$(document).ready(function() {
+	$("input[name=userbirthyy], input[name=userbirthmm], input[name=userbirthdd]").keyup(function(e) {
+        var keyVal = e.keyCode;
+        console.log(keyVal)
+ 
+        if(((keyVal >= 48) && (keyVal <= 57))){
+            return true;
+        }
+        else{
+        	console.log("숫자 아님")
+        	warningModal("숫자만 입력가능합니다");
+            return false;
+        }
+	})
+});
  
 </script>
 <meta charset="UTF-8">
@@ -688,6 +724,25 @@ function inputIdChk(){
 <body>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
+		<!-- 경고 모달창 -->
+            <div class="modal fade" id="defaultModals">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-danger">
+                        <div class="modal-header panel-heading">
+                        
+                            <h4 class="modal-title">오류 메시지</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+       
+            <!--// 경고 모달창 -->
 <div class="container">
   <div class="frame">
     <div class="nav">
@@ -699,7 +754,7 @@ function inputIdChk(){
     <div ng-app ng-init="checked = false">
     
     
-				        <form class="form-signin" action="/member/login" method="post" name="form">
+				        <form class="form-signin" action="/member/login" method="post" name="form"onClick="return checkValue()">
           <label for="userid">User Id</label>
           <input class="form-styling" type="text" name="userid" placeholder=""/>
           <label for="userpw">Password</label>
@@ -715,27 +770,49 @@ function inputIdChk(){
 				        <form class="form-signup" action="/member/join" method="post" name="form">
           <label for="userid">USER ID</label>
           <input class="form-styling" type="text" name="userid" placeholder=""/>
-          <input type="button" value="중복확인" onclick="openIdChk()">	
+          <input class="form-stylings"type="button" value="중복확인" onclick="openIdChk()">	
+          
+          
           <label for="password">Password</label>
 			<input type="hidden" name="idDuplication" value="idUncheck" >
           <input class="form-styling" type="text" name="userpw" placeholder=""/>
+        
+ 
           <label for="confirmpassword">Confirm password</label>
-          <input class="form-styling" type="text" name="passwordcheck" placeholder=""/>
+          <input class="form-styling" type="text" name="passwordcheck" placeholder=""/>          
+          
+          
           <label for="usernick">NICKNAME</label>
-          <input class="form-styling" type="text" name="usernick" placeholder=""/>
-          <label for="gender">GENDER</label>
-          <input class="form-styling" type="radio" name="gender" value="1"/>남
-          <input class="form-styling" type="radio" name="gender" value="0"/>여
+          <input class="form-styling" type="text" name="usernick" placeholder=""/>          
           
           
-          <label for="email">Email</label>
+          <label for="gender">GENDER :                 
+         	<input type="radio" name="gender" value="1" >남
+			<input type="radio" name="gender" value="0" >여
+         </label><br>
+          
+                    
+
+           <label for="userbirth">생년월일</label>
+         <input class="form-stylings" type="text" name="userbirthyy" maxlength="4" placeholder="년(4자)" size="6" min="1900" max="2020" />
+          <input class="form-stylings" type="text" name="userbirthmm" placeholder="월"  maxlength="4" size="6" />
+          <input class="form-stylings" type="text" name="userbirthdd" maxlength="2" placeholder="일" size="4" min ="01" max = "31" />
+          
+          
+            <label for="email">Email</label>
           <input class="form-styling" type="text" name="email" placeholder=""/>
-           <label for="confirmpassword">Confirm password</label>
-          <input class="form-styling" type="text" name="confirmpassword" placeholder=""/>
-           <label for="confirmpassword">Confirm password</label>
-          <input class="form-styling" type="text" name="confirmpassword" placeholder=""/>
           
-          <a ng-click="checked = !checked" class="btn-signup">Sign Up</a>
+          
+           <label for="userphnum">휴대폰번호</label>
+          <input class="form-styling" type="text" name="userphnum" placeholder=""/>
+          
+          
+            <label for="useraddr">주소</label>
+          <input class="form-styling" type="text" name="useraddr" placeholder=""/>
+          
+            <label for="useraddrdetail">상세주소</label>
+          <input class="form-styling" type="text" name="useraddrdetail"placeholder=""/>
+          <a ng-click="checked = !checked" class="btn-signup" >Sign Up</a>          
 				        </form>
       
             <div  class="success">
@@ -747,6 +824,7 @@ function inputIdChk(){
                   c-9.9-0.46-18.128-8.344-18.972-18.218c-0.292-3.416,0.276-6.673,1.51-9.578" />
                 <div class="successtext">
                    <p> TRAVELERS에 오신걸 환영합니다!! <br>당신의 로망은 어디인가요?</p>
+                   
                <a ng-click="checked = !checked" class="btn-signup" onClick="history.go()">로그인하기</a>
                    
                 </div>
@@ -756,7 +834,7 @@ function inputIdChk(){
       </div>
       
       <div class="forgot">
-        <a href="#">Forgot your password?</a>
+        <a href="/find/userinfo">Forgot your password?</a>
       </div>
       
       <div>
@@ -781,5 +859,6 @@ function inputIdChk(){
     </svg>
   </a>
 </div>
+
 </body>
 </html>
