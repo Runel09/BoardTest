@@ -146,7 +146,7 @@ public class MemberServiceImpl implements MemberService{
 	      
 	      String subject = "TRAVELERS 비밀번호 찾기 입니다.";
 	      String content = "고객님의 임시 비밀번호는 " + pwTmember +  " 입니다. 홈페이지 바로가기: " + 
-          "<a href='" + host + "main" + "'><br>돌아가기</a>";
+          "<a href='" + host + "member/login" + "'><br>돌아가기</a>";
 
 	      // SMTP에 접속하기 위한 정보를 기입합니다.
 	      Properties p = new Properties();
