@@ -119,7 +119,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
    	
       <td class="info">아이디</td><td>${super_id }</td>
    	</c:if>
-      <td class="info">아이디</td><td>${user_id }</td>
+      <td class="info">아이디</td><td>${userid }</td>
    <tr>
 
    

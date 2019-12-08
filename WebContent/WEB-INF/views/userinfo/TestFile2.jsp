@@ -3,8 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="///cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+
+
 <style type ="text/css">
 html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
 
@@ -40,13 +46,14 @@ body {
   overflow: hidden;
   transition: all .5s ease;
 }
-
+/* 회원가입 부분 세로길이 */
 .frame-long {
-  height: 615px;
+  height: 1200px;
 }
 
+/* 회원가입 부분 가로길이 */
 .frame-short {
-  height: 400px;
+  height: 441px;
   margin-top: 50px;
   box-shadow: 0px 2px 7px rgba(0,0,0,0.1);
 }
@@ -203,6 +210,16 @@ li {
   background: rgba(255,255,255,.2);
 }
 
+.form-stylings {
+  width: 25%;
+  height: 35px;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,.2);
+}
+
 label {
   font-weight: 400;
   text-transform: uppercase;
@@ -320,9 +337,10 @@ label {
   height: 35px;
 	border: none;
 	border-radius: 20px;
-  margin-top: 23px;
+  margin-top: 35px;
   background-color: #1059FF;
 }
+
 
 .btn-signin {
   float: left;
@@ -480,7 +498,7 @@ h1 {
 }
 
 .btn-goback-up {
-  top: -1080px;
+  top: -1500px;
   opacity: 1;
 }
 
@@ -519,7 +537,7 @@ a.btn-goback:hover {
 </style>
 
 
-<script>
+<script type="text/javascript">
 $(function() {
 	$(".btn").click(function() {
 		$(".form-signin").toggleClass("form-signin-left");
@@ -541,6 +559,8 @@ $(function() {
 	});
 });
 
+
+
 $(function() {
 	$(".btn-signin").click(function() {
   $(".btn-animate").toggleClass("btn-animate-grow");
@@ -556,7 +576,147 @@ $(function() {
 function goFirstForm() {
 	location.href="/main";
 }	
+//아이디 중복체크 화면open
+function openIdChk(){
 
+	
+	window.name = "parentForm";
+	window.open("/Login/chk",
+			"chkform", "width=500, height=300, resizable = no, scrollbars = no");	
+}
+// 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
+// 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때
+// 다시 중복체크를 하도록 한다.
+function inputIdChk(){
+	document.userInfo.idDuplication.value ="idUncheck";
+}
+//경고 모달 호출 메서드
+   function warningModal(content) {
+      $(".modal-contents").text(content);
+      $("#defaultModals").modal('show');
+   }
+	
+	// 회원가입 화면의 입력값들을 검사한다.
+	function checkValue()	
+	{
+		var form = document.userInfo;
+	
+		if(!form.userid.value){
+			warningModal("아이디를 입력하세요.");
+			return false;
+		}
+		
+		if(form.idDuplication.value != "idCheck"){
+			warningModal("아이디 중복체크를 해주세요.");
+			return false;
+		}
+		
+		if(!form.userpw.value){
+			warningModal("비밀번호를 입력하세요.");
+			return false;
+		}
+		
+		// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+		if(form.userpw.value != form.passwordcheck.value ){
+			warningModal("비밀번호를 동일하게 입력하세요.");
+			return false;
+		}	
+		
+		if(!form.usernick.value){
+			warningModal("닉네임을 입력하세요.");
+			return false;
+		}
+		
+		if(!form.username.value){
+			warningModal("이름을 입력하세요.");
+			return false;
+		}
+		
+		if(!form.userbirthyy.value){
+			warningModal("년도를 입력하세요.");
+			return false;
+		}
+		
+		if(form.userbirthyy.value){
+			warningModal("년도는 숫자만 입력가능합니다.");
+			return false;
+		}
+		
+		if(form.userbirthmm.value == "00"){
+			warningModal("월을 선택하세요.");
+			return false;
+		}
+		
+		if(!form.userbirthdd.value){
+			warningModal("날짜를 입력하세요.");
+			return false;
+		}
+		
+		if(form.userbirthdd.value){
+			warningModal("날짜는 숫자만 입력가능합니다.");
+			return false;
+		}
+		
+		if(!form.usermail.value){
+			warningModal("메일 주소를 입력하세요.");
+			return false;
+		}
+		
+		if(!form.userphnum.value){
+			warningModal("전화번호를 입력하세요.");
+			return false;
+		}
+		
+		if(form.userphnum.value){
+			warningModal("전화번호는 - 제외한 숫자만 입력해주세요.");
+			return false;
+		}
+		
+		if(!form.useraddr.value){
+			warningModal("주소를 입력하세요.");
+			return false;
+		}
+		
+		if(!form.useraddrdetail.value){
+			warningModal("자세한 주소를 입력하세요.");
+			return false;
+		}
+		
+	}
+	
+	//문자 입력시 오류
+
+	
+	
+		function checkNum(e) {
+	        var keyVal = e.keyCode;
+	        
+	        console.log(keyVal)
+	 
+	        if(((keyVal >= 48) && (keyVal <= 57))){
+	            return true;
+	        }
+	        else{
+	        	warningModal("숫자만 입력가능합니다");
+	            return false;
+	        }	    
+}
+$(document).ready(function() {
+	$("input[name=userbirt], input[name=userbirthmm], input[name=userbirthdd]").keyup(function(e) {
+        var keyVal = e.keyCode;
+        console.log(keyVal)
+ 
+        if(((keyVal >= 48) && (keyVal <= 57))){
+            return true;
+        }
+        else{
+        	console.log("숫자 아님")
+        	warningModal("숫자만 입력가능합니다");
+            return false;
+        }
+	})
+});
+ 
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -564,6 +724,25 @@ function goFirstForm() {
 <body>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
+		<!-- 경고 모달창 -->
+            <div class="modal fade" id="defaultModals">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-danger">
+                        <div class="modal-header panel-heading">
+                        
+                            <h4 class="modal-title">오류 메시지</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+       
+            <!--// 경고 모달창 -->
 <div class="container">
   <div class="frame">
     <div class="nav">
@@ -575,45 +754,87 @@ function goFirstForm() {
     <div ng-app ng-init="checked = false">
     
     
-				        <form class="form-signin" action="" method="post" name="form">
-          <label for="username">Username</label>
-          <input class="form-styling" type="text" name="username" placeholder=""/>
-          <label for="password">Password</label>
-          <input class="form-styling" type="text" name="password" placeholder=""/>
+				        <form class="form-signin" action="/member/login" method="post" name="form"onClick="return checkValue()">
+          <label for="userid">User Id</label>
+          <input class="form-styling" type="text" name="userid" placeholder=""/>
+          <label for="userpw">Password</label>
+          <input class="form-styling" type="text" name="userpw" placeholder=""/>
 <!--           <input type="checkbox" id="checkbox"/> -->
 <!--           <label for="checkbox" ><span class="ui"></span>Keep me signed in</label> -->
           <div class="btn-animate">
             <a class="btn-signin">Sign in</a>
           </div>
+          
 				        </form>
         
-				        <form class="form-signup" action="" method="post" name="form">
-          <label for="fullname">Full name</label>
-          <input class="form-styling" type="text" name="fullname" placeholder=""/>
-          <label for="email">Email</label>
-          <input class="form-styling" type="text" name="email" placeholder=""/>
+				        <form class="form-signup" action="/member/join" method="post" name="form">
+          <label for="userid">USER ID</label>
+          <input class="form-styling" type="text" name="userid" placeholder=""/>
+          <input class="form-stylings"type="button" value="중복확인" onclick="openIdChk()">	
+          
+          
           <label for="password">Password</label>
-          <input class="form-styling" type="text" name="password" placeholder=""/>
+			<input type="hidden" name="idDuplication" value="idUncheck" >
+          <input class="form-styling" type="text" name="userpw" placeholder=""/>
+        
+ 
           <label for="confirmpassword">Confirm password</label>
-          <input class="form-styling" type="text" name="confirmpassword" placeholder=""/>
-          <a ng-click="checked = !checked" class="btn-signup">Sign Up</a>
+          <input class="form-styling" type="text" name="passwordcheck" placeholder=""/>          
+          
+          
+          <label for="usernick">NICKNAME</label>
+          <input class="form-styling" type="text" name="usernick" placeholder=""/>          
+          
+          
+          <label for="gender">GENDER :                 
+         	<input type="radio" name="gender" value="1" >남
+			<input type="radio" name="gender" value="0" >여
+         </label><br>
+          
+                    
+
+           <label for="userbirth">생년월일</label>
+         <input class="form-stylings" type="text" name="userbirthyy" maxlength="4" placeholder="년(4자)" size="6" min="1900" max="2020" />
+          <input class="form-stylings" type="text" name="userbirthmm" placeholder="월"  maxlength="4" size="6" />
+          <input class="form-stylings" type="text" name="userbirthdd" maxlength="2" placeholder="일" size="4" min ="01" max = "31" />
+          
+          
+            <label for="email">Email</label>
+          <input class="form-styling" type="text" name="email" placeholder=""/>
+          
+          
+           <label for="userphnum">휴대폰번호</label>
+          <input class="form-styling" type="text" name="userphnum" placeholder=""/>
+          
+          
+            <label for="useraddr">주소</label>
+          <input class="form-styling" type="text" name="useraddr" placeholder=""/>
+          
+            <label for="useraddrdetail">상세주소</label>
+          <input class="form-styling" type="text" name="useraddrdetail"placeholder=""/>
+          <a ng-click="checked = !checked" class="btn-signup" >Sign Up</a>          
 				        </form>
       
             <div  class="success">
-              <svg width="270" height="270" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-       viewBox="0 0 60 60" id="check" ng-class="checked ? 'checked' : ''">
+              <svg width="270" height="270" xmlns="http://www.w3.org/2000/svg" 
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       	viewBox="0 0 60 60" id="check" ng-class="checked ? 'checked' : ''">
                  <path fill="#ffffff" d="M40.61,23.03L26.67,36.97L13.495,23.788c-1.146-1.147-1.359-2.936-0.504-4.314
                   c3.894-6.28,11.169-10.243,19.283-9.348c9.258,1.021,16.694,8.542,17.622,17.81c1.232,12.295-8.683,22.607-20.849,22.042
                   c-9.9-0.46-18.128-8.344-18.972-18.218c-0.292-3.416,0.276-6.673,1.51-9.578" />
                 <div class="successtext">
-                   <p> 회원가입이 완료되었습니다.  로그인해주세요!</p>
-                    <a class="btn-goback" value="Refresh" onClick="history.go()">로그인하기</a>
+                   <p> TRAVELERS에 오신걸 환영합니다!! <br>당신의 로망은 어디인가요?</p>
+                   
+               <a ng-click="checked = !checked" class="btn-signup" onClick="history.go()">로그인하기</a>
+                   
                 </div>
+              
              </div>
+                  
       </div>
       
       <div class="forgot">
-        <a href="#">Forgot your password?</a>
+        <a href="/find/userinfo">Forgot your password?</a>
       </div>
       
       <div>
@@ -621,6 +842,7 @@ function goFirstForm() {
         <div class="profile-photo"></div>
         <h1 class="welcome">환영합니다!</h1>
         <a class="btn-goback" value="Refresh" onClick="goFirstForm()">메인으로</a>
+        
       </div>
   </div>
     
@@ -637,5 +859,6 @@ function goFirstForm() {
     </svg>
   </a>
 </div>
+
 </body>
 </html>

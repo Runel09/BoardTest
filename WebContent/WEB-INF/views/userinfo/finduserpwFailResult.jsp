@@ -45,7 +45,7 @@
 	<br>
 	<div id="chk">
 		<form id="checkForm">
-			일치하는 정보가 없습니다.
+			회원님의 정보와 일치하는 정보가 없습니다.
 		</form>
 		<div id="msg"></div>
 		<br>
