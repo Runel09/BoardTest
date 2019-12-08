@@ -168,10 +168,10 @@ div.pullRight a:hover:before
    
 </table>
 
-<c:if test="${!empty user_id }">
+<c:if test="${!empty userid }">
 <button id="btnWrite" style="float: right;">글쓰기</button>
 </c:if>
-<c:if test="${empty user_id }">
+<c:if test="${empty userid }">
 <button id="emptylogin" style="float: right;">글쓰기</button>
 </c:if>
 
