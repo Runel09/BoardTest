@@ -18,6 +18,8 @@ import dao.board.face.BoardDao;
 import dao.board.face.BoardFileDao;
 import dao.board.impl.BoardDaoImpl;
 import dao.board.impl.BoardFileDaoImpl;
+import dao.mypage.face.MypageDao;
+import dao.mypage.impl.MypageDaoImpl;
 import dao.place.face.PlaceDao;
 import dao.place.impl.PlaceDaoImpl;
 import dao.supervisor.face.SupervisorDao;
@@ -39,7 +41,7 @@ public class SupervisorServiceImpl implements SupervisorService{
 	//SupervisorDao 객체
 	private SupervisorDao supervisordao = new SupervisorDaoImpl();
 	private BoardDao boardDao = new BoardDaoImpl();
-
+	private MypageDao mypageDao = new MypageDaoImpl();
 
 	@Override
 	public Supervisor getLoginMember(HttpServletRequest req) {
@@ -711,6 +713,9 @@ public class SupervisorServiceImpl implements SupervisorService{
 
 	@Override
 	public void deleteCheckuserno(String[] check) {
+		
+		supervisordao.deleteBoardByCheck(check);
+		supervisordao.deleteCommentByCheck(check);
 		supervisordao.deleteMemberList(check);
 		
 	}

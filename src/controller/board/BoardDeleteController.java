@@ -30,7 +30,7 @@ public class BoardDeleteController extends HttpServlet {
 		
 		boardService.delete(board);
 		
-		resp.sendRedirect("/board/list");
+		resp.sendRedirect("/board/free");
 	}
 
 }

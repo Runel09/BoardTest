@@ -84,7 +84,7 @@ public class MypageDaoImpl implements MypageDao {
 
 		sql += " order by boardno desc)B";
 		sql += " ORDER BY rnum) BOARD";
-		sql += " WHERE rnum BETWEEN ? AND ? and id=?";
+		sql += " WHERE rnum BETWEEN ? AND ? and user_id=?";
 
 		List<Board> list = new ArrayList<>();
 		try {
@@ -104,8 +104,8 @@ public class MypageDaoImpl implements MypageDao {
 				Board board= new Board();
 				
 				board.setBoardno(rs.getInt("boardno"));
-				board.setTitle(rs.getString("TITLE"));
-				board.setUser_id(rs.getString("ID"));
+				board.setTitle(rs.getString("title"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -128,7 +128,7 @@ public class MypageDaoImpl implements MypageDao {
 		// 수행할 SQL 쿼리
 		String sql = "";
 		sql += "SELECT count(*) FROM board";
-		sql += " WHERE id=?";
+		sql += " WHERE user_id=?";
 
 		// 최종 결과 변수
 		int cnt = 0;

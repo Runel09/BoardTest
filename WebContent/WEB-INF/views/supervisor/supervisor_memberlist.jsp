@@ -45,7 +45,6 @@ $(document).ready(function () {
 	<th style="width: 5%"><input type="checkbox" id="checkall"/></th>
 	<th style="width: 10%">user_num</th>
 	<th style="width: 10%">user_id</th>
-	<th style="width: 10%">user_pw</th>
 	<th style="width: 20%">user_phnum</th>
 	<th style="width: 20%">user_name</th>
 </tr>
@@ -54,12 +53,11 @@ $(document).ready(function () {
 
 <tr>
 	
-	<td><input type="checkbox" name="check" value="${member.user_number}" /></td>
+	<td><input type="checkbox" name="check" value="${member.user_id}" /></td>
 	<td>${member.user_number}</td>
 <%-- 	<td><input type="checkbox" name="check" value="${member.User_Num}" /></td> --%>
 <%-- 	<td>${member.User_Num}</td> --%>
 	<td>${member.user_id }</td>
-	<td>${member.user_pw }</td>
 	<td>${member.user_phnum}</td>
 	<td>${member.user_name}</td>
 </tr>

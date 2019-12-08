@@ -64,6 +64,10 @@ public interface SupervisorDao {
 
 	void deleteMemberList(String[] check);
 
+	void deleteBoardByCheck(String[] check);
+
+	void deleteCommentByCheck(String[] check);
+
 
 
 
