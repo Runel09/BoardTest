@@ -45,7 +45,7 @@ public class MemberJoinController extends HttpServlet {
 //		resp.sendRedirect("/member/join");
 		
 		
-		resp.setContentType("text/html; charset=UTF-8");
+//		resp.setContentType("text/html; charset=UTF-8");
 		 
 		PrintWriter out = resp.getWriter();
 		 
