@@ -94,12 +94,14 @@ html, body {
 }
 
 .top {
+	text-align:center;
 	height: 90px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .tag_body {
+	width:200px;
 	border: 2px solid #337ab7;
 	height: 90px;
 	
@@ -119,7 +121,7 @@ html, body {
 
 .tag_body div {
 	float: left;
-	width: 800px;
+	width: 200px;
 }
 div div > .selected{
 	color: white;
@@ -177,6 +179,7 @@ div div > .selected{
 
 <script type="text/javascript">
 	var map;
+	
 	$(document).ready(
 			function() {
 				$(".center").on(
@@ -234,7 +237,30 @@ div div > .selected{
 
 				//전체 경로 검색
 				$("#search_btn").on('click', searchAll);
-	
+				
+				var index= new Array();
+				<c:forEach items="${index}" var="indexes">
+				
+				</c:forEach>
+				
+				var days=0;
+
+				<c:forEach items="${day_size}" var="size">
+					var num=0;
+					$(".day_bar").append("<div class='day_con "+(days+1)+"day'><p>"+(days+1)+"일차</p></div>")
+					console.log(${size})
+					console.log(${index[0].index_num})
+					for(var i =0 ; i<${size};i++){
+						$(".index_body").append("<div class='index_ele' data-index='"+i+"' data-place_no='"+${index[num].place_num}+"'><input name='place_cate' type='hidden' value='"+result[${index[num].place_num}].cate+"'/><input type='hidden' name='place_no' value='"+${index[num].place_num}+"'/>"+result[${index[num].place_num}].place_name+"<br>"+result[${index[num].place_num}].detail+"<button type='button'>경로검색</button><button type='button'>삭제</button></div>"))
+						num=+1;
+						
+						
+					}
+					days++;
+				</c:forEach>
+				
+				$(".day_bar > .1day").addClass("selected_con");
+				
 				//인덱스 선택 버튼 동작
 				$(".day_bar .day_con").on('click',function(){
 					var index= $(this).index()+1;
@@ -260,7 +286,11 @@ div div > .selected{
 					}
 					path.getAt();
 				})
-				
+				$(".place").children("div").eq(1).text("${planner.trip_nation}");
+				$(".travel_date").children("div").eq(1).text("${planner.trip_date}");
+				$(".travel_season").children("div").eq(1).text("${planner.trip_season}");
+				$(".traval_thema").children("div").eq(1).text("${planner.trip_theme}");
+				$(".top").children().children("p").eq(1).text("${planner.PLANNER_NAME}");
 				
 			});
 </script>
@@ -270,52 +300,35 @@ div div > .selected{
 	<div>
 		<div class="container text-center">
 			<div class="top col-md-12">
-				<div class="col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 9px">
-					<p style="color:#337ab7;font-size: 20px; font-weight: 900;">플래너 이름&nbsp;</p> <input id="title_char" name="title_char" type="text"
-						readonly="readonly">
+				<div class="col-md-offset-4 col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 9px">
+					<p style="color:#337ab7;font-size: 20px; font-weight: 900;">플래너 이름&nbsp;</p>
+					<p style="color:#337ab7;font-size: 20px; font-weight: 900;"></p>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-2">
 					<div class="tag_body" id="tag_body">
 						<div class="place">
 							<div id="place_head">
 								여행지 <input type="hidden" id="travel_Place" value="" />
 							</div>
 							<div>국내</div>
-							<div>일본</div>
-							<div>홍콩</div>
-							<div>싱가포르</div>
-							<div>대만</div>
-							<div>태국</div>
-							<div>미국</div>
 						</div>
 						<div class="danger travel_date">
 							<div id="travel_date_head">
 								여행일<input type="hidden" id="travel_date" value="" />
 							</div>
 							<div>1-3일</div>
-							<div>4-6일</div>
-							<div>7-10일</div>
-							<div>11-15일</div>
-							<div>15일이상</div>
 						</div>
 						<div class="travel_season">
 							<div id="travel_season_head">
 								여행시기<input type="hidden" id="travel_season" value="">
 							</div>
 							<div>봄</div>
-							<div>여름</div>
-							<div>가을</div>
-							<div>겨울</div>
 						</div>
 						<div class="success traval_thema">
 							<div id ="traval_thema_head">
 								여행테마<input type="hidden" id="traval_thema" value="" />
 							</div>
 							<div>가족여행</div>
-							<div>나홀로여행</div>
-							<div>커플여행</div>
-							<div>친구와함께</div>
-							<div>비지니스여행</div>
 						</div>
 					</div>
 
@@ -325,9 +338,6 @@ div div > .selected{
 			
 			<div class="left">
 			<div class="day_bar">
-			<div class="day_con 1day selected_con">
-			<p>1일차</p>
-			</div>
 			</div>
 				<div class="index_body">
 					<div class="1day index selected_index">

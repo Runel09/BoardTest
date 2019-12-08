@@ -1,6 +1,7 @@
 package controller.planner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.place.PlaceDto;
+import dto.planner.Index;
+import dto.planner.Planner;
 import service.place.face.PlaceService;
 import service.place.impl.PlaceServiceImpl;
 import service.planner.face.PlannerService;
@@ -38,8 +41,22 @@ public class PlannerViewController extends HttpServlet {
 			place=placeService.view(placeparam);
 			req.setAttribute("placeno",(place.getPlace_number()));
 		}
+		Planner planner = new Planner();
+		List<Index> index = new ArrayList<Index>();
+		int[] indexSize;
+		planner=plannerService.selectPlanner(req);
+//		System.out.println(planner.toString());
+		index=plannerService.selectIndex(req);
+//		System.out.println(index.toString());
+//		System.out.println("크기"+index.get(index.size()-1));
+		indexSize=plannerService.getIndexSize(req);
+//		System.out.println("사이즈"+indexSize);
+		req.setAttribute("planner", planner);
+		req.setAttribute("index", index);
+		req.setAttribute("day_size", indexSize);
 		
 		req.getRequestDispatcher("/WEB-INF/views/planner/view.jsp").forward(req, resp);
+		
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {};
 }

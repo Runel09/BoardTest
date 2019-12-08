@@ -86,22 +86,11 @@ function openWindow(){
 	var divBody=$(".index_body .selected_index")
 	var index=divInd.index();
 	var info ;
-// 	console.log(divInd.attr("data-place_no"))
-// 	console.log(divBody)
-// 	console.log(index)
 	var opwin=window.open("../map/test?startNo="+divBody.children("div").eq(index-1).attr("data-place_no")+"&endNo="+divInd.attr("data-place_no")
 			,"childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
-// 	$(opwin.document.getElementById("startIdx")).attr("data-location-lat")=
+
 		
-// 	$(opwin.doucument).ready(function(){
-// 		$(opwin.document.getElementById("startIdx_lat")).val(result[(divBody.children("div").eq(index-1).attr("data-place_no"))].lat);
-// 		$(opwin.document.getElementById("startIdx_lng")).val(result[(divBody.children("div").eq(index-1).attr("data-place_no"))].lng);
-// 		$(opwin.document.getElementById("endIdx_lat")).val(result[(divBody.children("div").eq(index).attr("data-place_no"))].lat);
-// 		$(opwin.document.getElementById("endIdx_lng")).val('Integer.parresult[(divBody.children("div").eq(index).attr("data-place_no"))-1].lng');
-	
-// 	})	
-		
-}
+};
 
 function searchAll(){
 	var divBody=$(".index_body")
@@ -116,11 +105,8 @@ function searchAll(){
 		}
 	}
 	var opwin=window.open(info,"childForm", "width=900px, height=600px, resizable = no, scrollbars = no"); 
-	
-	
-	
-	
-}
+};
+
 function addIndex(ind){
 	$.ajax({
 		type: "get"
@@ -135,7 +121,7 @@ function addIndex(ind){
 		}
 	})
 	 		   
-		}
+};
     
 
 

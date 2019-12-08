@@ -30,7 +30,12 @@ public class PlannerInputController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		HttpSession session = null;
+				
+		session= req.getSession();
+		
+		
 		PlaceDto placeparam=placeService.getPlace_number(req);
 		PlaceDto place= new PlaceDto();
 		if (placeparam==null) {
@@ -43,6 +48,9 @@ public class PlannerInputController extends HttpServlet {
 			place=placeService.view(placeparam);
 			req.setAttribute("placeno",(place.getPlace_number()));
 		}
+		if(session.getAttribute("user_userNum")!=null)
+		req.setAttribute("user", session.getAttribute("user_userNum"));
+		
 		
 		req.getRequestDispatcher("/WEB-INF/views/planner/plannerBody.jsp").forward(req, resp);
 	}

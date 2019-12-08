@@ -115,6 +115,12 @@ public interface PlannerService {
 
 	public void insertIndex(List<Index> indexList);
 
+	public Planner selectPlanner(HttpServletRequest req);
+
+	public List<Index> selectIndex(HttpServletRequest req);
+
+	public int[] getIndexSize(HttpServletRequest req);
+
 	
 
 }

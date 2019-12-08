@@ -178,7 +178,9 @@ div div > .selected{
 <script type="text/javascript">
 	var map;
 	$(document).ready(
+			
 			function() {
+				console.log(${user});
 				$(".center").on(
 						"click",
 						".marker",
@@ -393,6 +395,7 @@ div div > .selected{
 				<div class="col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 9px">
 					<p style="color:#337ab7;font-size: 20px; font-weight: 900;">플래너 이름&nbsp;</p> <input id="title_char" name="title_char" type="text"
 						readonly="readonly">
+						
 					<button type="button" id = "title_set">편집</button>
 
 				</div>
