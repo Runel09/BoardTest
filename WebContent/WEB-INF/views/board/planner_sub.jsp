@@ -36,12 +36,14 @@ tr td:not(:first-child), tr th:not(:first-child){
 	
   <div class="col-sm-6 col-md-3"  style=" height:278px; margin-top: 117px;">
     <div class="thumbnail" style="padding: 0px;">
-      <img src="/image/${plan.travel_season}_1.jpg" style="height:180px; width:318.63px;">
+      <img src="/image/${plan.trip_season}_1.jpg" style="height:180px; width:318.63px;
+    width: 318.63px;
+}">
       <div style="height: 95px; padding:9px; line-height: 0.8;">
         <div></div>
-        <div>${plan.travel_place }</div><br>
-        <div>${plan.travel_season }</div><br>
-        <div>${plan.travel_date }</div><br>
+        <div>${plan.trip_nation }</div><br>
+        <div>${plan.trip_season }</div><br>
+        <div>${plan.trip_date }</div><br>
         <div>${plan.review_score }</div><br>
       </div>
     </div>

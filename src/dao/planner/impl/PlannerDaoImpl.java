@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.planner.face.PlannerDao;
@@ -126,6 +127,165 @@ public class PlannerDaoImpl implements PlannerDao {
 
 		}
 		
+	}
+
+	@Override
+	public Planner getPlanner(Planner planner) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * ";
+		sql += " FROM plannerInfo ";		
+		sql += " where planner_num = ?";
+		
+		Planner view_planner= new Planner();
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, planner.getPLANNER_NUM());
+			
+			rs = ps.executeQuery();
+			
+			rs.next();
+				
+			view_planner.setPLANNER_NAME(rs.getString("planner_name"));
+			view_planner.setTrip_nation(rs.getString("trip_nation"));
+			view_planner.setTrip_date(rs.getString("trip_date"));
+			view_planner.setTrip_season(rs.getString("trip_season"));
+			view_planner.setTrip_theme(rs.getString("trip_theme"));
+	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
+		return view_planner;
+	}
+
+	@Override
+	public List<Index> getIndex(int parseInt) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * ";
+		sql += " FROM PLANNER_IDX  ";		
+		sql += " where planner_num = ?";
+		
+		List<Index> indexList= new ArrayList<Index>();
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, parseInt);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Index index = new Index();
+				index.setIndex_num(rs.getInt("index_num"));
+				index.setPlace_num(rs.getInt("place_number"));
+				index.setPlanner_date(rs.getInt("planner_date"));
+				index.setPlanner_num(rs.getInt("planner_num"));
+				indexList.add(index);
+			}
+				
+	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
+		return indexList;
+	}
+
+
+	@Override
+	public int[] getSize(int[] parseInt) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT COUNT(*) ";
+		sql += " FROM PLANNER_IDX  ";		
+		sql += " where planner_num = ? GROUP BY PLANNER_DATE";
+		;
+		int[] sizeList = new int[parseInt[1]];
+		int days=0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, parseInt[0]);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int size = rs.getInt(1);
+				System.out.println(days+"회 :"+size);
+				sizeList[days]	=size;
+				days++;
+			}
+				
+	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
+		return sizeList;
+	}
+
+	@Override
+	public int getDayCnt(int parseInt) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT count(COUNT(*)) ";
+		sql += " FROM PLANNER_IDX  ";		
+		sql += " where planner_num = ? GROUP BY PLANNER_DATE";
+		int days=0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, parseInt);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				days = rs.getInt(1);
+				
+			}
+				
+	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+		         try {
+			            if(ps!=null) ps.close();
+			            if(rs!=null) rs.close();
+
+			         } catch (SQLException e) {
+			            e.printStackTrace();
+			         }
+			      }
+		return days;
 	}
 
 }

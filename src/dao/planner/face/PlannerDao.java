@@ -25,6 +25,18 @@ public interface PlannerDao {
 	public void insert_index(List<Index> indexList);
 
 
+	public Planner getPlanner(Planner planner);
+
+
+	public List<Index> getIndex(int parseInt);
+
+
+	public int[] getSize(int[] day_cnt);
+
+
+	public int getDayCnt(int i);
+
+
 
 	
 	

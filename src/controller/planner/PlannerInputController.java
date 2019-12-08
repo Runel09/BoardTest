@@ -30,20 +30,12 @@ public class PlannerInputController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String placeparam=req.getParameter("placeno");
-//		PlaceDto place= new PlaceDto();
-//		int placeno= 0;
-//		if (placeparam==null) {
-//			place.setCoordinate_lat(35.305034);
-//			place.setCoordinate_lng(123.726168);
-//			req.setAttribute("centerPlace", place);
-//		}else {
-//			placeno=Integer.parseInt((placeparam));
-//			place=placeService.getInfoByplaceno(placeno);
-//			req.setAttribute("centerPlace", place);
-//		}
-//		List<PlaceDto> placeList=placeService.getAlleGeoInfo();
-//		
+		
+		HttpSession session = null;
+				
+		session= req.getSession();
+		
+		
 		PlaceDto placeparam=placeService.getPlace_number(req);
 		PlaceDto place= new PlaceDto();
 		if (placeparam==null) {
@@ -56,6 +48,9 @@ public class PlannerInputController extends HttpServlet {
 			place=placeService.view(placeparam);
 			req.setAttribute("placeno",(place.getPlace_number()));
 		}
+		if(session.getAttribute("user_userNum")!=null)
+		req.setAttribute("user", session.getAttribute("user_userNum"));
+		
 		
 		req.getRequestDispatcher("/WEB-INF/views/planner/plannerBody.jsp").forward(req, resp);
 	}

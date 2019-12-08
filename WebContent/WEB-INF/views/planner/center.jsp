@@ -4,9 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:choose>
 	<c:when test="${placeno eq 0}">
-		<div style="height: 40px; margin-top: 15px">
-		<label for="search_no">장소 검색&nbsp;&nbsp; </label><input id="search_no" name="search_no" type="text"/>
-		</div>
 		<c:forEach items="${markers}" var="marker">
 			<div style="border: 1px solid #ccc" class="marker"
 				data-idx="${marker.place_number }" data-location-lat="${marker.coordinate_lat }" data-location-lng="${marker.coordinate_lng }">
