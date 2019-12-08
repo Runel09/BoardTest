@@ -1077,7 +1077,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	      //수행할 SQL쿼리
 	      String sql = "";
-	      sql += "SELECT user_nick FROM member ";
+	      sql += "SELECT user_nick FROM userinfo ";
 	      sql += "WHERE user_id = ?";
 
 	      String user_nick = null;
