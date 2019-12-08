@@ -13,8 +13,8 @@ import dao.board.face.BoardDao;
 import dbutil.DBConn;
 import dto.board.Board;
 import dto.board.BoardFile;
-import dto.board.PlanBoard;
 import dto.board.Report;
+import dto.planner.Planner;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao{
@@ -29,7 +29,7 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT boardno, title, id, content, hit, writtendate";
+		sql += "SELECT boardno, title, user_id, content, hit, writtendate";
 		sql += " FROM board ORDER BY boardno DESC";
 		
 		List<Board> list = new ArrayList<>();
@@ -44,7 +44,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -89,7 +89,7 @@ public class BoardDaoImpl implements BoardDao{
 			sql += " AND content LIKE ?";
 		}
 		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
-			sql += " AND id LIKE ?";
+			sql += " AND user_id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -125,7 +125,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -171,7 +171,7 @@ public class BoardDaoImpl implements BoardDao{
 			sql += " AND content LIKE ?";
 		}
 		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
-			sql += " AND id LIKE ?";
+			sql += " AND user_id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -207,7 +207,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -254,7 +254,7 @@ public class BoardDaoImpl implements BoardDao{
 			sql += " AND content LIKE ?";
 		}
 		else if(paging.getSearch()!=null && !"".equals(paging.getSearch()) && paging.getSearchno()==3) {
-			sql += " AND id LIKE ?";
+			sql += " AND user_id LIKE ?";
 		}
 		
 		sql	+=	"        ORDER BY boardno DESC";
@@ -290,7 +290,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -301,7 +301,6 @@ public class BoardDaoImpl implements BoardDao{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 	         try {
@@ -323,25 +322,26 @@ public class BoardDaoImpl implements BoardDao{
 
 		String sql = "";
 		sql += "SELECT count(*) FROM (";
-		sql	+= "        SELECT planboard.*";
-		sql += "        , (select count(*) from planrecommend R where R.planboardno= planboard.planboardno) recommend";
-		sql	+= "        FROM planboard";
+		sql	+= "        SELECT plannerinfo.*";
+		sql += "        , (select count(*) from planrecommend R where R.planner_num= plannerinfo.planner_num) recommend";
+		sql	+= "        FROM Plannerinfo";
+		
 		sql += " WHERE 1=1";
 
-		if(paging.getTravel_place()!=null && !"".equals(paging.getTravel_place())) {
-			sql += " AND Travel_place = ?";
+		if(paging.getTrip_nation()!=null && !"".equals(paging.getTrip_nation())) {
+			sql += " AND trip_nation = ?";
 		}
 
-		if(paging.getTravel_date()!=null && !"".equals(paging.getTravel_date())) {
-			sql += " AND Travel_date = ?";
+		if(paging.getTrip_date()!=null && !"".equals(paging.getTrip_date())) {
+			sql += " AND trip_DATE = ?";
 		}
 
-		if(paging.getTravel_season()!=null && !"".equals(paging.getTravel_season())) {
-			sql += " AND Travel_season = ?";
+		if(paging.getTrip_season()!=null && !"".equals(paging.getTrip_season())) {
+			sql += " AND trip_season = ?";
 		}
 
-		if(paging.getTravel_thema()!=null && !"".equals(paging.getTravel_thema())) {
-			sql += " AND Travel_thema = ?";
+		if(paging.getTrip_theme()!=null && !"".equals(paging.getTrip_theme())) {
+			sql += " AND trip_theme = ?";
 		}
 
 		sql	+=	" ) B";
@@ -353,21 +353,21 @@ public class BoardDaoImpl implements BoardDao{
 
 			
 			int psnum = 1;
-			if( paging.getTravel_place() != null && !"".equals(paging.getTravel_place()) ) {
-				ps.setString(psnum++, paging.getTravel_place());
+			if( paging.getTrip_nation() != null && !"".equals(paging.getTrip_nation()) ) {
+				ps.setString(psnum++, paging.getTrip_nation());
 			}
 			
-			if( paging.getTravel_date()!=null && !"".equals(paging.getTravel_date()) ) {
-				ps.setString(psnum++, paging.getTravel_date());
+			if( paging.getTrip_date()!=null && !"".equals(paging.getTrip_date()) ) {
+				ps.setString(psnum++, paging.getTrip_date());
 			}
 			
-			if( paging.getTravel_season()!=null && !"".equals(paging.getTravel_season()) ) {
-				ps.setString(psnum++, paging.getTravel_season());
+			if( paging.getTrip_season()!=null && !"".equals(paging.getTrip_season()) ) {
+				ps.setString(psnum++, paging.getTrip_season());
 			}
 
 
-			if( paging.getTravel_thema()!=null && !"".equals(paging.getTravel_thema()) ) {
-				ps.setString(psnum++, paging.getTravel_thema());
+			if( paging.getTrip_theme()!=null && !"".equals(paging.getTrip_theme()) ) {
+				ps.setString(psnum++, paging.getTrip_theme());
 			}
 
 			
@@ -391,42 +391,47 @@ public class BoardDaoImpl implements BoardDao{
 		return cnt;
 	}
 
+	
 	@Override
-	public List<PlanBoard> selectPlannerAll(Paging paging) {
+	public List<Planner> selectPlannerNewAll(Paging paging) {
 
 		conn = DBConn.getConnection();
 
+//		합 : 
+//		수 : count(*)
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql	+= "    SELECT rownum rnum, B.* FROM (";
-		sql	+= "        SELECT planboard.*";
-		sql += "        , (select count(*) from planrecommend R where R.planboardno= planboard.planboardno) recommend";
-		sql	+= "        FROM planboard";
+		sql	+= "        SELECT Plannerinfo.*";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Planner.planner_num) score";
+		sql	+= "        FROM Plannerinfo";
 		sql += " WHERE 1=1";
 		
-		if(paging.getTravel_place()!=null && !"".equals(paging.getTravel_place())) {
-			sql += " AND Travel_place = ?";
+		if(paging.getTrip_nation()!=null && !"".equals(paging.getTrip_nation())) {
+			sql += " AND trip_nation = ?";
 		}
 		
-		if(paging.getTravel_date()!=null && !"".equals(paging.getTravel_date())) {
-			sql += " AND Travel_date = ?";
+		if(paging.getTrip_date()!=null && !"".equals(paging.getTrip_date())) {
+			sql += " AND trip_DATE = ?";
 		}
 		
-		if(paging.getTravel_season()!=null && !"".equals(paging.getTravel_season())) {
-			sql += " AND Travel_season = ?";
+		if(paging.getTrip_season()!=null && !"".equals(paging.getTrip_season())) {
+			sql += " AND trip_season = ?";
 		}
 				
-		if(paging.getTravel_thema()!=null && !"".equals(paging.getTravel_thema())) {
-			sql += " AND Travel_thema = ?";
+		if(paging.getTrip_theme()!=null && !"".equals(paging.getTrip_theme())) {
+			sql += " AND trip_theme = ?";
 		}
 		
-		sql	+=	"        ORDER BY recommend DESC";
+		sql	+=	"        ORDER BY planner_num DESC";			
 		sql	+=	"    ) B";
 		sql	+=	"    ORDER BY rnum";
 		sql	+=	" ) BOARD";
 		sql	+=	" WHERE rnum BETWEEN ? AND ?";
 
-		List<PlanBoard> list = new ArrayList<>();
+//		System.out.println(sql);
+		List<Planner> list = new ArrayList<>();
+//		System.out.println(sql);
 		
 		try {
 			
@@ -434,133 +439,40 @@ public class BoardDaoImpl implements BoardDao{
 			
 			
 			int psnum = 1;
-			if( paging.getTravel_place() != null && !"".equals(paging.getTravel_place()) ) {
-				ps.setString(psnum++, paging.getTravel_place());
+			if( paging.getTrip_nation() != null && !"".equals(paging.getTrip_nation()) ) {
+				ps.setString(psnum++, paging.getTrip_nation());
 			}
 			
-			if( paging.getTravel_date()!=null && !"".equals(paging.getTravel_date()) ) {
-				ps.setString(psnum++, paging.getTravel_date());
+			if( paging.getTrip_date()!=null && !"".equals(paging.getTrip_date()) ) {
+				ps.setString(psnum++, paging.getTrip_date());
 			}
 			
-			if( paging.getTravel_season()!=null && !"".equals(paging.getTravel_season()) ) {
-				ps.setString(psnum++, paging.getTravel_season());
+			if( paging.getTrip_season()!=null && !"".equals(paging.getTrip_season()) ) {
+				ps.setString(psnum++, paging.getTrip_season());
 			}
 
 
-			if( paging.getTravel_thema()!=null && !"".equals(paging.getTravel_thema()) ) {
-				ps.setString(psnum++, paging.getTravel_thema());
+			if( paging.getTrip_theme()!=null && !"".equals(paging.getTrip_theme()) ) {
+				ps.setString(psnum++, paging.getTrip_theme());
 			}
 
 			ps.setInt(psnum++, paging.getStartNo());
 			ps.setInt(psnum, paging.getEndNo());
-			
-//				if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place())) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date())) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season())) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema()))) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setInt(2, paging.getStartNo());
-//					ps.setInt(3, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_season());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_thema());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setString(3, paging.getTravel_season());
-//					ps.setInt(4, paging.getStartNo());
-//					ps.setInt(5, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setString(3, paging.getTravel_thema());
-//					ps.setInt(4, paging.getStartNo());
-//					ps.setInt(5, paging.getEndNo());
-//				} else if((paging.getTravel_place()!=null && !"".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_season());
-//					ps.setString(3, paging.getTravel_thema());
-//					ps.setInt(4, paging.getStartNo());
-//					ps.setInt(5, paging.getEndNo());
-//				} else {
-//					ps.setString(1, paging.getTravel_place());
-//					ps.setString(2, paging.getTravel_date());
-//					ps.setString(3, paging.getTravel_season());
-//					ps.setString(4, paging.getTravel_thema());
-//					ps.setInt(5, paging.getStartNo());
-//					ps.setInt(6, paging.getEndNo());
-//				}
-			
-			
-//
-//			} else if ((paging.getTravel_date()!=null || !"".equals(paging.getTravel_date())) {
-//				
-//				if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setInt(2, paging.getStartNo());
-//				ps.setInt(3, paging.getEndNo());
-//			} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setString(2, paging.getTravel_season());
-//				ps.setInt(3, paging.getStartNo());
-//				ps.setInt(4, paging.getEndNo());
-//			} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setString(2, paging.getTravel_thema());
-//				ps.setInt(3, paging.getStartNo());
-//				ps.setInt(4, paging.getEndNo());
-//			} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()!=null || !"".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//				ps.setString(1, paging.getTravel_date());
-//				ps.setString(2, paging.getTravel_season());
-//				ps.setString(2, paging.getTravel_thema());
-//				ps.setInt(3, paging.getStartNo());
-//				ps.setInt(4, paging.getEndNo());
-//			}
-//	
-//			} else if ((paging.getTravel_season()!=null || !"".equals(paging.getTravel_season())) {
-//				if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()==null || "".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_season());
-//					ps.setInt(2, paging.getStartNo());
-//					ps.setInt(3, paging.getEndNo());
-//				} else if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()!=null || !"".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_season());
-//					ps.setString(2, paging.getTravel_thema());
-//					ps.setInt(3, paging.getStartNo());
-//					ps.setInt(4, paging.getEndNo());
-//				}
-//			} else if ((paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//				if((paging.getTravel_place()==null && "".equals(paging.getTravel_place()) && (paging.getTravel_date()==null || "".equals(paging.getTravel_date()) && (paging.getTravel_season()==null || "".equals(paging.getTravel_season()) && (paging.getTravel_thema()!=null || !"".equals(paging.getTravel_thema())) {
-//					ps.setString(1, paging.getTravel_season());
-//					ps.setInt(2, paging.getStartNo());
-//					ps.setInt(3, paging.getEndNo());
-//			}
-//			}
-			
-//			System.out.println(rs.next());
-			
+		
 			
 			
 			rs = ps.executeQuery();
 
 			while(rs.next()) {
-				PlanBoard planBoard = new PlanBoard();
+				Planner planner = new Planner();
 				
-				planBoard.setTravel_place(rs.getString("travel_place"));
-				planBoard.setTravel_date(rs.getString("travel_date"));
-				planBoard.setTravel_season(rs.getString("travel_season"));
-				planBoard.setTravel_thema(rs.getString("travel_thema"));
+				planner.setTrip_nation(rs.getString("trip_nation"));
+				planner.setTrip_date(rs.getString("trip_date"));
+				planner.setTrip_season(rs.getString("trip_season"));
+				planner.setTrip_theme(rs.getString("trip_theme"));
+				planner.setReview_score(rs.getDouble("score"));
 				
-				
-				list.add(planBoard);
+				list.add(planner);
 			}
 			
 		} catch (SQLException e) {
@@ -580,13 +492,117 @@ public class BoardDaoImpl implements BoardDao{
 		return list;
 	}
 	
+	
+	
+	@Override
+	public List<Planner> selectPlannerHotAll(Paging paging) {
+
+		conn = DBConn.getConnection();
+
+//		합 : 
+//		수 : count(*)
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql	+= "    SELECT rownum rnum, B.* FROM (";
+		sql	+= "        SELECT Plannerinfo.*";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Planner.planner_num) score";
+		sql	+= "        FROM Plannerinfo";
+		sql += " WHERE 1=1";
+		
+		if(paging.getTrip_nation()!=null && !"".equals(paging.getTrip_nation())) {
+			sql += " AND trip_nation = ?";
+		}
+		
+		if(paging.getTrip_date()!=null && !"".equals(paging.getTrip_date())) {
+			sql += " AND trip_DATE = ?";
+		}
+		
+		if(paging.getTrip_season()!=null && !"".equals(paging.getTrip_season())) {
+			sql += " AND trip_season = ?";
+		}
+				
+		if(paging.getTrip_theme()!=null && !"".equals(paging.getTrip_theme())) {
+			sql += " AND trip_theme = ?";
+		}
+		
+		sql	+=	"        ORDER BY score DESC nulls last";			
+		sql	+=	"    ) B";
+		sql	+=	"    ORDER BY rnum";
+		sql	+=	" ) BOARD";
+		sql	+=	" WHERE rnum BETWEEN ? AND ?";
+
+//		System.out.println(sql);
+		List<Planner> list = new ArrayList<>();
+//		System.out.println(sql);
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			
+			
+			int psnum = 1;
+			if( paging.getTrip_nation() != null && !"".equals(paging.getTrip_nation()) ) {
+				ps.setString(psnum++, paging.getTrip_nation());
+			}
+			
+			if( paging.getTrip_date()!=null && !"".equals(paging.getTrip_date()) ) {
+				ps.setString(psnum++, paging.getTrip_date());
+			}
+			
+			if( paging.getTrip_season()!=null && !"".equals(paging.getTrip_season()) ) {
+				ps.setString(psnum++, paging.getTrip_season());
+			}
+
+
+			if( paging.getTrip_theme()!=null && !"".equals(paging.getTrip_theme()) ) {
+				ps.setString(psnum++, paging.getTrip_theme());
+			}
+
+			ps.setInt(psnum++, paging.getStartNo());
+			ps.setInt(psnum, paging.getEndNo());
+		
+			
+			
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Planner planner = new Planner();
+				
+				planner.setTrip_nation(rs.getString("trip_nation"));
+				planner.setTrip_date(rs.getString("trip_date"));
+				planner.setTrip_season(rs.getString("trip_season"));
+				planner.setTrip_theme(rs.getString("trip_theme"));
+				planner.setReview_score(rs.getDouble("score"));
+				
+				list.add(planner);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+	         try {
+		            if(ps!=null) ps.close();
+		            if(rs!=null) rs.close();
+
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		
+		
+		return list;
+	}
+	
+	
+	
 	@Override
 	public Board selectBoardByBoardno(Board board) {
 		
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT boardno, title, id, content, hit, writtendate, checkboard ";
+		sql += "SELECT boardno, title, user_id, content, hit, writtendate, checkboard ";
 		sql += ",(SELECT count(*) FROM recommend WHERE boardno=?) recommend ";		
 		sql += "FROM board WHERE boardno=?";
 		
@@ -604,7 +620,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 			boarddetail.setBoardno(rs.getInt("boardno"));
 			boarddetail.setTitle(rs.getString("title"));
-			boarddetail.setId(rs.getString("id"));
+			boarddetail.setUser_id(rs.getString("user_id"));
 			boarddetail.setContent(rs.getString("content"));
 			boarddetail.setHit(rs.getInt("hit"));
 			boarddetail.setWrittendate(rs.getDate("writtendate"));
@@ -677,7 +693,7 @@ public class BoardDaoImpl implements BoardDao{
 			} else if(Integer.parseInt(req.getParameter("searchno")) == 2) {
 				sql += " AND content LIKE ?";				
 			} else if(Integer.parseInt(req.getParameter("searchno")) == 3) {
-				sql += " AND id LIKE ?";				
+				sql += " AND user_id LIKE ?";				
 			}
 		}
 			
@@ -725,7 +741,7 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO board(boardno,title,id,content,hit,writtendate,checkboard)";
+		sql += "INSERT INTO board(boardno,title,user_id,content,hit,writtendate,checkboard)";
 		sql += " VALUES(?,?,?,?,0,sysdate,?)";
 		
 		try {
@@ -733,7 +749,7 @@ public class BoardDaoImpl implements BoardDao{
 			
 			ps.setInt(1, board.getBoardno());
 			ps.setString(2, board.getTitle());
-			ps.setString(3, board.getId());
+			ps.setString(3, board.getUser_id());
 			ps.setString(4, board.getContent());
 			ps.setString(5, board.getCheckboard());
 			
@@ -1061,23 +1077,23 @@ public class BoardDaoImpl implements BoardDao{
 
 	      //수행할 SQL쿼리
 	      String sql = "";
-	      sql += "SELECT usernick FROM member ";
-	      sql += "WHERE userid = ?";
+	      sql += "SELECT user_nick FROM member ";
+	      sql += "WHERE user_id = ?";
 
-	      String nick = null;
+	      String user_nick = null;
 	      
 	      try {
 	         //SQL 쿼리수행객체
 	         ps = conn.prepareStatement(sql);
 
 	         //?채우기
-	         ps.setString(1, board.getId());
+	         ps.setString(1, board.getUser_id());
 
 	         //SQL쿼리 수행 및 ResultSet반환
 	         rs = ps.executeQuery();
 
 	         while( rs.next() ) {
-	            nick = rs.getString("usernick");
+	            user_nick = rs.getString("user_nick");
 	            
 	         }
 
@@ -1094,7 +1110,7 @@ public class BoardDaoImpl implements BoardDao{
 	         }
 	      }
 
-	      return nick;
+	      return user_nick;
 	   }
 
 	@Override
@@ -1102,7 +1118,7 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "UPDATE board SET repo = repo+1";
+		sql += "UPDATE board SET boardrepo = boardrepo+1";
 		sql += " WHERE boardno=?";
 		
 
@@ -1132,7 +1148,7 @@ public class BoardDaoImpl implements BoardDao{
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "INSERT INTO report(boardno, content, db_id, reason, reportno)";
+		sql += "INSERT INTO report(boardno, content, user_id, reason, reportno)";
 		sql += " VALUES(?,?, ?, ?, report_seq.nextval)";
 		
 		try {
@@ -1140,7 +1156,7 @@ public class BoardDaoImpl implements BoardDao{
 			
 			ps.setInt(1, report.getBoardno());
 			ps.setString(2, report.getContent());
-			ps.setString(3, report.getDb_id());
+			ps.setString(3, report.getUser_id());
 			ps.setString(4, report.getReason());
 			
 			ps.executeQuery();
@@ -1188,7 +1204,7 @@ public class BoardDaoImpl implements BoardDao{
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));

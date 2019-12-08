@@ -54,7 +54,7 @@ public class FindUserPwController extends HttpServlet {
 
 				//이메일정보를 넣기위한 작업
 				member2 = memberservice.getMemberByUserid(memberResult2);
-//				System.out.println("정보를 가져와 보자 : " + member2);
+//				System.out.println("정보 : " + member2);
 				//메일 보내기
 				memberservice.sendEmailPw(member2);
 			}

@@ -37,12 +37,12 @@ public class BoardViewController extends HttpServlet {
 		req.setAttribute("board", board);
 		req.setAttribute("file", boardFile);
 		req.setAttribute("comment", commentList);
-		req.setAttribute("nick", boardService.getNick(board));
+		req.setAttribute("user_nick", boardService.getNick(board));
 		
 		//추천 상태 전달
 		Recommend recommend = new Recommend();
 		recommend.setBoardno(board.getBoardno()); //게시글 번호
-		recommend.setUserid((String)req.getSession().getAttribute("userid")); //로그인한 아이디
+		recommend.setUser_id((String)req.getSession().getAttribute("user_id")); //로그인한 아이디
 				
 		boolean isRecommend = boardService.isRecommend(recommend);
 		req.setAttribute("isRecommend", isRecommend);

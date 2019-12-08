@@ -9,13 +9,38 @@
 src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+   
+
+	$("#btnWrite").click(function() {
+      
+		$(location).attr("href", "/planner/input");
+   })
+   
+	//글쓰기버튼 동작
+	$("#emptylogin").click(function() {
+		var result = confirm("로그인하실?");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	});
+});
+   
+</script>
+
+
 <script type="text/javascript">
 
 $(document).ready(function() {
 	
 
 //테마 선택
-($("#tag_body").children().children()).on('click',function() {
+($("#tag_body").children().children()).on('click',function() 
+			{
                if(this==this.parentNode.firstElementChild){
                   return false;
                }
@@ -30,6 +55,20 @@ $(document).ready(function() {
                }
                console.log($(this.parentNode.firstElementChild).children("input").val())
             })
+           
+            
+    $("#hot").click(function() {
+		
+		$(this).addClass("hotnew");
+		$("#new").removeClass("hotnew");
+	})
+	
+	$("#new").click(function() {
+		
+		$(this).addClass("hotnew")
+		$("#hot").removeClass("hotnew");
+	})
+            
 });
 </script>
 
@@ -44,13 +83,13 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "get"
-			, url: "/planner/ajax"
+			, url: "/planner/new"
 			, data: 
 			{	
-					"travel_place" : $("#travel_place").val(),
-					"travel_date" : $("#travel_date").val(),
-					"travel_season" : $("#travel_season").val(),
-					"travel_thema" : $("#travel_thema").val(),
+					"trip_nation" : $("#trip_nation").val(),
+					"trip_date" : $("#trip_date").val(),
+					"trip_season" : $("#trip_season").val(),
+					"trip_theme" : $("#trip_theme").val(),
 			}
 			, dataType: "html"
 			, success: function( html ) 
@@ -68,6 +107,28 @@ $(document).ready(function() {
 		});
 	});
 	
+
+	
+	$("#order span").click(function() {
+		$.ajax({
+			type : "get",
+			url : "/planner/ajax",
+			data : {
+				type: $(this).attr("id")
+			},
+			dataType : "html",
+			success : function(html) {
+// 				console.log($("#hot").text());
+				html
+			},
+			error : function() {
+				console.log("실패");
+
+			}
+		});
+	});
+	
+
 });
 </script>
 
@@ -92,7 +153,7 @@ div.container
 {
     font-family: Raleway;
     margin: 0 auto;
-	padding: 1em 7em;
+	padding: 4em 7em;
 	text-align: center;
 }
 
@@ -110,7 +171,7 @@ div.container a
 
 .yellow
 {
-    background: #f7bcbc;
+    background: #2b90d9;
     
 }
 
@@ -150,6 +211,7 @@ div.pullRight a:hover:before
    width: 138px;
    text-align: center;
    font-size: 23px;
+   cursor: pointer;
 }
 
 .tag_body div {
@@ -161,26 +223,29 @@ div.pullRight a:hover:before
    color: white;
    background: black;
 }
+
+
+
 </style>
 
 <div class="container yellow pullRight"  style="margin-bottom: 45px; margin-top: 50px;">
 
 <div class="community">
-<span>커뮤니티</span>
+<span style="font-family: 'NIXGONL-Vb';">커뮤니티</span>
 </div>
 
-  <a href="/board/planner" class="menutab" style="font-size:38px; color: white;">플래너</a>
-  <a href="/board/free" class="menutab" style="font-size:38px; ">자유</a>
-  <a href="/board/tip" class="menutab" style="font-size:38px;">여행팁</a>
-  <a href="/board/question" class="menutab" style="font-size:38px;">질문</a>
+  <a href="/board/planner" class="menutab" style="font-size:38px; color: white; font-family: 'NIXGONL-Vb';">플래너</a>
+  <a href="/board/free" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb'; ">자유</a>
+  <a href="/board/tip" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">여행팁</a>
+  <a href="/board/question" class="menutab" style="font-size:38px; font-family: 'NIXGONL-Vb';">질문</a>
 </div>
 <br>
 <h2 style="text-align:center; margin-bottom: 70px; ">여행자들의 일정보기</h2>
 
 <div class="tag_body" id="tag_body">
 	<div class="place">
-		<div id="place_head">
-			여행지 | <input type="hidden" id="travel_place" value="" />
+		<div id="place_head" style="font-weight: bold;">
+			여행지 <input type="hidden" id="trip_nation" value="" />
 		</div>
 		<div>국내</div>
 		<div>일본</div>
@@ -190,9 +255,9 @@ div.pullRight a:hover:before
 		<div>태국</div>
 		<div>미국</div>
 	</div>
-	<div class="travel_date">
-		<div id="travel_date_head">
-			여행일 |<input type="hidden" id="travel_date" value="" />
+	<div class="trip_date">
+		<div id="trip_date_head" style="font-weight: bold;">
+			여행일<input type="hidden" id="trip_date" value="" />
 		</div>
 		<div>1-3일</div>
 		<div>4-6일</div>
@@ -200,18 +265,18 @@ div.pullRight a:hover:before
 		<div>11-15일</div>
 		<div>15일이상</div>
 	</div>
-	<div class="travel_season">
-		<div id="travel_season_head">
-			여행시기|<input type="hidden" id="travel_season" value="" />
+	<div class="trip_season">
+		<div id="trip_season_head" style="font-weight: bold;">
+			여행시기<input type="hidden" id="trip_season" value="" />
 		</div>
 		<div>봄</div>
 		<div>여름</div>
 		<div>가을</div>
 		<div>겨울</div>
 	</div>
-	<div class="traval_thema">
-		<div id="traval_thema_head">
-			여행테마|<input type="hidden" id="travel_thema" value="" />
+	<div class="trip_theme">
+		<div id="trip_theme_head" style="font-weight: bold;">
+			여행테마<input type="hidden" id="trip_theme" value="" />
 		</div>
 		<div>가족여행</div>
 		<div>나홀로여행</div>
@@ -222,15 +287,27 @@ div.pullRight a:hover:before
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br>
-<div class="container">
-<h1 style="float:left;">플래너 게시판</h1><br><br><br><br><br>
-<div style="text-align: left;">인기 | 신규</div>
+<div class="container" style="width:1450px; margin-bottom: -125px;">
+<h1 style="float:left; font-family: 'NIXGONL-Vb';">플래너 게시판</h1><br><br><br><br><br>
 
+<div id="order">
+<span id="new" style="cursor:pointer; float:left; font-family: 'NIXGONL-Vb';  "><a href="/board/plannernew" style="color:red;">최신순</a></span>
+<span style="float:left; font-family: 'NIXGONL-Vb';"> | </span> 
+<span id="hot" style="cursor:pointer; float:left; font-family: 'NIXGONL-Vb'; margin-left:8px;"><a href="/board/plannerhot">평점순</a></span>
+</div>
+</div> <!-- .container -->
+<br>
 <div id="plannercontent"></div>
 
 <%-- <jsp:include page="/WEB-INF/views/board/planner_sub.jsp" /> --%>
-<%-- <jsp:include page="/WEB-INF/views/layout/planner_paging.jsp" /> --%>
+<jsp:include page="/WEB-INF/views/layout/plannernew_paging.jsp" />
 
-</div> <!-- .container -->
+<c:if test="${!empty userid }">
+<button id="btnWrite" style="float: right;">글쓰기</button>
+</c:if>
+<c:if test="${empty userid }">
+<button id="emptylogin" style="float: right;">글쓰기</button>
+</c:if> 
 
+<br><br><br><br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

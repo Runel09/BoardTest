@@ -150,8 +150,10 @@ $(document).ready(function(){
 		<input type="radio" name="cate" value="숙소"/>숙소
 		<input type="radio" name="cate" value="관광명소"/>관광명소</td>
 	</tr>
+	<tr>
+	<td><button id="btnCateSearch" class="btn">검색</button><td>
+	</tr>
 </table>
-<button id="btnCateSearch" class="btn">검색</button>
 </form>
 <jsp:include page="/WEB-INF/views/layout/paging.jsp"/>
 </div>

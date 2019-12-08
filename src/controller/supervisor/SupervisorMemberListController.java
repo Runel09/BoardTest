@@ -27,7 +27,7 @@ public class SupervisorMemberListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// 관리자 로그인 됐을 경우
-		if (req.getSession().getAttribute("login") != null) {
+		if (req.getSession().getAttribute("super_login") != null) {
 
 
 			//요청파라미터에서 curPage를 구하고 Paging 객체 반환

@@ -22,7 +22,7 @@ public class SupervisorLogoutController extends HttpServlet {
 	      HttpSession session = null;
 	      session = req.getSession();
 	      
-	      session.removeAttribute("login");
+	      session.removeAttribute("super_login");
 	      session.removeAttribute("super_id");
 //	      session.removeAttribute("super_pw");
 	      

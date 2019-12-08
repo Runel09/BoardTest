@@ -6,34 +6,6 @@
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5de76b36d96992700fcaa8ab/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-
-
-//마우스 스크롤링
-
-jQuery(document).ready(function($){
-	   
-	   $('a.scroll-link').click(function(e){
-	      e.preventDefault();
-	      $id = $(this).attr('href');
-	      $('body,html').animate({
-	         scrollTop: $($id).offset().top -20
-	      }, 750);
-	   });
-	   
-	});
-</script>
-<!--End of Tawk.to Script-->
 <style type="text/css">
 /*
 마우스 스크롤링
@@ -76,11 +48,11 @@ h2 {
 
 .hero {
    position: relative;
-   min-height: 8vh;
+   min-height: 5vh;
    display: flex;
    align-items: center;
    justify-content: center;
-   padding: 3rem 2rem;
+   padding: 2rem 2rem;
    color: white;
    background: {
       image: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%), url('https://source.unsplash.com/random/1920x1080/?sky');
@@ -134,6 +106,7 @@ h2 {
    align-items: center;
    justify-content: center;
    text-align: center; 
+  
 }
 
 
@@ -169,12 +142,138 @@ ul#slider li img{
 	height: 650px;
 }
 </style>
+<style type ="text/css">
+table, th{
+	text-align:center;
+
+
+}
+tr td:nth-child(2){
+	text-align:left;
+}
+
+tr td:not(:first-child), tr th:not(:first-child){
+
+	border-left:3px solid white;
+}
+
+
+
+
+</style>
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+	$("#btnWrite").click(function(){
+		var loginstatus ='<%= session.getAttribute("login")%>';
+		if(loginstatus == "true")
+			$(location).attr("href","/place/insert");
+		else if(loginstatus != "true")
+			$(location).attr("href","/main");
+	});
+	
+
+	
+	$("btnCateSearch").click(function(){
+		
+		$form = $("<form>").attr({
+			action: "/place/list",
+			method: "get"
+		}).append(
+			$("<input>")
+				.attr("name","cate")
+				.css("display","none")
+				.attr("value",$("<form>").find("[name='cate']:checked").val() )
+				);
+		
+		
+		
+		$(document.body).append($form);
+		
+		$form.submit();
+		
+		
+		
+	})
+	
+		
+		
+	
+});
+
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5de76b36d96992700fcaa8ab/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+
+
+//마우스 스크롤링
+
+jQuery(document).ready(function($){
+	   
+	   $('a.scroll-link').click(function(e){
+	      e.preventDefault();
+	      $id = $(this).attr('href');
+	      $('body,html').animate({
+	         scrollTop: $($id).offset().top -20
+	      }, 750);
+	   });
+	   
+	});
+</script>
+<!--End of Tawk.to Script-->
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
 <script type="text/javascript">
+$(function(){
+	var flag= false;
+    $("html, body").on('mousewheel DOMMouseScroll', function(e) {
+        var E = e.originalEvent;
+        delta = 0;
+        eventValues = 0;
+        console.log(E);
+// e.detail => 파이어폭스를위한 값
+        if (E.detail) {
+        	eventValues = E.detail * -40;
+//             $('body').text(delta);
+        }else{
+        	eventValues = E.wheelDelta;
+//             $('body').text(delta);
+        };
+     // minus nav height(50px) 
+		var scmove = $(this).height() - $(".l-header-pc").height();
+		
+     // 음수이면 아래로 내린 것 
+     if(eventValues <0 && !flag){
+    	 // roll down mouse wheel 
+    	 flag = true; 
+    	 $('html, body').animate( { scrollTop : '+='+scmove }, 750 ,function(){ flag = false; }); }; 
+    	
+    	 // 양수이면 위로 올린 것 
+    	 if(eventValues >0 && !flag){ 
+    	// roll up mouse wheel 
+    	flag = true; 
+    	$('html, body').animate( { scrollTop : '-='+scmove }, 750 ,function(){ flag = false; }); };
+
+       
+    });
+});
+
+
+
 $(document).ready(function(){	
 	
 	//모든 이미지 리스트
@@ -223,8 +322,8 @@ $(document).ready(function(){
 
 <div id="sliderbox">
 	<ul id="slider">
-		<li><img src="/image/alex-knight-wfwUpfVqrKU-unsplash.jpg"/></li>
 		<li><img src="/image/lisheng-chang-m9BBVrPl87M-unsplash.jpg"/></li>
+		<li><img src="/image/alex-knight-wfwUpfVqrKU-unsplash.jpg"/></li>
 		<li><img src="/image/sebastian-pena-lambarri-7i5HMCGupVw-unsplash.jpg"/></li>
 		<li><img src="/image/sebastien-jermer-n7DY58YFg9E-unsplash.jpg"/></li>
 		<li><img src="/image/sutirta-budiman-kjOBqwMUnWw-unsplash.jpg"/></li>
@@ -244,17 +343,28 @@ $(document).ready(function(){
          <circle class="scroll" cx="36.5" cy="31.5" r="4.5" fill="#FFF"/>
       </g>
    </svg>
-   <span style="margin: -34px; font-size: 32px; font-family: fantasy;">↓</span>
    </a>
    
 </div>
 
-<div id="content" class="content">
    
-   
-   <jsp:include page="/WEB-INF/views/search/searchAir.jsp"/>
-   <jsp:include page="/WEB-INF/views/search/searchHotel.jsp"/>
+<div class ="container" style="width:84%">
+
+<c:forEach var= "place"  items = "${list}" varStatus="status" begin="1" end="8">
+  <div class="col-sm-6 col-md-3"  style=" height:278px; margin-top: 117px;">
+    <div class="thumbnail">
+      <img src="/image/${place.place_number}_1.jpg" style="height:180px; width:318.63px;">
+      <div style="height: 95px; padding:9px; line-height: 0.8;">
+        <h3><a href ="/place/view?place_number=${place.place_number }">${place.place_name }</a></h3><br>
+      </div>
+    </div>
+  </div>
+	
+</c:forEach>
+
 </div>
+
+
    <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 
 

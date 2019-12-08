@@ -76,7 +76,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
 
 <form action="/board/report" method="post">
 		<input type="hidden" name="boardno" value="${boardno }"/>
-		<input type="hidden" name="userid" value="${userid }"/>
+		<input type="hidden" name="user_id" value="${userid }"/>
 		<table class="table table-bordered">
 
 			<tr>

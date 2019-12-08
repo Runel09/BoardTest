@@ -2,41 +2,44 @@ package util;
 
 public class Paging {
 	
-	private String travel_place; // 여행 국가
-	private String travel_date; // 여행 기간
-	private String travel_season; // 여행 시즌
-	private String travel_thema; // 여행 테마
-	public String getTravel_place() {
-		return travel_place;
+	private String trip_nation; // 여행 국가
+	private String trip_date; // 여행 기간
+	private String trip_season; // 여행 시즌
+	private String trip_theme; // 여행 테마
+	
+
+	public String getTrip_nation() {
+		return trip_nation;
 	}
 
-	public void setTravel_place(String travel_place) {
-		this.travel_place = travel_place;
+	public void setTrip_nation(String trip_nation) {
+		this.trip_nation = trip_nation;
 	}
 
-	public String getTravel_date() {
-		return travel_date;
+	public String getTrip_date() {
+		return trip_date;
 	}
 
-	public void setTravel_date(String travel_date) {
-		this.travel_date = travel_date;
+	public void setTrip_date(String trip_date) {
+		this.trip_date = trip_date;
 	}
 
-	public String getTravel_season() {
-		return travel_season;
+	public String getTrip_season() {
+		return trip_season;
 	}
 
-	public void setTravel_season(String travel_season) {
-		this.travel_season = travel_season;
+	public void setTrip_season(String trip_season) {
+		this.trip_season = trip_season;
 	}
 
-	public String getTravel_thema() {
-		return travel_thema;
+	public String getTrip_theme() {
+		return trip_theme;
 	}
 
-	public void setTravel_thema(String travel_thema) {
-		this.travel_thema = travel_thema;
+	public void setTrip_theme(String trip_theme) {
+		this.trip_theme = trip_theme;
 	}
+
 	private String search;
 	private int searchno;
 	private int curPage; // 현재 페이지 번호 (브라우저에서 선택한 페이지 번호)
@@ -87,8 +90,8 @@ public class Paging {
 	
 	@Override
 	public String toString() {
-		return "Paging [travel_place=" + travel_place + ", travel_date=" + travel_date + ", travel_season="
-				+ travel_season + ", travel_thema=" + travel_thema + ", search=" + search + ", searchno=" + searchno
+		return "Paging [ trip_nation=" + trip_nation + ", trip_date=" + trip_date + ", trip_season="
+				+ trip_season + ", trip_theme=" + trip_theme + ", search=" + search + ", searchno=" + searchno
 				+ ", curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";

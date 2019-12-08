@@ -130,9 +130,9 @@ $(document).ready(function() {
 
 		<tr>
 			<td class="info">아이디</td>
-			<td>${board.id }</td>
+			<td>${board.user_id }</td>
 			<td class="info">닉네임</td>
-			<td>[ 회원가입완료되면 추가 ]</td>
+			<td>${board.user_nick }</td>
 		</tr>
 
 		<tr>
@@ -177,7 +177,7 @@ $(document).ready(function() {
 	</div>
 	<div class="text-right">
 		<button id="btnList" class="btn btn-primary">목록</button>
-		<c:if test="${userid eq board.id or super_id eq 'supervisor'}">
+		<c:if test="${userid eq board.user_id or super_id eq 'supervisor'}">
 			<button id="btnUpdate" class="btn btn-info">수정</button>
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
@@ -204,12 +204,12 @@ $(document).ready(function() {
 		</tr>
 		<c:forEach items="${comment }" var="comment">
 			<tr>
-				<td style="width: 21%;">작성자 : ${comment.userid }<br> 작성시간 : ${comment.writtendate }</td>
+				<td style="width: 21%;">작성자 : ${comment.user_id }<br> 작성시간 : ${comment.writtendate }</td>
 	
 				<td colspan="2">
 					<div style="height: 54px;" class="col-md-11 col-sm-11">${comment.content }</div>
 					<div class="col-md-1 col-sm-1 text-right">
-						<c:if test="${userid eq comment.userid }">
+						<c:if test="${user_id eq comment.user_id }">
 							<a class="btn btn-info"
 								href="/comment/delete?commentno=${comment.commentno }&boardno=${board.boardno}">삭제</a>
 						</c:if>

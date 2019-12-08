@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script type="text/javascript" 
+src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+
+window.scrollTo(0,document.body.scrollHeight);
+
+</script>
+
+
 <div class="text-center">
-	<ul class="pagination pagination-sm">
+	<ul class="pagination pagination-sm" >
 
 		<!-- 처음으로 가기 -->
 		<c:if test="${paging.curPage ne 1 }">
