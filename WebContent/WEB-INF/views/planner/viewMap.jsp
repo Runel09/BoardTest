@@ -6,7 +6,7 @@
 
 var index = new Array();
 var ploy;
-var result = new Array();
+
 var path;
 var zoomVal=0;
 
@@ -31,17 +31,7 @@ ploy = new google.maps.Polyline({
 
   ploy.setMap(map);
 
-<c:forEach items="${markers}" var="marker">
-	
-	var json  =new Object();
-	json.place_number=${marker.place_number}
-	json.place_name="${marker.place_name}"
-	json.lat=${marker.coordinate_lat};
-	json.lng=${marker.coordinate_lng};
-	json.cate="${marker.place_cate}";
-	json.detail="${marker.detail}";
-	result.push(json);
-</c:forEach>
+
 //	console.log("jsoninfo="+JSON.stringify(result));
 			
 var infowindow = new google.maps.InfoWindow();
