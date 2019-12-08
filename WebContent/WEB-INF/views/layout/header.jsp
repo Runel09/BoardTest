@@ -33,7 +33,7 @@ hr {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	border: 10;
-	border-top: 1px solid #0064FF;
+	border-top: 1px solid black;
 }
 
 @font-face { font-family: 'NIXGONL-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONL-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -63,6 +63,7 @@ h1.name {
 	min-width: 800px;
 	width: 72%;
 }
+
 
 #header {
 	text-align: center;

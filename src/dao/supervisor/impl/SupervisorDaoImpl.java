@@ -446,8 +446,8 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				Board board= new Board();
 				
 				board.setBoardno(rs.getInt("boardno"));
-				board.setTitle(rs.getString("TITLE"));
-				board.setUser_id(rs.getString("ID"));
+				board.setTitle(rs.getString("title"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));

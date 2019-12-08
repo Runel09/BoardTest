@@ -37,7 +37,6 @@ $(document).ready(function () {
 
 <div class="container">
 <h1>user 리스트</h1>
-<hr>
 
 <form action="/supervisor/memberdelete" method="get">
 <table class="table table-hover table-condenssed table-striped ">

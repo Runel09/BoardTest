@@ -42,24 +42,6 @@ $(document).ready(function() {
       history.back(-1);
    })
    
-   $("#free").click(function() {
-	   
-	   $("#cate").html("자유");
-
-	});
-		
-	   $("#tip").click(function() {
-			   
-	   $("#cate").html("여행팁");
-
-	});
-		   
-		$("#question").click(function() {
-			   
-		$("#cate").html("질문");
-
-	});
-   
 });
 
 </script>
@@ -86,7 +68,6 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <div class="container">
 
 <h1>수정</h1>
-<hr>
 
 <form action="/supervisor/noticeupdate" method="post" encType="multipart/form-data">
 <input type="hidden" value="${board.boardno }" name="boardno">
@@ -133,19 +114,13 @@ tr td:not(:first-child), tr th:not(:first-child) {
 			$("[name=checkboard][value=${board.checkboard}]").prop("checked", true);
 		})
 		</script>
-		<input id="free" type="radio" name="checkboard" value="자유">자유
-		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
-		<input id="question" type="radio" name="checkboard" value="질문">질문
-		<input id="question" type="radio" name="checkboard" value="공지">공지
+		<input id="question" type="radio" name="checkboard" checked="checked" value="공지">공지
 		
    		</td>
    		
    		<td><div id="cate">${board.checkboard}</div></td>
    </tr>
    
-   <tr>
-      <td class="info">아이디</td><td>${userid }</td>
-   <tr>
    
    <tr>
       <th class="info" >제목:</th>

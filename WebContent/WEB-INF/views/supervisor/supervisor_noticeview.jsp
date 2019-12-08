@@ -18,17 +18,15 @@ $(document).ready(function () {
       <table class="table" style="margin: 0 auto;">
          <thead>
             <tr>
-               <td>boardno</td>
-               <td>title</td>
-               <td>id</td>
-               <td>hit</td>
-               <td>writtendate</td>
+               <td>구분</td>
+               <td>제목</td>
+               <td>조회수</td>
+               <td>작성일</td>
             </tr>
          </thead>
          <tr>
-            <td>${board.boardno }</td>
+            <td>${board.checkboard }</td>
             <td>${board.title }</td>
-            <td>${board.user_id }</td>
             <td>${board.hit }</td>
             <td>${board.writtendate }</td>
          </tr>
@@ -51,7 +49,7 @@ $(document).ready(function () {
    <div class="text-center">
    
    <c:choose >
-   <c:when test="${board.user_id eq userid }">
+   <c:when test="${super_id eq 'supervisor' }">
    <button  id="btnUpdate" class="btn btn-default" onclick="location.href='/supervisor/noticeupdate?boardno=${board.boardno}'">수정</button>
   
 <%--    <button  id="btnDelete" class="btn btn-default" onclick="location.href='/supervisor/noticedelete?boardno=${board.boardno}'">삭제</button> --%>

@@ -93,11 +93,12 @@ div.container
     margin: 0 auto;
 	padding: 10em 3em;
 	text-align: center;
+	margin-top: -100px;
 }
 
 div.container a
 {
-    color: #FFF;
+    color: black;
     text-decoration: none;
     font: 20px Raleway;
     margin: 0px 10px;
@@ -137,11 +138,8 @@ margin: 0 auto;
 <span style="vertical-align: middle; -webkit-text-stroke-width: unset; font-size: 100px; line-height: 129px;  "><a href="/supervisor/main">Travelers</a>
 </span>
 </div>
-
 </div>
 
-<hr>
-<hr>
 
 <div class="title text-center ">
 <h1 style="padding: .67em ;">
