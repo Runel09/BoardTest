@@ -131,13 +131,19 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public void write(String[][] list) {
-		plannerDao.insert(list);
+	public void write(Planner planner) {
+		plannerDao.insert_planner(planner);
 	}
 
 	@Override
 	public int getPlannerNum() {
 		return plannerDao.getPlannerNum();
+	}
+
+	@Override
+	public void insertIndex(List<Index> indexList) {
+		plannerDao.insert_index(indexList);
+		
 	}
 
 	

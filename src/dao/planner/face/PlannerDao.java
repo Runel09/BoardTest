@@ -1,5 +1,8 @@
 package dao.planner.face;
 
+import java.util.List;
+
+import dto.planner.Index;
 import dto.planner.Planner;
 
 public interface PlannerDao {
@@ -13,10 +16,16 @@ public interface PlannerDao {
 	public Planner getParam(Planner SelectedPlanner);
 
 	
-	public void insert(String[][] list);
+	public void insert_planner(Planner planner);
 
 
 	public int getPlannerNum();
+
+
+	public void insert_index(List<Index> indexList);
+
+
+
 	
 	
 }

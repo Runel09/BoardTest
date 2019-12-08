@@ -109,8 +109,12 @@ public interface PlannerService {
 	public List<Index> getIndex(HttpServletRequest req);
 
 
-	public void write(String[][] list);
+	public void write(Planner planner);
 
 	public int getPlannerNum();
+
+	public void insertIndex(List<Index> indexList);
+
+	
 
 }
