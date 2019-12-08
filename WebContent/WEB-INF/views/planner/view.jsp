@@ -231,130 +231,10 @@ div div > .selected{
 					// 			console.log($(this).attr("location-lng"));
 
 				})
-				//전체 경로 초기화
-				$("#reset_btn").on('click', function() {
-					$(".selected_index").empty();
-					// 					console.log(path);
-					ploy.setMap(null);
-					ploy = new google.maps.Polyline({
-						strokeColor : '#3679e3',
-						strokeOpacity : 1.0,
-						strokeWeight : 3
-					});
 
-					ploy.setMap(map);
-
-				});
 				//전체 경로 검색
 				$("#search_btn").on('click', searchAll);
-				
-				//테마 선택
-				($("#tag_body").children().children()).on('click',function() {
-					if(this==this.parentNode.firstElementChild){
-						return false;
-					}
-					$(this.parentNode.firstElementChild).children("input").val(this.innerText)
-					if($(this).hasClass("selected")){
-						$(this).removeClass("selected")
-						console.log($(this).parent().children().eq(0).children("input"))
-						$(this).parent().children().eq(0).children("input").val("")
-					}else{
-						$(this.parentNode).children(".selected").removeClass('selected');
-						$(this).addClass("selected");
-					}
-					console.log($(this.parentNode.firstElementChild).children("input").val())
-				})
-
-				//플래너 정보 입력
-				$("#submit_btn").on('click', function() {
-					
-					var $f = $("<form>").attr({method:"post", action:"/planner/input"})
-					//인덱스 추가
-					
-					for (var j = 0 ; j<=$(".index_body").children("div").size();j++)
-					for(var i =0; i<$(".index_body").children("div").eq(j).children().size();i++){
-						$f.append( $("<input>").attr({name: (j+1)+"day_place_no", value:$(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no")}) )
-						console.log($(".index_body").children("div").eq(j).children("div").eq(i).attr("data-place_no"));
-					}
-					//타이틀 추가
-						$f.append( $("<input>").attr({name:"title", value:$("#title_char").val()}) );
-					//테마 추가
-						$f.append($("<input>").attr({name:"travel_Place", value:$("#travel_Place").val()}))
-						$f.append($("<input>").attr({name:"travel_date", value:$("#travel_date").val()}))
-						$f.append($("<input>").attr({name:"travel_season", value:$("#travel_season").val()}))
-						$f.append($("<input>").attr({name:"traval_thema", value:$("#traval_thema").val()}))
-						$f.appendTo( $(document.body) );
-					$f.submit();
-
-				});
-				//타이틀 편집 버튼
-				$("#title_set").on('click',function(){
-					if($("#title_char").prop("readonly")){
-						$("#title_char").prop("readonly", false)
-						$("#title_set").text("적용")
-					}else{
-						$("#title_char").prop("readonly", true)
-						$("#title_set").text("편집")
-					}
-				});
-				
-				//인덱스 추가버튼
-				$(".day_bar .plus").on("click", function() {
-					//인덱스 추가 처리
-					var index = $(this).index()+1;
-					console.log(index);
-					var insert=$("<div class='day_con'>").append($("<p>"+index+"일차</p>")).insertBefore($(this));
-					insert.addClass(index+"day");
-					$(".index_body > .selected_index").removeClass("selected_index")
-					$(".index_body").append($("<div class='"+index+"day index selected_index'>"));
-					$(".day_bar > .selected_con").removeClass("selected_con");
-					insert.addClass("selected_con");
-					
-					//맵 초기화
-					ploy.setMap(null);
-					ploy = new google.maps.Polyline({
-						strokeColor : '#3679e3',
-						strokeOpacity : 1.0,
-						strokeWeight : 3
-					});
-
-					ploy.setMap(map);
-					path = ploy.getPath();
-					for(var i =0; i<=$(".selected_index").children().size()-1;i++){
-						var place_num=$(".selected_index").children("div").eq(i).attr("data-place_no")
-						path.push(new google.maps.LatLng(result[place_num-1].lat, result[place_num-1].lng))
-					}
-					path.getAt();
-					
-					//인덱스 변경 버튼 클릭
-					insert.on('click',function(){
-						var index= $(this).index()+1;
-						if ($(this).index()==$(this).parent().children().eq(-1).index()){
-							return false;	
-						}
-						$(".index_body > .selected_index").removeClass("selected_index")
-						$(".index_body > ."+index+"day").addClass("selected_index")
-						$(".day_bar > .selected_con").removeClass("selected_con");
-						$(".day_bar").children().eq(index-1).addClass("selected_con");
-						ploy.setMap(null);
-						ploy = new google.maps.Polyline({
-							strokeColor : '#3679e3',
-							strokeOpacity : 1.0,
-							strokeWeight : 3
-						});
-
-						ploy.setMap(map);
-						path = ploy.getPath();
-						for(var i =0; i<=$(".selected_index").children().size()-1;i++){
-							var place_num=$(".selected_index").children("div").eq(i).attr("data-place_no")
-							path.push(new google.maps.LatLng(result[place_num-1].lat, result[place_num-1].lng))
-						}
-						path.getAt();
-
-					})
-				});
-				
-					
+	
 				//인덱스 선택 버튼 동작
 				$(".day_bar .day_con").on('click',function(){
 					var index= $(this).index()+1;
@@ -393,8 +273,6 @@ div div > .selected{
 				<div class="col-md-3" style="border: 2px solid #337ab7; height: 100%;padding: 9px">
 					<p style="color:#337ab7;font-size: 20px; font-weight: 900;">플래너 이름&nbsp;</p> <input id="title_char" name="title_char" type="text"
 						readonly="readonly">
-					<button type="button" id = "title_set">편집</button>
-
 				</div>
 				<div class="col-md-6">
 					<div class="tag_body" id="tag_body">
@@ -442,9 +320,6 @@ div div > .selected{
 					</div>
 
 				</div>
-				<div class="col-md-1 col-md-offset-1">
-					<button id="submit_btn">플래너 입력</button>
-				</div>
 			</div>
 			
 			
@@ -453,9 +328,6 @@ div div > .selected{
 			<div class="day_con 1day selected_con">
 			<p>1일차</p>
 			</div>
-			<div class="day_con plus">
-			<p>+</p>
-			</div>
 			</div>
 				<div class="index_body">
 					<div class="1day index selected_index">
@@ -463,7 +335,7 @@ div div > .selected{
 					
 				</div>
 					<div style="height: 55px; width:80%; border-top:  2px solid #337ab7; padding: 12px; float: left;">
-						<button id="reset_btn" type="button">목록 초기화</button>
+						
 						<button id="search_btn" type="button">전체 경로 검색</button>
 					</div>
 			</div>
@@ -474,7 +346,7 @@ div div > .selected{
 			</div>
 
 			<div class="right">
-				<jsp:include page="/WEB-INF/views/planner/test.jsp" />
+				<jsp:include page="/WEB-INF/views/planner/viewMap.jsp" />
 
 			</div>
 		</div>

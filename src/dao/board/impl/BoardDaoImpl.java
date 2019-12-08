@@ -403,7 +403,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql += "SELECT * FROM (";
 		sql	+= "    SELECT rownum rnum, B.* FROM (";
 		sql	+= "        SELECT Plannerinfo.*";
-		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Planner.planner_num) score";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Plannerinfo.planner_num) score";
 		sql	+= "        FROM Plannerinfo";
 		sql += " WHERE 1=1";
 		
@@ -505,7 +505,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql += "SELECT * FROM (";
 		sql	+= "    SELECT rownum rnum, B.* FROM (";
 		sql	+= "        SELECT Plannerinfo.*";
-		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Planner.planner_num) score";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Plannerinfo.planner_num) score";
 		sql	+= "        FROM Plannerinfo";
 		sql += " WHERE 1=1";
 		

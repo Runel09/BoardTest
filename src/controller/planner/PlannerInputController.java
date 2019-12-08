@@ -30,20 +30,7 @@ public class PlannerInputController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String placeparam=req.getParameter("placeno");
-//		PlaceDto place= new PlaceDto();
-//		int placeno= 0;
-//		if (placeparam==null) {
-//			place.setCoordinate_lat(35.305034);
-//			place.setCoordinate_lng(123.726168);
-//			req.setAttribute("centerPlace", place);
-//		}else {
-//			placeno=Integer.parseInt((placeparam));
-//			place=placeService.getInfoByplaceno(placeno);
-//			req.setAttribute("centerPlace", place);
-//		}
-//		List<PlaceDto> placeList=placeService.getAlleGeoInfo();
-//		
+
 		PlaceDto placeparam=placeService.getPlace_number(req);
 		PlaceDto place= new PlaceDto();
 		if (placeparam==null) {
