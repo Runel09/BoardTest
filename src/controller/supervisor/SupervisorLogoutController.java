@@ -21,9 +21,8 @@ public class SupervisorLogoutController extends HttpServlet {
 		//세션 객체 얻기
 	      HttpSession session = null;
 	      session = req.getSession();
-	      
-	      session.removeAttribute("super_login");
-	      session.removeAttribute("super_id");
+	      session.invalidate();
+//	      session.invalidate("super_id");
 //	      session.removeAttribute("super_pw");
 	      
 	      resp.sendRedirect("/supervisor/login");

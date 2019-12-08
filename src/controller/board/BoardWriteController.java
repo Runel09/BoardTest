@@ -118,7 +118,7 @@ public class BoardWriteController extends HttpServlet {
 		
 		System.out.println(board);
 		System.out.println(boardFile);
-				
+		board.setUser_id((String)req.getSession().getAttribute("userid"));
 		boardDao.insert(board);
 		boardDao.insertFile(boardFile);
 		

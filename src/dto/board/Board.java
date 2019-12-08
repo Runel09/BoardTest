@@ -12,7 +12,14 @@ public class Board {
 	private Date writtendate;
 	private int recommend;
 	private String checkboard;
+	private String user_nick;
 	
+	public String getUser_nick() {
+		return user_nick;
+	}
+	public void setUser_nick(String user_nick) {
+		this.user_nick = user_nick;
+	}
 	public int getRecommend() {
 		return recommend;
 	}
@@ -38,7 +45,7 @@ public class Board {
 	public String toString() {
 		return "Board [boardno=" + boardno + ", title=" + title + ", user_id=" + user_id + ", content=" + content
 				+ ", hit=" + hit + ", writtendate=" + writtendate + ", recommend=" + recommend + ", checkboard="
-				+ checkboard + ", boardrepo=" + boardrepo + "]";
+				+ checkboard + ", user_nick=" + user_nick + ", boardrepo=" + boardrepo + "]";
 	}
 	public int getBoardno() {
 		return boardno;

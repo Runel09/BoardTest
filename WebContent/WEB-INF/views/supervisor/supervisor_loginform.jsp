@@ -23,12 +23,12 @@ $(document).ready(function(){
 
 <%
 
-if(session.getAttribute("login")!=null&&(boolean)session.getAttribute("login")){
+if(session.getAttribute("super_login")!=null&&(boolean)session.getAttribute("super_login")){
 %>
+
 	<form action="/supervisor/logout" method="get">
 		<button>로그아웃</button>
 	</form>
-
 <%
 }else{%>
 <form action ="/supervisor/login" method="post" class="form-horizontal">

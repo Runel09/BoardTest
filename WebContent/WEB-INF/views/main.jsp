@@ -347,6 +347,7 @@ $(document).ready(function(){
    
 </div>
 
+<div id="content" >
    
 <div class ="container" style="width:84%">
 
@@ -363,7 +364,7 @@ $(document).ready(function(){
 </c:forEach>
 
 </div>
-
+</div>
 
    <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>
 
