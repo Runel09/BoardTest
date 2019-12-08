@@ -80,7 +80,7 @@ public class PlannerInputController extends HttpServlet {
 		plannerService.write(planner);
 		plannerService.insertIndex(indexList);
 
-		resp.sendRedirect("/planner/view?plannerno="+plannerno);
+		resp.sendRedirect("/planner/view?plannerno="+planner_num);
 		
 		
 		

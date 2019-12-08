@@ -179,7 +179,8 @@ div div > .selected{
 
 <script type="text/javascript">
 	var map;
-	
+	var result = new Array();
+	var index_List= new Array();
 	$(document).ready(
 			function() {
 				$(".center").on(
@@ -238,35 +239,57 @@ div div > .selected{
 				//전체 경로 검색
 				$("#search_btn").on('click', searchAll);
 				
-				var index= new Array();
-				<c:forEach items="${index}" var="indexes">
+				<c:forEach items="${markers}" var="marker">
 				
+					var json  =new Object();
+					json.place_number=${marker.place_number}
+					json.place_name="${marker.place_name}"
+					json.lat=${marker.coordinate_lat};
+					json.lng=${marker.coordinate_lng};
+					json.cate="${marker.place_cate}";
+					json.detail="${marker.detail}";
+					result.push(json);
+				</c:forEach>
+			
+				
+				<c:forEach items="${index}" var="indexes">
+					var json  =new Object();
+					json.index_num=${indexes.index_num}
+					json.planner_num=${indexes.planner_num}
+					json.place_num=${indexes.place_num};
+					json.planner_date=${indexes.planner_date};
+					index_List.push(json);
 				</c:forEach>
 				
 				var days=0;
-
+				var indexNum=0;
 				<c:forEach items="${day_size}" var="size">
-					var num=0;
 					$(".day_bar").append("<div class='day_con "+(days+1)+"day'><p>"+(days+1)+"일차</p></div>")
 					console.log(${size})
-					console.log(${index[0].index_num})
+					$(".index_body").append("<div class='"+(days+1)+"day index'>")
+					
 					for(var i =0 ; i<${size};i++){
-						$(".index_body").append("<div class='index_ele' data-index='"+i+"' data-place_no='"+${index[num].place_num}+"'><input name='place_cate' type='hidden' value='"+result[${index[num].place_num}].cate+"'/><input type='hidden' name='place_no' value='"+${index[num].place_num}+"'/>"+result[${index[num].place_num}].place_name+"<br>"+result[${index[num].place_num}].detail+"<button type='button'>경로검색</button><button type='button'>삭제</button></div>"))
-						num=+1;
-						
-						
+						var place_no=index_List[indexNum].place_num;
+						console.log(place_no)
+						if(i==0){
+							$(".index_body").children("div").eq(days).append("<div class='index_ele' data-index='"+i+"' data-place_no='"+place_no+"'><input name='place_cate' type='hidden' value='"+result[place_no-1].cate+"'/><input type='hidden' name='place_no' value='"+place_no+"'/>"+result[place_no-1].place_name+"<br>"+result[place_no-1].detail+"</div>");
+						}else{
+							$(".index_body").children("div").eq(days).append("<div class='index_ele' data-index='"+i+"' data-place_no='"+place_no+"'><input name='place_cate' type='hidden' value='"+result[place_no-1].cate+"'/><input type='hidden' name='place_no' value='"+place_no+"'/>"+result[place_no-1].place_name+"<br>"+result[place_no-1].detail+"<button type='button'>경로검색</button></div>");
+						}
+						indexNum+=1;
 					}
 					days++;
+					
+					
 				</c:forEach>
 				
 				$(".day_bar > .1day").addClass("selected_con");
 				
 				//인덱스 선택 버튼 동작
-				$(".day_bar .day_con").on('click',function(){
+				$(".day_bar > .day_con").on('click',function(){
+					console.log("나나나")
 					var index= $(this).index()+1;
-					if ($(this).index()==$(this).parent().children().eq(-1).index()){
-						return false;	
-					}
+					console.log(index);
 					$(".index_body > .selected_index").removeClass("selected_index")
 					$(".index_body > ."+index+"day").addClass("selected_index")
 					$(".day_bar > .selected_con").removeClass("selected_con");
@@ -340,8 +363,7 @@ div div > .selected{
 			<div class="day_bar">
 			</div>
 				<div class="index_body">
-					<div class="1day index selected_index">
-					</div>
+				
 					
 				</div>
 					<div style="height: 55px; width:80%; border-top:  2px solid #337ab7; padding: 12px; float: left;">
