@@ -37,7 +37,6 @@ $(document).ready(function () {
 
 <div class="container">
 <h1>Notice 리스트</h1>
-<hr>
 
 <form action="/supervisor/noticedelete" method="get">
 <table class="table table-hover table-condenssed table-striped ">
@@ -55,7 +54,7 @@ $(document).ready(function () {
 	
 	<td><input type="checkbox" name="check" value="${notice.boardno}" /></td>
 	<td>${notice.boardno}</td>
-	<td><a href="/supervisor/noticeview?boardno=${notice.boardno }">${notice.title }</a></td>
+	<td><a href="/supervisor/noticeview?boardno=${notice.boardno }" style="color:black;">${notice.title }</a></td>
 	<td>${notice.hit}</td>
 	<td>${notice.writtendate}</td>
 </tr>

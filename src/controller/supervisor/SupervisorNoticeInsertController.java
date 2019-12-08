@@ -99,7 +99,7 @@ req.setCharacterEncoding("UTF-8");
 		
 		board.setTitle(mul.getParameter("title"));
 
-		board.setUser_id((String)req.getSession().getAttribute("userid"));
+		board.setUser_id((String)req.getSession().getAttribute("super_id"));
 
 		board.setContent(mul.getParameter("content"));
 		board.setCheckboard(mul.getParameter("checkboard"));

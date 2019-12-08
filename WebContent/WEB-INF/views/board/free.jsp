@@ -127,7 +127,7 @@ div.pullRight a:hover:before
 <c:forEach var="list" items="${list }">
 <tr>
    <td>${list.checkboard }</td>
-   <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
+   <td style="text-align:left;"><a href="/supervisor/noticeview?boardno=${list.boardno }"  >${list.title }</a></td>
    <td>${list.hit }</td>
    <td>${list.writtendate }</td>
 </tr>

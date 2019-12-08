@@ -40,7 +40,6 @@ $(document).ready(function () {
 
 <div class="container">
 <h1>Report 리스트</h1>
-<hr>
 
 <form action="/supervisor/reportdelete" method="get">
 <table class="table table-hover table-condenssed table-striped ">
