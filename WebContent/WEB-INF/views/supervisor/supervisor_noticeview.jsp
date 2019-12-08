@@ -48,6 +48,7 @@ $(document).ready(function () {
    
    <div class="text-center">
    
+   <button  id="btnList" class="btn btn-default" onclick="location.href='/board/free'">목록</button>
    <c:choose >
    <c:when test="${super_id eq 'supervisor' }">
    <button  id="btnUpdate" class="btn btn-default" onclick="location.href='/supervisor/noticeupdate?boardno=${board.boardno}'">수정</button>
