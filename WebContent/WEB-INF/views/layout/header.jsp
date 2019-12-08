@@ -135,6 +135,7 @@ div.circleBehind a:hover:after {
 </style>
 
 </head>
+
 <body>
 
 <div id="header" >
@@ -153,7 +154,15 @@ div.circleBehind a:hover:after {
 
 <div class="loginbtngroup">
 <span>
-<c:if test="${empty login }">
+<c:if test="${not empty super_login }">
+<h1 style="
+	background-color : white;
+	color: white;
+    position: fixed;
+    margin: 0;
+    padding: 0;">■■■■■■■■■■■</h1>
+</c:if>
+<c:if test="${empty login}">
 <a href="/member/login"><button type="button" class="btn btn-primary" style="margin-right: 1%; font-family: auto;
 }">login</button></a>
 </c:if>
