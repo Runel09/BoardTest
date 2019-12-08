@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MainController
+ * Servlet implementation class FooterPageController
  */
-@WebServlet("/main")
-public class MainController extends HttpServlet {
+@WebServlet("/footer/result")
+public class FooterPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
-		
+		// TODO Auto-generated method stub
+	
+		req.getRequestDispatcher("/WEB-INF/views/layout/footerresult.jsp").forward(req , resp);
+
+	
 	}
-	
-	
-	
 }
