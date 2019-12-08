@@ -16,7 +16,7 @@ $(document).ready(function() {
    
 	//글쓰기버튼 동작
 	$("#emptylogin").click(function() {
-		var result = confirm("로그인하실?");
+		var result = confirm("로그인 후 이용가능합니다.");
 		
 		if(result==true){
 			$(location).attr("href", "/member/login");
@@ -164,10 +164,10 @@ div.pullRight a:hover:before
    
 </table>
 
-<c:if test="${!empty user_id }">
+<c:if test="${!empty userid }">
 <button id="btnWrite" style="float: right;">글쓰기</button>
 </c:if>
-<c:if test="${empty user_id }">
+<c:if test="${empty userid }">
 <button id="emptylogin" style="float: right;">글쓰기</button>
 </c:if>
 

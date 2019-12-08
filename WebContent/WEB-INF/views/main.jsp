@@ -142,6 +142,67 @@ ul#slider li img{
 	height: 650px;
 }
 </style>
+<style type ="text/css">
+table, th{
+	text-align:center;
+
+
+}
+tr td:nth-child(2){
+	text-align:left;
+}
+
+tr td:not(:first-child), tr th:not(:first-child){
+
+	border-left:3px solid white;
+}
+
+
+
+
+</style>
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+	$("#btnWrite").click(function(){
+		var loginstatus ='<%= session.getAttribute("login")%>';
+		if(loginstatus == "true")
+			$(location).attr("href","/place/insert");
+		else if(loginstatus != "true")
+			$(location).attr("href","/main");
+	});
+	
+
+	
+	$("btnCateSearch").click(function(){
+		
+		$form = $("<form>").attr({
+			action: "/place/list",
+			method: "get"
+		}).append(
+			$("<input>")
+				.attr("name","cate")
+				.css("display","none")
+				.attr("value",$("<form>").find("[name='cate']:checked").val() )
+				);
+		
+		
+		
+		$(document.body).append($form);
+		
+		$form.submit();
+		
+		
+		
+	})
+	
+		
+		
+	
+});
+
+</script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -286,11 +347,21 @@ $(document).ready(function(){
    
 </div>
 
-<div id="content" class="content">
    
-   
-   <jsp:include page="/WEB-INF/views/search/searchAir.jsp"/>
-   <jsp:include page="/WEB-INF/views/search/searchHotel.jsp"/>
+<div class ="container" style="width:84%">
+
+<c:forEach var= "place"  items = "${list}" varStatus="status" begin="1" end="8">
+  <div class="col-sm-6 col-md-3"  style=" height:278px; margin-top: 117px;">
+    <div class="thumbnail">
+      <img src="/image/${place.place_number}_1.jpg" style="height:180px; width:318.63px;">
+      <div style="height: 95px; padding:9px; line-height: 0.8;">
+        <h3><a href ="/place/view?place_number=${place.place_number }">${place.place_name }</a></h3><br>
+      </div>
+    </div>
+  </div>
+	
+</c:forEach>
+
 </div>
 
 

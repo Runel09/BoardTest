@@ -167,17 +167,17 @@ $(document).ready(function() {
 
 	<!-- 버튼을 통한 페이지 이동 -->
 	<div class="text-center">
-		<c:if test="${!empty user_id }">
+		<c:if test="${!empty userid }">
 		<button id="btnRecommend" class="btn btn-primary"></button>
 		</c:if>
-		<c:if test="${empty user_id }">
+		<c:if test="${empty userid }">
 		<button id="emptylogin" class="btn btn-primary">추천</button>
 		</c:if>
 		<button id="btnReport" class="btn btn-primary">신고</button>
 	</div>
 	<div class="text-right">
 		<button id="btnList" class="btn btn-primary">목록</button>
-		<c:if test="${user_id eq board.user_id or super_id eq 'supervisor'}">
+		<c:if test="${userid eq board.user_id or super_id eq 'supervisor'}">
 			<button id="btnUpdate" class="btn btn-info">수정</button>
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
