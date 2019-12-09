@@ -1,6 +1,7 @@
 package controller.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +26,7 @@ public class MemberJoinController extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
 
-		req.getRequestDispatcher("/WEB-INF/views/userinfo/jointest.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/userinfo/TestFile.jsp").forward(req, resp);
 		
 		
 		}
@@ -41,8 +42,16 @@ public class MemberJoinController extends HttpServlet {
 //		System.out.println("22131"+member);
 		memberservice.join(member);
 
-		resp.sendRedirect("/main");
+//		resp.sendRedirect("/member/join");
 		
+		
+//		resp.setContentType("text/html; charset=UTF-8");
+		 
+		PrintWriter out = resp.getWriter();
+		 
+		out.println("<script>alert('회원가입 되었습니다!'); location.href='/member/login\';</script>");
+		 
+		out.flush();
 		
 		}
 

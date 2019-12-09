@@ -131,13 +131,43 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public void write(String[][] list) {
-		plannerDao.insert(list);
+	public void write(Planner planner) {
+		plannerDao.insert_planner(planner);
 	}
 
 	@Override
 	public int getPlannerNum() {
 		return plannerDao.getPlannerNum();
+	}
+
+	@Override
+	public void insertIndex(List<Index> indexList) {
+		plannerDao.insert_index(indexList);
+		
+	}
+
+	@Override
+	public Planner selectPlanner(HttpServletRequest req) {
+		Planner planner = new Planner();
+		planner.setPLANNER_NUM(Integer.parseInt(req.getParameter("plannerno")));
+		planner=plannerDao.getPlanner(planner);
+		return planner;
+	}
+
+	@Override
+	public List<Index> selectIndex(HttpServletRequest req) {
+		
+		return plannerDao.getIndex(Integer.parseInt(req.getParameter("plannerno")));
+	}
+
+	@Override
+	public int[] getIndexSize(HttpServletRequest req) {
+		int day_cnt[] = new int[2];
+		day_cnt[0]=Integer.parseInt(req.getParameter("plannerno"));
+		day_cnt[1]=plannerDao.getDayCnt(day_cnt[0]);
+		System.out.println(day_cnt);
+		
+		return plannerDao.getSize(day_cnt);
 	}
 
 	

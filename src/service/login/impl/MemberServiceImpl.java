@@ -131,7 +131,7 @@ public class MemberServiceImpl implements MemberService{
 
 		 // 사용자에게 보낼 메시지를 기입합니다.
 	      String from = "bgan0064@gmail.com";
-	      String host = "http://192.168.10.149:8082/";
+	      String host = "http://localhost:8089/";
 	      
 	      //임시 비밀번호 생성
 	      String pwTmember = getRamdomPassword(8);
@@ -146,7 +146,7 @@ public class MemberServiceImpl implements MemberService{
 	      
 	      String subject = "TRAVELERS 비밀번호 찾기 입니다.";
 	      String content = "고객님의 임시 비밀번호는 " + pwTmember +  " 입니다. 홈페이지 바로가기: " + 
-          "<a href='" + host + "main" + "'><br>돌아가기</a>";
+          "<a href='" + host + "member/login" + "'><br>돌아가기</a>";
 
 	      // SMTP에 접속하기 위한 정보를 기입합니다.
 	      Properties p = new Properties();

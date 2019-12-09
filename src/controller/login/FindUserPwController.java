@@ -35,7 +35,9 @@ public class FindUserPwController extends HttpServlet {
 			// TODO Auto-generated method stub
 
 
-			
+			/*
+			 * 비밀번호찾기에필요한 정보 아이디, 휴대폰번호
+			 */
 			Member member2 = memberservice.getfinduserparam2(req);
 			
 
@@ -60,6 +62,7 @@ public class FindUserPwController extends HttpServlet {
 			}
 			
 			else {
+				//정보가없으면 실패페이지로
 				req.getRequestDispatcher("/WEB-INF/views/userinfo/finduserpwFailResult.jsp").forward(req,resp);
 				
 				

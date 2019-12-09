@@ -403,7 +403,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql += "SELECT * FROM (";
 		sql	+= "    SELECT rownum rnum, B.* FROM (";
 		sql	+= "        SELECT Plannerinfo.*";
-		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Planner.planner_num) score";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Plannerinfo.planner_num) score";
 		sql	+= "        FROM Plannerinfo";
 		sql += " WHERE 1=1";
 		
@@ -465,7 +465,7 @@ public class BoardDaoImpl implements BoardDao{
 
 			while(rs.next()) {
 				Planner planner = new Planner();
-				
+				planner.setPLANNER_NUM(rs.getInt("planner_num"));
 				planner.setTrip_nation(rs.getString("trip_nation"));
 				planner.setTrip_date(rs.getString("trip_date"));
 				planner.setTrip_season(rs.getString("trip_season"));
@@ -505,7 +505,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql += "SELECT * FROM (";
 		sql	+= "    SELECT rownum rnum, B.* FROM (";
 		sql	+= "        SELECT Plannerinfo.*";
-		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Planner.planner_num) score";
+		sql += "        , (select round(avg(score),1) from plannerreview R where R.planner_num= Plannerinfo.planner_num) score";
 		sql	+= "        FROM Plannerinfo";
 		sql += " WHERE 1=1";
 		
@@ -724,8 +724,8 @@ public class BoardDaoImpl implements BoardDao{
 			} finally {
 				
 				try {
-					ps.close();
-					rs.close();
+					if(ps!=null)ps.close();
+					if(rs!=null)rs.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -1077,10 +1077,10 @@ public class BoardDaoImpl implements BoardDao{
 
 	      //수행할 SQL쿼리
 	      String sql = "";
-	      sql += "SELECT usernick FROM member ";
+	      sql += "SELECT user_nick FROM userinfo ";
 	      sql += "WHERE user_id = ?";
 
-	      String nick = null;
+	      String user_nick = null;
 	      
 	      try {
 	         //SQL 쿼리수행객체
@@ -1093,7 +1093,7 @@ public class BoardDaoImpl implements BoardDao{
 	         rs = ps.executeQuery();
 
 	         while( rs.next() ) {
-	            nick = rs.getString("usernick");
+	            user_nick = rs.getString("user_nick");
 	            
 	         }
 
@@ -1110,7 +1110,7 @@ public class BoardDaoImpl implements BoardDao{
 	         }
 	      }
 
-	      return nick;
+	      return user_nick;
 	   }
 
 	@Override

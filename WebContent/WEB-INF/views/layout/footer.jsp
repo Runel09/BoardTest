@@ -16,18 +16,19 @@ body {
 }
 
 </style>
-
+<hr style="margin-top:100px;">
+<br><br>
 <div class="fotter center" style="background-color: #FFF">      
-         <a href="http://192.168.10.95:8888/clause">서비스소개 |</a>
-         <a href="http://192.168.10.95:8888/clause"> 회원약관 |</a>
-         <a href="http://192.168.10.95:8888/personal"> 개인정보처리방침 |</a>
-         <a href="http://192.168.10.95:8888/commercial"> 광고문의 |</a>
-         <a href="http://192.168.10.95:8888/customer"> 고객센터</a><br><br>
+         <a href="/footer/result">이용약관 ㅣ </a>
+         <a href="/footer/result">회원약관 ㅣ </a>
+         <a href="/footer/result">개인정보처리방침 ㅣ </a>
+         <a href="/footer/ad">광고문의</a>
       <div class="company_info">©
+      <br>
       <span class="ft_copyright"> 2019 <strong>Travelers</strong> All rights reserved.
       </span>
       </div>
    </div>
-
+<br><br><br>
 </body>
 </html>

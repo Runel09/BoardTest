@@ -1,6 +1,7 @@
 package controller.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,7 @@ public class MemberLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.getRequestDispatcher("/WEB-INF/views/userinfo/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/userinfo/TestFile.jsp").forward(req, resp);
 	}
 
 
@@ -53,8 +54,17 @@ public class MemberLoginController extends HttpServlet {
 				
 			resp.sendRedirect("/main");
 		} else {
-			System.out.println("로그인실패");
-			resp.sendRedirect("/member/login");
+//			System.out.println("로그인실패");
+//			resp.sendRedirect("/member/login");
+			resp.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = resp.getWriter();
+			 
+			out.println("<script>alert('회원정보가 일치하지 않습니다.'); location.href='/member/login\';</script>");
+			 
+			out.flush();
+
+
 		}
 
 	}

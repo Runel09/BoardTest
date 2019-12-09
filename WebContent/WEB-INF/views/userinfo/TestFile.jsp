@@ -5,415 +5,429 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<!--  jquery 2.2.4  -->
 <script type="text/javascript" src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<srcipt src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+
+
+<style type ="http://fonts.googleapis.com/css?family=Open+Sans:600"></style>
 <style type = text/css>
- 
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+body{
+	margin:0;
+	color:#6a6f8c;
+	background:#c8c8c8;
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.login-wrap{
+	width:100%;
+	margin:auto;
+	max-width:525px;
+	min-height:670px;
+	position:relative;
+	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+	width:100%;
+	height:180%;
+	position:absolute;
+	padding:90px 70px 50px 70px;
+	background:rgba(40,57,101,.9);
 }
 
-body {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  background: #ededed;
+/* .login-htmls{ */
+/* 	width:100%; */
+/* 	height:150%; */
+/* 	position:absolute; */
+/* 	padding:90px 70px 50px 70px; */
+/* 	background:rgba(40,57,101,.9); */
+/* } */
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	transform:rotateY(180deg);
+	backface-visibility:hidden;
+	transition:all .4s linear;
+}
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+}
+.login-html .tab{
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:#fff;
+	border-color:#1161ee;
+}
+.login-form{
+	min-height:345px;
+	position:relative;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+.login-form .group{
+	margin-bottom:15px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+.login-form .groups .labels
+.login-form .groups .input,
+.login-form .groups .button{
+	width:25%;
+	color:#fff;
+	display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group input[data-type="password"]{
+	text-security:circle;
+	-webkit-text-security:circle;
+}
+.login-form .group .label{
+	color:#aaa;
+	font-size:12px;
 }
 
-input, button {
-  border: none;
-  outline: none;
-  background: none;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+.login-form .group .button{
+	background:#1161ee;
+}
+.login-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+	color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+	background:#1161ee;
+}
+.login-form .group .check:checked + label .icon:before{
+	transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+	transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	transform:rotate(0);
 }
 
-$contW: 900px;
-$imgW: 260px;
-$formW: $contW - $imgW;
-$switchAT: 1.2s;
-
-$inputW: 260px;
-$btnH: 36px;
-
-$diffRatio: ($contW - $imgW) / $contW;
-
-@mixin signUpActive {
-  .cont.s--signup & {
-    @content;
-  }
+.hr{
+	height:2px;
+	margin:60px 0 50px 0;
+	background:rgba(255,255,255,.2);
 }
-
-.tip {
-  font-size: 20px;
-  margin: 40px auto 50px;
-  text-align: center;
+.foot-lnk{
+	text-align:center;
 }
-
-.cont {
-  overflow: hidden;
-  position: relative;
-  width: $contW;
-  height: 550px;
-  margin: 0 auto 100px;
-  background: #fff;
-}
-
-.form {
-  position: relative;
-  width: $formW;
-  height: 100%;
-  transition: transform $switchAT ease-in-out;
-  padding: 50px 30px 0;
-}
-
-.sub-cont {
-  overflow: hidden;
-  position: absolute;
-  left: $formW;
-  top: 0;
-  width: $contW;
-  height: 100%;
-  padding-left: $imgW;
-  background: #fff;
-  transition: transform $switchAT ease-in-out;
-
-  @include signUpActive {
-    transform: translate3d($formW * -1,0,0);
-  }
-}
-
-button {
-  display: block;
-  margin: 0 auto;
-  width: $inputW;
-  height: $btnH;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.img {
-  overflow: hidden;
-  z-index: 2;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: $imgW;
-  height: 100%;
-  padding-top: 360px;
-
-  &:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: $contW;
-    height: 100%;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
-    background-size: cover;
-    transition: transform $switchAT ease-in-out;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-  }
-
-  @include signUpActive {
-    &:before {
-      transform: translate3d($formW,0,0);
-    }
-  }
-
-  &__text {
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    top: 50px;
-    width: 100%;
-    padding: 0 20px;
-    text-align: center;
-    color: #fff;
-    transition: transform $switchAT ease-in-out;
-
-    h2 {
-      margin-bottom: 10px;
-      font-weight: normal;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    &.m--up {
-
-      @include signUpActive {
-        transform: translateX($imgW*2);
-      }
-    }
-
-    &.m--in {
-      transform: translateX($imgW * -2);
-
-      @include signUpActive {
-        transform: translateX(0);
-      }
-    }
-  }
-
-  &__btn {
-    overflow: hidden;
-    z-index: 2;
-    position: relative;
-    width: 100px;
-    height: $btnH;
-    margin: 0 auto;
-    background: transparent;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    cursor: pointer;
-    
-    &:after {
-      content: '';
-      z-index: 2;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      border: 2px solid #fff;
-      border-radius: 30px;
-    }
-
-    span {
-      position: absolute;
-      left: 0;
-      top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      transition: transform $switchAT;
-      
-      &.m--in {
-        transform: translateY($btnH*-2);
-        
-        @include signUpActive {
-          transform: translateY(0);
-        }
-      }
-      
-      &.m--up {
-        @include signUpActive {
-          transform: translateY($btnH*2);
-        }
-      }
-    }
-  }
-}
-
-h2 {
-  width: 100%;
-  font-size: 26px;
-  text-align: center;
-}
-
-label {
-  display: block;
-  width: $inputW;
-  margin: 25px auto 0;
-  text-align: center;
-
-  span {
-    font-size: 12px;
-    color: #cfcfcf;
-    text-transform: uppercase;
-  }
-}
-
-input {
-  display: block;
-  width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
-  text-align: center;
-}
-
-.forgot-pass {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 12px;
-  color: #cfcfcf;
-}
-
-.submit {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  background: #d4af7a;
-  text-transform: uppercase;
-}
-
-.fb-btn {
-  border: 2px solid #d3dae9;
-  color: darken(#d3dae9, 20%);
-
-  span {
-    font-weight: bold;
-    color: darken(#768cb6, 20%);
-  }
-}
-
-.sign-in {
-  transition-timing-function: ease-out;
-
-  @include signUpActive {
-    transition-timing-function: ease-in-out;
-    transition-duration: $switchAT;
-    transform: translate3d($formW,0,0);
-  }
-}
-
-.sign-up {
-  transform: translate3d($contW * -1,0,0);
-
-  @include signUpActive {
-    transform: translate3d(0,0,0);
-  }
-}
-
-.icon-link {
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
-  width: 32px;
-
-  img {
-    width: 100%;
-    vertical-align: top;
-  }
-
-  &--twitter {
-    left: auto;
-    right: 5px;
-  }
-}
-
 </style>
-<script type="text/javascript">
-<srcipt src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-document.querySelector('.img__btn').addEventListener('click', function() {
-	  document.querySelector('.cont').classList.toggle('s--signup');
-	});
-</script>
+<script type ="text/javascript">
+// if(!document.updateForm.onsubmit.call(document.updateForm)) {
+
+// 	 return;
+
+// 	}
+
+// 	document.updateForm.submit();
+
+//회원가입 화면의 입력값들을 검사한다.
+function checkValue()	
+{
+	var form = document.userInfo;
+
+	if(!form.userid.value){
+		alert("아이디를 입력하세요.");
+		return false;
+	}
+	
+	if(form.idDuplication.value != "idCheck"){
+		alert("아이디 중복체크를 해주세요.");
+		return false;
+	}
+	
+	if(!form.userpw.value){
+		alert("비밀번호를 입력하세요.");
+		return false;
+	}
+	
+	// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+	if(form.userpw.value != form.passwordcheck.value ){
+		alert("비밀번호를 동일하게 입력하세요.");
+		return false;
+	}	
+	
+	if(!form.usernick.value){
+		alert("닉네임을 입력하세요.");
+		return false;
+	}
+	
+	if(!form.username.value){
+		alert("이름을 입력하세요.");
+		return false;
+	}
+	
+	if(!form.userbirth.value){
+		alert("년도를 입력하세요.");
+		return false;
+	}
+	
+	
+	if(!form.userbirth.value){
+		alert("날짜를 입력하세요.");
+		return false;
+	}
+	
+	if(form.userbirth.value){
+		alert("날짜는 숫자만 입력가능합니다.");
+		return false;
+	}
+	
+	if(!form.usermail.value){
+		alert("메일 주소를 입력하세요.");
+		return false;
+	}
+	
+	if(!form.userphnum.value){
+		alert("전화번호를 입력하세요.");
+		return false;
+	}
+	
+	if(form.userphnum.value){
+		alert("전화번호는 - 제외한 숫자만 입력해주세요.");
+		return false;
+	}
+	
+	if(!form.useraddr.value){
+		alert("주소를 입력하세요.");
+		return false;
+	}
+	
+	if(!form.useraddrdetail.value){
+		alert("자세한 주소를 입력하세요.");
+		return false;
+	}
+	
+}
+
+// //문자 입력시 오류
+// < ***이구문 입력하면 중복검사 구문이 실행이 안됨 왜그런지는모르겠음******>
+
+// 	function checkNum(e) {
+//         var keyVal = event.keyCode;
+ 
+//         if(((keyVal >= 48) && (keyVal <= 57))){
+//             return true;
+//         }
+//         else{
+//         	alert("숫자만 입력가능합니다");
+//             return false;
+//         }
+    
+
+
+      //아이디 중복체크 화면open
+        function openIdChk(){
+
+        	
+        	window.name = "parentForm";
+        	window.open("/Login/chk",
+        			"chkform", "width=500, height=300, resizable = no, scrollbars = no");	
+        }
+
+
+// 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
+// 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때
+// 다시 중복체크를 하도록 한다.
+function inputIdChk(){
+	document.userInfo.idDuplication.value ="idUncheck";
+}
+$(document).ready(function() {
+	$("input[name=userbirth]").keyup(function(e) {
+        var keyVal = e.keyCode;
+//         console.log(keyVal)
+ 
+        if(((keyVal >= 48) && (keyVal <= 57))){
+            return true;
+        }
+        else{
+//         	console.log("숫자 아님")
+        	alert("숫자만 입력가능합니다");
+            return false;
+        }
+	})
+});
 </script>
 <meta charset="UTF-8">
-<title>WELCOME TRAVELERS!</title>
+<title>WELCOME TRAVELERS!!</title>
 </head>
 <body>
-<!-- <p class="tip">Enjoy Your Life! Enjoy Your Travel!</p> -->
-<!-- <div class="cont"> -->
-<!--   <div class="form sign-in"> -->
-<!--     <h2>Welcome back,</h2> -->
-<!--     <label> -->
-<!--       <span>User Id</span> -->
-<!--       <input type="email" /> -->
-<!--     </label> -->
-<!--     <label> -->
-<!--       <span>Password</span> -->
-<!--       <input type="password" /> -->
-<!--     </label> -->
-<!--     <a href= "/find/userinfo"><p class="forgot-pass">Forgot password?</p></a> -->
-<!--     <button type="button" class="submit">Sign In</button> -->
-<!--     <button type="button" class="fb-btn">Connect with <span>facebook</span></button> -->
-<!--   </div> -->
-<!--   <div class="sub-cont"> -->
-<!--     <div class="img"> -->
-<!--       <div class="img__text m--up"> -->
-<!--         <h2>New here?</h2> -->
-<!--         <p>Sign up and discover great amount of new opportunities!</p> -->
-<!--       </div> -->
-<!--       <div class="img__text m--in"> -->
-<!--         <h2>One of us?</h2> -->
-<!--         <p>If you already has an account, just sign in. We've missed you!</p> -->
-<!--       </div> -->
-<!--       <div class="img__btn"> -->
-<!--         <span class="m--up">Sign Up</span> -->
-<!--         <span class="m--in">Sign In</span> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--   </div> -->
-<!-- </div> -->
-<p class="tip">Click on button in image container</p>
-<div class="cont">
-  <div class="form sign-in">
-    <h2>Welcome back,</h2>
-    <label>
-      <span>Email</span>
-      <input type="email" />
-    </label>
-    <label>
-      <span>Password</span>
-      <input type="password" />
-    </label>
-    <p class="forgot-pass">Forgot password?</p>
-    <button type="button" class="submit">Sign In</button>
-    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
-  </div>
-  <div class="sub-cont">
-    <div class="img">
-      <div class="img__text m--up">
-        <h2>New here?</h2>
-        <p>Sign up and discover great amount of new opportunities!</p>
-      </div>
-      <div class="img__text m--in">
-        <h2>One of us?</h2>
-        <p>If you already has an account, just sign in. We've missed you!</p>
-      </div>
-      <div class="img__btn">
-        <span class="m--up">Sign Up</span>
-        <span class="m--in">Sign In</span>
-      </div>
-    </div>
-    <div class="form sign-up">
-      <h2>Time to feel like home,</h2>
-      <label>
-        <span>Name</span>
-        <input type="text" />
-      </label>
-      <label>
-        <span>Email</span>
-        <input type="email" />
-      </label>
-      <label>
-        <span>Password</span>
-        <input type="password" />
-      </label>
-      <button type="button" class="submit">Sign Up</button>
-      <button type="button" class="fb-btn">Join with <span>facebook</span></button>
-    </div>
-  </div>
-</div>
-
-<a href="https://dribbble.com/shots/3306190-Login-Registration-form" target="_blank" class="icon-link">
-  <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/256/Dribbble-icon.png">
-</a>
-<a href="https://twitter.com/NikolayTalanov" target="_blank" class="icon-link icon-link--twitter">
-  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png">
-</a>
+<div class="login-wrap">
+	<div class="login-html">
+	<form action="/member/login" method="post" class="form-signin">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<div class="group">
+					<label for="userid" class="label" >User Id<label>
+					<input id="userid"name="userid" type="text" class="input" required>
+				</div>
+				<div class="group">
+					<label for="userpw" class="label">Password</label>
+					<input id="userpw" name="userpw" type="password" class="input" data-type="password" required>
+				</div>
+				
+				
+				<!--  -->
+<!-- 				<div class="group"> -->
+<!-- 					<input id="check" type="checkbox" class="check" checked> -->
+<!-- 					<label for="check"><span class="icon"></span> Keep me Signed in</label> -->
+<!-- 				</div> -->
+				<div class="group">
+					<input type="submit" class="button" value="LogIn">
+				</div>
+				</form>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href= "/find/userinfo">Forgot ID or Password?</a>
+				</div>
+			</div>
+			
+			
+			
+			<form method="post" action="/member/join" 
+				name="userInfo" onsubmit="return checkValue()">
+			<div class="sign-up-htm">
+				<div class="group">
+					<label for="userid" class="label">UserID</label>
+					<input id="userid" name="userid"type="text" class="input" maxlength="50" onkeydown="inputIdChk()">
+				</div>
+				<div class="group">
+					
+					<input class="button" type="button" value="중복확인" onclick="openIdChk()">	
+						<input type="hidden" name="idDuplication" value="idUncheck" >
+						
+				</div>
+<!-- 				<input class = "input" type="button" value="중복확인" >	 -->
+<!-- 						<input type="hidden" name="idDuplication" value="idUncheck"onclick="openIdChk()" > -->
+<!-- 						 -->
+				
+				<div class="group">
+					<label for="userpw" class="label">Password</label>
+					<input id="userpw" name="userpw" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="passwordcheck" class="label">Confirm Password</label>
+					<input id="passwordcheck" name ="passwordcheck" type="password" class="input" data-type="password">
+				</div>
+				
+				<div class="group">
+					<label for="username" class="label">Name</label>
+					<input id="username" name ="username" type="text" class="input" maxlength="50">
+				</div>
+				
+				<div class="group">
+					<label for="gender" class="label">Gender</label>
+					<input id="gender" name ="gender" type="radio" class="input"  value="1" checked>남
+					<input id="gender" name ="gender" type="radio" class="input"  value="0" checked>여					
+				</div>
+				
+				<div class="group">
+					<label for="userbirth" class="label">Birth</label>
+					<input id="userbirth" name ="userbirth" type="text" class="input" style="width:160px;"maxlength="8" placeholder="년월일(8자)" >
+				</div>
+				<br>
+				<div class="group">
+					<label for="usermail" class="label">Email Address</label>
+					<input id="usermail" name="usermail" type="email" class="input" maxlength="50">
+				</div>
+				<div class="group">
+					<label for="userphnum" class="label">Phome Number</label>
+					<input id="userphnum" name="userphnum" type="text" class="input" maxlength="11">
+				</div>
+				<div class="group">
+					<label for="usermailnum" class="label">우편번호</label>
+					<input id="usermailnum" name="usermailnum" type="text" class="input" size="8" name="usermailnum" onKeyPress="return checkNum(event)" >
+				</div>
+				<div class="group">
+					<label for="useraddr" class="label">Address</label>
+					<input id="useraddr" name="useraddr" type="text" class="input" >
+				</div>
+				<div class="group">
+					<label for="useraddrdetail" class="label">Detail Address</label>
+					<input id="useraddrdetail" name="useraddrdetail" type="text" class="input" >
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="회원가입">
+				</div>
+			
+				<div class="hr"></div>
+					</form>
+					
+				<div class="foot-lnk">
+					<label for="tab-1">이미 아이디가 있으신가요?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
 </body>
 </html>

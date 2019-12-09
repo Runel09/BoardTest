@@ -203,7 +203,7 @@ background-color: #141723 ;
 <!-- <a href="/main"><img src="/image/logo.png"  style="width: 78px; margin: 29px; height: 71px;"/></a> -->
 <!-- </div> -->
 <span style="vertical-align: middle; -webkit-text-stroke-width: unset; font-size: 50px; line-height: 129px; margin-left: 10px;  ">
-<a href="/main">Travelers</a>
+Travelers
 </span>
 </div>
 </div>

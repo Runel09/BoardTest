@@ -9,6 +9,30 @@
 src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+   
+
+	$("#btnWrite").click(function() {
+      
+		$(location).attr("href", "/planner/input");
+   })
+   
+	//글쓰기버튼 동작
+	$("#emptylogin").click(function() {
+		var result = confirm("로그인 후 이용가능합니다.");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	});
+});
+   
+</script>
+
+
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -277,6 +301,13 @@ div.pullRight a:hover:before
 
 <%-- <jsp:include page="/WEB-INF/views/board/planner_sub.jsp" /> --%>
 <jsp:include page="/WEB-INF/views/layout/plannernew_paging.jsp" />
+
+<c:if test="${!empty userid }">
+<button id="btnWrite" style="float: right;">글쓰기</button>
+</c:if>
+<c:if test="${empty userid }">
+<button id="emptylogin" style="float: right;">글쓰기</button>
+</c:if> 
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

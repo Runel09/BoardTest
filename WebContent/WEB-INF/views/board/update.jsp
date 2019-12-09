@@ -62,6 +62,12 @@ $(document).ready(function() {
 
 	});
 		
+		$("#notice").click(function() {
+			   
+			$("#cate").html("공지");
+
+		});
+		
    
 });
 
@@ -119,7 +125,9 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <%-- 		<c:if test="${board.checkboard ne 'tip'}">   --%>
 		<input id="tip" type="radio" name="checkboard" value="여행팁">여행팁
 <%-- 		</c:if> --%>
-		
+		<c:if test="${!empty super_login }">
+		<input id="notice" type="radio" name="checkboard" value="공지">공지
+		</c:if>
 <%-- 		<c:if test="${board.checkboard eq 'question'}">   --%>
 <!-- 		<input id="question" type="radio" name="checkboard" value="질문" checked="checked">질문 -->
 <%-- 		</c:if> --%>
@@ -134,7 +142,7 @@ tr td:not(:first-child), tr th:not(:first-child) {
    </tr>
    
    <tr>
-      <td class="info">아이디</td><td>${user_id }</td>
+      <td class="info">아이디</td><td>${userid }</td>
    <tr>
    
    <tr>

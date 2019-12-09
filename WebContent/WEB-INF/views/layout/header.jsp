@@ -33,7 +33,7 @@ hr {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	border: 10;
-	border-top: 1px solid #0064FF;
+	border-top: 1px solid black;
 }
 
 @font-face { font-family: 'NIXGONL-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONL-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -63,6 +63,7 @@ h1.name {
 	min-width: 800px;
 	width: 72%;
 }
+
 
 #header {
 	text-align: center;
@@ -135,6 +136,7 @@ div.circleBehind a:hover:after {
 </style>
 
 </head>
+
 <body>
 
 <div id="header" >
@@ -153,24 +155,32 @@ div.circleBehind a:hover:after {
 
 <div class="loginbtngroup">
 <span>
-<c:if test="${empty login }">
+<c:if test="${not empty super_login }">
+<h1 style="
+	background-color : white;
+	color: white;
+    position: fixed;
+    margin: 0;
+    padding: 0;">■■■■■■■■■■■</h1>
+</c:if>
+<c:if test="${empty login}">
 <a href="/member/login"><button type="button" class="btn btn-primary" style="margin-right: 1%; font-family: auto;
-}">로그인</button></a>
-<a href="/member/join"><button type="button" class="btn btn-success" style="font-family: auto;
-}">회원가입</button></a>
+}">login</button></a>
 </c:if>
 <c:if test="${login eq true }">
+<a href="/mypage/main"><button type="button" class="btn btn-primary" style=" margin-right: 1%; font-family: auto;
+}">mypage</button></a>
 <a href="/member/logout"><button type="button" class="btn btn-danger" style="font-family: auto;
-}">로그아웃</button></a>
+}">logout</button></a>
 </c:if>
 </span>
 </div>
 
 <p class="container" style="margin-top: 20px;">
-  <a class ="menubar" href="">플래너</a>
+  <a class ="menubar" href="/board/plannernew">플래너</a>
   <a class ="menubar" href="/place/list">장소정보</a>
   <a class ="menubar" href="/board/free">게시판</a>
-  <a class ="menubar" href="/mypage/main">마이페이지</a>
+  <a class ="menubar" href="/search/air">항공권/호텔</a>
   
 </p>
 

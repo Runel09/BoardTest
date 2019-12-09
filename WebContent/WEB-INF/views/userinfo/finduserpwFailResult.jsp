@@ -31,11 +31,13 @@
 // function goBack(){
 // 	window.histroy.back();
 // }
+
+
 </script>
 <meta charset="UTF-8">
 <title>TRAVERS 정보조회 결과</title>
 </head>
-<body>
+
 
 <body onload="pValue()">
 <div id="wrap">
@@ -45,7 +47,7 @@
 	<br>
 	<div id="chk">
 		<form id="checkForm">
-			일치하는 정보가 없습니다.
+			입력하신 정보와 일치하는 정보가 없습니다.
 		</form>
 		<div id="msg"></div>
 		<br>

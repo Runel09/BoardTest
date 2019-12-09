@@ -446,8 +446,8 @@ public class SupervisorDaoImpl implements SupervisorDao{
 				Board board= new Board();
 				
 				board.setBoardno(rs.getInt("boardno"));
-				board.setTitle(rs.getString("TITLE"));
-				board.setUser_id(rs.getString("ID"));
+				board.setTitle(rs.getString("title"));
+				board.setUser_id(rs.getString("user_id"));
 				board.setContent(rs.getString("content"));
 				board.setHit(rs.getInt("hit"));
 				board.setWrittendate(rs.getDate("writtendate"));
@@ -579,14 +579,14 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		conn = DBConn.getConnection();
 
 		String sql = "DELETE FROM userinfo";
-		sql += " WHERE user_number=?";
+		sql += " WHERE user_id=?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
 			for (int i = 0; i < check.length; i++) {
 
-				ps.setInt(1, Integer.parseInt(check[i]));
+				ps.setString(1, check[i]);
 				ps.executeQuery();
 			}
 
@@ -604,6 +604,68 @@ public class SupervisorDaoImpl implements SupervisorDao{
 		
 	}
 		}
+
+	@Override
+	public void deleteBoardByCheck(String[] check) {
+		conn = DBConn.getConnection();
+
+		String sql = "DELETE FROM board";
+		sql += " WHERE user_id=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < check.length; i++) {
+
+				ps.setString(1, check[i]);
+				ps.executeQuery();
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		
+	}
+	}
+
+	@Override
+	public void deleteCommentByCheck(String[] check) {
+		conn = DBConn.getConnection();
+
+		String sql = "DELETE FROM commenttb";
+		sql += " WHERE user_id=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < check.length; i++) {
+
+				ps.setString(1, check[i]);
+				ps.executeQuery();
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			try {
+				if( rs!=null)rs.close();
+				if( ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		
+	}
+	}
 
 
 

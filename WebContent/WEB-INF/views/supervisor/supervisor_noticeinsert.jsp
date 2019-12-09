@@ -93,7 +93,6 @@ tr td:not(:first-child), tr th:not(:first-child) {
 <div class="container">
 
 <h1>공지사항 작성</h1>
-<hr>
 
 <form action="/board/write" method="post" encType="multipart/form-data">
 <input type="hidden" name="checkboard" value="공지" />

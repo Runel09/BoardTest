@@ -37,6 +37,8 @@ function openIdChk(){
 	$("#inputEmail").val("")
 	$("#inputName").val("")
 }
+
+
 </script>
 <meta charset="UTF-8">
 <title>TRAVERS 정보조회 </title>

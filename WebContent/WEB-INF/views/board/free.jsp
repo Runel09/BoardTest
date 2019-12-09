@@ -17,7 +17,7 @@ $(document).ready(function() {
    
 	//글쓰기버튼 동작
 	$("#emptylogin").click(function() {
-		var result = confirm("로그인하실?");
+		var result = confirm("로그인 후 이용가능합니다.");
 		
 		if(result==true){
 			$(location).attr("href", "/member/login");
@@ -127,7 +127,7 @@ div.pullRight a:hover:before
 <c:forEach var="list" items="${list }">
 <tr>
    <td>${list.checkboard }</td>
-   <td style="text-align:left;"><a href="/board/view?boardno=${list.boardno }"  >${list.title }</a></td>
+   <td style="text-align:left;"><a href="/supervisor/noticeview?boardno=${list.boardno }"  >${list.title }</a></td>
    <td>${list.hit }</td>
    <td>${list.writtendate }</td>
 </tr>
@@ -168,10 +168,10 @@ div.pullRight a:hover:before
    
 </table>
 
-<c:if test="${!empty user_id }">
+<c:if test="${!empty userid }">
 <button id="btnWrite" style="float: right;">글쓰기</button>
 </c:if>
-<c:if test="${empty user_id }">
+<c:if test="${empty userid }">
 <button id="emptylogin" style="float: right;">글쓰기</button>
 </c:if>
 

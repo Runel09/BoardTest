@@ -243,7 +243,7 @@ public class PlaceDaoImpl implements PlaceDao {
 				place.setDb_web_site(rs.getString("db_web_site"));
 				place.setBusiness_hours(rs.getString("business_hours"));
 				place.setTel_number(rs.getString("tel_number"));
-				place.setScore(rs.getDouble("score"));
+				place.setScore(rs.getDouble("review_score"));
 				
 				list.add(place);
 			}
