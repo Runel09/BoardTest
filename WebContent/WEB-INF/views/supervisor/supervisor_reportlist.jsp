@@ -56,7 +56,7 @@ $(document).ready(function () {
 <tr>
 	
 	<td><input type="checkbox" name="chk" id="checkbox" value="${report.reportno}" /></td>
-	<td>${report.db_id}</td>
+	<td>${report.user_id}</td>
 	<td><a href="/board/view?boardno=${report.boardno }">${report.boardno }</a></td>
 	<td>${report.reason}</td>
 	<td>${report.content}</td>
