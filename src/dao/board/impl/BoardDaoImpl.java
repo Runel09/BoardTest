@@ -465,7 +465,7 @@ public class BoardDaoImpl implements BoardDao{
 
 			while(rs.next()) {
 				Planner planner = new Planner();
-				
+				planner.setPLANNER_NUM(rs.getInt("planner_num"));
 				planner.setTrip_nation(rs.getString("trip_nation"));
 				planner.setTrip_date(rs.getString("trip_date"));
 				planner.setTrip_season(rs.getString("trip_season"));
@@ -724,8 +724,8 @@ public class BoardDaoImpl implements BoardDao{
 			} finally {
 				
 				try {
-					ps.close();
-					rs.close();
+					if(ps!=null)ps.close();
+					if(rs!=null)rs.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
