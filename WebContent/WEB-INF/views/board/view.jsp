@@ -49,13 +49,22 @@ $(document).ready(function(){
 	});
 	
 	
-	$("#notloginbtn").click(function() {
+	$("#notloginbtn1").click(function() {
 		var result = confirm("로그인 후 이용가능합니다.");
 		
 		if(result==true){
 			$(location).attr("href", "/member/login");
 		}
 	})
+	
+		$("#notloginbtn2").click(function() {
+		var result = confirm("로그인 후 이용가능합니다.");
+		
+		if(result==true){
+			$(location).attr("href", "/member/login");
+		}
+	})
+	
 	
 	//추천버튼 동작
 	$("#emptylogin").click(function() {
@@ -182,7 +191,12 @@ $(document).ready(function() {
 		<c:if test="${empty userid }">
 		<button id="emptylogin" class="btn btn-primary">추천</button>
 		</c:if>
+		<c:if test="${!empty userid }">
 		<button id="btnReport" class="btn btn-primary">신고</button>
+		</c:if>
+		<c:if test="${empty userid }">
+		<button id="notloginbtn2" class="btn btn-primary">신고</button>
+		</c:if>
 	</div>
 	<div class="text-right">
 		<button id="btnList" class="btn btn-primary">목록</button>
