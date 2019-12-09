@@ -55,7 +55,6 @@ public class PlannerInputController extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/views/planner/plannerBody.jsp").forward(req, resp);
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int plannerno=0;
@@ -81,12 +80,6 @@ public class PlannerInputController extends HttpServlet {
 		plannerService.insertIndex(indexList);
 
 		resp.sendRedirect("/planner/view?plannerno="+planner_num);
-		
-		
-		
-		
-		
-		
 		
 		
 	}
